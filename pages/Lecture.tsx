@@ -1,5 +1,7 @@
 import { Layout } from 'antd';
+import LecturePlaylist from '../components/lecture/LecturePlaylist';
 import LecturePlayer from '../components/lecture/LecturePlayer';
+import LectureQnA from '../components/lecture/LectureQnA';
 
 const { Content } = Layout;
 
@@ -20,10 +22,24 @@ function Lecture() {
           <Layout style={{ ...lectureBgColor }}>
             <Content>
               <LecturePlayer src={src} />
+              <Content style={{ padding: '32px 24px' }}>
+                <div className="lecture__title">
+                  입문자를 위한 반응형 웹 기초 강의
+                </div>
+                <LectureQnA />
+              </Content>
             </Content>
           </Layout>
         </Content>
       </Layout>
+      <style jsx>{`
+        .lecture__title {
+          font-size: 20px;
+          line-height: 140%;
+          padding-bottom: 20px;
+          font-weight: 700;
+        }
+      `}</style>
     </>
   );
 }

@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface LecturePlayerProps {
   src: string;
 }
@@ -15,7 +13,6 @@ function LecturePlayer({ src }: LecturePlayerProps) {
           position: relative;
           padding-bottom: 56.25%;
           height: 0;
-          margin: 40px 0px;
         }
 
         .player__iframe {
