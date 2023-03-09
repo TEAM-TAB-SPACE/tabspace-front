@@ -29,6 +29,7 @@ function Lecture() {
                 <LectureQnA />
               </Content>
             </Content>
+            <LecturePlaylist />
           </Layout>
         </Content>
       </Layout>
