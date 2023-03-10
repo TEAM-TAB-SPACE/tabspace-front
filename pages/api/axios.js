@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const KAKAO_URL = 'http://localhost:8000/api/auth/callback/kakao';
-
 export const axiosInstance = axios.create({
-  baseURL: KAKAO_URL,
+  baseURL: Config().baseURL,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
