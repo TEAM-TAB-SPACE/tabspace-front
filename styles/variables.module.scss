@@ -1,0 +1,28 @@
+$black: #111;
+$white: #fff;
+$purple: #722ed1;
+$purple-light: rgba(114, 46, 209, 0.25);
+$purple-dark: #330b52;
+
+$primary: $purple;
+$disable: $purple-light;
+
+$bg-color: #e2e8f0;
+$border-color: #a1aebf;
+
+$text-color: $black;
+$text-secondary-color: rgba(0, 0, 0, 0.6);
+
+:export {
+  black: $black;
+  white: $white;
+  purple: $purple;
+  purpleDark: $purple-dark;
+  purpleLight: $purple-light;
+  primary: $primary;
+  disable: $disable;
+  bgColor: $bg-color;
+  borderColor: $border-color;
+  textColor: $text-color;
+  textSecondaryColor: $text-secondary-color;
+}
