@@ -3,7 +3,23 @@ import Image from 'next/image';
 import Kakao from '../public/assets/kakaotalk.png';
 import Link from 'next/link';
 
+import { useRouter } from 'next/router';
+
 export default function Login() {
+  const router = useRouter();
+  const kakaoLogin = () => {
+    window.Kakao.Auth.authorize({
+      success(authObj: any) {
+        console.log(authObj);
+        window.localStorage.setItem('token', authObj.access_token);
+        // router.push('/');
+      },
+      fail(err: any) {
+        console.log(err);
+      },
+    });
+  };
+
   return (
     <div className="login__container">
       <div className="login__wrap">
@@ -11,12 +27,9 @@ export default function Login() {
         <p>탭스페이스 수강장에</p>
         <p>오신걸 환영합니다.</p>
       </div>
-      <div className="login__kakaoBtn">
-        <button>
-          {' '}
-          <Image src={Kakao} alt="kakao" />
-          <p>카카오로 로그인하기</p>
-        </button>
+      <div className="login__kakaoBtn" onClick={kakaoLogin}>
+        <Image src={Kakao} alt="kakao" />
+        <p>카카오로 로그인하기</p>
       </div>
       <div className="login__register">
         <p>회원이 아니신가요?</p>
