@@ -2,12 +2,11 @@ import '../styles/globals.css';
 import { Reset } from 'styled-reset';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { useEffect } from 'react';
 import Script from 'next/script';
 
-// if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-//   import('../mocks');
-// }
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  import('../mocks');
+}
 
 // 전역에서 kakao 선언
 declare global {
