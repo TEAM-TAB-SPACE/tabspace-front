@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import {
   allLectureAtom,
@@ -10,21 +10,24 @@ import { callPlaylistApi } from '../pages/api/lecture';
 import Config from '../config/config.export';
 
 const usePlaylist = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [allLecture, setAllLecture] = useRecoilState(allLectureAtom);
   const [playlist, setPlaylist] = useRecoilState(playlistAtom);
 
   useEffect(() => {
     (async () => {
-      let data: LectureRoomSingleData[];
+      const getLectureroomData = async () => {
+        const data: LectureRoomSingleData[] = await callPlaylistApi();
+        setAllLecture(() => data);
+        setIsLoading(false);
+      };
 
       if (Config().mode === 'development') {
         setTimeout(async () => {
-          data = await callPlaylistApi();
-          setAllLecture(() => data);
+          getLectureroomData();
         }, 500);
       } else {
-        data = await callPlaylistApi();
-        setAllLecture(() => data);
+        getLectureroomData();
       }
     })();
   }, []);
@@ -34,7 +37,7 @@ const usePlaylist = () => {
     setPlaylist(playlist);
   }, [allLecture]);
 
-  return playlist;
+  return { playlist, isLoading };
 };
 
 export default usePlaylist;
