@@ -1,10 +1,15 @@
 import '../styles/globals.css';
+import { RecoilRoot } from 'recoil';
 import { Reset } from 'styled-reset';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
+import Config from '../config/config.export';
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+if (
+  Config().mode === 'development' &&
+  process.env.NEXT_PUBLIC_API_MOCKING === 'enabled'
+) {
   import('../mocks');
 }
 
@@ -24,16 +29,18 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>TAP SPACE</title>
-        <Script
-          src="https://developers.kakao.com/sdk/js/kakao.js"
-          onLoad={kakaoInit}
-        ></Script>
-      </Head>
-      <Reset />
+      <RecoilRoot>
+        <Head>
+          <title>TAP SPACE</title>
+          <Script
+            src="https://developers.kakao.com/sdk/js/kakao.js"
+            onLoad={kakaoInit}
+          ></Script>
+        </Head>
+        <Reset />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
+      </RecoilRoot>
     </>
   );
 }
