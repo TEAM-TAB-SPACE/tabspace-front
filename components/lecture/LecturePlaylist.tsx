@@ -1,12 +1,14 @@
 import { Layout, Menu } from 'antd';
 import { useSetRecoilState } from 'recoil';
-import usePlaylist from '../../hooks/usePlaylist';
-import { selectedLectureKeyPathAtom } from '../../store/lecture';
+import { PlaylistItem, selectedLectureKeyPathAtom } from '../../store/lecture';
 
 const { Sider } = Layout;
 
-function LecturePlaylist() {
-  const playlist = usePlaylist();
+interface LecturePlaylistProps {
+  menuItems: PlaylistItem[];
+}
+
+function LecturePlaylist({ menuItems }: LecturePlaylistProps) {
   const setSelectedLectureKeyPath = useSetRecoilState(
     selectedLectureKeyPathAtom,
   );
@@ -18,7 +20,7 @@ function LecturePlaylist() {
           mode="inline"
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['menu1']}
-          items={playlist}
+          items={menuItems}
           style={{
             width: '100%',
             height: '100%',

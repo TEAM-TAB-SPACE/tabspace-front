@@ -48,9 +48,7 @@ export const currentLectureSelector = selector({
     const allLecture = get(allLectureAtom);
     const [key, _] = get(selectedLectureKeyPathAtom);
 
-    return allLecture.filter(
-      lecture => `${lecture.id}` === key,
-    )[0];
+    return allLecture.filter(lecture => `${lecture.id}` === key)[0];
   },
 });
 
