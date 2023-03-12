@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 export interface LectureRoomSingleData {
   id: number;
@@ -27,14 +27,31 @@ export interface PlaylistItem {
   }[];
 }
 
-export const selectedLectureIdAtom = atom({
-  key: 'selectedLectureIdAtom',
-  default: 1,
+export const selectedLectureKeyPathAtom = atom({
+  key: 'selectedLectureKeyPathAtom',
+  default: ['1', 'menu1'],
+});
+
+export const allLectureAtom = atom({
+  key: 'allLectureAtom',
+  default: new Array<LectureRoomSingleData>(),
 });
 
 export const playlistAtom = atom({
-  key: 'playlistSelector',
+  key: 'playlistAtom',
   default: new Array<PlaylistItem>(),
+});
+
+export const currentLectureSelector = selector({
+  key: 'currentLectureSelector',
+  get: ({ get }) => {
+    const allLecture = get(allLectureAtom);
+    const [key, _] = get(selectedLectureKeyPathAtom);
+
+    return allLecture.filter(
+      lecture => `${lecture.id}` === key,
+    )[0];
+  },
 });
 
 const pickCategories = (lectureroomData: LectureRoomSingleData[]) => {
@@ -42,6 +59,7 @@ const pickCategories = (lectureroomData: LectureRoomSingleData[]) => {
     (categories: string[], item: LectureRoomSingleData) => {
       const category = item.lecture.category;
       if (!categories.includes(category)) return [...categories, category];
+
       return categories;
     },
     [],
@@ -92,7 +110,7 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
         }
 
         if (lectureCategory === category) {
-          addPlaylistItemChildren(newPlaylistItem, `item${id}`, title);
+          addPlaylistItemChildren(newPlaylistItem, `${id}`, title);
         }
       }
 

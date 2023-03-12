@@ -1,8 +1,11 @@
-interface LecturePlayerProps {
-  src: string;
-}
+import { useRecoilValue } from 'recoil';
+import { currentLectureSelector } from '../../store/lecture';
 
-function LecturePlayer({ src }: LecturePlayerProps) {
+function LecturePlayer() {
+  const selectedLecture = useRecoilValue(currentLectureSelector);
+  const videoId = selectedLecture?.lecture.videoId;
+  const src = `https://www.youtube.com/embed/${videoId}`;
+
   return (
     <>
       <div className="lecture__player">

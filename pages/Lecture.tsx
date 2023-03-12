@@ -6,7 +6,6 @@ import LectureQnA from '../components/lecture/LectureQnA';
 const { Content } = Layout;
 
 const lectureBgColor = { backgroundColor: 'transparent' };
-const src = 'https://www.youtube.com/embed/zCV-JoKl7x8';
 
 const lectureStyle = {
   maxWidth: '1074px',
@@ -21,7 +20,7 @@ function Lecture() {
         <Content>
           <Layout style={{ ...lectureBgColor }}>
             <Content>
-              <LecturePlayer src={src} />
+              <LecturePlayer />
               <Content style={{ padding: '32px 24px' }}>
                 <div className="lecture__title">
                   입문자를 위한 반응형 웹 기초 강의
