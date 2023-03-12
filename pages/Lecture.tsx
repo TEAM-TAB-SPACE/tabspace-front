@@ -1,7 +1,9 @@
+import { useRecoilValue } from 'recoil';
 import { Layout } from 'antd';
 import LecturePlaylist from '../components/lecture/LecturePlaylist';
 import LecturePlayer from '../components/lecture/LecturePlayer';
 import LectureQnA from '../components/lecture/LectureQnA';
+import { currentLectureSelector } from '../store/lecture';
 
 const { Content } = Layout;
 
@@ -14,17 +16,18 @@ const lectureStyle = {
 };
 
 function Lecture() {
+  const selectedLecture = useRecoilValue(currentLectureSelector);
+  const { title, videoId } = selectedLecture?.lecture;
+
   return (
     <>
       <Layout className="lecture" style={lectureStyle}>
         <Content>
           <Layout style={{ ...lectureBgColor }}>
             <Content>
-              <LecturePlayer />
+              <LecturePlayer videoId={videoId} />
               <Content style={{ padding: '32px 24px' }}>
-                <div className="lecture__title">
-                  입문자를 위한 반응형 웹 기초 강의
-                </div>
+                <div className="lecture__title">{title}</div>
                 <LectureQnA />
               </Content>
             </Content>

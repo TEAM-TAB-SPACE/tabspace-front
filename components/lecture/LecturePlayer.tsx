@@ -1,15 +1,14 @@
-import { useRecoilValue } from 'recoil';
-import { currentLectureSelector } from '../../store/lecture';
+interface LecturePlayerProps {
+  videoId: string;
+}
 
-function LecturePlayer() {
-  const selectedLecture = useRecoilValue(currentLectureSelector);
-  const videoId = selectedLecture?.lecture.videoId;
+function LecturePlayer({ videoId }: LecturePlayerProps) {
   const src = `https://www.youtube.com/embed/${videoId}`;
 
   return (
     <>
       <div className="lecture__player">
-        <iframe className="player__iframe" src={src} />
+        <iframe className="player__iframe" src={src} allowFullScreen />
       </div>
       <style jsx>{`
         .lecture__player {
