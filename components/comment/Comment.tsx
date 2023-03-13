@@ -1,6 +1,6 @@
 import React from 'react';
 import UserBadge from '../userBadge/UserBadge';
-import { UserBadgeData } from '../userBadge/userBadge';
+import { UserBadgeData } from '../userBadge/UserBadge';
 import ReplyButton from './ReplyButton';
 
 interface CommentProps {
