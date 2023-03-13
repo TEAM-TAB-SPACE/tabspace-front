@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
 import usePlaylist from '../hooks/usePlaylist';
 import LectureContent from '../components/lecture/LectureContent';
-import Spinner from '../components/common/spin';
+import Spinner from '../components/common/Spin';
 
 const { Content } = Layout;
 
@@ -12,7 +12,7 @@ const lectureStyle = {
 };
 
 function Lecture() {
-  const { isLoading, playlist } = usePlaylist();
+  const { isLoading } = usePlaylist();
 
   if (isLoading) {
     return <Spinner />;
@@ -22,7 +22,7 @@ function Lecture() {
     <>
       <Layout className="lecture" style={lectureStyle}>
         <Content>
-          <LectureContent playlistItems={playlist} />
+          <LectureContent />
         </Content>
       </Layout>
     </>

@@ -13,6 +13,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@types/react-responsive": "^8.0.5",
     "antd": "^5.3.0",
     "axios": "^1.3.4",
     "env-cmd": "^10.1.0",
@@ -20,6 +21,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.5",
+    "react-responsive": "^9.0.2",
     "react-youtube": "^10.1.0",
     "recoil": "^0.7.7",
     "styled-reset": "^4.4.5"

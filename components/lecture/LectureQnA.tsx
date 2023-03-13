@@ -24,7 +24,7 @@ function LectureQnA() {
         .lecture__qna {
           font-size: 16px;
           line-height: 140%;
-          padding-bottom: 10px;
+          padding: 20px 0 10px;
           font-weight: 500;
           border-bottom: 1px solid #111;
         }
