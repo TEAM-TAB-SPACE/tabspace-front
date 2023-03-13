@@ -11,7 +11,7 @@ const lectureStyle = {
   backgroundColor: 'transparent',
 };
 
-function Lectureroom() {
+function Lecture() {
   const { isLoading } = usePlaylist();
 
   if (isLoading) {
@@ -29,4 +29,4 @@ function Lectureroom() {
   );
 }
 
-export default Lectureroom;
+export default Lecture;
