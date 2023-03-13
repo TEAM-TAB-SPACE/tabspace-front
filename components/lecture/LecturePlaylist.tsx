@@ -1,8 +1,8 @@
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { Layout, Menu } from 'antd';
-import { selectedLectureKeyPathAtom } from '../../store/lecture';
-import { playlistAtom } from '../../store/lecture';
+import { playlistAtom, selectedLectureKeyPathAtom } from '../../store/lecture';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
+import variables from '../../styles/variables.module.scss';
 
 const { Sider } = Layout;
 
@@ -38,6 +38,15 @@ function LecturePlaylist() {
 
         .ant-menu {
           overflow: ${isMobile ? 'visible' : 'scroll'};
+
+          &-submenu-selected > &-submenu-title {
+            color: ${variables.primary} !important;
+          }
+
+          &-item-selected {
+            background-color: ${variables.purpleOpacity} !important;
+            color: ${variables.primary} !important;
+          }
         }
       `}</style>
     </>

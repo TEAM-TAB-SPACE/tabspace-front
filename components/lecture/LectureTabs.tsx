@@ -1,9 +1,9 @@
 import React from 'react';
-import { Tabs } from 'antd';
+import { Layout, Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LectureQnA from './LectureQnA';
-import { Layout } from 'antd';
+import variables from '../../styles/variables.module.scss';
 
 const { Content } = Layout;
 
@@ -29,6 +29,21 @@ function LectureTabs() {
     <>
       <Tabs defaultActiveKey="1" items={items} />
       <style jsx global>{`
+        .ant-tabs-tab {
+          &:hover {
+            color: ${variables.primary} !important;
+          }
+
+          &-active &-btn {
+            color: ${variables.black} !important;
+            font-weight: 500;
+          }
+        }
+
+        .ant-tabs-ink-bar-animated {
+          background: ${variables.primary} !important;
+        }
+
         .ant-tabs-nav {
           margin: 0 !important;
 
