@@ -1,26 +1,26 @@
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { Layout, Menu } from 'antd';
-import { useSetRecoilState } from 'recoil';
-import { PlaylistItem, selectedLectureKeyPathAtom } from '../../store/lecture';
+import { playlistAtom, selectedLectureKeyPathAtom } from '../../store/lecture';
+import useMediaQueryState from '../../hooks/useMediaQueryState';
+import variables from '../../styles/variables.module.scss';
 
 const { Sider } = Layout;
 
-interface LecturePlaylistProps {
-  menuItems: PlaylistItem[];
-}
-
-function LecturePlaylist({ menuItems }: LecturePlaylistProps) {
+function LecturePlaylist() {
+  const { isMobile } = useMediaQueryState();
+  const playlistItems = useRecoilValue(playlistAtom);
   const setSelectedLectureKeyPath = useSetRecoilState(
     selectedLectureKeyPathAtom,
   );
 
   return (
     <>
-      <Sider width="35%">
+      <Sider width="35%" className="playlist">
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['menu1']}
-          items={menuItems}
+          items={playlistItems}
           style={{
             width: '100%',
             height: '100%',
@@ -28,6 +28,27 @@ function LecturePlaylist({ menuItems }: LecturePlaylistProps) {
           onClick={item => setSelectedLectureKeyPath(item.keyPath)}
         />
       </Sider>
+      <style jsx global>{`
+        .playlist {
+          width: 100% !important;
+          max-width: 100% !important;
+          height: 100vh !important;
+          max-height: 100vh !important;
+        }
+
+        .ant-menu {
+          overflow: ${isMobile ? 'visible' : 'scroll'};
+
+          &-submenu-selected > &-submenu-title {
+            color: ${variables.primary} !important;
+          }
+
+          &-item-selected {
+            background-color: ${variables.purpleOpacity} !important;
+            color: ${variables.primary} !important;
+          }
+        }
+      `}</style>
     </>
   );
 }

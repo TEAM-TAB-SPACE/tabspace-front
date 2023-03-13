@@ -3,58 +3,30 @@ import Image from 'next/image';
 import Kakao from '../public/assets/kakaotalk.png';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function Register() {
-  // const handleKakaoLogin = () => {
-  //   const KAKAO_LOGIN_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
-  //   window.location.href = KAKAO_LOGIN_URL;
-  // };
-
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
-  // const code = new URL(window.location.href).searchParams.get('code');
 
-  const searchParams = useSearchParams();
+  const [inputs, setInputs] = useState({
+    realname: '',
+    email: '',
+    phone: '',
+    secret_key: '',
+  });
+  // 비구조화 할당으로 값 추출
+  const { realname, email, phone, secret_key } = inputs;
 
-  const code = searchParams.get('code');
-  console.log(code);
-  // let code = params.get('code');
+  useEffect(() => {
+    sessionStorage.setItem('inputs', JSON.stringify(inputs));
+  }, [inputs]);
 
-  // console.log(router.query);
-  // const { code } = router.query;
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [secretKey, setSecretKey] = useState('');
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    console.log({ name, email, phone, secretKey });
-
-    const data = {
-      realname: name,
-      email: email,
-      phone: phone,
-      secret_key: secretKey,
-    };
-
-    await axios
-      .post(`http://127.0.0.1:8000/api/auth/register`, data)
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(error => {
-        if (error.res) {
-          console.log(error.res);
-          console.log('res ERROR!!');
-        } else if (error.req) {
-          console.log('네트워크 에러!');
-        } else {
-          console.log(error);
-        }
-      });
+  const onChange = (e: any) => {
+    setInputs(prevInputs => {
+      return {
+        ...prevInputs,
+        [e.target.name]: e.target.value,
+      };
+    });
   };
 
   return (
@@ -64,14 +36,15 @@ export default function Register() {
         <p>꿈을 키우세요.</p>
       </div>
       <div className="register__form">
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="register__input">
-            <label htmlFor="name">
+            <label htmlFor="realname">
               이름
               <input
                 type="text"
-                name="name"
-                onChange={e => setName(e.target.value)}
+                name="realname"
+                value={realname}
+                onChange={onChange}
                 placeholder="이름을 입력해주세요"
               />
             </label>
@@ -82,7 +55,8 @@ export default function Register() {
               <input
                 type="email"
                 name="email"
-                onChange={e => setEmail(e.target.value)}
+                value={email}
+                onChange={onChange}
                 placeholder="메일을 입력해주세요"
               />
             </label>
@@ -93,30 +67,28 @@ export default function Register() {
               <input
                 type="number"
                 name="phone"
-                onChange={e => setPhone(e.target.value)}
+                value={phone}
+                onChange={onChange}
                 placeholder="전화번호를 입력해주세요"
               />
             </label>
           </div>
           <div className="register__input">
-            <label htmlFor="code">
+            <label htmlFor="secretKey">
               인증번호
               <input
                 type="number"
-                name="secretKey"
-                onChange={e => setSecretKey(e.target.value)}
+                name="secret_key"
+                value={secret_key}
+                onChange={onChange}
                 placeholder="인증코드를 입력해주세요"
               />
             </label>
           </div>
 
-          <button type="submit" className="register__kakaoBtn">
-            카카오 회원가입하기
-            <Image src={Kakao} alt="kakao" />
-            <Link href={KAKAO_AUTH_URL} className="kakaoBtn">
-              카카오로 회원가입하기
-            </Link>
-          </button>
+          <Link href={KAKAO_AUTH_URL} className="kakaoBtn">
+            카카오회원가입
+          </Link>
         </form>
       </div>
 
@@ -186,24 +158,26 @@ const register = css`
         }
       }
     }
-    .register__kakaoBtn {
+    .kakaoBtn {
       display: flex;
       justify-content: center;
-      flex-direction: row;
       align-items: center;
-      position: absolute;
-      background: #722ed1;
-      border: none;
-      border-radius: 2px;
-      width: 187px;
-      height: 38px;
-      top: 410px;
-      .kakaoBtn {
+      color: #ffffff;
+      padding-left: 5px;
+      height: 300px;
+      .register__kakaoBtn {
         display: flex;
         justify-content: center;
+        flex-direction: row;
         align-items: center;
-        color: #ffffff;
-        padding-left: 5px;
+        position: absolute;
+        background: #722ed1;
+        border: none;
+        border-radius: 2px;
+        width: 187px;
+        height: 38px;
+        top: 410px;
+
         p {
           margin-left: 10px;
         }

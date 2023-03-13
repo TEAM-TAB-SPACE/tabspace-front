@@ -1,9 +1,9 @@
 import '../styles/globals.css';
-import { RecoilRoot } from 'recoil';
 import { Reset } from 'styled-reset';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
+import { RecoilRoot } from 'recoil';
 import Config from '../config/config.export';
 
 if (

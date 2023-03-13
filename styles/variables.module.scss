@@ -1,6 +1,7 @@
 $black: #111;
 $white: #fff;
 $purple: #722ed1;
+$purple-opacity: rgba(114, 46, 209, 0.05);
 $purple-light: rgba(114, 46, 209, 0.25);
 $purple-dark: #330b52;
 
@@ -19,6 +20,7 @@ $text-secondary-color: rgba(0, 0, 0, 0.6);
   purple: $purple;
   purpleDark: $purple-dark;
   purpleLight: $purple-light;
+  purpleOpacity:$purple-opacity;
   primary: $primary;
   disable: $disable;
   bgColor: $bg-color;

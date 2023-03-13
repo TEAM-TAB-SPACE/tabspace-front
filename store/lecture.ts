@@ -1,4 +1,8 @@
 import { atom, selector } from 'recoil';
+import type { MenuProps } from 'antd';
+import { SubMenuType } from 'antd/es/menu/hooks/useItems';
+
+export type MenuItem = Required<MenuProps>['items'][number];
 
 export interface LectureRoomSingleData {
   id: number;
@@ -18,15 +22,6 @@ export interface LectureRoomSingleData {
   completed: boolean;
 }
 
-export interface PlaylistItem {
-  key: string;
-  label: string;
-  children: {
-    key: string;
-    label: string;
-  }[];
-}
-
 export const selectedLectureKeyPathAtom = atom({
   key: 'selectedLectureKeyPathAtom',
   default: ['1', 'menu1'],
@@ -39,7 +34,7 @@ export const allLectureAtom = atom({
 
 export const playlistAtom = atom({
   key: 'playlistAtom',
-  default: new Array<PlaylistItem>(),
+  default: new Array<MenuItem>(),
 });
 
 export const currentLectureSelector = selector({
@@ -67,14 +62,15 @@ const pickCategories = (lectureroomData: LectureRoomSingleData[]) => {
 };
 
 const addPlaylistItemChildren = (
-  playlistItem: PlaylistItem,
+  playlistItem: SubMenuType,
   key: string,
   label: string,
 ) => {
-  playlistItem.children = [...playlistItem.children, { key, label }];
+  const newPlaylistItemChildren = [...playlistItem?.children, { key, label }];
+  playlistItem.children = newPlaylistItemChildren;
 };
 
-const createPlaylistItem = (key: string, label: string) => {
+const createPlaylistItem = (key: string, label: string): SubMenuType => {
   return {
     key,
     label,
@@ -93,11 +89,8 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
   let prevCategories: string[] = [];
 
   const playlist = categories.reduce(
-    (playlist: PlaylistItem[], category: string, index: number) => {
-      const newPlaylistItem: PlaylistItem = createPlaylistItem(
-        `menu${index + 1}`,
-        category,
-      );
+    (playlist: MenuItem[], category: string, index: number): MenuItem[] => {
+      const newPlaylistItem = createPlaylistItem(`menu${index + 1}`, category);
 
       for (const item of lectureroomData) {
         const { id, category: lectureCategory, title } = item.lecture;
