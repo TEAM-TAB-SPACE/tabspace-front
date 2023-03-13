@@ -1,6 +1,6 @@
 import css from 'styled-jsx/css';
 import Image from 'next/image';
-import Kakao from '../public/assets/kakaotalk.png';
+import Kakao from '../public/assets/kakaotalk.svg';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -12,9 +12,10 @@ export default function Register() {
     email: '',
     phone: '',
     secret_key: '',
+    msg_agree: 1,
   });
   // 비구조화 할당으로 값 추출
-  const { realname, email, phone, secret_key } = inputs;
+  const { realname, email, phone, secret_key, msg_agree } = inputs;
 
   useEffect(() => {
     sessionStorage.setItem('inputs', JSON.stringify(inputs));
@@ -45,7 +46,7 @@ export default function Register() {
                 name="realname"
                 value={realname}
                 onChange={onChange}
-                placeholder="이름을 입력해주세요"
+                placeholder="이름을 입력해주세요."
               />
             </label>
           </div>
@@ -57,7 +58,7 @@ export default function Register() {
                 name="email"
                 value={email}
                 onChange={onChange}
-                placeholder="메일을 입력해주세요"
+                placeholder="메일을 입력해주세요."
               />
             </label>
           </div>
@@ -69,7 +70,7 @@ export default function Register() {
                 name="phone"
                 value={phone}
                 onChange={onChange}
-                placeholder="전화번호를 입력해주세요"
+                placeholder="전화번호를 입력해주세요."
               />
             </label>
           </div>
@@ -81,14 +82,22 @@ export default function Register() {
                 name="secret_key"
                 value={secret_key}
                 onChange={onChange}
-                placeholder="인증코드를 입력해주세요"
+                placeholder="인증코드를 입력해주세요."
               />
             </label>
           </div>
-
-          <Link href={KAKAO_AUTH_URL} className="kakaoBtn">
-            카카오회원가입
-          </Link>
+          <div className="input__marketing">
+            <label htmlFor="msg_agree">
+              <input type="checkbox" name="msg_agree" value={msg_agree} />
+              광고성 정보 수신 동의
+            </label>
+          </div>
+          <div className="register__btn">
+            <Link href={KAKAO_AUTH_URL} className="kakaoBtn">
+              <Kakao />
+              <p>카카오로 회원가입 하기</p>
+            </Link>
+          </div>
         </form>
       </div>
 
@@ -100,6 +109,20 @@ export default function Register() {
       </div>
 
       <style global jsx>{`
+        .kakaoBtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 200px;
+          height: 38px;
+          color: #ffffff;
+          background-color: #722ed1;
+          font-size: 0.8rem;
+          border-radius: 5px;
+          p {
+            padding-left: 5px;
+          }
+        }
         a {
           text-decoration: none;
         }
@@ -158,30 +181,19 @@ const register = css`
         }
       }
     }
-    .kakaoBtn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #ffffff;
-      padding-left: 5px;
-      height: 300px;
-      .register__kakaoBtn {
+    .input__marketing {
+      label {
         display: flex;
         justify-content: center;
-        flex-direction: row;
+        font-size: 0.8rem;
         align-items: center;
-        position: absolute;
-        background: #722ed1;
-        border: none;
-        border-radius: 2px;
-        width: 187px;
-        height: 38px;
-        top: 410px;
-
-        p {
-          margin-left: 10px;
-        }
+        text-align: center;
+        padding: 10px 0;
       }
+    }
+    .register__btn {
+      display: flex;
+      flex-direction: row;
     }
     .register__login {
       display: flex;
@@ -189,11 +201,17 @@ const register = css`
       flex-direction: row;
       align-items: center;
       position: absolute;
-      top: 470px;
+      top: 490px;
       p {
         font-size: 0.8rem;
         padding-right: 5px;
       }
+    }
+  }
+
+  @media (max-width: 667px) {
+    .register__container {
+      top: 60px;
     }
   }
 `;

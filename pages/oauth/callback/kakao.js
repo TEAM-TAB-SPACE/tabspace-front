@@ -15,7 +15,7 @@ const redirectHandler = () => {
     if (code) {
       registerKaKao(code, inputPayload);
       sessionStorage.removeItem('inputs');
-      router.push('/dashboard');
+      // router.push('/dashboard');
     }
   }, [code]);
 
