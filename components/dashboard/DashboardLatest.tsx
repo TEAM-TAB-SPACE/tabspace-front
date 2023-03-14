@@ -2,22 +2,22 @@ import Link from 'next/link';
 import variables from '../../styles/variables.module.scss';
 import layout from '../../styles/layout.module.scss';
 
-function DashboardLatestLecture() {
+function DashboardLatest() {
   return (
     <>
-      <div className="dashboard__latestLecture">
-        <div className="latestLecture__wrapper">
+      <div className="dashboard__latest">
+        <div className="latest__wrapper">
           <Link
             href="/lecture"
-            className={`latestLecture__link ${layout.flex_center}`}
+            className={`latest__link ${layout.flex_center}`}
           >
             이어보기
           </Link>
-          <div className="latestLecture__img"></div>
+          <div className="latest__img"></div>
         </div>
       </div>
       <style jsx global>{`
-        .dashboard__latestLecture {
+        .dashboard__latest {
           position: relative;
           padding-bottom: 56.25%;
           width: 100%;
@@ -25,7 +25,7 @@ function DashboardLatestLecture() {
           overflow: hidden;
         }
 
-        .latestLecture {
+        .latest {
           &__wrapper {
             display: block;
             width: 100%;
@@ -74,4 +74,4 @@ function DashboardLatestLecture() {
   );
 }
 
-export default DashboardLatestLecture;
+export default DashboardLatest;
