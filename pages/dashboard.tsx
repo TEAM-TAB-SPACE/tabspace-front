@@ -1,17 +1,9 @@
+import DashboardGreeting from '../components/dashboard/DashboardGreeting';
 import DashboardLatestLecture from '../components/dashboard/DashboardLatestLecture';
 import DashboardLayout from '../components/dashboard/DashboardLayout';
 
 const dashboardItems = {
-  greeting: {
-    title: '',
-    item: (
-      <div>
-        안녕하세요
-        <br />
-        문예림님!
-      </div>
-    ),
-  },
+  greeting: { title: '', item: <DashboardGreeting username="모찌" /> },
   latest: { title: '가장 최근 항목', item: <DashboardLatestLecture /> },
   today: { title: '오늘의 강의', item: <DashboardLatestLecture /> },
   attendance: { title: '내 출셕', item: <DashboardLatestLecture /> },
