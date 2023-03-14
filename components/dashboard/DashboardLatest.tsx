@@ -3,12 +3,14 @@ import variables from '../../styles/variables.module.scss';
 import layout from '../../styles/layout.module.scss';
 
 function DashboardLatest() {
+  const videoId = 'FBNlr2RMf1k';
+
   return (
     <>
       <div className="dashboard__latest">
         <div className="latest__wrapper">
           <Link
-            href="/lecture"
+            href={`/lecture/${videoId}`}
             className={`latest__link ${layout.flex_center}`}
           >
             이어보기
@@ -40,7 +42,7 @@ function DashboardLatest() {
             width: 100%;
             height: 100%;
             color: ${variables.white};
-            background: url('http://img.youtube.com/vi/G360D6lqrfo/0.jpg')
+            background: url(${`http://img.youtube.com/vi/${videoId}/0.jpg`})
               no-repeat;
             background-size: cover;
             background-position: center center;
