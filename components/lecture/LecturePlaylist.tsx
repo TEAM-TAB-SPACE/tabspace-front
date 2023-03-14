@@ -36,7 +36,9 @@ function LecturePlaylist() {
         }
 
         .ant-menu {
-          overflow: ${isMobile ? 'visible' : 'scroll'};
+          &-root {
+            overflow: ${isMobile ? 'visible' : 'scroll'};
+          }
 
           &-submenu-selected > &-submenu-title {
             color: ${variables.primary} !important;
@@ -45,6 +47,11 @@ function LecturePlaylist() {
           &-item-selected {
             background-color: ${variables.purpleOpacity} !important;
             color: ${variables.primary} !important;
+          }
+
+          &-item:not(.ant-menu-item-selected):active,
+          &-light:not(.ant-menu-horizontal) .ant-menu-submenu-title:active {
+            background-color: ${variables.purpleOpacity} !important;
           }
         }
       `}</style>
