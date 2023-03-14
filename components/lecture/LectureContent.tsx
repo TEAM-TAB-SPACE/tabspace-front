@@ -6,19 +6,23 @@ import LectureQnA from './LectureQnA';
 import { currentLectureSelector } from '../../store/lecture';
 import LectureTabs from './LectureTabs';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
+import { useRouter } from 'next/router';
 
 const { Content } = Layout;
 
 function LectureContent() {
+  const router = useRouter();
+  const { videoId } = router.query;
+
   const { isMobile } = useMediaQueryState();
-  const selectedLecture = useRecoilValue(currentLectureSelector);
-  const { title, videoId } = selectedLecture?.lecture;
+  const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
+  const { title } = selectedLecture?.lecture;
 
   return (
     <>
       <Layout style={{ backgroundColor: 'transparent' }}>
         <Content className="lecture__content">
-          <LecturePlayer videoId={videoId} />
+          <LecturePlayer videoId={`${videoId}`} />
           {isMobile ? (
             <LectureTabs />
           ) : (

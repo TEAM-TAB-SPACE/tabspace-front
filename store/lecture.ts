@@ -1,4 +1,4 @@
-import { atom, selector } from 'recoil';
+import { atom, selectorFamily } from 'recoil';
 import type { MenuProps } from 'antd';
 import { SubMenuType } from 'antd/es/menu/hooks/useItems';
 
@@ -22,11 +22,6 @@ export interface LectureRoomSingleData {
   completed: boolean;
 }
 
-export const selectedLectureKeyPathAtom = atom({
-  key: 'selectedLectureKeyPathAtom',
-  default: ['1', 'menu1'],
-});
-
 export const allLectureAtom = atom({
   key: 'allLectureAtom',
   default: new Array<LectureRoomSingleData>(),
@@ -37,14 +32,18 @@ export const playlistAtom = atom({
   default: new Array<MenuItem>(),
 });
 
-export const currentLectureSelector = selector({
+export const currentLectureSelector = selectorFamily<
+  LectureRoomSingleData,
+  string
+>({
   key: 'currentLectureSelector',
-  get: ({ get }) => {
-    const allLecture = get(allLectureAtom);
-    const [key, _] = get(selectedLectureKeyPathAtom);
+  get:
+    videoId =>
+    ({ get }) => {
+      const allLecture = get(allLectureAtom);
 
-    return allLecture.filter(lecture => `${lecture.id}` === key)[0];
-  },
+      return allLecture.filter(({ lecture }) => lecture.videoId === videoId)[0];
+    },
 });
 
 const pickCategories = (lectureroomData: LectureRoomSingleData[]) => {
@@ -93,7 +92,7 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
       const newPlaylistItem = createPlaylistItem(`menu${index + 1}`, category);
 
       for (const item of lectureroomData) {
-        const { id, category: lectureCategory, title } = item.lecture;
+        const { videoId, category: lectureCategory, title } = item.lecture;
 
         if (isNewCategory(prevCategories, lectureCategory, category)) {
           prevCategories = [...prevCategories, category];
@@ -101,7 +100,7 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
         }
 
         if (lectureCategory === category) {
-          addPlaylistItemChildren(newPlaylistItem, `${id}`, title);
+          addPlaylistItemChildren(newPlaylistItem, videoId, title);
         }
       }
 
