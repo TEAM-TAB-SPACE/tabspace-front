@@ -1,13 +1,14 @@
 import { Card } from 'antd';
 
 interface DashoardItemProps {
+  title: string;
   children: React.ReactNode;
 }
 
-function DashboardItem({ children }: DashoardItemProps) {
+function DashboardItem({ title, children }: DashoardItemProps) {
   return (
     <>
-      <Card className="dashboard__item" title="가장 최근 강의">
+      <Card className="dashboard__item" title={title}>
         {children}
       </Card>
       <style jsx global>{`
