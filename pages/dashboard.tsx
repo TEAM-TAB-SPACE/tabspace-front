@@ -1,12 +1,13 @@
+import DashboardLayout from '../components/dashboard/DashboardLayout';
 import DashboardGreeting from '../components/dashboard/DashboardGreeting';
 import DashboardLatest from '../components/dashboard/DashboardLatest';
-import DashboardLayout from '../components/dashboard/DashboardLayout';
+import DashboardToday from '../components/dashboard/dashboardToday/DashboardToday';
 
 const dashboardItems = {
   greeting: { title: '', item: <DashboardGreeting username="모찌" /> },
-  latest: { title: '가장 최근 항목', item: <DashboardLatest /> },
-  today: { title: '오늘의 강의', item: <DashboardLatest /> },
-  attendance: { title: '내 출셕', item: <DashboardLatest /> },
+  latest: { title: '가장 최근 강의', item: <DashboardLatest /> },
+  today: { title: '오늘의 강의', item: <DashboardToday /> },
+  attendance: { title: '내 출석', item: <DashboardLatest /> },
   mission: { title: '내 미션', item: <DashboardLatest /> },
   capable: { title: '내 역량', item: <DashboardLatest /> },
   submitMission: { title: '미션제출', item: <DashboardLatest /> },
