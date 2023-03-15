@@ -1,9 +1,13 @@
-import { todayLecturesData } from '../../../mocks/data/todayLecturesData';
 import ProgressWithBackground from '../../common/ProgressWithBackground';
 import GoLearnButton from './GoLearnButton';
+import SpinCircle from '../../common/SpinCircle';
+import useTodayLectures from '../../../hooks/useTodayLectures';
 
 function DashboardToday() {
-  const todayLectures = todayLecturesData;
+  const { todayLectures, isLoading } = useTodayLectures();
+
+  if (isLoading)
+    return <SpinCircle style={{ width: '100%', height: '250px' }} />;
 
   return (
     <>
