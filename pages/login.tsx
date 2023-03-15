@@ -1,25 +1,16 @@
 import css from 'styled-jsx/css';
-import Image from 'next/image';
-import Kakao from '../public/assets/kakaotalk.png';
+
 import Link from 'next/link';
+import Kakao from '../public/assets/kakaotalk.svg';
 
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Login() {
   const router = useRouter();
-  const kakaoLogin = () => {
-    window.Kakao.Auth.authorize({
-      success(authObj: any) {
-        console.log(authObj);
-        window.localStorage.setItem('token', authObj.access_token);
-        // router.push('/');
-      },
-      fail(err: any) {
-        console.log(err);
-      },
-    });
-  };
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
 
+  useEffect(() => {}, []);
   return (
     <div className="login__container">
       <div className="login__wrap">
@@ -27,9 +18,9 @@ export default function Login() {
         <p>탭스페이스 수강장에</p>
         <p>오신걸 환영합니다.</p>
       </div>
-      <div className="login__kakaoBtn" onClick={kakaoLogin}>
-        <Image src={Kakao} alt="kakao" />
-        <p>카카오로 로그인하기</p>
+      <div className="login__kakaoBtn">
+        <Kakao />
+        <Link href={KAKAO_AUTH_URL}>카카오로그인</Link>
       </div>
       <div className="login__register">
         <p>회원이 아니신가요?</p>
@@ -82,6 +73,8 @@ const login = css`
       align-items: center;
       position: absolute;
       top: 180px;
+      background: #722ed1;
+      color: #ffffff;
 
       button {
         display: flex;

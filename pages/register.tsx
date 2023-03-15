@@ -1,10 +1,51 @@
 import css from 'styled-jsx/css';
-import Image from 'next/image';
 import Kakao from '../public/assets/kakaotalk.svg';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { useRouter } from 'next/router';
+import axios from 'axios';
+import { validationApi } from './api/validation';
+
+// interface RegisterType {
+//   realname: string;
+//   email: string;
+//   phone: number;
+//   secret_key: number;
+//   msg_agree: boolean;
+// }
 
 export default function Register() {
+  const router = useRouter();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data: any) => {
+    console.log({ data });
+  };
+
+  async function postValid(res: Response) {
+    try {
+      const { data } = await axios.post(
+        'http://127.0.0.1:8000/api/auth/register/validation',
+      );
+      if (res.status === 200) {
+        router.push(
+          `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`,
+        );
+      }
+      return data;
+    } catch (error) {
+      console.log(error);
+      alert('회원가입에 실패했습니다!');
+    }
+  }
+
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
 
   const [inputs, setInputs] = useState({
@@ -12,10 +53,9 @@ export default function Register() {
     email: '',
     phone: '',
     secret_key: '',
-    msg_agree: 1,
   });
   // 비구조화 할당으로 값 추출
-  const { realname, email, phone, secret_key, msg_agree } = inputs;
+  const { realname, email, phone, secret_key } = inputs;
 
   useEffect(() => {
     sessionStorage.setItem('inputs', JSON.stringify(inputs));
@@ -37,66 +77,89 @@ export default function Register() {
         <p>꿈을 키우세요.</p>
       </div>
       <div className="register__form">
-        <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="register__input">
             <label htmlFor="realname">
               이름
               <input
+                {...register('realname', { required: true })}
                 type="text"
                 name="realname"
                 value={realname}
                 onChange={onChange}
-                placeholder="이름을 입력해주세요."
+                placeholder="실명을 입력해주세요."
               />
+              <p>
+                {errors.realname?.type === 'required' && '이름을 입력해주세요.'}
+              </p>
             </label>
           </div>
           <div className="register__input">
             <label htmlFor="email">
               이메일
               <input
+                {...register('email', { required: true })}
                 type="email"
                 name="email"
                 value={email}
                 onChange={onChange}
                 placeholder="메일을 입력해주세요."
               />
+              <p>
+                {errors.email?.type === 'required' && '이메일을 입력해주세요.'}
+              </p>
             </label>
           </div>
           <div className="register__input">
             <label htmlFor="phone">
               전화번호
               <input
+                {...register('phone', { required: true })}
                 type="number"
                 name="phone"
                 value={phone}
                 onChange={onChange}
-                placeholder="전화번호를 입력해주세요."
+                placeholder="휴대전화를 입력해주세요."
               />
+              <p>
+                {errors.phone?.type === 'required' &&
+                  '휴대전화를 입력해주세요.'}
+              </p>
             </label>
           </div>
           <div className="register__input">
             <label htmlFor="secretKey">
               인증번호
               <input
+                {...register('secret_key', { required: true })}
                 type="number"
                 name="secret_key"
                 value={secret_key}
                 onChange={onChange}
-                placeholder="인증코드를 입력해주세요."
+                placeholder="인증코드 4자리를 입력해주세요."
               />
+              <p>
+                {errors.secret_key?.type === 'required' &&
+                  '인증코드 입력해주세요.'}
+              </p>
             </label>
           </div>
           <div className="input__marketing">
             <label htmlFor="msg_agree">
-              <input type="checkbox" name="msg_agree" value={msg_agree} />
+              <input type="checkbox" {...register('secret_key')} />
               광고성 정보 수신 동의
             </label>
           </div>
+
           <div className="register__btn">
-            <Link href={KAKAO_AUTH_URL} className="kakaoBtn">
-              <Kakao />
-              <p>카카오로 회원가입 하기</p>
-            </Link>
+            {/* <Kakao /> */}
+            <input
+              type="submit"
+              className="kakaoBtn"
+              value="카카오로 회원가입하기"
+              onClick={() => postValid()}
+            />
+            {/* <Link href={KAKAO_AUTH_URL}>카카오로그인</Link> */}
           </div>
         </form>
       </div>
@@ -127,12 +190,12 @@ export default function Register() {
           text-decoration: none;
         }
       `}</style>
-      <style jsx>{register}</style>
+      <style jsx>{registerStyle}</style>
     </div>
   );
 }
 
-const register = css`
+const registerStyle = css`
   .register__container {
     display: flex;
     flex-direction: column;
@@ -143,7 +206,7 @@ const register = css`
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     width: 300px;
-    height: 440px;
+    height: 450px;
     position: relative;
     margin: 0 auto;
     top: 100px;
@@ -168,7 +231,7 @@ const register = css`
         display: flex;
         flex-direction: column;
         .register__input {
-          padding: 8px;
+          padding-bottom: 5px;
           label {
             font-size: 0.8rem;
             input {
@@ -176,6 +239,11 @@ const register = css`
               height: 30px;
               border-radius: 5px;
               border: 1px solid gray;
+            }
+            p {
+              font-size: 0.7rem;
+              padding-top: 7px;
+              color: red;
             }
           }
         }
@@ -194,6 +262,9 @@ const register = css`
     .register__btn {
       display: flex;
       flex-direction: row;
+      .kakaoBtn {
+        border: none;
+      }
     }
     .register__login {
       display: flex;
@@ -201,7 +272,7 @@ const register = css`
       flex-direction: row;
       align-items: center;
       position: absolute;
-      top: 490px;
+      top: 510px;
       p {
         font-size: 0.8rem;
         padding-right: 5px;

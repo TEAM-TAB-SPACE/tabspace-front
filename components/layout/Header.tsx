@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import css from 'styled-jsx/css';
-import Logo from '../../public/assets/logo.png';
+import Logo from '../../public/assets/mainLogo.svg';
 
 export default function Header() {
   return (
     <header className="header__container">
-      <Image src={Logo} alt="logo" />
+      <Logo />
       <div className="header__auth">
         <div className="header__login">
           <Link href="/login">로그인</Link>
