@@ -40,7 +40,7 @@ interface DashboardLayoutProps {
 }
 
 function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
-  const { isMobile } = useMediaQueryState();
+  const { isMobile, isTablet } = useMediaQueryState();
 
   const {
     greeting,
@@ -56,13 +56,13 @@ function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
     <>
       <Layout style={layoutStyle}>
         <Content style={contentStyle}>
-          <Row gutter={22} wrap={isMobile ? true : false}>
+          <Row gutter={22} justify={'space-between'}>
             <Col flex={isMobile ? '100%' : '160px'}>
               <div className="dashboard__user" style={{ marginBottom: '30px' }}>
                 {greeting.item}
               </div>
             </Col>
-            <Col flex={isMobile ? '100%' : '380px'}>
+            <Col flex={isMobile ? '100%' : isTablet ? '500px' : '380px'}>
               <DashboardItem title={latest.title} style={{ height: '348px' }}>
                 {latest.item}
               </DashboardItem>
@@ -73,19 +73,19 @@ function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
           </Row>
 
           <Row gutter={22}>
-            <Col flex={1}>
+            <Col flex={isMobile ? '100%' : '1 1 300px'}>
               <DashboardItem title={attendance.title}>
                 {attendance.item}
               </DashboardItem>
             </Col>
-            <Col flex={1}>
-              <DashboardItem title={mission.title}>
-                {mission.item}
-              </DashboardItem>
-            </Col>
-            <Col flex={1}>
+            <Col flex={isMobile ? 'auto' : '1 1 300px'}>
               <DashboardItem title={capable.title}>
                 {capable.item}
+              </DashboardItem>
+            </Col>
+            <Col flex={isMobile ? '100%' : '1 1 300px'}>
+              <DashboardItem title={mission.title}>
+                {mission.item}
               </DashboardItem>
             </Col>
           </Row>
