@@ -4,12 +4,9 @@ import type { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 import { RecoilRoot } from 'recoil';
-import Config from '../config/config.export';
+import { isDevMode } from '../config/config.export';
 
-if (
-  Config().mode === 'development' &&
-  process.env.NEXT_PUBLIC_API_MOCKING === 'enabled'
-) {
+if (isDevMode && process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   import('../mocks');
 }
 

@@ -7,7 +7,8 @@ import {
   playlistAtom,
 } from '../store/lecture';
 import { callPlaylistApi } from '../pages/api/lecture';
-import Config from '../config/config.export';
+import { isDevMode } from '../config/config.export';
+import { sleep } from '../utils/time';
 
 const usePlaylist = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,14 +19,16 @@ const usePlaylist = () => {
     (async () => {
       const getLectureroomData = async () => {
         const data: LectureRoomSingleData[] = await callPlaylistApi();
-        setAllLecture(() => data);
+
+        if (data instanceof Error) return;
+
+        setAllLecture(data);
         setIsLoading(false);
       };
 
-      if (Config().mode === 'development') {
-        setTimeout(async () => {
-          getLectureroomData();
-        }, 500);
+      if (isDevMode) {
+        await sleep(500);
+        getLectureroomData();
       } else {
         getLectureroomData();
       }
