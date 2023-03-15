@@ -20,18 +20,15 @@ function DashboardLatest() {
       </div>
       <style jsx global>{`
         .dashboard__latest {
-          position: relative;
-          padding-bottom: 56.25%;
           width: 100%;
-          height: 100%;
+          max-width: 400px;
           overflow: hidden;
         }
 
         .latest {
           &__wrapper {
-            display: block;
-            width: 100%;
-            height: 100%;
+            position: relative;
+            padding-bottom: 56.25%;
           }
 
           &__img {

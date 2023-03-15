@@ -23,6 +23,7 @@ function DashboardToday() {
       </div>
       <style jsx global>{`
         .dashboard__today {
+          width: 100%;
           overflow-y: scroll;
           min-height: 250px;
           max-height: 250px;

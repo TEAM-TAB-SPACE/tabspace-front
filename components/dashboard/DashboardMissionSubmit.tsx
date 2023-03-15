@@ -30,6 +30,8 @@ function DashboardMissionSubmit() {
       </Form>
       <style jsx global>{`
         .dashboard__missionSubmit {
+          width: 100%;
+
           .anticon {
             color: ${variables.primary} !important;
           }

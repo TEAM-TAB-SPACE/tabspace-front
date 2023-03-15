@@ -1,5 +1,6 @@
 import { Layout, Row, Col } from 'antd';
 import DashboardItem from '../../components/dashboard/DashboardItem';
+import useMediaQueryState from '../../hooks/useMediaQueryState';
 import variables from '../../styles/variables.module.scss';
 
 const { Content } = Layout;
@@ -39,6 +40,8 @@ interface DashboardLayoutProps {
 }
 
 function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
+  const { isMobile } = useMediaQueryState();
+
   const {
     greeting,
     latest,
@@ -53,18 +56,23 @@ function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
     <>
       <Layout style={layoutStyle}>
         <Content style={contentStyle}>
-          <Row gutter={22} style={{ marginBottom: '50px' }}>
-            <Col flex={0.2} span={24}>
-              <div className="dashboard__user">{greeting.item}</div>
+          <Row gutter={22} wrap={isMobile ? true : false}>
+            <Col flex={isMobile ? '100%' : '160px'}>
+              <div className="dashboard__user" style={{ marginBottom: '30px' }}>
+                {greeting.item}
+              </div>
             </Col>
-            <Col flex={1} span={24}>
-              <DashboardItem title={latest.title}>{latest.item}</DashboardItem>
+            <Col flex={isMobile ? '100%' : '380px'}>
+              <DashboardItem title={latest.title} style={{ height: '348px' }}>
+                {latest.item}
+              </DashboardItem>
             </Col>
-            <Col flex={1}>
+            <Col flex="auto">
               <DashboardItem title={today.title}>{today.item}</DashboardItem>
             </Col>
           </Row>
-          <Row gutter={22} style={{ marginBottom: '50px' }}>
+
+          <Row gutter={22}>
             <Col flex={1}>
               <DashboardItem title={attendance.title}>
                 {attendance.item}
@@ -81,6 +89,7 @@ function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
               </DashboardItem>
             </Col>
           </Row>
+
           <Row gutter={22}>
             <Col flex={1}>
               <DashboardItem title={submitMission.title}>
