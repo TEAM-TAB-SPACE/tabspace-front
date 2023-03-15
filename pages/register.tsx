@@ -3,63 +3,30 @@ import Kakao from '../public/assets/kakaotalk.svg';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
 import { useRouter } from 'next/router';
-import axios from 'axios';
 import { validationApi } from './api/validation';
 
-// interface RegisterType {
-//   realname: string;
-//   email: string;
-//   phone: number;
-//   secret_key: number;
-//   msg_agree: boolean;
-// }
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
+
+export interface RegisterType {
+  realname: string;
+  email: string;
+  phone: number;
+  secret_key: number;
+  msg_agree: boolean;
+}
 
 export default function Register() {
   const router = useRouter();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = async (data: any) => {
-    console.log({ data });
-  };
-
-  async function postValid(res: Response) {
-    try {
-      const { data } = await axios.post(
-        'http://127.0.0.1:8000/api/auth/register/validation',
-      );
-      if (res.status === 200) {
-        router.push(
-          `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`,
-        );
-      }
-      return data;
-    } catch (error) {
-      console.log(error);
-      alert('회원가입에 실패했습니다!');
-    }
-  }
-
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
-
   const [inputs, setInputs] = useState({
     realname: '',
     email: '',
-    phone: '',
-    secret_key: '',
+    phone: 0,
+    secret_key: 0,
+    msg_agree: false,
   });
   // 비구조화 할당으로 값 추출
   const { realname, email, phone, secret_key } = inputs;
-
-  useEffect(() => {
-    sessionStorage.setItem('inputs', JSON.stringify(inputs));
-  }, [inputs]);
 
   const onChange = (e: any) => {
     setInputs(prevInputs => {
@@ -69,6 +36,44 @@ export default function Register() {
       };
     });
   };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async () => {
+    const data = await validationApi(inputs);
+
+    if (data instanceof Error) {
+      alert('회원가입에 실패했습니다!');
+    } else {
+      sessionStorage.setItem('inputs', JSON.stringify(inputs));
+      router.push(KAKAO_AUTH_URL);
+    }
+  };
+
+  // async function postValid(res: Response) {
+  //   try {
+  //     const { data } = await axios.post(
+  //       'http://127.0.0.1:8000/api/auth/register/validation',
+  //     );
+  //     if (res.status === 200) {
+  //       router.push(
+  //         `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`,
+  //       );
+  //     }
+  //     return data;
+  //   } catch (error) {
+  //     console.log(error);
+  //     alert('회원가입에 실패했습니다!');
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   sessionStorage.setItem('inputs', JSON.stringify(inputs));
+  // }, [inputs]);
 
   return (
     <div className="register__container">
@@ -157,7 +162,6 @@ export default function Register() {
               type="submit"
               className="kakaoBtn"
               value="카카오로 회원가입하기"
-              onClick={() => postValid()}
             />
             {/* <Link href={KAKAO_AUTH_URL}>카카오로그인</Link> */}
           </div>
