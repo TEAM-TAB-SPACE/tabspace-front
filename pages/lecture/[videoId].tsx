@@ -1,7 +1,7 @@
 import { Layout } from 'antd';
-import usePlaylist from '../hooks/usePlaylist';
-import LectureContent from '../components/lecture/LectureContent';
-import Spinner from '../components/common/Spin';
+import usePlaylist from '../../hooks/usePlaylist';
+import LectureContent from '../../components/lecture/LectureContent';
+import Spinner from '../../components/common/Spin';
 
 const { Content } = Layout;
 

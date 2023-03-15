@@ -1,17 +1,16 @@
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { Layout, Menu } from 'antd';
-import { playlistAtom, selectedLectureKeyPathAtom } from '../../store/lecture';
+import { playlistAtom } from '../../store/lecture';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
 import variables from '../../styles/variables.module.scss';
+import { useRouter } from 'next/router';
 
 const { Sider } = Layout;
 
 function LecturePlaylist() {
+  const router = useRouter();
   const { isMobile } = useMediaQueryState();
   const playlistItems = useRecoilValue(playlistAtom);
-  const setSelectedLectureKeyPath = useSetRecoilState(
-    selectedLectureKeyPathAtom,
-  );
 
   return (
     <>
@@ -25,7 +24,7 @@ function LecturePlaylist() {
             width: '100%',
             height: '100%',
           }}
-          onClick={item => setSelectedLectureKeyPath(item.keyPath)}
+          onClick={({ keyPath: [key] }) => router.push(`/lecture/${key}`)}
         />
       </Sider>
       <style jsx global>{`
@@ -37,7 +36,9 @@ function LecturePlaylist() {
         }
 
         .ant-menu {
-          overflow: ${isMobile ? 'visible' : 'scroll'};
+          &-root {
+            overflow: ${isMobile ? 'visible' : 'scroll'};
+          }
 
           &-submenu-selected > &-submenu-title {
             color: ${variables.primary} !important;
@@ -46,6 +47,11 @@ function LecturePlaylist() {
           &-item-selected {
             background-color: ${variables.purpleOpacity} !important;
             color: ${variables.primary} !important;
+          }
+
+          &-item:not(.ant-menu-item-selected):active,
+          &-light:not(.ant-menu-horizontal) .ant-menu-submenu-title:active {
+            background-color: ${variables.purpleOpacity} !important;
           }
         }
       `}</style>
