@@ -5,6 +5,7 @@ import LectureContent from '../../components/lecture/LectureContent';
 import Spinner from '../../components/common/Spin';
 import useFetch from '../../hooks/useFetch';
 import { allLectureAtom } from '../../store/lecture';
+import { API_URL_LECTURE } from '../api/lecture';
 
 const { Content } = Layout;
 
@@ -15,7 +16,7 @@ const lectureStyle = {
 };
 
 function Lecture() {
-  const { isLoading, data } = useFetch('/lecturerooms');
+  const { isLoading, data } = useFetch(API_URL_LECTURE.ALL_LECTURE);
   const setAllLecture = useSetRecoilState(allLectureAtom);
 
   useEffect(() => {

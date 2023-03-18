@@ -1,6 +1,5 @@
 import { useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { Layout } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LecturePlayer from './LecturePlayer';
