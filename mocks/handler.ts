@@ -13,4 +13,12 @@ export const handlers = [
       return res(ctx.json(todayLecturesData));
     },
   ),
+  rest.get(`${Config().baseUrl}/dashboards/latest`, async (req, res, ctx) => {
+    return res(
+      ctx.json({
+        title: '올바른 태그 사용',
+        videoId: 'I_0kJ6xvBYA',
+      }),
+    );
+  }),
 ];
