@@ -1,10 +1,13 @@
 import ProgressWithBackground from '../../common/ProgressWithBackground';
 import GoLearnButton from './GoLearnButton';
 import SpinCircle from '../../common/SpinCircle';
-import useTodayLectures from '../../../hooks/useTodayLectures';
+import useFetch from '../../../hooks/useFetch';
+import { TodayLectureSingleData } from '../../../store/dashboard';
+import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
 function DashboardToday() {
-  const { todayLectures, isLoading } = useTodayLectures();
+  const { isLoading, data } = useFetch(API_URL_DASHBOARD.TODAY);
+  const todayLectures: TodayLectureSingleData[] = data;
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
