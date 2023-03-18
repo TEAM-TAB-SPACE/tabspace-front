@@ -88,8 +88,8 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
   let prevCategories: string[] = [];
 
   const playlist = categories.reduce(
-    (playlist: MenuItem[], category: string, index: number): MenuItem[] => {
-      const newPlaylistItem = createPlaylistItem(`menu${index + 1}`, category);
+    (playlist: MenuItem[], category: string): MenuItem[] => {
+      const newPlaylistItem = createPlaylistItem(category, category);
 
       for (const item of lectureroomData) {
         const { videoId, category: lectureCategory, title } = item.lecture;

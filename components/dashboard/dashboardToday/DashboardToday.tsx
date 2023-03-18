@@ -12,14 +12,16 @@ function DashboardToday() {
   return (
     <>
       <div className="dashboard__today">
-        {todayLectures.map(({ lecture, progress }, index) => (
-          <ProgressWithBackground
-            key={'today' + index}
-            header={lecture.title}
-            icon={<GoLearnButton />}
-            percent={progress}
-          />
-        ))}
+        {todayLectures.map(
+          ({ lecture: { title, videoId }, progress }, index) => (
+            <ProgressWithBackground
+              key={'today' + index}
+              header={title}
+              icon={<GoLearnButton videoId={videoId} />}
+              percent={progress}
+            />
+          ),
+        )}
       </div>
       <style jsx global>{`
         .dashboard__today {

@@ -7,7 +7,14 @@ import { useRouter } from 'next/router';
 
 const { Sider } = Layout;
 
-function LecturePlaylist() {
+interface LecturePlaylist {
+  defaultKeys: {
+    videoId: string;
+    category: string;
+  };
+}
+
+function LecturePlaylist({ defaultKeys }: LecturePlaylist) {
   const router = useRouter();
   const { isMobile } = useMediaQueryState();
   const playlistItems = useRecoilValue(playlistAtom);
@@ -17,8 +24,8 @@ function LecturePlaylist() {
       <Sider width="35%" className="playlist">
         <Menu
           mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['menu1']}
+          defaultSelectedKeys={[defaultKeys.videoId]}
+          defaultOpenKeys={[defaultKeys.category]}
           items={playlistItems}
           style={{
             width: '100%',

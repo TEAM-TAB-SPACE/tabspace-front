@@ -16,7 +16,7 @@ function LectureContent() {
 
   const { isMobile } = useMediaQueryState();
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
-  const { title } = selectedLecture?.lecture;
+  const { title, category } = selectedLecture?.lecture;
 
   return (
     <>
@@ -32,7 +32,9 @@ function LectureContent() {
             </Content>
           )}
         </Content>
-        {!isMobile && <LecturePlaylist />}
+        {!isMobile && (
+          <LecturePlaylist defaultKeys={{ videoId: `${videoId}`, category }} />
+        )}
       </Layout>
       <style jsx global>{`
         .lecture {
