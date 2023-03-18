@@ -1,4 +1,6 @@
 import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { Layout } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LecturePlayer from './LecturePlayer';
@@ -6,7 +8,6 @@ import LectureQnA from './LectureQnA';
 import { currentLectureSelector } from '../../store/lecture';
 import LectureTabs from './LectureTabs';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
-import { useRouter } from 'next/router';
 
 const { Content } = Layout;
 
@@ -16,7 +17,11 @@ function LectureContent() {
 
   const { isMobile } = useMediaQueryState();
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
-  const { title, category } = selectedLecture?.lecture;
+
+  const playlistDefaultKeys = {
+    selectedKey: `${videoId}`,
+    openKey: selectedLecture?.lecture.category,
+  };
 
   return (
     <>
@@ -27,14 +32,14 @@ function LectureContent() {
             <LectureTabs />
           ) : (
             <Content style={{ padding: '32px 24px' }}>
-              <div className="lecture__title">{title}</div>
+              <div className="lecture__title">
+                {selectedLecture?.lecture.title}
+              </div>
               <LectureQnA />
             </Content>
           )}
         </Content>
-        {!isMobile && (
-          <LecturePlaylist defaultKeys={{ videoId: `${videoId}`, category }} />
-        )}
+        {!isMobile && <LecturePlaylist defaultKeys={playlistDefaultKeys} />}
       </Layout>
       <style jsx global>{`
         .lecture {

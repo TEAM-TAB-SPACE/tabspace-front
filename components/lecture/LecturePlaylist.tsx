@@ -1,37 +1,41 @@
-import { useRecoilValue } from 'recoil';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Layout, Menu } from 'antd';
-import { playlistAtom } from '../../store/lecture';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
 import variables from '../../styles/variables.module.scss';
-import { useRouter } from 'next/router';
+import usePlaylist from '../../hooks/usePlaylist';
 
 const { Sider } = Layout;
 
 interface LecturePlaylist {
   defaultKeys: {
-    videoId: string;
-    category: string;
+    selectedKey: string;
+    openKey: string;
   };
 }
 
 function LecturePlaylist({ defaultKeys }: LecturePlaylist) {
   const router = useRouter();
+  const playlist = usePlaylist();
   const { isMobile } = useMediaQueryState();
-  const playlistItems = useRecoilValue(playlistAtom);
+  const [openKey, setOpenKey] = useState([defaultKeys.openKey]);
 
   return (
     <>
       <Sider width="35%" className="playlist">
         <Menu
           mode="inline"
-          defaultSelectedKeys={[defaultKeys.videoId]}
-          defaultOpenKeys={[defaultKeys.category]}
-          items={playlistItems}
+          defaultSelectedKeys={[defaultKeys.selectedKey]}
+          openKeys={[...openKey]}
+          items={playlist}
           style={{
             width: '100%',
             height: '100%',
           }}
           onClick={({ keyPath: [key] }) => router.push(`/lecture/${key}`)}
+          onOpenChange={openKey => {
+            setOpenKey(openKey);
+          }}
         />
       </Sider>
       <style jsx global>{`
