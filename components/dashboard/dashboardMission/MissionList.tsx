@@ -9,12 +9,13 @@ function MissionList({ missions }: MissionListProps) {
   return (
     <>
       <ul className="mission__list">
-        {missions.map(({ homework: { title }, id, is_submitted }) => {
+        {missions.map(({ homework: { title }, id, is_submitted, storages }) => {
           return (
             <MissionListItem
               key={id}
               title={title}
               isSubmitted={is_submitted}
+              files={storages}
             />
           );
         })}
