@@ -47,4 +47,10 @@ export const handlers = [
       return res(ctx.json(missionData));
     },
   ),
+  rest.post(
+    `${Config().baseUrl}${API_URL_DASHBOARD.MISSION}`,
+    async (req, res, ctx) => {
+      return res(ctx.text('homework submitted successfully'));
+    },
+  ),
 ];

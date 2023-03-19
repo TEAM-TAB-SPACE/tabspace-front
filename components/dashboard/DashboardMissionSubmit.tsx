@@ -1,6 +1,7 @@
 import { InboxOutlined } from '@ant-design/icons';
 import { Form, Upload, Select } from 'antd';
 import variables from '../../styles/variables.module.scss';
+import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
 
 const { Option } = Select;
 const { Dragger } = Upload;
@@ -15,7 +16,13 @@ function DashboardMissionSubmit() {
           <Option value="django">장고 어드민 페이지 개발</Option>
           <Option value="mvp">mvp 기업협업 프로젝트</Option>
         </Select>
-        <Dragger>
+        <Dragger
+          multiple={false}
+          maxCount={1}
+          data={{ id: 7 }}
+          fileList={[]}
+          action={`api${API_URL_DASHBOARD.MISSION}`}
+        >
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
