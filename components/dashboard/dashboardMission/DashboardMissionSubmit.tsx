@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { InboxOutlined } from '@ant-design/icons';
 import { Form, Upload, Select } from 'antd';
-import variables from '../../styles/variables.module.scss';
-import { missionsSelectOptionsSelector } from '../../store/dashboard';
-import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
+import variables from '../../../styles/variables.module.scss';
+import { missionsSelectOptionsSelector } from '../../../store/dashboard';
+import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
 const { Option } = Select;
 const { Dragger } = Upload;
