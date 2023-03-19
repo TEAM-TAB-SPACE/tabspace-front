@@ -33,3 +33,16 @@ export const missionsAtom = atom({
   key: 'missionsAtom',
   default: Array<MissionSingleData>(),
 });
+
+export const missionsSelectOptionsSelector = selector({
+  key: 'missionsSelectOptionsSelector',
+  get: ({ get }) => {
+    const missions = get(missionsAtom);
+    return missions?.map(({ id, homework: { title } }) => {
+      return {
+        id,
+        title,
+      };
+    });
+  },
+});
