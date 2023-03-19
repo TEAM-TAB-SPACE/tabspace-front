@@ -1,39 +1,38 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { InboxOutlined } from '@ant-design/icons';
-import { Form, Upload, Select } from 'antd';
+import { Form, Upload } from 'antd';
+import MissionSelect from './MissionSelect';
 import variables from '../../../styles/variables.module.scss';
 import { missionsSelectOptionsSelector } from '../../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
-const { Option } = Select;
 const { Dragger } = Upload;
 
 function DashboardMissionSubmit() {
   const missionsSelectOptions = useRecoilValue(missionsSelectOptionsSelector);
+
   const defaultSelectedValue =
     missionsSelectOptions && missionsSelectOptions[0]?.id;
-  const [selectedValue, setSelectedValue] = useState<number>();
+
+  const [selectedValue, setSelectedValue] = useState<number>(0);
 
   useEffect(() => {
     setSelectedValue(defaultSelectedValue);
   }, [defaultSelectedValue]);
 
+  const onSelectChange = (value: number) => {
+    setSelectedValue(value);
+  };
+
   return (
     <>
       <Form className="dashboard__missionSubmit">
-        <Select
+        <MissionSelect
+          options={missionsSelectOptions}
           value={selectedValue}
-          size="middle"
-          style={{ width: '200px' }}
-          onChange={selectedValue => {
-            setSelectedValue(selectedValue);
-          }}
-        >
-          {missionsSelectOptions?.map(({ id, title }) => (
-            <Option value={id}>{title}</Option>
-          ))}
-        </Select>
+          onChange={onSelectChange}
+        />
         <Dragger
           multiple={false}
           maxCount={1}

@@ -29,12 +29,17 @@ export interface MissionSingleData {
   storages: MissionStorage[];
 }
 
+export interface MissionSelectOption {
+  id: number;
+  title: string;
+}
+
 export const missionsAtom = atom({
   key: 'missionsAtom',
   default: Array<MissionSingleData>(),
 });
 
-export const missionsSelectOptionsSelector = selector({
+export const missionsSelectOptionsSelector = selector<MissionSelectOption[]>({
   key: 'missionsSelectOptionsSelector',
   get: ({ get }) => {
     const missions = get(missionsAtom);
