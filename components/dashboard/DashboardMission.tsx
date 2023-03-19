@@ -1,41 +1,23 @@
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { HeartFilled } from '@ant-design/icons';
 import ProgressWithBackground from '../common/ProgressWithBackground';
+import SpinCircle from '../common/SpinCircle';
 import variables from '../../styles/variables.module.scss';
 import layout from '../../styles/layout.module.scss';
 import useFetch from '../../hooks/useFetch';
+import useMission from '../../hooks/useMission';
+import { missionsAtom, MissionSingleData } from '../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
-import SpinCircle from '../common/SpinCircle';
-
-const missions = [
-  { title: '랜딩페이지 개발', submited: true },
-  { title: 'mbti 개발', submited: true },
-  { title: '장고 어드민 페이지 개발', submited: false },
-  { title: 'mvp 기업협업 프로젝트', submited: false },
-];
-
-interface missionStorage {
-  id: number;
-  url: string;
-}
-
-interface missionSingleData {
-  id: number;
-  homework: {
-    title: string;
-  };
-  is_submitted: boolean;
-  storages: missionStorage[];
-}
 
 function DashboardMission() {
   const { isLoading, data } = useFetch(API_URL_DASHBOARD.MISSION);
-  const missions: missionSingleData[] = data;
+  const { missions, percent } = useMission(data);
+  const setMission = useSetRecoilState<MissionSingleData[]>(missionsAtom);
 
-  const submittedCount = missions
-    ? missions.filter(mission => mission.is_submitted).length
-    : 0;
-
-  const percent =(submittedCount / missions?.length) * 100 ;
+  useEffect(() => {
+    setMission(missions);
+  }, [missions]);
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
