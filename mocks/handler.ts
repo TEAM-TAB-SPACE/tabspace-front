@@ -3,6 +3,7 @@ import Config from '../config/config.export';
 import { API_URL_DASHBOARD } from '../pages/api/dashboard';
 import { API_URL_LECTURE } from '../pages/api/lecture';
 import { lectureroomsData } from './data/lectureroomsData';
+import { missionData } from './data/missionData';
 import { todayLecturesData } from './data/todayLecturesData';
 
 export const handlers = [
@@ -38,6 +39,12 @@ export const handlers = [
           attendance: 'h0000000111',
         }),
       );
+    },
+  ),
+  rest.get(
+    `${Config().baseUrl}${API_URL_DASHBOARD.MISSION}`,
+    async (req, res, ctx) => {
+      return res(ctx.json(missionData));
     },
   ),
 ];
