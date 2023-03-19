@@ -1,11 +1,11 @@
 import { Calendar } from 'antd';
 import variables from '../../styles/variables.module.scss';
+import SpinCircle from '../common/SpinCircle';
+import useFetch from '../../hooks/useFetch';
+import useAttendance from '../../hooks/useAttendance';
+import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
 
-const attendanceData = [1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1];
-
-const dateCellRender = (value: any) => {
-  const listData = attendanceData;
-
+const dateCellRender = (listData: []) => (value: any) => {
   const style: React.CSSProperties = {
     position: 'absolute',
     top: 0,
@@ -18,11 +18,8 @@ const dateCellRender = (value: any) => {
 
   return (
     <>
-      {listData.map((state, index) => {
-        const day = index + 1;
-        const month = new Date().getMonth();
-
-        if (value.month() === month && day === value.date() && state)
+      {listData?.map(({ month, date, state }, index) => {
+        if (value.month() === month && date === value.date() && state)
           return <div key={index} style={style}></div>;
       })}
     </>
@@ -30,10 +27,24 @@ const dateCellRender = (value: any) => {
 };
 
 function DashboardAttendance() {
+  const { isLoading, data } = useFetch(API_URL_DASHBOARD.ATTENDANCE);
+  const attendanceData = {
+    startDate: data && new Date(data.start_date),
+    attendance: data?.attendance || '',
+  };
+
+  const calendarData = useAttendance(attendanceData);
+
+  if (isLoading)
+    return <SpinCircle style={{ width: '100%', height: '250px' }} />;
+
   return (
     <>
       <div className="dashboard__attendance">
-        <Calendar fullscreen={false} dateCellRender={dateCellRender} />
+        <Calendar
+          fullscreen={false}
+          dateCellRender={dateCellRender(calendarData)}
+        />
       </div>
       <style jsx global>{`
         .dashboard__attendance {
