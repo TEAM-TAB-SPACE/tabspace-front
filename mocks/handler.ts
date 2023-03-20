@@ -1,11 +1,12 @@
 import { rest } from 'msw';
 import Config from '../config/config.export';
+import { lectureCommentHandler } from './commentHandler';
 import { dashboardMissionHandler } from './dashboardMissionHandler';
+import { growthData } from './data/growthData';
 import { lectureroomsData } from './data/lectureroomsData';
 import { todayLecturesData } from './data/todayLecturesData';
 import { API_URL_LECTURE } from '../pages/api/lecture';
 import { API_URL_DASHBOARD } from '../pages/api/dashboard';
-import { growthData } from './data/growthData';
 
 export const handlers = [
   rest.get(
@@ -49,4 +50,5 @@ export const handlers = [
     },
   ),
   ...dashboardMissionHandler,
+  ...lectureCommentHandler,
 ];
