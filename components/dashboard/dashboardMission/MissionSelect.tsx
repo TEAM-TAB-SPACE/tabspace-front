@@ -20,7 +20,9 @@ function MissionSelect({ options, value, onChange }: MissionSelectProps) {
         onChange={onChange}
       >
         {options?.map(({ id, title }) => (
-          <Option value={id}>{title}</Option>
+          <Option key={id} value={id}>
+            {title}
+          </Option>
         ))}
       </Select>
       <style jsx global>{`
