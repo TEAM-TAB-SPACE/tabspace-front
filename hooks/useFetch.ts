@@ -42,7 +42,7 @@ const useFetch: FetchHook = (url, refetchKeyAtom) => {
           setRefetchKey && setRefetchKey('fresh');
         };
 
-        if (refetchKey === 'stale' && url) {
+        if (refetchKey !== 'fresh' && url) {
           if (isDevMode) {
             await sleep(500);
             callApi(url);
