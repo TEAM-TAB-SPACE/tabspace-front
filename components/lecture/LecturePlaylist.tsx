@@ -1,32 +1,35 @@
-import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Layout, Menu } from 'antd';
-import useMediaQueryState from '../../hooks/useMediaQueryState';
 import variables from '../../styles/variables.module.scss';
+import useMediaQueryState from '../../hooks/useMediaQueryState';
 import usePlaylist from '../../hooks/usePlaylist';
+import { currentLectureSelector } from '../../store/lecture';
 
 const { Sider } = Layout;
 
-interface LecturePlaylist {
-  defaultKeys: {
-    selectedKey: string;
-    openKey: string;
-  };
-}
-
-function LecturePlaylist({ defaultKeys }: LecturePlaylist) {
+function LecturePlaylist() {
   const router = useRouter();
-  const playlist = usePlaylist();
+  const { videoId } = router.query;
+
+  const [openKey, setOpenKey] = useState<string[]>([]);
   const { isMobile } = useMediaQueryState();
-  const [openKey, setOpenKey] = useState([defaultKeys.openKey]);
+  const playlist = usePlaylist();
+
+  const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
+
+  useEffect(() => {
+    setOpenKey([selectedLecture?.lecture.category]);
+  }, [selectedLecture]);
 
   return (
     <>
       <Sider width="35%" className="playlist">
         <Menu
           mode="inline"
-          defaultSelectedKeys={[defaultKeys.selectedKey]}
-          openKeys={[...openKey]}
+          defaultSelectedKeys={[`${videoId}`]}
+          openKeys={openKey}
           items={playlist}
           style={{
             width: '100%',

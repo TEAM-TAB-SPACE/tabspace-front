@@ -4,9 +4,9 @@ import { Layout } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LecturePlayer from './LecturePlayer';
 import LectureQnA from './LectureQnA';
-import { currentLectureSelector } from '../../store/lecture';
 import LectureTabs from './LectureTabs';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
+import { currentLectureSelector } from '../../store/lecture';
 
 const { Content } = Layout;
 
@@ -16,11 +16,6 @@ function LectureContent() {
 
   const { isMobile } = useMediaQueryState();
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
-
-  const playlistDefaultKeys = {
-    selectedKey: `${videoId}`,
-    openKey: selectedLecture?.lecture.category,
-  };
 
   return (
     <>
@@ -38,7 +33,7 @@ function LectureContent() {
             </Content>
           )}
         </Content>
-        {!isMobile && <LecturePlaylist defaultKeys={playlistDefaultKeys} />}
+        {!isMobile && <LecturePlaylist />}
       </Layout>
       <style jsx global>{`
         .lecture {
