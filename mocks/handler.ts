@@ -5,6 +5,7 @@ import { lectureroomsData } from './data/lectureroomsData';
 import { todayLecturesData } from './data/todayLecturesData';
 import { API_URL_LECTURE } from '../pages/api/lecture';
 import { API_URL_DASHBOARD } from '../pages/api/dashboard';
+import { growthData } from './data/growthData';
 
 export const handlers = [
   rest.get(
@@ -39,6 +40,12 @@ export const handlers = [
           videoId: 'I_0kJ6xvBYA',
         }),
       );
+    },
+  ),
+  rest.get(
+    `${Config().baseUrl}${API_URL_DASHBOARD.GROWTH}`,
+    async (req, res, ctx) => {
+      return res(ctx.json(growthData));
     },
   ),
   ...dashboardMissionHandler,
