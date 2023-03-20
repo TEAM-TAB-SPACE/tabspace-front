@@ -35,6 +35,20 @@ export interface MissionSelectOption {
   title: string;
 }
 
+export interface GrowthSingleData {
+  id: number;
+  lecture_category: {
+    name: string;
+  };
+  ability: number;
+  dashboard: number;
+}
+
+export interface GrowthChartCategory {
+  name: string;
+  ability: number;
+}
+
 export const missionsRefetchKeyAtom = atom<RefetchKey>({
   key: 'missionsRefetchKey',
   default: 'stale',

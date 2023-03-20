@@ -5,6 +5,7 @@ import DashboardToday from '../components/dashboard/dashboardToday/DashboardToda
 import DashboardMissionSubmit from '../components/dashboard/dashboardMission/DashboardMissionSubmit';
 import DashboardAttendance from '../components/dashboard/DashboardAttendance';
 import DashboardMission from '../components/dashboard/dashboardMission/DashboardMission';
+import DashboardGrowth from '../components/dashboard/dashboardGrowth/DashboardGrowth';
 
 const dashboardItems = {
   greeting: { title: '', item: <DashboardGreeting username="모찌" /> },
@@ -12,7 +13,7 @@ const dashboardItems = {
   today: { title: '오늘의 강의', item: <DashboardToday /> },
   attendance: { title: '내 출석', item: <DashboardAttendance /> },
   mission: { title: '내 미션', item: <DashboardMission /> },
-  capable: { title: '내 역량', item: <DashboardLatest /> },
+  capable: { title: '내 역량', item: <DashboardGrowth /> },
   submitMission: { title: '미션제출', item: <DashboardMissionSubmit /> },
 };
 
