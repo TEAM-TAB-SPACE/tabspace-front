@@ -1,42 +1,67 @@
 import { useEffect, useState } from 'react';
+import { RecoilState, useRecoilState } from 'recoil';
 import { isDevMode } from '../config/config.export';
-import { callGetApi } from '../pages/api/axios';
+import { callGetApi, callDeleteApi } from '../pages/api/axios';
 import { sleep } from '../utils/time';
 
-type FetchHook = (
-  url: string,
-  method?: 'GET' | 'POST' | 'DELETE' | 'PUT',
-) => { isLoading: boolean; data: any; error: any };
+export type RefetchKey = 'stale' | 'fresh';
 
-const useFetch: FetchHook = (url, method) => {
+type FetchHook = (
+  url?: string,
+  refetchKeyAtom?: RecoilState<RefetchKey>,
+) => {
+  isLoading: boolean;
+  data: any;
+  error: any;
+  get: (url: string) => Promise<any>;
+  delete: (url: string, payload: any) => Promise<any>;
+};
+
+const useFetch: FetchHook = (url, refetchKeyAtom) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [error, setError] = useState('{}');
 
-  useEffect(() => {
-    (async () => {
-      const callApi = async () => {
-        const fetchData = await callGetApi(url);
+  const [refetchKey, setRefetchKey] = refetchKeyAtom
+    ? useRecoilState<RefetchKey>(refetchKeyAtom)
+    : [];
 
-        if (fetchData instanceof Error) {
-          setError(JSON.stringify(fetchData));
-          return;
+  useEffect(
+    () => {
+      (async () => {
+        const callApi = async (endPoint: string) => {
+          const fetchData = await callGetApi(endPoint);
+
+          if (fetchData instanceof Error) {
+            setError(JSON.stringify(fetchData));
+            return;
+          }
+
+          setData(fetchData);
+          setIsLoading(false);
+          setRefetchKey && setRefetchKey('fresh');
+        };
+
+        if (refetchKey === 'stale' && url) {
+          if (isDevMode) {
+            await sleep(500);
+            callApi(url);
+          } else {
+            callApi(url);
+          }
         }
+      })();
+    },
+    refetchKey ? [refetchKey] : [],
+  );
 
-        setData(fetchData);
-        setIsLoading(false);
-      };
-
-      if (isDevMode) {
-        await sleep(500);
-        callApi();
-      } else {
-        callApi();
-      }
-    })();
-  }, []);
-
-  return { isLoading, data, error: JSON.parse(error) };
+  return {
+    isLoading,
+    data,
+    error: JSON.parse(error),
+    get: callGetApi,
+    delete: callDeleteApi,
+  };
 };
 
 export default useFetch;

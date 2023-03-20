@@ -18,3 +18,13 @@ export const callGetApi = async (url: string) => {
     return String(error);
   }
 };
+
+export const callDeleteApi = async (url: string, payload: any) => {
+  try {
+    const { data } = await axiosInstance.delete(url, { data: payload });
+    return data;
+  } catch (error) {
+    if (error instanceof Error) return error;
+    return String(error);
+  }
+};
