@@ -1,8 +1,10 @@
+import { useSetRecoilState } from 'recoil';
 import { InboxOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
 import { UploadChangeParam, UploadFile } from 'antd/es/upload';
 import variables from '../../../styles/variables.module.scss';
 import useMessage from '../../../hooks/useMessage';
+import { missionsRefetchKeyAtom } from '../../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
 const { Dragger } = Upload;
@@ -18,6 +20,7 @@ const UPLOAD_HINT =
   '하나의 파일만 제출 가능합니다. 여러 개의 파일은 압축 폴더로 제출해주세요.';
 
 function MissionUpload({ missionId }: MissionUploadProps) {
+  const setRefetchKey = useSetRecoilState(missionsRefetchKeyAtom);
   const { contextHolder, success, error } = useMessage();
 
   const draggerProps = {
@@ -29,6 +32,7 @@ function MissionUpload({ missionId }: MissionUploadProps) {
     onChange: (info: UploadChangeParam<UploadFile<any>>) => {
       if (info.file.status === 'done') {
         success(SUCCESS_MESSAGE);
+        setRefetchKey('stale');
       } else if (info.file.status === 'error') {
         error(ERROR_MESSAGE);
       }

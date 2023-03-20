@@ -9,6 +9,22 @@ export const Missions = () => {
     missions = newMissions;
   };
 
+  const submitMission = (id: number) => {
+    const newMissions = missions.map(mission => {
+      if (mission.id === id) {
+        mission.is_submitted = true;
+        mission.storages = [
+          {
+            id: 10,
+            url: 'https://ds3h3lok6dodu.cloudfront.net/4aaee37e-f7fb-4dc3-865c-e21bf223478a/7/20230318_214624_test2.py',
+          },
+        ];
+      }
+      return mission;
+    });
+    setMissions(newMissions);
+  };
+
   const deleteSubmittedFile = (id: number) => {
     const newMissions = missions.map(mission => {
       if (mission.id === id) {
@@ -24,6 +40,7 @@ export const Missions = () => {
   return {
     getMissions,
     setMissions,
+    submitMission,
     deleteSubmittedFile,
   };
 };

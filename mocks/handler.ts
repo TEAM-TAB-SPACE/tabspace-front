@@ -52,6 +52,7 @@ export const handlers = [
   rest.post(
     `${Config().baseUrl}${API_URL_DASHBOARD.MISSION}`,
     async (req, res, ctx) => {
+      missions.submitMission(9);
       return res(ctx.text('homework submitted successfully'));
     },
   ),
@@ -60,7 +61,6 @@ export const handlers = [
     async (req, res, ctx) => {
       const { id } = await req.json();
       missions.deleteSubmittedFile(id);
-
       return res(ctx.text('storage deleted'));
     },
   ),
