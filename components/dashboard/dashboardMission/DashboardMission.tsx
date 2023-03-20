@@ -5,13 +5,21 @@ import SpinCircle from '../../common/SpinCircle';
 import MissionList from './MissionList';
 import useFetch from '../../../hooks/useFetch';
 import useMission from '../../../hooks/useMission';
-import { missionsAtom, MissionSingleData } from '../../../store/dashboard';
+import {
+  missionsAtom,
+  MissionSingleData,
+  missionsRefetchKeyAtom,
+} from '../../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
 function DashboardMission() {
-  const { isLoading, data } = useFetch(API_URL_DASHBOARD.MISSION);
-  const { missions, percent } = useMission(data);
   const setMission = useSetRecoilState<MissionSingleData[]>(missionsAtom);
+  const { isLoading, data } = useFetch(
+    API_URL_DASHBOARD.MISSION,
+    missionsRefetchKeyAtom,
+  );
+
+  const { missions, percent } = useMission(data);
 
   useEffect(() => {
     setMission(missions);

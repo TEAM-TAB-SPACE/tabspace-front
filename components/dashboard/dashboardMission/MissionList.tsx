@@ -13,6 +13,7 @@ function MissionList({ missions }: MissionListProps) {
           return (
             <MissionListItem
               key={id}
+              missionId={id}
               title={title}
               isSubmitted={is_submitted}
               files={storages}

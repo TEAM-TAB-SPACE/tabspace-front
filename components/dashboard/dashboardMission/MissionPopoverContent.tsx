@@ -2,10 +2,27 @@ import { CloseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import text from '../../../styles/text.module.scss';
 import layout from '../../../styles/layout.module.scss';
+import useFetch from '../../../hooks/useFetch';
+import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
+import { missionsRefetchKeyAtom } from '../../../store/dashboard';
+import { useSetRecoilState } from 'recoil';
 
-function MissionPopoverContent({ url }: { url: string }) {
+interface MissionPopoverContentProps {
+  missionId: number;
+  url: string;
+}
+
+function MissionPopoverContent({ missionId, url }: MissionPopoverContentProps) {
+  const setRefetchKey = useSetRecoilState(missionsRefetchKeyAtom);
+  const fetch = useFetch();
+
   const splitUrl = url.split('/');
   const fileName = splitUrl[splitUrl.length - 1];
+
+  const onClick = () => {
+    fetch.delete(API_URL_DASHBOARD.MISSION, { id: missionId });
+    setRefetchKey('stale');
+  };
 
   return (
     <>
@@ -18,7 +35,10 @@ function MissionPopoverContent({ url }: { url: string }) {
           >
             {fileName}
           </a>
-          <Button style={{ padding: 0, width: '20px', border: 'none' }}>
+          <Button
+            onClick={onClick}
+            style={{ padding: 0, width: '20px', border: 'none' }}
+          >
             <CloseOutlined />
           </Button>
         </div>

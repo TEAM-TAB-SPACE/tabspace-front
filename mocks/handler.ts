@@ -3,8 +3,10 @@ import Config from '../config/config.export';
 import { API_URL_DASHBOARD } from '../pages/api/dashboard';
 import { API_URL_LECTURE } from '../pages/api/lecture';
 import { lectureroomsData } from './data/lectureroomsData';
-import { missionData } from './data/missionData';
+import { Missions } from './data/Missions';
 import { todayLecturesData } from './data/todayLecturesData';
+
+const missions = Missions();
 
 export const handlers = [
   rest.get(
@@ -44,13 +46,22 @@ export const handlers = [
   rest.get(
     `${Config().baseUrl}${API_URL_DASHBOARD.MISSION}`,
     async (req, res, ctx) => {
-      return res(ctx.json(missionData));
+      return res(ctx.json(missions.getMissions()));
     },
   ),
   rest.post(
     `${Config().baseUrl}${API_URL_DASHBOARD.MISSION}`,
     async (req, res, ctx) => {
       return res(ctx.text('homework submitted successfully'));
+    },
+  ),
+  rest.delete(
+    `${Config().baseUrl}${API_URL_DASHBOARD.MISSION}`,
+    async (req, res, ctx) => {
+      const { id } = await req.json();
+      missions.deleteSubmittedFile(id);
+
+      return res(ctx.text('storage deleted'));
     },
   ),
 ];

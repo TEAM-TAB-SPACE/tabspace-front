@@ -6,19 +6,25 @@ import variables from '../../../styles/variables.module.scss';
 import MissionPopoverContent from './MissionPopoverContent';
 
 interface MissionListItemProps {
+  missionId: number;
   title: string;
   isSubmitted: boolean;
   files: { id: number; url: string }[];
 }
 
-function MissionListItem({ title, isSubmitted, files }: MissionListItemProps) {
+function MissionListItem({
+  missionId,
+  title,
+  isSubmitted,
+  files,
+}: MissionListItemProps) {
   const url = files.length ? files[0].url : '';
 
   return (
     <>
       <Popover
         title="제출된 파일"
-        content={<MissionPopoverContent url={url} />}
+        content={<MissionPopoverContent {...{ missionId, url }} />}
       >
         <li className={`mission__item ${layout.flex_a_center_j_between}`}>
           <span className="mission__title">{title}</span>

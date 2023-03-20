@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil';
+import { RefetchKey } from '../hooks/useFetch';
 
 export interface TodayLectureSingleData {
   lecture: {
@@ -33,6 +34,11 @@ export interface MissionSelectOption {
   id: number;
   title: string;
 }
+
+export const missionsRefetchKeyAtom = atom<RefetchKey>({
+  key: 'missionsRefetchKey',
+  default: 'stale',
+});
 
 export const missionsAtom = atom({
   key: 'missionsAtom',
