@@ -1,11 +1,21 @@
-import Comment from '../comment/Comment';
-import CommentForm from '../comment/CommentForm';
 import { Layout } from 'antd';
+import Comments from '../comment/Comments';
+import CommentForm from '../comment/CommentForm';
 import variables from '../../styles/variables.module.scss';
+import useFetch from '../../hooks/useFetch';
+import { commentRefetchKeyAtom } from '../../store/comment';
+import { API_URL_LECTURE } from '../../pages/api/lecture';
 
 const { Content } = Layout;
 
 function LectureQnA() {
+  const { data } = useFetch(
+    API_URL_LECTURE.COMMENTS_READ,
+    commentRefetchKeyAtom,
+  );
+
+  const comments = data;
+
   return (
     <>
       <div className="lecture__qna">질의응답</div>
@@ -14,11 +24,7 @@ function LectureQnA() {
           padding: '10px 25px 0',
         }}
       >
-        <Comment
-          isMyComment={true}
-          userBadgeData={{ userName: '모찌', elapsedTime: '10분전' }}
-          content="질문이있어요"
-        />
+        <Comments {...{ depth: 1, comments }} />
         <CommentForm />
       </Content>
       <style jsx global>{`
