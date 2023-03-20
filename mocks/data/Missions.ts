@@ -1,4 +1,34 @@
-export const missionData = [
+import { MissionSingleData } from '../../store/dashboard';
+
+export const Missions = () => {
+  let missions = missionData;
+
+  const getMissions = () => missions;
+
+  const setMissions = (newMissions: MissionSingleData[]) => {
+    missions = newMissions;
+  };
+
+  const deleteSubmittedFile = (id: number) => {
+    const newMissions = missions.map(mission => {
+      if (mission.id === id) {
+        mission.is_submitted = false;
+        mission.storages = [];
+      }
+      return mission;
+    });
+
+    setMissions(newMissions);
+  };
+
+  return {
+    getMissions,
+    setMissions,
+    deleteSubmittedFile,
+  };
+};
+
+const missionData = [
   {
     id: 6,
     homework: {
