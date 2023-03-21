@@ -9,9 +9,9 @@ export const axiosInstance = axios.create({
   },
 });
 
-export const callGetApi = async (url: string) => {
+export const callGetApi = async (url: string, payload: any) => {
   try {
-    const { data } = await axiosInstance.get(url);
+    const { data } = await axiosInstance.get(url, payload);
     return data;
   } catch (error) {
     if (error instanceof Error) return error;

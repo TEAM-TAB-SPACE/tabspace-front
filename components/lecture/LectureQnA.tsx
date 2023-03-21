@@ -5,12 +5,21 @@ import variables from '../../styles/variables.module.scss';
 import useFetch from '../../hooks/useFetch';
 import { commentRefetchKeyAtom } from '../../store/comment';
 import { API_URL_LECTURE } from '../../pages/api/lecture';
+import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
+import { currentLectureSelector } from '../../store/lecture';
 
 const { Content } = Layout;
 
 function LectureQnA() {
+  const router = useRouter();
+  const { videoId } = router.query;
+
+  const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
+
   const { data } = useFetch(
     API_URL_LECTURE.COMMENTS_READ,
+    { id: selectedLecture?.id },
     commentRefetchKeyAtom,
   );
 

@@ -8,16 +8,17 @@ export type RefetchKey = 'stale' | 'fresh';
 
 type FetchHook = (
   url?: string,
+  payload?: any,
   refetchKeyAtom?: RecoilState<RefetchKey>,
 ) => {
   isLoading: boolean;
   data: any;
   error: any;
-  get: (url: string) => Promise<any>;
+  get: (url: string, payload: any) => Promise<any>;
   delete: (url: string, payload: any) => Promise<any>;
 };
 
-const useFetch: FetchHook = (url, refetchKeyAtom) => {
+const useFetch: FetchHook = (url, payload, refetchKeyAtom) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [error, setError] = useState('{}');
@@ -30,7 +31,7 @@ const useFetch: FetchHook = (url, refetchKeyAtom) => {
     () => {
       (async () => {
         const callApi = async (endPoint: string) => {
-          const fetchData = await callGetApi(endPoint);
+          const fetchData = await callGetApi(endPoint, payload);
 
           if (fetchData instanceof Error) {
             setError(JSON.stringify(fetchData));
