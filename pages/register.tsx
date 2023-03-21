@@ -1,7 +1,6 @@
 import css from 'styled-jsx/css';
-import Kakao from '../public/assets/kakaotalk.svg';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { validationApi } from './api/validation';
@@ -11,22 +10,22 @@ const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${proc
 export interface RegisterType {
   realname: string;
   email: string;
-  phone: number;
-  secret_key: number;
+  phone: string;
+  secret_key: string;
   msg_agree: boolean;
 }
 
 export default function Register() {
   const router = useRouter();
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<RegisterType>({
     realname: '',
     email: '',
-    phone: 0,
-    secret_key: 0,
-    msg_agree: false,
+    phone: '',
+    secret_key: '',
+    msg_agree: true,
   });
   // 비구조화 할당으로 값 추출
-  const { realname, email, phone, secret_key } = inputs;
+  const { realname, email, phone, secret_key, msg_agree } = inputs;
 
   const onChange = (e: any) => {
     setInputs(prevInputs => {
@@ -51,29 +50,9 @@ export default function Register() {
     } else {
       sessionStorage.setItem('inputs', JSON.stringify(inputs));
       router.push(KAKAO_AUTH_URL);
+      router.push('/dashboard');
     }
   };
-
-  // async function postValid(res: Response) {
-  //   try {
-  //     const { data } = await axios.post(
-  //       'http://127.0.0.1:8000/api/auth/register/validation',
-  //     );
-  //     if (res.status === 200) {
-  //       router.push(
-  //         `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`,
-  //       );
-  //     }
-  //     return data;
-  //   } catch (error) {
-  //     console.log(error);
-  //     alert('회원가입에 실패했습니다!');
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   sessionStorage.setItem('inputs', JSON.stringify(inputs));
-  // }, [inputs]);
 
   return (
     <div className="register__container">
@@ -151,13 +130,17 @@ export default function Register() {
           </div>
           <div className="input__marketing">
             <label htmlFor="msg_agree">
-              <input type="checkbox" {...register('secret_key')} />
+              <input
+                type="checkbox"
+                {...register('msg_agree')}
+                name="msg_agree"
+                onChange={onChange}
+              />
               광고성 정보 수신 동의
             </label>
           </div>
 
           <div className="register__btn">
-            {/* <Kakao /> */}
             <input
               type="submit"
               className="kakaoBtn"

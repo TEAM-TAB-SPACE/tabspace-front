@@ -1,14 +1,13 @@
-import axios from 'axios';
 import { RegisterType } from '../register';
+import { axiosInstance } from './axios';
 
 export const validationApi = async (req: RegisterType) => {
   try {
-    const { data } = await axios.post(
-      'http://127.0.0.1:8000/api/auth/register/validation',
-      req,
-    );
+    const { data } = await axiosInstance.post('/auth/register/validation', req);
+    console.log(data);
     return data;
   } catch (error) {
+    console.log(error);
     return error;
   }
 };

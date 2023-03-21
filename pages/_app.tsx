@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import { Reset } from 'styled-reset';
-import type { AppProps } from 'next/app';
+import type { AppContext, AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
 import { RecoilRoot } from 'recoil';
