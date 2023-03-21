@@ -27,7 +27,7 @@ const dateCellRender = (listData: []) => (value: any) => {
 };
 
 function DashboardAttendance() {
-  const { isLoading, data } = useFetch(API_URL_DASHBOARD.ATTENDANCE);
+  const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.ATTENDANCE });
   const attendanceData = {
     startDate: data && new Date(data.start_date),
     attendance: data?.attendance || '',

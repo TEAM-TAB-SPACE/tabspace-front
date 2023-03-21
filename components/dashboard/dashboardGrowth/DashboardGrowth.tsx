@@ -8,7 +8,7 @@ import {
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
 function DashboardGrowth() {
-  const { isLoading, data } = useFetch(API_URL_DASHBOARD.GROWTH);
+  const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.GROWTH });
 
   const chartData = data?.reduce(
     (

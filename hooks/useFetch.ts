@@ -12,11 +12,13 @@ import { sleep } from '../utils/time';
 
 export type RefetchKey = 'stale' | 'fresh';
 
-type FetchHook = (
-  url?: string,
-  payload?: any,
-  refetchKeyAtom?: RecoilState<RefetchKey>,
-) => {
+interface FetchParams {
+  url?: string;
+  payload?: any;
+  refetchKeyAtom?: RecoilState<RefetchKey>;
+}
+
+type FetchHook = (params?: FetchParams) => {
   isLoading: boolean;
   data: any;
   error: any;
@@ -24,7 +26,9 @@ type FetchHook = (
   delete: (url: string, payload: any) => Promise<any>;
 };
 
-const useFetch: FetchHook = (url, payload, refetchKeyAtom) => {
+const useFetch: FetchHook = (params = {}) => {
+  const { url, payload, refetchKeyAtom } = params;
+
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [error, setError] = useState('{}');

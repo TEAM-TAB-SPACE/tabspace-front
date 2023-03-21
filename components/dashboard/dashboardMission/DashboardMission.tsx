@@ -14,10 +14,10 @@ import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
 function DashboardMission() {
   const setMission = useSetRecoilState<MissionSingleData[]>(missionsAtom);
-  const { isLoading, data } = useFetch(
-    API_URL_DASHBOARD.MISSION,
-    missionsRefetchKeyAtom,
-  );
+  const { isLoading, data } = useFetch({
+    url: API_URL_DASHBOARD.MISSION,
+    refetchKeyAtom: missionsRefetchKeyAtom,
+  });
 
   const { missions, percent } = useMission(data);
 

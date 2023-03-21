@@ -17,11 +17,11 @@ function LectureQnA() {
 
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
 
-  const { data } = useFetch(
-    API_URL_LECTURE.COMMENTS_READ,
-    { id: selectedLecture?.id },
-    commentRefetchKeyAtom,
-  );
+  const { data } = useFetch({
+    url: API_URL_LECTURE.COMMENTS_READ,
+    payload: { id: selectedLecture?.id },
+    refetchKeyAtom: commentRefetchKeyAtom,
+  });
 
   const comments = data;
 
