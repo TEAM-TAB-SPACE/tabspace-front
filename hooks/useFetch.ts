@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
+import { getCookie } from 'cookies-next';
 import { RecoilState, useRecoilState } from 'recoil';
 import { isDevMode } from '../config/config.export';
-import { callGetApi, callDeleteApi } from '../pages/api/axios';
+import {
+  callGetApi,
+  callDeleteApi,
+  axiosInstance,
+  setAxiosAccessToken,
+} from '../pages/api/axios';
 import { sleep } from '../utils/time';
 
 export type RefetchKey = 'stale' | 'fresh';
@@ -27,11 +33,21 @@ const useFetch: FetchHook = (url, payload, refetchKeyAtom) => {
     ? useRecoilState<RefetchKey>(refetchKeyAtom)
     : [];
 
+  const token = getCookie('accessToken');
+  const axios = axiosInstance;
+
+  if (typeof token === 'string' && token) setAxiosAccessToken(axios, token);
+
+  const client = {
+    get: callGetApi(axios),
+    delete: callDeleteApi(axios),
+  };
+
   useEffect(
     () => {
       (async () => {
         const callApi = async (endPoint: string) => {
-          const fetchData = await callGetApi(endPoint, payload);
+          const fetchData = await client.get(endPoint, payload);
 
           if (fetchData instanceof Error) {
             setError(JSON.stringify(fetchData));
@@ -42,7 +58,6 @@ const useFetch: FetchHook = (url, payload, refetchKeyAtom) => {
           setIsLoading(false);
           setRefetchKey && setRefetchKey('fresh');
         };
-
         if (refetchKey !== 'fresh' && url) {
           if (isDevMode) {
             await sleep(500);
@@ -60,8 +75,7 @@ const useFetch: FetchHook = (url, payload, refetchKeyAtom) => {
     isLoading,
     data,
     error: JSON.parse(error),
-    get: callGetApi,
-    delete: callDeleteApi,
+    ...client,
   };
 };
 
