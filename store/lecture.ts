@@ -9,7 +9,9 @@ export interface LectureRoomSingleData {
   lecture: {
     id: number;
     title: string;
-    category: string;
+    category: {
+      name: string;
+    };
     teacher: string;
     duration: number;
     videoId: string;
@@ -49,7 +51,7 @@ export const currentLectureSelector = selectorFamily<
 const pickCategories = (lectureroomData: LectureRoomSingleData[]) => {
   const categories = lectureroomData.reduce(
     (categories: string[], item: LectureRoomSingleData) => {
-      const category = item.lecture.category;
+      const category = item.lecture.category.name;
       if (!categories.includes(category)) return [...categories, category];
 
       return categories;
@@ -98,7 +100,7 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
       for (const item of lectureroomData) {
         const {
           videoId,
-          category: lectureCategory,
+          category: { name: lectureCategory },
           title,
           active_lecture,
         } = item.lecture;

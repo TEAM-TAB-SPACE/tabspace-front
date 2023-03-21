@@ -20,7 +20,7 @@ function LecturePlaylist() {
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
 
   useEffect(() => {
-    setOpenKey([selectedLecture?.lecture.category]);
+    setOpenKey([selectedLecture?.lecture.category.name]);
   }, [selectedLecture]);
 
   return (
