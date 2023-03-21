@@ -17,7 +17,9 @@ export const setAxiosAccessToken = (axiosInstance: Axios, access: string) => {
 export const callGetApi =
   (axios: Axios) => async (url: string, payload: any) => {
     try {
-      const { data } = await axios.get(url, payload);
+      const { data } = payload
+        ? await axios.get(url, { params: payload })
+        : await axios.get(url);
       return data;
     } catch (error) {
       if (error instanceof Error) return error;
