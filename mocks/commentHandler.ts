@@ -5,7 +5,7 @@ import { API_URL_LECTURE } from '../pages/api/lecture';
 
 const comments = Comments();
 
-export const lectureCommentHandler = [
+export const commentHandler = [
   rest.get(
     `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_READ}`,
     async (req, res, ctx) => {

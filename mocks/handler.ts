@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 import Config from '../config/config.export';
-import { lectureCommentHandler } from './commentHandler';
+import { commentHandler } from './commentHandler';
 import { dashboardMissionHandler } from './dashboardMissionHandler';
 import { growthData } from './data/growthData';
 import { lectureroomsData } from './data/lectureroomsData';
@@ -50,5 +50,5 @@ export const handlers = [
     },
   ),
   ...dashboardMissionHandler,
-  ...lectureCommentHandler,
+  ...commentHandler,
 ];

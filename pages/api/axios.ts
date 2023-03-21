@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import Config from '../../config/config.export';
 
 export const axiosInstance = axios.create({
@@ -9,22 +9,29 @@ export const axiosInstance = axios.create({
   },
 });
 
-export const callGetApi = async (url: string) => {
-  try {
-    const { data } = await axiosInstance.get(url);
-    return data;
-  } catch (error) {
-    if (error instanceof Error) return error;
-    return String(error);
-  }
+export const setAxiosAccessToken = (axiosInstance: Axios, access: string) => {
+  axiosInstance.defaults.headers.common['Authorization'] = access;
+  return axiosInstance;
 };
 
-export const callDeleteApi = async (url: string, payload: any) => {
-  try {
-    const { data } = await axiosInstance.delete(url, { data: payload });
-    return data;
-  } catch (error) {
-    if (error instanceof Error) return error;
-    return String(error);
-  }
-};
+export const callGetApi =
+  (axios: Axios) => async (url: string, payload: any) => {
+    try {
+      const { data } = await axios.get(url, payload);
+      return data;
+    } catch (error) {
+      if (error instanceof Error) return error;
+      return String(error);
+    }
+  };
+
+export const callDeleteApi =
+  (axios: Axios) => async (url: string, payload: any) => {
+    try {
+      const { data } = await axios.delete(url, { data: payload });
+      return data;
+    } catch (error) {
+      if (error instanceof Error) return error;
+      return String(error);
+    }
+  };
