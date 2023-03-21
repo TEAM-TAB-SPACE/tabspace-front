@@ -1,24 +1,18 @@
+import React, { useEffect, useState } from 'react';
 import css from 'styled-jsx/css';
-import Image from 'next/image';
-import Kakao from '../public/assets/kakaotalk.png';
 import Link from 'next/link';
-
 import { useRouter } from 'next/router';
+import Kakao from '../public/assets/kakaotalk.svg';
 
 export default function Login() {
   const router = useRouter();
-  const kakaoLogin = () => {
-    window.Kakao.Auth.authorize({
-      success(authObj: any) {
-        console.log(authObj);
-        window.localStorage.setItem('token', authObj.access_token);
-        // router.push('/');
-      },
-      fail(err: any) {
-        console.log(err);
-      },
-    });
-  };
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
+
+  function loginOnclick() {
+    if (sessionStorage !== null) {
+      router.push(KAKAO_AUTH_URL);
+    }
+  }
 
   return (
     <div className="login__container">
@@ -27,20 +21,33 @@ export default function Login() {
         <p>탭스페이스 수강장에</p>
         <p>오신걸 환영합니다.</p>
       </div>
-      <div className="login__kakaoBtn" onClick={kakaoLogin}>
-        <Image src={Kakao} alt="kakao" />
-        <p>카카오로 로그인하기</p>
+      <div className="login__kakaoBtn">
+        <button onClick={loginOnclick}>
+          <Kakao style={{ paddingRight: '10px' }} />
+          카카오 로그인
+        </button>
       </div>
       <div className="login__register">
         <p>회원이 아니신가요?</p>
         <Link href="/register">회원가입</Link>
       </div>
       <style global jsx>{`
-        a {
-          text-decoration: none;
-          color: #722ed1;
-          font-size: 0.8rem;
-          padding-left: 5px;
+        .login__register {
+          display: flex;
+          justify-content: center;
+          flex-direction: row;
+          align-items: center;
+          position: absolute;
+          top: 270px;
+          a {
+            text-decoration: none;
+            color: #722ed1;
+            font-size: 0.8rem;
+            padding-left: 5px;
+          }
+          p {
+            font-size: 0.8rem;
+          }
         }
       `}</style>
       <style jsx>{login}</style>
@@ -81,8 +88,7 @@ const login = css`
       flex-direction: row;
       align-items: center;
       position: absolute;
-      top: 180px;
-
+      top: 160px;
       button {
         display: flex;
         justify-content: center;
@@ -94,20 +100,6 @@ const login = css`
         background: #722ed1;
         border: none;
         border-radius: 2px;
-        p {
-          margin-left: 10px;
-        }
-      }
-    }
-    .login__register {
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-      align-items: center;
-      position: absolute;
-      top: 270px;
-      p {
-        font-size: 0.8rem;
       }
     }
   }

@@ -7,6 +7,9 @@ import Profileimg3 from '../public/images/profile3.jpeg';
 import Profileimg4 from '../public/images/profile4.jpeg';
 
 import css from 'styled-jsx/css';
+import cookies from 'next-cookies';
+import { NextPageContext } from 'next';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   return (
@@ -218,3 +221,20 @@ const index = css`
     border-radius: 50%;
   }
 `;
+
+// Home.getInitialProps = (ctx: NextPageContext) => {
+//   // const router = useRouter();
+//   const { tokens } = cookies(ctx);
+
+//   if (!tokens || tokens === '') {
+//     if (ctx.req && ctx.res) {
+//       ctx.res.writeHead(302, { Location: '/login' });
+//       ctx.res.end();
+//     } else {
+//       // router.push('/login');
+//       console.log('test');
+//     }
+//   }
+
+//   return { tokens };
+// };
