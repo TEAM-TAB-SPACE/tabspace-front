@@ -4,22 +4,29 @@ import css from 'styled-jsx/css';
 import Logo from '../../public/assets/mainLogo.svg';
 import { useRouter } from 'next/router';
 
-import { getCookie } from 'cookies-next';
+import { getCookie, removeCookies } from 'cookies-next';
 import { useEffect, useState } from 'react';
+import { axiosInstance } from '../../pages/api/axios';
 
 export default function Header() {
   const router = useRouter();
-
   const user = getCookie('realname');
-  const Logout = () => {
-    router.push('/');
+  const Logout = async (token: any) => {
+    await axiosInstance
+      .post(`/auth/logout`, token)
+      .then(res => {
+        console.log(res.data);
+        console.log('로그아웃 성공');
+        removeCookies('refreshToken');
+        removeCookies('realname');
+        router.push('/');
+      })
+      .catch(err => {
+        console.log(err);
+        console.log('로그아웃 실패');
+      });
   };
-  // const isLogged = localStorage.getItem('access');
-  // const user = localStorage.getItem('realname');
-  // const Logout = () => {
-  //   localStorage.removeItem('accessToken');
-  //   router.push('/');
-  // };
+
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {

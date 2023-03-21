@@ -27,7 +27,8 @@ const redirectHandler = () => {
         console.log(res.data);
 
         setCookie('refreshToken', res.data.tokens.refresh);
-        setCookie('realname', res.data.realname);
+        setCookie('realname', res.data.user.realname);
+        setCookie('id', res.data.user.id);
       })
       .catch(error => {
         if (error.res) {
