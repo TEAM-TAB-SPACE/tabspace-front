@@ -1,12 +1,12 @@
 import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
 import { Layout } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LecturePlayer from './LecturePlayer';
 import LectureQnA from './LectureQnA';
-import { currentLectureSelector } from '../../store/lecture';
 import LectureTabs from './LectureTabs';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
-import { useRouter } from 'next/router';
+import { currentLectureSelector } from '../../store/lecture';
 
 const { Content } = Layout;
 
@@ -16,7 +16,6 @@ function LectureContent() {
 
   const { isMobile } = useMediaQueryState();
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
-  const { title } = selectedLecture?.lecture;
 
   return (
     <>
@@ -27,7 +26,9 @@ function LectureContent() {
             <LectureTabs />
           ) : (
             <Content style={{ padding: '32px 24px' }}>
-              <div className="lecture__title">{title}</div>
+              <div className="lecture__title">
+                {selectedLecture?.lecture.title}
+              </div>
               <LectureQnA />
             </Content>
           )}

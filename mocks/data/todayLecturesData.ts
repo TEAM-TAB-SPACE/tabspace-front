@@ -1,21 +1,24 @@
 export const todayLecturesData = [
   {
     lecture: {
-      title: '심볼(Symbol)',
+      title: 'call, apply, bind',
+      videoId: 'KfuyXQLFNW4',
     },
     progress: 0,
     completed: false,
   },
   {
     lecture: {
-      title: '숫자, 수학 method (Number, Math)',
+      title: '상속, 프로토타입(Prototype)',
+      videoId: 'ddJcDZHBRm0',
     },
     progress: 0,
     completed: false,
   },
   {
     lecture: {
-      title: '문자열 메소드(String methods)',
+      title: '클래스(Class)',
+      videoId: 'OpvtD7ELMQo',
     },
     progress: 0,
     completed: false,

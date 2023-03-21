@@ -10,4 +10,6 @@ const Config = () => {
   }
 };
 
+export const isDevMode = Config().mode === 'development';
+
 export default Config;

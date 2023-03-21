@@ -1,9 +1,16 @@
 import Link from 'next/link';
 import variables from '../../styles/variables.module.scss';
 import layout from '../../styles/layout.module.scss';
+import SpinCircle from '../common/SpinCircle';
+import useFetch from '../../hooks/useFetch';
+import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
 
 function DashboardLatest() {
-  const videoId = 'FBNlr2RMf1k';
+  const { isLoading, data } = useFetch(API_URL_DASHBOARD.LATEST);
+  const { videoId } = data ? data : { videoId: '' };
+
+  if (isLoading)
+    return <SpinCircle style={{ width: '100%', height: '250px' }} />;
 
   return (
     <>
@@ -20,18 +27,15 @@ function DashboardLatest() {
       </div>
       <style jsx global>{`
         .dashboard__latest {
-          position: relative;
-          padding-bottom: 56.25%;
           width: 100%;
-          height: 100%;
+          max-width: 400px;
           overflow: hidden;
         }
 
         .latest {
           &__wrapper {
-            display: block;
-            width: 100%;
-            height: 100%;
+            position: relative;
+            padding-bottom: 56.25%;
           }
 
           &__img {

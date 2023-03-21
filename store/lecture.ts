@@ -64,8 +64,12 @@ const addPlaylistItemChildren = (
   playlistItem: SubMenuType,
   key: string,
   label: string,
+  disabled: boolean,
 ) => {
-  const newPlaylistItemChildren = [...playlistItem?.children, { key, label }];
+  const newPlaylistItemChildren = [
+    ...playlistItem?.children,
+    { key, label, disabled },
+  ];
   playlistItem.children = newPlaylistItemChildren;
 };
 
@@ -88,11 +92,16 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
   let prevCategories: string[] = [];
 
   const playlist = categories.reduce(
-    (playlist: MenuItem[], category: string, index: number): MenuItem[] => {
-      const newPlaylistItem = createPlaylistItem(`menu${index + 1}`, category);
+    (playlist: MenuItem[], category: string): MenuItem[] => {
+      const newPlaylistItem = createPlaylistItem(category, category);
 
       for (const item of lectureroomData) {
-        const { videoId, category: lectureCategory, title } = item.lecture;
+        const {
+          videoId,
+          category: lectureCategory,
+          title,
+          active_lecture,
+        } = item.lecture;
 
         if (isNewCategory(prevCategories, lectureCategory, category)) {
           prevCategories = [...prevCategories, category];
@@ -100,7 +109,12 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
         }
 
         if (lectureCategory === category) {
-          addPlaylistItemChildren(newPlaylistItem, videoId, title);
+          addPlaylistItemChildren(
+            newPlaylistItem,
+            videoId,
+            title,
+            !active_lecture,
+          );
         }
       }
 

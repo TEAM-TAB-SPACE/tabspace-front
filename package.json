@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "@nivo/radar": "^0.80.0",
     "@types/react-responsive": "^8.0.5",
     "@hookform/resolvers": "^2.9.11",
     "@svgr/webpack": "^6.5.1",

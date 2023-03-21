@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
 import { Layout } from 'antd';
-import usePlaylist from '../../hooks/usePlaylist';
+import { useSetRecoilState } from 'recoil';
 import LectureContent from '../../components/lecture/LectureContent';
 import Spinner from '../../components/common/Spin';
+import useFetch from '../../hooks/useFetch';
+import { allLectureAtom } from '../../store/lecture';
+import { API_URL_LECTURE } from '../api/lecture';
 
 const { Content } = Layout;
 
@@ -12,7 +16,14 @@ const lectureStyle = {
 };
 
 function Lecture() {
-  const { isLoading } = usePlaylist();
+  const { isLoading, data } = useFetch(API_URL_LECTURE.ALL_LECTURE);
+  const setAllLecture = useSetRecoilState(allLectureAtom);
+
+  useEffect(() => {
+    if (data) {
+      setAllLecture(data);
+    }
+  }, [data]);
 
   if (isLoading) {
     return <Spinner />;
