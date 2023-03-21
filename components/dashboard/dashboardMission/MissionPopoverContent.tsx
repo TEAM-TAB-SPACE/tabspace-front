@@ -8,28 +8,29 @@ import { missionsRefetchKeyAtom } from '../../../store/dashboard';
 import { useSetRecoilState } from 'recoil';
 
 interface MissionPopoverContentProps {
-  missionId: number;
-  url: string;
+  files: { id: number; url: string }[];
 }
 
-function MissionPopoverContent({ missionId, url }: MissionPopoverContentProps) {
+function MissionPopoverContent({ files }: MissionPopoverContentProps) {
   const setRefetchKey = useSetRecoilState(missionsRefetchKeyAtom);
   const fetch = useFetch();
 
-  const splitUrl = url.split('/');
-  const fileName = splitUrl[splitUrl.length - 1];
+  const file = files[0];
+
+  const splitUrl = file?.url.split('/');
+  const fileName = splitUrl && splitUrl[splitUrl.length - 1];
 
   const onClick = () => {
-    fetch.delete(API_URL_DASHBOARD.MISSION, { id: missionId });
+    fetch.delete(API_URL_DASHBOARD.MISSION, { id: file.id });
     setRefetchKey('stale');
   };
 
   return (
     <>
-      {url ? (
+      {file ? (
         <div className={layout.flex_a_center_j_between}>
           <a
-            href={url}
+            href={file.url}
             className={text.ellipsis_oneLine}
             style={{ maxWidth: '130px' }}
           >

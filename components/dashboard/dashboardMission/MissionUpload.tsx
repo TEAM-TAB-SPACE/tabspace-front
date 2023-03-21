@@ -27,7 +27,7 @@ function MissionUpload({ missionId }: MissionUploadProps) {
     multiple: false,
     maxCount: 1,
     data: { id: missionId },
-    action: `api${API_URL_DASHBOARD.MISSION}`,
+    action: `${process.env.NEXT_PUBLIC_BASE_URL}${API_URL_DASHBOARD.MISSION}`,
     showUploadList: false,
     onChange: (info: UploadChangeParam<UploadFile<any>>) => {
       if (info.file.status === 'done') {
