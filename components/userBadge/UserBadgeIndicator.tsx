@@ -1,10 +1,24 @@
+import { useState } from 'react';
 import IndicatorIcon from './IndicatorIcon';
-
+import EditModal from './modal/EditModal';
+import DeleteModal from './modal/DeleteModal';
 import IndicatorPopover from './IndicatorPopover';
 import usePopover from '../../hooks/usePopover';
+import useModal from '../../hooks/useModal';
 
 function UserBadgeIndicator({ commentId }: { commentId: number }) {
   const { isPopoverOpen, showPopover } = usePopover();
+  const { isModalOpen, showModal, closeModal } = useModal();
+  const [modalType, setModalType] = useState('');
+
+  const onOk = () => {
+    closeModal();
+  };
+
+  const onPopoverItemClick = (type: 'edit' | 'delete') => () => {
+    setModalType(type);
+    showModal();
+  };
 
   return (
     <>
@@ -18,8 +32,14 @@ function UserBadgeIndicator({ commentId }: { commentId: number }) {
           <IndicatorIcon width="20px" height="20px" />
         </button>
         <IndicatorPopover
+          onItemClick={onPopoverItemClick}
           className={isPopoverOpen ? 'indicator__popover_active' : ''}
         />
+        {modalType === 'edit' ? (
+          <EditModal {...{ isModalOpen, onClickEdit: onOk }} />
+        ) : (
+          <DeleteModal {...{ isModalOpen, onClickEdit: onOk }} />
+        )}
       </div>
       <style jsx global>{`
         .indicator {
