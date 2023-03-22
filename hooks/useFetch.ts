@@ -8,6 +8,7 @@ import {
   axiosInstance,
   setAxiosAccessToken,
   callPostApi,
+  callPutApi,
 } from '../pages/api/axios';
 import { sleep } from '../utils/time';
 
@@ -27,6 +28,7 @@ type FetchHook = (params?: FetchParams) => {
   error: any;
   get: ApiCall;
   post: ApiCall;
+  put: ApiCall;
   delete: ApiCall;
 };
 
@@ -49,6 +51,7 @@ const useFetch: FetchHook = (params = {}) => {
   const client = {
     get: callGetApi(axios),
     post: callPostApi(axios),
+    put: callPutApi(axios),
     delete: callDeleteApi(axios),
   };
 
