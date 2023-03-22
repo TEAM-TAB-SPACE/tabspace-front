@@ -22,6 +22,8 @@ function ReplyForm({ commentId, hideReplyForm }: ReplyFormProps) {
     const textarea = form.children.namedItem('reply') as HTMLTextAreaElement;
     e.preventDefault();
 
+    if (!textarea.value) return;
+
     fetch.post(API_URL_LECTURE.COMMENTS_DEPTH2, {
       lecture_comment: commentId,
       comment: textarea.value,
