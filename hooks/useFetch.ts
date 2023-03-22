@@ -7,10 +7,13 @@ import {
   callDeleteApi,
   axiosInstance,
   setAxiosAccessToken,
+  callPostApi,
 } from '../pages/api/axios';
 import { sleep } from '../utils/time';
 
 export type RefetchKey = 'stale' | 'fresh';
+
+export type ApiCall = (url: string, payload: any) => Promise<any>;
 
 interface FetchParams {
   url?: string;
@@ -22,8 +25,9 @@ type FetchHook = (params?: FetchParams) => {
   isLoading: boolean;
   data: any;
   error: any;
-  get: (url: string, payload: any) => Promise<any>;
-  delete: (url: string, payload: any) => Promise<any>;
+  get: ApiCall;
+  post: ApiCall;
+  delete: ApiCall;
 };
 
 const useFetch: FetchHook = (params = {}) => {
@@ -44,6 +48,7 @@ const useFetch: FetchHook = (params = {}) => {
 
   const client = {
     get: callGetApi(axios),
+    post: callPostApi(axios),
     delete: callDeleteApi(axios),
   };
 

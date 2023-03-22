@@ -3,8 +3,22 @@ export const Comments = () => {
 
   const getComments = () => comments;
 
+  const addComment = (comment: string) => {
+    comments = [
+      ...comments,
+      {
+        id: Math.random() * 100,
+        user: {
+          realname: '박찬양',
+        },
+        comment: comment,
+        replies: [],
+      },
+    ];
+  };
   return {
     getComments,
+    addComment,
   };
 };
 

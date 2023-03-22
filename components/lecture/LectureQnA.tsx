@@ -16,10 +16,11 @@ function LectureQnA() {
   const { videoId } = router.query;
 
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
+  const lectureId = selectedLecture?.id;
 
   const { data } = useFetch({
     url: API_URL_LECTURE.COMMENTS_READ,
-    payload: { id: selectedLecture?.id },
+    payload: { id: lectureId },
     refetchKeyAtom: commentRefetchKeyAtom,
   });
 
@@ -34,7 +35,7 @@ function LectureQnA() {
         }}
       >
         <Comments {...{ depth: 1, comments }} />
-        <CommentForm />
+        <CommentForm {...{ lectureId }} />
       </Content>
       <style jsx global>{`
         .lecture__qna {

@@ -27,6 +27,17 @@ export const callGetApi =
     }
   };
 
+export const callPostApi =
+  (axios: Axios) => async (url: string, payload: any) => {
+    try {
+      const { data } = await axios.post(url, payload);
+      return data;
+    } catch (error) {
+      if (error instanceof Error) return error;
+      return String(error);
+    }
+  };
+
 export const callDeleteApi =
   (axios: Axios) => async (url: string, payload: any) => {
     try {
