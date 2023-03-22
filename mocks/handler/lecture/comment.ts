@@ -30,6 +30,24 @@ export const commentHandler = [
       );
     },
   ),
+  rest.put(
+    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_OTHER}`,
+    async (req, res, ctx) => {
+      const { id, comment } = await req.json();
+      comments.editComment(id, comment);
+
+      return res(
+        ctx.json({
+          id: 4,
+          created_at: '2023-03-19T15:00:04.060219+09:00',
+          updated_at: '2023-03-19T15:00:31.358599+09:00',
+          comment: '질문없습니다!',
+          user: 9,
+          lecture: 1,
+        }),
+      );
+    },
+  ),
   rest.delete(
     `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_OTHER}`,
     async (req, res, ctx) => {
