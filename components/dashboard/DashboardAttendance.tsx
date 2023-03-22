@@ -3,9 +3,10 @@ import variables from '../../styles/variables.module.scss';
 import SpinCircle from '../common/SpinCircle';
 import useFetch from '../../hooks/useFetch';
 import useAttendance from '../../hooks/useAttendance';
+import { CalendarCellData } from '../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
 
-const dateCellRender = (listData: []) => (value: any) => {
+const dateCellRender = (listData: CalendarCellData[]) => (value: any) => {
   const style: React.CSSProperties = {
     position: 'absolute',
     top: 0,
@@ -28,12 +29,8 @@ const dateCellRender = (listData: []) => (value: any) => {
 
 function DashboardAttendance() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.ATTENDANCE });
-  const attendanceData = {
-    startDate: data && new Date(data.start_date),
-    attendance: data?.attendance || '',
-  };
 
-  const calendarData = useAttendance(attendanceData);
+  const calendarData = useAttendance(data?.attendance);
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
