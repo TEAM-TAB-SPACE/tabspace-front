@@ -1,4 +1,4 @@
-import { CloseOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import text from '../../../styles/text.module.scss';
 import layout from '../../../styles/layout.module.scss';
@@ -40,7 +40,7 @@ function MissionPopoverContent({ files }: MissionPopoverContentProps) {
             onClick={onClick}
             style={{ padding: 0, width: '20px', border: 'none' }}
           >
-            <CloseOutlined />
+            <DeleteOutlined />
           </Button>
         </div>
       ) : (
