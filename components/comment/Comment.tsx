@@ -1,7 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 import UserBadge from '../userBadge/UserBadge';
-import { UserBadgeData } from '../userBadge/UserBadge';
 import ReplyButton from './ReplyButton';
+import ReplyForm from './ReplyForm';
+import { UserBadgeData } from '../userBadge/UserBadge';
 
 interface CommentProps {
   isMyComment?: boolean;
@@ -9,8 +10,6 @@ interface CommentProps {
   userBadgeData: UserBadgeData;
   content: string;
   depth?: 1 | 2;
-  onClickReply?: React.MouseEventHandler<HTMLButtonElement>;
-  onClickIndicator?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 function Comment({
@@ -19,17 +18,27 @@ function Comment({
   userBadgeData,
   content,
   depth = 1,
-  onClickReply,
-  onClickIndicator,
 }: CommentProps) {
+  const [isReplyMode, setIsReplyMode] = useState(false);
+
+  const showReplyForm = () => setIsReplyMode(true);
+  const hideReplyForm = () => setIsReplyMode(false);
+
+  const onClickReplyButton = () => {
+    if (isReplyMode) {
+      hideReplyForm();
+    } else {
+      showReplyForm();
+    }
+  };
+
   return (
     <>
       <div className="comment">
-        <UserBadge
-          {...{ ...userBadgeData, commentId, isMyComment, onClickIndicator }}
-        />
+        <UserBadge {...{ ...userBadgeData, commentId, isMyComment }} />
         <div className="comment__text">{content}</div>
-        {depth === 1 && <ReplyButton onClick={onClickReply} />}
+        {depth === 1 && <ReplyButton onClick={onClickReplyButton} />}
+        {isReplyMode && <ReplyForm {...{ commentId, hideReplyForm }} />}
       </div>
       <style jsx>{`
         .comment {
