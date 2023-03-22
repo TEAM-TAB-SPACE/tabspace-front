@@ -13,11 +13,15 @@ const useComment = (depth: 1 | 2) => {
     fetch.post(url, { id: lectureRoomId, comment });
   };
 
+  const editComment = (commentId: number, comment: string, reply: string) => {
+    fetch.put(url, { id: commentId, comment, reply });
+  };
+
   const deleteComment = (commentId: number) => {
     fetch.delete(url, { id: commentId });
   };
 
-  return { addComment, deleteComment };
+  return { addComment, editComment, deleteComment };
 };
 
 export default useComment;

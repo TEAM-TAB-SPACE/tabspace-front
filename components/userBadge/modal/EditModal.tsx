@@ -1,12 +1,11 @@
+import { useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Button, Modal, Input } from 'antd';
-import useFetch from '../../../hooks/useFetch';
 import {
   currentCommentSelector,
   commentRefetchKeyAtom,
 } from '../../../store/comment';
-import { API_URL_LECTURE } from '../../../pages/api/lecture';
-import { useRef } from 'react';
+import useComment from '../../../hooks/useComment';
 
 const { TextArea } = Input;
 
@@ -17,38 +16,27 @@ interface EditModalProps {
   onClickEdit?: () => void;
 }
 
-const PLACEHOLDER = '수정할 내용을 입력해주세요.';
-
 function EditModal({
   depth,
   commentId,
   isModalOpen,
   onClickEdit,
 }: EditModalProps) {
-  const fetch = useFetch();
+  const { editComment } = useComment(depth);
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
+
+  const form = useRef<HTMLFormElement>(null);
 
   const currentComment = useRecoilValue(
     currentCommentSelector({ depth, commentId }),
   );
-
-  const form = useRef<HTMLFormElement>(null);
-
-  const url =
-    depth === 1
-      ? API_URL_LECTURE.COMMENTS_DEPTH1
-      : API_URL_LECTURE.COMMENTS_DEPTH2;
 
   const onClick = () => {
     const textarea = form.current?.children.namedItem(
       'comment',
     ) as HTMLTextAreaElement;
 
-    fetch.put(url, {
-      id: commentId,
-      comment: textarea.value,
-      reply: textarea.value,
-    });
+    editComment(commentId, textarea.value, textarea.value);
 
     textarea.value = '';
     setCommentRefetchKey('stale');
@@ -80,7 +68,6 @@ function EditModal({
           defaultValue={currentComment.comment}
           className="form__textarea"
           style={{ marginTop: '10px', height: '120px', resize: 'none' }}
-          placeholder={PLACEHOLDER}
         />
       </form>
     </Modal>
