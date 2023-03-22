@@ -1,7 +1,7 @@
 import { rest } from 'msw';
-import Config from '../config/config.export';
-import { Comments } from './data/Comments';
-import { API_URL_LECTURE } from '../pages/api/lecture';
+import Config from '../../../config/config.export';
+import { Comments } from '../../data/Comments';
+import { API_URL_LECTURE } from '../../../pages/api/lecture';
 
 const comments = Comments();
 
