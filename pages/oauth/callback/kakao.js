@@ -16,7 +16,8 @@ const redirectHandler = () => {
     if (code) {
       registerKaKao(code, inputPayload);
       sessionStorage.removeItem('inputs');
-      router.push('/dashboard');
+      //  router.push('/dashboard');
+      router.push('/');
     }
   }, [code]);
 
@@ -24,13 +25,8 @@ const redirectHandler = () => {
     await axiosInstance
       .post(`/auth/register`, { code, ...inputData })
       .then(({ data }) => {
-        localStorage.setItem(
-          'user',
-          JSON.stringify({
-            realname: data.user.realname,
-            id: data.user.id,
-          }),
-        );
+        localStorage.setItem('realname', JSON.stringify(data.user.realname));
+        localStorage.setItem('id', JSON.stringify(data.user.id));
 
         setCookie('accessToken', data.tokens.access);
         setCookie('refreshToken', data.tokens.refresh);
