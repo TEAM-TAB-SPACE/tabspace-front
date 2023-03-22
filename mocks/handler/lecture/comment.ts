@@ -30,4 +30,13 @@ export const commentHandler = [
       );
     },
   ),
+  rest.delete(
+    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_OTHER}`,
+    async (req, res, ctx) => {
+      const { id } = await req.json();
+      comments.deleteComment(id);
+
+      return res(ctx.status(200));
+    },
+  ),
 ];

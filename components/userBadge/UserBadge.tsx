@@ -6,6 +6,7 @@ import UserBadgeIndicator from '../userBadge/UserBadgeIndicator';
 export interface UserBadgeData {
   userName: string;
   elapsedTime?: string | null;
+  commentId: number;
 }
 
 interface UserBadgeProps extends UserBadgeData {
@@ -16,6 +17,7 @@ function UserBadge({
   isMyComment,
   userName,
   elapsedTime = null,
+  commentId,
 }: UserBadgeProps) {
   return (
     <div
@@ -23,7 +25,7 @@ function UserBadge({
       style={{ position: 'relative' }}
     >
       <UserBadgeText {...{ userName, elapsedTime }} />
-      {isMyComment && <UserBadgeIndicator/>}
+      {isMyComment && <UserBadgeIndicator {...{ commentId }} />}
     </div>
   );
 }

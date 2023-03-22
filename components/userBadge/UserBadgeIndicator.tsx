@@ -1,18 +1,26 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import IndicatorIcon from './IndicatorIcon';
 import EditModal from './modal/EditModal';
 import DeleteModal from './modal/DeleteModal';
 import IndicatorPopover from './IndicatorPopover';
 import usePopover from '../../hooks/usePopover';
 import useModal from '../../hooks/useModal';
+import useComment from '../../hooks/useComment';
+import { commentRefetchKeyAtom } from '../../store/comment';
 
 function UserBadgeIndicator({ commentId }: { commentId: number }) {
   const { isPopoverOpen, showPopover } = usePopover();
   const { isModalOpen, showModal, closeModal } = useModal();
   const [modalType, setModalType] = useState('');
+  const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
-  const onOk = () => {
+  const { deleteComment } = useComment();
+
+  const onClickDelete = () => {
+    deleteComment(commentId);
     closeModal();
+    setCommentRefetchKey('stale');
   };
 
   const onPopoverItemClick = (type: 'edit' | 'delete') => () => {
@@ -36,9 +44,9 @@ function UserBadgeIndicator({ commentId }: { commentId: number }) {
           className={isPopoverOpen ? 'indicator__popover_active' : ''}
         />
         {modalType === 'edit' ? (
-          <EditModal {...{ isModalOpen, onClickEdit: onOk }} />
+          <EditModal {...{ isModalOpen, onClickEdit: closeModal }} />
         ) : (
-          <DeleteModal {...{ isModalOpen, onClickEdit: onOk }} />
+          <DeleteModal {...{ isModalOpen, onClickDelete }} />
         )}
       </div>
       <style jsx global>{`

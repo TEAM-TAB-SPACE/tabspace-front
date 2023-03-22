@@ -16,9 +16,15 @@ export const Comments = () => {
       },
     ];
   };
+
+  const deleteComment = (id: number) => {
+    comments = comments.filter(comment => comment.id !== id);
+  };
+
   return {
     getComments,
     addComment,
+    deleteComment,
   };
 };
 
