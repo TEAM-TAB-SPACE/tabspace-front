@@ -16,13 +16,13 @@ interface CommentFormProps {
 function CommentForm({ lectureId }: CommentFormProps) {
   const fetch = useFetch();
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
-  
+
   const onSubmit = (e: React.SyntheticEvent) => {
     const form = e.target as HTMLFormElement;
     const textarea = form.children.namedItem('comment') as HTMLTextAreaElement;
     e.preventDefault();
 
-    fetch.post(API_URL_LECTURE.COMMENTS_OTHER, {
+    fetch.post(API_URL_LECTURE.COMMENTS_DEPTH1, {
       id: lectureId,
       comment: textarea.value,
     });

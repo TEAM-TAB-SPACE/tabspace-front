@@ -7,13 +7,13 @@ const comments = Comments();
 
 export const commentHandler = [
   rest.get(
-    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_READ}`,
+    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_REVIEWS}`,
     async (req, res, ctx) => {
       return res(ctx.json(comments.getComments()));
     },
   ),
   rest.post(
-    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_OTHER}`,
+    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_DEPTH1}`,
     async (req, res, ctx) => {
       const { comment } = await req.json();
       comments.addComment(comment);
@@ -31,7 +31,7 @@ export const commentHandler = [
     },
   ),
   rest.put(
-    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_OTHER}`,
+    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_DEPTH1}`,
     async (req, res, ctx) => {
       const { id, comment } = await req.json();
       comments.editComment(id, comment);
@@ -49,7 +49,7 @@ export const commentHandler = [
     },
   ),
   rest.delete(
-    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_OTHER}`,
+    `${Config().baseUrl}${API_URL_LECTURE.COMMENTS_DEPTH1}`,
     async (req, res, ctx) => {
       const { id } = await req.json();
       comments.deleteComment(id);

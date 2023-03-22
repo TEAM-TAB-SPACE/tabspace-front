@@ -27,7 +27,7 @@ function EditModal({ commentId, isModalOpen, onClickEdit }: EditModalProps) {
     const form = document.querySelector('.comment__edit') as HTMLFormElement;
     const textarea = form.children.namedItem('comment') as HTMLTextAreaElement;
 
-    fetch.put(API_URL_LECTURE.COMMENTS_OTHER, {
+    fetch.put(API_URL_LECTURE.COMMENTS_DEPTH1, {
       id: commentId,
       comment: textarea.value,
     });

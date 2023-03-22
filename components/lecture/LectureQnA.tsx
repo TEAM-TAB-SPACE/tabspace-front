@@ -27,7 +27,7 @@ function LectureQnA() {
   );
 
   const { data } = useFetch({
-    url: API_URL_LECTURE.COMMENTS_READ,
+    url: API_URL_LECTURE.COMMENTS_REVIEWS,
     payload: { id: lectureId },
     refetchKeyAtom: commentRefetchKeyAtom,
   });
