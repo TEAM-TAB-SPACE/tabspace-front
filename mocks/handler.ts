@@ -2,12 +2,12 @@ import { rest } from 'msw';
 import Config from '../config/config.export';
 import { commentHandler } from './commentHandler';
 import { dashboardMissionHandler } from './dashboardMissionHandler';
+import { otherHandler } from './otherHandler';
 import { growthData } from './data/growthData';
 import { lectureroomsData } from './data/lectureroomsData';
 import { todayLecturesData } from './data/todayLecturesData';
 import { API_URL_LECTURE } from '../pages/api/lecture';
 import { API_URL_DASHBOARD } from '../pages/api/dashboard';
-
 export const handlers = [
   rest.get(
     `${Config().baseUrl}${API_URL_LECTURE.ALL_LECTURE}`,
@@ -20,8 +20,7 @@ export const handlers = [
     async (req, res, ctx) => {
       return res(
         ctx.json({
-          start_date: '2023-03-01',
-          attendance: 'h0000000111',
+          attendance: 'h11111111111001',
         }),
       );
     },
@@ -51,4 +50,5 @@ export const handlers = [
   ),
   ...dashboardMissionHandler,
   ...commentHandler,
+  ...otherHandler,
 ];
