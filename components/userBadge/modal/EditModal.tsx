@@ -23,7 +23,7 @@ function EditModal({ isModalOpen, onClickEdit }: EditModalProps) {
       ]}
     >
       <TextArea
-        maxLength={3000}
+        maxLength={1000}
         name="comment"
         className="form__textarea"
         style={{ marginTop: '10px', height: '120px', resize: 'none' }}

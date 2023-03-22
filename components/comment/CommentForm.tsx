@@ -35,7 +35,7 @@ function CommentForm({ lectureId }: CommentFormProps) {
     <>
       <form className="comment__form" onSubmit={onSubmit}>
         <TextArea
-          maxLength={3000}
+          maxLength={1000}
           name="comment"
           className="form__textarea"
           style={{ marginTop: '20px', height: '120px', resize: 'none' }}
