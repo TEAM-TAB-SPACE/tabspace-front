@@ -16,7 +16,8 @@ function Comments({ depth, comments }: CommentsProps) {
             <Comment
               depth={depth}
               isMyComment={true}
-              userBadgeData={{ commentId: id, userName: user.realname }}
+              commentId={id}
+              userBadgeData={{ userName: user.realname }}
               content={comment}
             />
             {replies && <Comments depth={2} comments={replies} />}

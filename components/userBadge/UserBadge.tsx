@@ -6,11 +6,11 @@ import UserBadgeIndicator from '../userBadge/UserBadgeIndicator';
 export interface UserBadgeData {
   userName: string;
   elapsedTime?: string | null;
-  commentId: number;
 }
 
 interface UserBadgeProps extends UserBadgeData {
   isMyComment?: boolean;
+  commentId: number;
 }
 
 function UserBadge({

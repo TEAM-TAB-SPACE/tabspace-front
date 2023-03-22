@@ -44,7 +44,7 @@ function UserBadgeIndicator({ commentId }: { commentId: number }) {
           className={isPopoverOpen ? 'indicator__popover_active' : ''}
         />
         {modalType === 'edit' ? (
-          <EditModal {...{ isModalOpen, onClickEdit: closeModal }} />
+          <EditModal {...{ commentId, isModalOpen, onClickEdit: closeModal }} />
         ) : (
           <DeleteModal {...{ isModalOpen, onClickDelete }} />
         )}

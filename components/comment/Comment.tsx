@@ -5,6 +5,7 @@ import ReplyButton from './ReplyButton';
 
 interface CommentProps {
   isMyComment?: boolean;
+  commentId: number;
   userBadgeData: UserBadgeData;
   content: string;
   depth?: 1 | 2;
@@ -14,6 +15,7 @@ interface CommentProps {
 
 function Comment({
   isMyComment = false,
+  commentId,
   userBadgeData,
   content,
   depth = 1,
@@ -23,7 +25,9 @@ function Comment({
   return (
     <>
       <div className="comment">
-        <UserBadge {...{ ...userBadgeData, isMyComment, onClickIndicator }} />
+        <UserBadge
+          {...{ ...userBadgeData, commentId, isMyComment, onClickIndicator }}
+        />
         <div className="comment__text">{content}</div>
         {depth === 1 && <ReplyButton onClick={onClickReply} />}
       </div>
