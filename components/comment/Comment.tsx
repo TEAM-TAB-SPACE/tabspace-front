@@ -35,7 +35,7 @@ function Comment({
   return (
     <>
       <div className="comment">
-        <UserBadge {...{ ...userBadgeData, commentId, isMyComment }} />
+        <UserBadge {...{ ...userBadgeData, depth, commentId, isMyComment }} />
         <div className="comment__text">{content}</div>
         {depth === 1 && <ReplyButton onClick={onClickReplyButton} />}
         {isReplyMode && <ReplyForm {...{ commentId, hideReplyForm }} />}

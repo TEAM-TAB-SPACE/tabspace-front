@@ -2,14 +2,16 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Button, Modal, Input } from 'antd';
 import useFetch from '../../../hooks/useFetch';
 import {
-  currentCommentsSelector,
+  currentCommentSelector,
   commentRefetchKeyAtom,
 } from '../../../store/comment';
 import { API_URL_LECTURE } from '../../../pages/api/lecture';
+import { useRef } from 'react';
 
 const { TextArea } = Input;
 
 interface EditModalProps {
+  depth: 1 | 2;
   commentId: number;
   isModalOpen: boolean;
   onClickEdit?: () => void;
@@ -17,21 +19,38 @@ interface EditModalProps {
 
 const PLACEHOLDER = '수정할 내용을 입력해주세요.';
 
-function EditModal({ commentId, isModalOpen, onClickEdit }: EditModalProps) {
+function EditModal({
+  depth,
+  commentId,
+  isModalOpen,
+  onClickEdit,
+}: EditModalProps) {
   const fetch = useFetch();
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
-  const currentComment = useRecoilValue(currentCommentsSelector(commentId));
+  const currentComment = useRecoilValue(
+    currentCommentSelector({ depth, commentId }),
+  );
 
-  const onClick = (e: React.SyntheticEvent) => {
-    const form = document.querySelector('.comment__edit') as HTMLFormElement;
-    const textarea = form.children.namedItem('comment') as HTMLTextAreaElement;
+  const form = useRef<HTMLFormElement>(null);
 
-    fetch.put(API_URL_LECTURE.COMMENTS_DEPTH1, {
+  const url =
+    depth === 1
+      ? API_URL_LECTURE.COMMENTS_DEPTH1
+      : API_URL_LECTURE.COMMENTS_DEPTH2;
+
+  const onClick = () => {
+    const textarea = form.current?.children.namedItem(
+      'comment',
+    ) as HTMLTextAreaElement;
+
+    fetch.put(url, {
       id: commentId,
       comment: textarea.value,
+      reply: textarea.value,
     });
 
+    textarea.value = '';
     setCommentRefetchKey('stale');
   };
 
@@ -45,8 +64,8 @@ function EditModal({ commentId, isModalOpen, onClickEdit }: EditModalProps) {
         <Button
           key="submit"
           type="primary"
-          onClick={e => {
-            onClick(e);
+          onClick={() => {
+            onClick();
             onClickEdit && onClickEdit();
           }}
         >
@@ -54,7 +73,7 @@ function EditModal({ commentId, isModalOpen, onClickEdit }: EditModalProps) {
         </Button>,
       ]}
     >
-      <form className="comment__edit">
+      <form ref={form} className="comment__edit">
         <TextArea
           maxLength={1000}
           name="comment"

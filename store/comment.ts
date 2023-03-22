@@ -7,7 +7,7 @@ export interface CommentSingleData {
     realname: string;
   };
   comment: string;
-  replies: CommentSingleData[];
+  replies?: CommentSingleData[];
 }
 
 export const commentRefetchKeyAtom = atom<RefetchKey>({
@@ -20,16 +20,35 @@ export const currentLectureCommentsAtom = atom<CommentSingleData[]>({
   default: Array<CommentSingleData>(),
 });
 
-export const currentCommentsSelector = selectorFamily<
+export const currentCommentSelector = selectorFamily<
   CommentSingleData,
-  number
+  { depth: 1 | 2; commentId: number }
 >({
   key: 'currentCommentsSelector',
   get:
-    commentId =>
+    params =>
     ({ get }) => {
       const comments = get(currentLectureCommentsAtom);
+      const isCurrentComment = (id: number) => id === params.commentId;
 
-      return comments.filter(comment => comment.id === commentId)[0];
+      const currentComment = comments.reduce(
+        (currentComment: any, comment: CommentSingleData) => {
+          if (params.depth === 2) {
+            return (
+              comment.replies?.filter(({ id }) => isCurrentComment(id))[0] ||
+              currentComment
+            );
+          }
+
+          if (isCurrentComment(comment.id)) {
+            return comment;
+          }
+
+          return currentComment;
+        },
+        {},
+      );
+
+      return currentComment;
     },
 });

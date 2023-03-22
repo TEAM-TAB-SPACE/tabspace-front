@@ -9,7 +9,12 @@ import useModal from '../../hooks/useModal';
 import useComment from '../../hooks/useComment';
 import { commentRefetchKeyAtom } from '../../store/comment';
 
-function UserBadgeIndicator({ commentId }: { commentId: number }) {
+interface UserBadgeIndicatorProps {
+  depth: 1 | 2;
+  commentId: number;
+}
+
+function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
   const { isPopoverOpen, showPopover } = usePopover();
   const { isModalOpen, showModal, closeModal } = useModal();
   const [modalType, setModalType] = useState('');
@@ -44,7 +49,9 @@ function UserBadgeIndicator({ commentId }: { commentId: number }) {
           className={isPopoverOpen ? 'indicator__popover_active' : ''}
         />
         {modalType === 'edit' ? (
-          <EditModal {...{ commentId, isModalOpen, onClickEdit: closeModal }} />
+          <EditModal
+            {...{ commentId, depth, isModalOpen, onClickEdit: closeModal }}
+          />
         ) : (
           <DeleteModal {...{ isModalOpen, onClickDelete }} />
         )}
