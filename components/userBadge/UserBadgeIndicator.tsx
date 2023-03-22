@@ -1,33 +1,53 @@
 import IndicatorIcon from './IndicatorIcon';
-import { Popover, Space } from 'antd';
 
-const content = (
-  <>
-    <button className="indicator__item">수정하기</button>
-    <button className="indicator__item">삭제하기</button>
-  </>
-);
+import IndicatorPopover from './IndicatorPopover';
+import usePopover from '../../hooks/usePopover';
 
-function UserBadgeIndicator() {
+function UserBadgeIndicator({ commentId }: { commentId: number }) {
+  const { isPopoverOpen, showPopover } = usePopover();
+
   return (
     <>
-      <Space className="userBadge__indicator" wrap>
-        <Popover placement="left" content={content} trigger="focus">
-          <button className="indicator__button">
-            <IndicatorIcon width="20px" height="20px" />
-          </button>
-        </Popover>
-      </Space>
+      <div className="userBadge__indicator">
+        <button
+          className="indicator__button"
+          onClick={() => {
+            showPopover();
+          }}
+        >
+          <IndicatorIcon width="20px" height="20px" />
+        </button>
+        <IndicatorPopover
+          className={isPopoverOpen ? 'indicator__popover_active' : ''}
+        />
+      </div>
       <style jsx global>{`
-        .indicator__button,
-        .indicator__item {
-          display: flex;
-          border: none;
-          background-color: transparent;
-        }
+        .indicator {
+          &__button {
+            display: flex;
+            border: none;
+            background-color: transparent;
+          }
 
-        .indicator__item {
-          padding: 7px;
+          &__popover {
+            display: none;
+            position: absolute;
+            top: -4px;
+            right: 30px;
+            width: 100px;
+            padding: 7px 5px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+            &_active {
+              display: block;
+            }
+
+            .popover__item:not(:last-child) {
+              margin-bottom: 5px;
+            }
+          }
         }
       `}</style>
     </>

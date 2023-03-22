@@ -18,9 +18,12 @@ function UserBadge({
   elapsedTime = null,
 }: UserBadgeProps) {
   return (
-    <div className={layout.flex_a_center_j_between}>
+    <div
+      className={layout.flex_a_center_j_between}
+      style={{ position: 'relative' }}
+    >
       <UserBadgeText {...{ userName, elapsedTime }} />
-      {isMyComment && <UserBadgeIndicator />}
+      {isMyComment && <UserBadgeIndicator/>}
     </div>
   );
 }
