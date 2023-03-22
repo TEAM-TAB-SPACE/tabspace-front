@@ -20,7 +20,7 @@ function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
   const [modalType, setModalType] = useState('');
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
-  const { deleteComment } = useComment();
+  const { deleteComment } = useComment(depth);
 
   const onClickDelete = () => {
     deleteComment(commentId);
