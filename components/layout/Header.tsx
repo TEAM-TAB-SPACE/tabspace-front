@@ -1,17 +1,15 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import css from 'styled-jsx/css';
 import Logo from '../../public/assets/mainLogo.svg';
 import { useRouter } from 'next/router';
 
-import { deleteCookie, getCookie, removeCookies } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
-import { axiosInstance, setAxiosAccessToken } from '../../pages/api/axios';
-import cookies from 'next-cookies';
+import { axiosInstance } from '../../pages/api/axios';
 
 export default function Header() {
   const router = useRouter();
-  const [user, setUser] = useState({}); //realname
+  const [username, setUsername] = useState(''); //realname
   const [isLogin, setIsLogin] = useState(false); // refresh
 
   // 로그아웃
@@ -29,8 +27,6 @@ export default function Header() {
       router.push('/');
     } catch (error) {
       console.log(error);
-      console.log(error.response.status);
-      console.log(error.response.data.error);
     }
   };
 
@@ -45,8 +41,7 @@ export default function Header() {
   // 로컬스토리지에서 realname
   useEffect(() => {
     const username = localStorage.getItem('realname');
-    console.log(username);
-    setUser(username);
+    if (username) setUsername(username);
   }, []);
 
   return (
@@ -63,7 +58,7 @@ export default function Header() {
         </div>
       ) : (
         <div className="username__div">
-          <p>{user}님 환영합니다!</p>
+          <p>{username}님 환영합니다!</p>
           <button onClick={Logout}>로그아웃</button>
         </div>
       )}
