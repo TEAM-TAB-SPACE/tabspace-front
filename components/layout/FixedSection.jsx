@@ -62,33 +62,31 @@ export default function FixedSection() {
 
 const fixedsection = css`
   .fixedsection_container {
+    position: fixed;
     display: flex;
     align-items: center;
-    width: 700px;
-    bottom: 10px;
+    gap: 10px;
+    width: 550px;
+    bottom: 30px;
     border: 1px solid #a1aebf;
-    padding: 15px 30px;
+    padding: 15px;
     background: #ffffff;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     justify-content: space-evenly;
-    position: fixed;
     left: 50%;
     transform: translateX(-50%);
   }
   .fixedsection_selectbtn {
-    width: 140px;
-    height: 30px;
-    border-radius: 2px;
-    border: 1px solid #40a9ff;
+    height: 36px;
+    border-radius: 5px;
     text-align: center;
   }
   .fixedsection_telnumber {
-    width: 243px;
-    height: 30px;
+    height: 36px;
     text-align: center;
     border: 1px solid #d9d9d9;
-    border-radius: 2px;
+    border-radius: 5px;
     font-weight: 400;
     font-size: 16px;
     line-height: 140%;
@@ -97,16 +95,15 @@ const fixedsection = css`
     border-radius: 2px;
     background: #722ed1;
     border: 1px solid #722ed1;
-    width: 231px;
-    height: 36.8px;
+    padding: 0 30px;
+    height: 36px;
     color: white;
     font-size: 16px;
     line-height: 140%;
     font-weight: 700;
+    border-radius: 5px;
   }
-  @media (max-width: 834px) {
-  }
-  @media (max-width: 500px) {
+  @media (max-width: 570px) {
     .fixedsection_container {
       width: 288px;
       height: 114.8px;

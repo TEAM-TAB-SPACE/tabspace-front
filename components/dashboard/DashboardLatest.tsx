@@ -12,6 +12,20 @@ function DashboardLatest() {
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
 
+  if (!videoId)
+    return (
+      <div
+        className={`${layout.flex_center} latest__notFound`}
+        style={{
+          width: '100%',
+          height: '250px',
+          color: variables.textSecondaryColor,
+        }}
+      >
+        최근 수강 강의가 없습니다.
+      </div>
+    );
+
   return (
     <>
       <div className="dashboard__latest">
@@ -73,6 +87,11 @@ function DashboardLatest() {
             transform: scale(1.1);
             transition: transform 0.5s, filter 0.5s;
             filter: brightness(45%);
+          }
+
+          &__notFound {
+            background-color: red;
+            height: 250px;
           }
         }
       `}</style>

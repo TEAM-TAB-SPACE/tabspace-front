@@ -49,8 +49,9 @@ function MyApp({ Component, pageProps }: AppProps) {
             ></Script>
           </Head>
           <Reset />
-
-          <Component {...pageProps} />
+          <BaseLayout>
+            <Component {...{ ...pageProps }} />
+          </BaseLayout>
         </ConfigProvider>
       </RecoilRoot>
     </>

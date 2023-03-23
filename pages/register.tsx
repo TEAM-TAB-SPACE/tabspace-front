@@ -146,7 +146,6 @@ export default function Register() {
               className="kakaoBtn"
               value="카카오로 회원가입하기"
             />
-            {/* <Link href={KAKAO_AUTH_URL}>카카오로그인</Link> */}
           </div>
         </form>
       </div>
@@ -164,7 +163,7 @@ export default function Register() {
           justify-content: center;
           align-items: center;
           width: 200px;
-          height: 38px;
+          height: 30px;
           color: #ffffff;
           background-color: #722ed1;
           font-size: 0.8rem;
@@ -193,10 +192,9 @@ const registerStyle = css`
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     width: 300px;
-    height: 450px;
+    height: 470px;
     position: relative;
-    margin: 0 auto;
-    top: 100px;
+    margin: 50px auto 200px;
     .register__wrap {
       position: absolute;
       display: flex;
@@ -259,7 +257,7 @@ const registerStyle = css`
       flex-direction: row;
       align-items: center;
       position: absolute;
-      top: 510px;
+      top: 500px;
       p {
         font-size: 0.8rem;
         padding-right: 5px;

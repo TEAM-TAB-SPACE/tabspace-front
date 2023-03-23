@@ -6,18 +6,20 @@ import Spinner from '../../components/common/Spin';
 import useFetch from '../../hooks/useFetch';
 import { allLectureAtom } from '../../store/lecture';
 import { API_URL_LECTURE } from '../api/lecture';
+import useMediaQueryState from '../../hooks/useMediaQueryState';
 
 const { Content } = Layout;
 
-const lectureStyle = {
-  maxWidth: '1074px',
-  margin: '0 auto',
-  backgroundColor: 'transparent',
-};
-
 function Lecture() {
-  const { isLoading, data } = useFetch({ url: API_URL_LECTURE.ALL_LECTURE });
+  const { isMobile } = useMediaQueryState();
+  const { isLoading, data } = useFetch({ url: API_URL_LECTURE.LECTUREROOMS });
   const setAllLecture = useSetRecoilState(allLectureAtom);
+
+  const lectureStyle = {
+    maxWidth: '1074px',
+    margin: isMobile ? '0 16px' : '0 70px',
+    backgroundColor: 'transparent',
+  };
 
   useEffect(() => {
     if (data) {

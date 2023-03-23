@@ -21,7 +21,10 @@ function LectureContent() {
     <>
       <Layout style={{ backgroundColor: 'transparent' }}>
         <Content className="lecture__content">
-          <LecturePlayer videoId={`${videoId}`} />
+          <LecturePlayer
+            videoId={`${videoId}`}
+            lectureroomId={selectedLecture?.id}
+          />
           {isMobile ? (
             <LectureTabs />
           ) : (

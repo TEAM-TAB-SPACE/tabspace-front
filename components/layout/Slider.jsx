@@ -18,10 +18,11 @@ export default class Sliders extends Component {
       slidesToShow: 3,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 4000,
-      autoplaySpeed: 4000,
+      speed: 2000,
+      autoplaySpeed: 2000,
       cssEase: 'linear',
       centerMode: true,
+      draggable: false,
       variableWidth: true,
       responsive: [
         {
@@ -31,8 +32,9 @@ export default class Sliders extends Component {
             slidesToShow: 2,
             slidesToScroll: 1,
             autoplay: true,
-            speed: 4000,
-            autoplaySpeed: 4000,
+            speed: 2000,
+            autoplaySpeed: 2000,
+            draggable: false,
             cssEase: 'linear',
           },
         },
@@ -43,8 +45,9 @@ export default class Sliders extends Component {
             slidesToShow: 1,
             slidesToScroll: 1,
             autoplay: true,
-            speed: 4000,
-            autoplaySpeed: 4000,
+            speed: 2000,
+            autoplaySpeed: 2000,
+            draggable: false,
             cssEase: 'linear',
           },
         },
@@ -60,22 +63,22 @@ export default class Sliders extends Component {
         <div className="slider_slidecontainer">
           <Slider {...settings}>
             <div>
-              <Image src={Logo1} alt="logo1" style={{ width: 250 }} />
+              <Image src={Logo1} alt="logo1" style={{ width: 185 }} />
             </div>
             <div>
-              <Image src={Logo2} alt="logo2" style={{ width: 250 }} />
+              <Image src={Logo2} alt="logo2" style={{ width: 185 }} />
             </div>
             <div>
-              <Image src={Logo3} alt="logo3" style={{ width: 250 }} />
+              <Image src={Logo3} alt="logo3" style={{ width: 185 }} />
             </div>
             <div>
-              <Image src={Logo4} alt="logo4" style={{ width: 250 }} />
+              <Image src={Logo4} alt="logo4" style={{ width: 185 }} />
             </div>
             <div>
-              <Image src={Logo5} alt="logo5" style={{ width: 250 }} />
+              <Image src={Logo5} alt="logo5" style={{ width: 185 }} />
             </div>
             <div>
-              <Image src={Logo6} alt="logo6" style={{ width: 250 }} />
+              <Image src={Logo6} alt="logo6" style={{ width: 185 }} />
             </div>
           </Slider>
         </div>
@@ -86,7 +89,7 @@ export default class Sliders extends Component {
 }
 const slider = css`
   .slider_container {
-    margin-bottom: 64px;
+    margin-bottom: 120px;
   }
   .slider_box {
     margin-bottom: 64px;
@@ -94,19 +97,11 @@ const slider = css`
   .slider_text {
     font-weight: 400;
     font-size: 24px;
-    margin-left: 70px;
-    margin-top: 150px;
+    margin-top: 80px;
   }
   .slider_title {
     font-weight: 700;
     font-size: 40px;
-    margin-left: 70px;
     margin-top: 24px;
   }
-  @media (max-width: 500px) {
-    .slider_box {
-      margin-left: -30px;
-    }
-  }
-
 `;

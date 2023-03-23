@@ -17,7 +17,7 @@ export default function Course() {
             </p>
           </div>
           <div className="coures_backend">
-            <p className="coures_backend_badge">모집예정</p>
+            <p className="coures_badge">모집예정</p>
             <h1 className="coures_box_title">백엔드 코스</h1>
             <p className="coures_box_text">
               안정적인 웹 서비스를 효율적으로 구축하는 백엔드 개발자 양성 과정
@@ -40,23 +40,26 @@ export default function Course() {
 const index = css`
   .coures_title {
     font-weight: bold;
-    font-size: 40px;
+    font-size: 35px;
     margin-top: 80px;
     text-align: center;
+    line-height: 140%;
   }
   .coures_text {
-    margin-top: 24px;
+    margin-top: 15px;
     text-align: center;
     line-height: 40px;
-    font-size: 24px;
+    font-size: 22px;
+    line-height: 130%;
   }
   .coures_box {
     margin-top: 40px;
     display: flex;
     justify-content: center;
+    gap: 32px;
   }
   .coures_front {
-    width: 280px;
+    width: 100%;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -64,11 +67,10 @@ const index = css`
     gap: 12px;
     background: rgba(255, 133, 192, 0.07);
     border-radius: 10px;
-    margin-right: 32px;
     padding: 40px;
   }
   .coures_backend {
-    width: 280px;
+    width: 100%;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -76,11 +78,10 @@ const index = css`
     gap: 12px;
     background: rgba(82, 196, 26, 0.07);
     border-radius: 10px;
-    margin-right: 32px;
     padding: 40px;
   }
   .coures_ux {
-    width: 280px;
+    width: 100%;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -91,28 +92,12 @@ const index = css`
     padding: 40px;
   }
   .coures_badge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 8px;
-    width: 48px;
-    height: 17px;
+    padding: 5px 8px;
     background: #722ed1;
     border-radius: 100px;
     color: #ffffff;
     font-size: 12px;
-  }
-  .coures_backend_badge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0px 8px;
-    width: 58px;
-    height: 17px;
-    background: #722ed1;
-    border-radius: 100px;
-    color: #ffffff;
-    font-size: 12px;
+    font-weight: 500;
   }
   .coures_box_title {
     font-size: 25px;
@@ -121,38 +106,15 @@ const index = css`
   }
   .coures_box_text {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 140%;
     letter-spacing: 0.02em;
   }
-  @media (max-width: 834px) {
+  @media (max-width: 700px) {
     .coures_box {
-    }
-    .coures_front,
-    .coures_backend,
-    .coures_ux {
-      width: 212px;
-      height: 280px;
-    }
-    @media (max-width: 500px) {
-      .coures_box {
-        display: flex;
-        flex-direction: column;
-      }
-      .coures_front {
-        width: 280px;
-        height: 120px;
-        margin-bottom: 32px;
-      }
-      .coures_backend {
-        width: 280px;
-        height: 120px;
-        margin-bottom: 32px;
-      }
-      .coures_ux {
-        width: 280px;
-        height: 120px;
-      }
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
     }
   }
 `;
