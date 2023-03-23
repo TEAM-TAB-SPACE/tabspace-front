@@ -16,7 +16,7 @@ const lectureStyle = {
 };
 
 function Lecture() {
-  const { isLoading, data } = useFetch({ url: API_URL_LECTURE.ALL_LECTURE });
+  const { isLoading, data } = useFetch({ url: API_URL_LECTURE.LECTUREROOMS });
   const setAllLecture = useSetRecoilState(allLectureAtom);
 
   useEffect(() => {

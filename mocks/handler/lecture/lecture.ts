@@ -6,7 +6,7 @@ import { API_URL_LECTURE } from '../../../pages/api/lecture';
 
 export const lectureHandler = [
   rest.get(
-    `${Config().baseUrl}${API_URL_LECTURE.ALL_LECTURE}`,
+    `${Config().baseUrl}${API_URL_LECTURE.LECTUREROOMS}`,
     async (req, res, ctx) => {
       return res(ctx.json(lectureroomsData));
     },
