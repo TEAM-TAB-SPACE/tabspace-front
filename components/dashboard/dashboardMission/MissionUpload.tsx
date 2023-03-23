@@ -6,6 +6,7 @@ import variables from '../../../styles/variables.module.scss';
 import useMessage from '../../../hooks/useMessage';
 import { missionsRefetchKeyAtom } from '../../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
+import { getCookie } from 'cookies-next';
 
 const { Dragger } = Upload;
 
@@ -27,9 +28,11 @@ function MissionUpload({ missionId }: MissionUploadProps) {
     multiple: false,
     maxCount: 1,
     data: { id: missionId },
+    headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
     action: `${process.env.NEXT_PUBLIC_BASE_URL}${API_URL_DASHBOARD.MISSION}`,
     showUploadList: false,
     onChange: (info: UploadChangeParam<UploadFile<any>>) => {
+      console.log(info.file.status);
       if (info.file.status === 'done') {
         success(SUCCESS_MESSAGE);
         setRefetchKey('stale');

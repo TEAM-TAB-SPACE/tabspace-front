@@ -10,7 +10,7 @@ export const axiosInstance = axios.create({
 });
 
 export const setAxiosAccessToken = (axiosInstance: Axios, access: string) => {
-  axiosInstance.defaults.headers.common['Authorization'] = access;
+  axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access}`;
   return axiosInstance;
 };
 
