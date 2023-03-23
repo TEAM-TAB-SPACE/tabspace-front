@@ -1,9 +1,10 @@
 import '../styles/globals.css';
 import { Reset } from 'styled-reset';
 import { RecoilRoot } from 'recoil';
-import type { AppContext, AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
+import BaseLayout from '../components/layout/BaseLayout';
 import locale from 'antd/lib/locale/ko_KR';
 import { isDevMode } from '../config/config.export';
 import { ConfigProvider } from 'antd';
