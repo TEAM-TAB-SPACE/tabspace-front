@@ -1,41 +1,48 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import css from 'styled-jsx/css';
 import Logo from '../../public/assets/mainLogo.svg';
 import { useRouter } from 'next/router';
 
-import { getCookie, removeCookies } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import { axiosInstance } from '../../pages/api/axios';
 
 export default function Header() {
   const router = useRouter();
-  const user = getCookie('realname');
-  const Logout = async (token: any) => {
-    await axiosInstance
-      .post(`/auth/logout`, token)
-      .then(res => {
-        console.log(res.data);
-        console.log('로그아웃 성공');
-        removeCookies('refreshToken');
-        removeCookies('realname');
-        router.push('/');
-      })
-      .catch(err => {
-        console.log(err);
-        console.log('로그아웃 실패');
+  const [username, setUsername] = useState(''); //realname
+  const [isLogin, setIsLogin] = useState(false); // refresh
+
+  // 로그아웃
+  const Logout = async () => {
+    const token = getCookie('accessToken');
+    try {
+      const response = await axiosInstance.post(`/auth/logout`, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+      console.log('로그아웃성공');
+      deleteCookie('accessToken');
+      deleteCookie('refreshToken');
+      router.push('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const [isLogin, setIsLogin] = useState(false);
-
   useEffect(() => {
-    if ((getCookie('refresh'), getCookie('realname'))) {
+    if (getCookie('accessToken')) {
       setIsLogin(!isLogin);
     } else {
       setIsLogin(false);
     }
-  }, [getCookie('refresh'), getCookie('realname')]);
+  }, [getCookie('accessToken')]);
+
+  // 로컬스토리지에서 realname
+  useEffect(() => {
+    const username = localStorage.getItem('realname');
+    if (username) setUsername(username);
+  }, []);
 
   return (
     <header className="header__container">
@@ -50,8 +57,8 @@ export default function Header() {
           </div>
         </div>
       ) : (
-        <div>
-          <p>{user}님 환영합니다!</p>
+        <div className="username__div">
+          <p>{username}님 환영합니다!</p>
           <button onClick={Logout}>로그아웃</button>
         </div>
       )}
@@ -84,5 +91,24 @@ const header = css`
   }
   .header__register {
     padding: 0 10px;
+  }
+
+  .username__div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 34px;
+    p {
+      padding-right: 10px;
+    }
+    button {
+      width: 100px;
+      height: 34px;
+      border: none;
+      border-radius: 5px;
+
+      color: #ffffff;
+      background-color: #722ed1;
+    }
   }
 `;

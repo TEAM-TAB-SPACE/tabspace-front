@@ -23,7 +23,7 @@ export default function Login() {
       </div>
       <div className="login__kakaoBtn">
         <button onClick={loginOnclick}>
-          <Kakao style={{ paddingRight: '10px' }} />
+          <Kakao style={{ marginRight: '5px' }} />
           카카오 로그인
         </button>
       </div>
@@ -65,8 +65,8 @@ const login = css`
     border: 1px solid #a1aebf;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
-    width: 200px;
-    height: 240px;
+    width: 250px;
+    height: 350px;
     position: relative;
     margin: 0 auto;
     top: 200px;
