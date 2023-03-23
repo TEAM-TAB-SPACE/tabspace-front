@@ -57,7 +57,7 @@ const index = css`
   }
   .coures_front {
     width: 280px;
-    height: 120px;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -69,7 +69,7 @@ const index = css`
   }
   .coures_backend {
     width: 280px;
-    height: 120px;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -81,7 +81,7 @@ const index = css`
   }
   .coures_ux {
     width: 280px;
-    height: 120px;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -115,7 +115,7 @@ const index = css`
     font-size: 12px;
   }
   .coures_box_title {
-    font-size: 28px;
+    font-size: 25px;
     line-height: 140%;
     font-weight: 700;
   }
@@ -128,17 +128,11 @@ const index = css`
   @media (max-width: 834px) {
     .coures_box {
     }
-    .coures_front {
-      width: 212px;
-      height: 200px;
-    }
-    .coures_backend {
-      width: 212px;
-      height: 200px;
-    }
+    .coures_front,
+    .coures_backend,
     .coures_ux {
       width: 212px;
-      height: 200px;
+      height: 280px;
     }
     @media (max-width: 500px) {
       .coures_box {

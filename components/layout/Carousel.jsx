@@ -184,7 +184,7 @@ const Global = createGlobalStyle`
     }
     @media (max-width: 834px) {
       .slick-slide {
-        margin-right: 80px;
+        margin-right: 70px;
       }
   
     }
@@ -256,10 +256,10 @@ const carousel = css`
   }
   @media (max-width: 834px) {
     .carousel_long_slide {
-      height: 260px;
+      height: 330px;
     }
     .carousel_shot_slide {
-      height: 130px;
+      height: 200px;
     }
   }
   @media (max-width: 500px) {
