@@ -1,24 +1,33 @@
 import React from 'react';
 import UserBadgeText from './UserBadgeText';
-import { UserBadgeData } from './userBadge';
 import layout from '../../styles/layout.module.scss';
-import UserBadgeIndicator from '../userBadge/UserBadgeIndicator';
+import UserBadgeIndicator from './UserBadgeIndicator';
+
+export interface UserBadgeData {
+  userName: string;
+  elapsedTime?: string | null;
+}
 
 interface UserBadgeProps extends UserBadgeData {
   isMyComment?: boolean;
-  onClickIndicator: React.MouseEventHandler<HTMLButtonElement>;
+  commentId: number;
+  depth: 1 | 2;
 }
 
 function UserBadge({
   isMyComment,
   userName,
   elapsedTime = null,
-  onClickIndicator,
+  commentId,
+  depth,
 }: UserBadgeProps) {
   return (
-    <div className={layout.flex_a_center_j_between}>
+    <div
+      className={layout.flex_a_center_j_between}
+      style={{ position: 'relative' }}
+    >
       <UserBadgeText {...{ userName, elapsedTime }} />
-      {isMyComment && <UserBadgeIndicator onClick={onClickIndicator} />}
+      {isMyComment && <UserBadgeIndicator {...{ depth, commentId }} />}
     </div>
   );
 }

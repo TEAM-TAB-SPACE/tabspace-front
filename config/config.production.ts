@@ -1,6 +1,8 @@
 import getConfigs from './config.common';
 
-const baseUrl = 'http://localhost:8000/api';
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  ? process.env.NEXT_PUBLIC_BASE_URL
+  : '';
 const mode = 'production';
 
 const configProduction = getConfigs({

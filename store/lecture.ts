@@ -1,11 +1,17 @@
-import { atom, selector } from 'recoil';
+import { atom, selectorFamily } from 'recoil';
+import type { MenuProps } from 'antd';
+import { SubMenuType } from 'antd/es/menu/hooks/useItems';
+
+export type MenuItem = Required<MenuProps>['items'][number];
 
 export interface LectureRoomSingleData {
   id: number;
   lecture: {
     id: number;
     title: string;
-    category: string;
+    category: {
+      name: string;
+    };
     teacher: string;
     duration: number;
     videoId: string;
@@ -18,20 +24,6 @@ export interface LectureRoomSingleData {
   completed: boolean;
 }
 
-export interface PlaylistItem {
-  key: string;
-  label: string;
-  children: {
-    key: string;
-    label: string;
-  }[];
-}
-
-export const selectedLectureKeyPathAtom = atom({
-  key: 'selectedLectureKeyPathAtom',
-  default: ['1', 'menu1'],
-});
-
 export const allLectureAtom = atom({
   key: 'allLectureAtom',
   default: new Array<LectureRoomSingleData>(),
@@ -39,23 +31,27 @@ export const allLectureAtom = atom({
 
 export const playlistAtom = atom({
   key: 'playlistAtom',
-  default: new Array<PlaylistItem>(),
+  default: new Array<MenuItem>(),
 });
 
-export const currentLectureSelector = selector({
+export const currentLectureSelector = selectorFamily<
+  LectureRoomSingleData,
+  string
+>({
   key: 'currentLectureSelector',
-  get: ({ get }) => {
-    const allLecture = get(allLectureAtom);
-    const [key, _] = get(selectedLectureKeyPathAtom);
+  get:
+    videoId =>
+    ({ get }) => {
+      const allLecture = get(allLectureAtom);
 
-    return allLecture.filter(lecture => `${lecture.id}` === key)[0];
-  },
+      return allLecture.filter(({ lecture }) => lecture.videoId === videoId)[0];
+    },
 });
 
 const pickCategories = (lectureroomData: LectureRoomSingleData[]) => {
   const categories = lectureroomData.reduce(
     (categories: string[], item: LectureRoomSingleData) => {
-      const category = item.lecture.category;
+      const category = item.lecture.category.name;
       if (!categories.includes(category)) return [...categories, category];
 
       return categories;
@@ -67,14 +63,19 @@ const pickCategories = (lectureroomData: LectureRoomSingleData[]) => {
 };
 
 const addPlaylistItemChildren = (
-  playlistItem: PlaylistItem,
+  playlistItem: SubMenuType,
   key: string,
   label: string,
+  disabled: boolean,
 ) => {
-  playlistItem.children = [...playlistItem.children, { key, label }];
+  const newPlaylistItemChildren = [
+    ...playlistItem?.children,
+    { key, label, disabled },
+  ];
+  playlistItem.children = newPlaylistItemChildren;
 };
 
-const createPlaylistItem = (key: string, label: string) => {
+const createPlaylistItem = (key: string, label: string): SubMenuType => {
   return {
     key,
     label,
@@ -93,14 +94,16 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
   let prevCategories: string[] = [];
 
   const playlist = categories.reduce(
-    (playlist: PlaylistItem[], category: string, index: number) => {
-      const newPlaylistItem: PlaylistItem = createPlaylistItem(
-        `menu${index + 1}`,
-        category,
-      );
+    (playlist: MenuItem[], category: string): MenuItem[] => {
+      const newPlaylistItem = createPlaylistItem(category, category);
 
       for (const item of lectureroomData) {
-        const { id, category: lectureCategory, title } = item.lecture;
+        const {
+          videoId,
+          category: { name: lectureCategory },
+          title,
+          active_lecture,
+        } = item.lecture;
 
         if (isNewCategory(prevCategories, lectureCategory, category)) {
           prevCategories = [...prevCategories, category];
@@ -108,7 +111,12 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
         }
 
         if (lectureCategory === category) {
-          addPlaylistItemChildren(newPlaylistItem, `${id}`, title);
+          addPlaylistItemChildren(
+            newPlaylistItem,
+            videoId,
+            title,
+            !active_lecture,
+          );
         }
       }
 

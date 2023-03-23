@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
-
-import axios from 'axios';
+import { axiosInstance } from '../../api/axios';
+import { setCookie } from 'cookies-next';
 
 const redirectHandler = () => {
   const router = useRouter();
@@ -12,6 +12,7 @@ const redirectHandler = () => {
   useEffect(() => {
     const inputData = sessionStorage.getItem('inputs');
     const inputPayload = JSON.parse(inputData);
+
     if (code) {
       registerKaKao(code, inputPayload);
       sessionStorage.removeItem('inputs');
@@ -20,10 +21,14 @@ const redirectHandler = () => {
   }, [code]);
 
   const registerKaKao = async (code, inputData) => {
-    await axios
-      .post(`http://127.0.0.1:8000/api/auth/register`, { code, ...inputData })
-      .then(res => {
-        console.log(res.data);
+    await axiosInstance
+      .post(`/auth/register`, { code, ...inputData })
+      .then(({ data }) => {
+        localStorage.setItem('realname', JSON.stringify(data.user.realname));
+        localStorage.setItem('id', JSON.stringify(data.user.id));
+
+        setCookie('accessToken', data.tokens.access);
+        setCookie('refreshToken', data.tokens.refresh);
       })
       .catch(error => {
         if (error.res) {

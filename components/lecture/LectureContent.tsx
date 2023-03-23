@@ -1,38 +1,56 @@
 import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
 import { Layout } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LecturePlayer from './LecturePlayer';
 import LectureQnA from './LectureQnA';
-import { currentLectureSelector, PlaylistItem } from '../../store/lecture';
+import LectureTabs from './LectureTabs';
+import useMediaQueryState from '../../hooks/useMediaQueryState';
+import { currentLectureSelector } from '../../store/lecture';
 
 const { Content } = Layout;
 
-interface LectureContentProps {
-  playlistItems: PlaylistItem[];
-}
+function LectureContent() {
+  const router = useRouter();
+  const { videoId } = router.query;
 
-function LectureContent({ playlistItems }: LectureContentProps) {
-  const selectedLecture = useRecoilValue(currentLectureSelector);
-  const { title, videoId } = selectedLecture?.lecture;
+  const { isMobile } = useMediaQueryState();
+  const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
 
   return (
     <>
       <Layout style={{ backgroundColor: 'transparent' }}>
-        <Content>
-          <LecturePlayer videoId={videoId} />
-          <Content style={{ padding: '32px 24px' }}>
-            <div className="lecture__title">{title}</div>
-            <LectureQnA />
-          </Content>
+        <Content className="lecture__content">
+          <LecturePlayer
+            videoId={`${videoId}`}
+            lectureroomId={selectedLecture?.id}
+          />
+          {isMobile ? (
+            <LectureTabs />
+          ) : (
+            <Content style={{ padding: '32px 24px' }}>
+              <div className="lecture__title">
+                {selectedLecture?.lecture.title}
+              </div>
+              <LectureQnA />
+            </Content>
+          )}
         </Content>
-        <LecturePlaylist menuItems={playlistItems} />
+        {!isMobile && <LecturePlaylist />}
       </Layout>
-      <style jsx>{`
-        .lecture__title {
-          font-size: 20px;
-          line-height: 140%;
-          padding-bottom: 20px;
-          font-weight: 700;
+      <style jsx global>{`
+        .lecture {
+          &__title {
+            font-size: 20px;
+            line-height: 140%;
+            font-weight: 700;
+          }
+
+          &__content {
+            overflow: scroll;
+            height: 100vh;
+            max-height: 100vh;
+          }
         }
       `}</style>
     </>

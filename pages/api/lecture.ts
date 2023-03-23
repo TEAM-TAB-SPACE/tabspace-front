@@ -1,11 +1,6 @@
-import { axiosInstance } from './axios';
-
-export const callPlaylistApi = async () => {
-  try {
-    const { data } = await axiosInstance.get('/lecturerooms');
-    return data;
-  } catch (error) {
-    if (error instanceof Error) return error.message;
-    return String(error);
-  }
+export const API_URL_LECTURE = {
+  LECTUREROOMS: '/lecturerooms/room',
+  COMMENTS_REVIEWS: '/comment/reviews',
+  COMMENTS_DEPTH1: '/comment/review',
+  COMMENTS_DEPTH2: '/comment/reply',
 };
