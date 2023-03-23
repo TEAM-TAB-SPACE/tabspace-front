@@ -111,4 +111,9 @@ const header = css`
       background-color: #722ed1;
     }
   }
+  @media (max-width: 768px) {
+    .header__container {
+      padding: 16px;
+    }
+  }
 `;

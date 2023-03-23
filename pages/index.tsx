@@ -10,25 +10,23 @@ import css from 'styled-jsx/css';
 export default function Home() {
   return (
     <>
-      <BaseLayout>
-        <div className="index_wrapper">
-          <div className="index_mainimg">
-            <Image src={Mainimg} alt="mainimg" className="mainimg" />
-          </div>
-          <div className="index_course">
-            <Course />
-          </div>
-          <div className="index_carousel">
-            <Carousel />
-          </div>
-          <div className="index_slider">
-            <Slider />
-          </div>
-          <div className="index_fixedsection">
-            <FixedSection />
-          </div>
+      <div className="index_wrapper">
+        <div className="index_mainimg">
+          <Image src={Mainimg} alt="mainimg" className="mainimg" />
         </div>
-      </BaseLayout>
+        <div className="index_course">
+          <Course />
+        </div>
+        <div className="index_carousel">
+          <Carousel />
+        </div>
+        <div className="index_slider">
+          <Slider />
+        </div>
+        <div className="index_fixedsection">
+          <FixedSection />
+        </div>
+      </div>
       <style jsx>{index}</style>
       <style global jsx>{`
         .mainimg {

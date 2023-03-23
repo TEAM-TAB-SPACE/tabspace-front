@@ -5,20 +5,6 @@ import variables from '../../styles/variables.module.scss';
 
 const { Content } = Layout;
 
-const layoutStyle = {
-  margin: '0 auto',
-  maxWidth: '1073px',
-  width: '100%',
-  background: 'transparent',
-};
-
-const contentStyle = {
-  margin: '50px 16px',
-  minHeight: 120,
-  lineHeight: '120px',
-  color: variables.black,
-};
-
 type DashboardItemName =
   | 'greeting'
   | 'latest'
@@ -41,6 +27,19 @@ interface DashboardLayoutProps {
 
 function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
   const { isMobile, isTablet } = useMediaQueryState();
+
+  const layoutStyle = {
+    margin: isMobile ? '0 16px' : '0 70px',
+    maxWidth: '1073px',
+    background: 'transparent',
+  };
+
+  const contentStyle = {
+    margin: '50px 16px',
+    minHeight: 120,
+    lineHeight: '120px',
+    color: variables.black,
+  };
 
   const {
     greeting,

@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import css from 'styled-jsx/css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -66,10 +65,9 @@ const login = css`
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     width: 250px;
-    height: 350px;
+    height: 320px;
     position: relative;
-    margin: 0 auto;
-    top: 200px;
+    margin: 100px auto;
     .login__wrap {
       position: absolute;
       display: flex;
@@ -93,13 +91,13 @@ const login = css`
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 30px;
+        margin-top: 20px;
         width: 187px;
         height: 38px;
         color: #ffffff;
         background: #722ed1;
         border: none;
-        border-radius: 2px;
+        border-radius: 5px;
       }
     }
   }
