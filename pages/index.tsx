@@ -4,39 +4,51 @@ import Mainimg from '../public/images/img1.jpg';
 import Course from '../components/layout/Course';
 import Carousel from '../components/layout/Carousel';
 import Slider from '../components/layout/Slider';
-import FixedSection from '../components/layout/ FixedSection';
+import FixedSection from '../components/layout/FixedSection';
 import css from 'styled-jsx/css';
 
 export default function Home() {
   return (
-    <BaseLayout>
-      <div className="index_mainimg">
-        <Image src={Mainimg} alt="mainimg" className="mainimg" />
-      </div>
+    <>
+      <BaseLayout>
+        <div className="index_wrapper">
+          <div className="index_mainimg">
+            <Image src={Mainimg} alt="mainimg" className="mainimg" />
+          </div>
+          <div className="index_course">
+            <Course />
+          </div>
+          <div className="index_carousel">
+            <Carousel />
+          </div>
+          <div className="index_slider">
+            <Slider />
+          </div>
+          <div className="index_fixedsection">
+            <FixedSection />
+          </div>
+        </div>
+      </BaseLayout>
+      <style jsx>{index}</style>
       <style global jsx>{`
         .mainimg {
           width: 100%;
           height: 100%;
         }
       `}</style>
-      <div className="index_course">
-        <Course />
-      </div>
-      <div className="index_carousel">
-        <Carousel />
-      </div>
-      <div className="index_slider">
-        <Slider />
-      </div>
-      <div className="index_fixedsection">
-        <FixedSection />
-      </div>
-      <style jsx>{index}</style>
-    </BaseLayout>
+    </>
   );
 }
 
 const index = css`
+  .index_wrapper {
+    padding: 0 70px;
+  }
+  @media (max-width: 500px) {
+    .index_wrapper {
+      padding: 0 16px;
+    }
+  }
   .index_top {
     width: 1440px;
     height: 568px;
@@ -160,4 +172,3 @@ const index = css`
     border-radius: 50%;
   }
 `;
-

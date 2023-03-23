@@ -44,29 +44,39 @@ export default function Footer() {
 const footer = css`
   .footer_container {
     display: flex;
-    background-color: #330b52;
-    width: 1440px;
-    height: 292px;
     justify-content: space-around;
+    width: 100%;
+    padding: 30px 70px;
+    background-color: #330b52;
     align-items: center;
   }
   .footer_title {
     color: white;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 16px;
     line-height: 24px;
   }
   .footer_text {
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 22px;
     margin-top: 10px;
   }
   .footerimg_container {
-    margin-top: 10px;
+    margin: 20px auto 0;
     width: 134px;
     height: 24px;
     display: flex;
     justify-content: space-between;
+  }
+  @media (max-width: 700px) {
+    .footer_container {
+      display: block;
+      text-align: center;
+    }
+    .footer_second_box,
+    .footer_third_box {
+      margin-top: 50px;
+    }
   }
 `;

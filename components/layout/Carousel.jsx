@@ -13,7 +13,7 @@ function NextArrow(props) {
   const { onClick } = props;
   return (
     <div
-      style={{ position: 'absolute', top: -110, right: 20 }}
+      style={{ position: 'absolute', top: -110, right: 0 }}
       className="rightbtn"
     >
       <Image
@@ -32,7 +32,7 @@ function PrevArrow(props) {
   const { onClick } = props;
   return (
     <div
-      style={{ position: 'absolute', top: -110, right: 90 }}
+      style={{ position: 'absolute', top: -110, right: 70 }}
       className="leftbtn"
     >
       <Image
@@ -56,30 +56,18 @@ export default class Carousel extends Component {
       variableWidth: true,
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,
-
+      accessibility: true,
       responsive: [
         {
           breakpoint: 834,
           settings: {
-            infinite: true,
-
             slidesToShow: 2,
-            slidesToScroll: 1,
-            // slidesPerRow: 2,
-            nextArrow: <NextArrow />,
-            prevArrow: <PrevArrow />,
           },
         },
         {
           breakpoint: 500,
           settings: {
-            infinite: true,
-
             slidesToShow: 1,
-            slidesToScroll: 1,
-            // slidesPerRow: 2,
-            nextArrow: <NextArrow />,
-            prevArrow: <PrevArrow />,
           },
         },
       ],
@@ -130,7 +118,7 @@ export default class Carousel extends Component {
               </div>
               <p className="carousel_mid_text">
                 같이 일하고 싶은 개발자가 되고 싶으신 예비 개발자들 분들께
-                코드스쿼드 마스터즈 코스를 추천합니다
+                탭스페이스를 추천합니다
               </p>
             </div>
             <div className="carousel_long_slide" style={{ width: 250 }}>
@@ -179,98 +167,66 @@ export default class Carousel extends Component {
   }
 }
 const Global = createGlobalStyle`
-    .slick-slide {
-      margin-right: 80px;
-    }
-    @media (max-width: 834px) {
-      .slick-slide {
-        margin-right: 70px;
-      }
-  
-    }
+  .slick-slide {
+      margin-right: 30px;
+  }
+  .carousel_container {
+    .slick-track {
+      width: 5000px;
+      height: 400px;
+      overflow: hidden;
+    }  
     @media (max-width: 500px) {
-      .slick-slide {
-        margin-right: 90px;
-
-      }
-      .slick-track {
-        margin-left: 16px;
-      }
       .rightbtn {
-        margin-top: 230px; 
-        margin-right: 45px;
+          left: 75%;
+          transform: translateX(-50%);
+          margin-top: 240px; 
       }
       .leftbtn {
-        margin-top: 230px; 
-        margin-right: 45px;
+        left: 50%;
+        transform: translateX(-40%);
+        margin-top: 240px; 
       }
-      }
+    }
+  }
 `;
 
 const carousel = css`
-  .carousel_container {
-  }
   .carousel_box {
     margin-bottom: 56px;
   }
   .carousel_text {
     font-weight: 400;
     font-size: 24px;
-    margin-left: 70px;
     margin-top: 150px;
   }
   .carousel_title {
     font-weight: 700;
     font-size: 40px;
-    margin-left: 70px;
     margin-top: 24px;
   }
   .carousel_long_slide {
     border: 1px solid #a1aebf;
     border-radius: 4px;
-    padding: 24px;
-    height: 250px;
+    padding: 20px;
   }
   .carousel_shot_slide {
     border: 1px solid #a1aebf;
     border-radius: 4px;
-    padding: 24px;
-    height: 130px;
+    padding: 20px;
   }
   .carousel_mid_profile_title {
     display: flex;
     align-items: center;
   }
   .carousel_mid_title {
-    margin-left: 9px;
+    margin-left: 10px;
     font-weight: bold;
+    line-height: 120%;
   }
   .carousel_mid_text {
     margin-top: 16px;
     letter-spacing: 0.02em;
     line-height: 150%;
-  }
-  .carousel_slider_container {
-    width: 90%;
-    margin: 0 auto;
-  }
-  @media (max-width: 834px) {
-    .carousel_long_slide {
-      height: 330px;
-    }
-    .carousel_shot_slide {
-      height: 200px;
-    }
-  }
-  @media (max-width: 500px) {
-    .carousel_long_slide {
-      height: 250px;
-    }
-    .carousel_shot_slide {
-      height: 130px;
-    }
-    .carousel_box {
-      margin-left: -30px;
-    }
   }
 `;

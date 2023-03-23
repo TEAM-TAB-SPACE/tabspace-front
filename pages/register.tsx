@@ -164,7 +164,7 @@ export default function Register() {
           justify-content: center;
           align-items: center;
           width: 200px;
-          height: 38px;
+          height: 30px;
           color: #ffffff;
           background-color: #722ed1;
           font-size: 0.8rem;
