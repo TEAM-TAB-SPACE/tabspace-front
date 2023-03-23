@@ -23,7 +23,7 @@ function DashboardMission() {
 
   useEffect(() => {
     setMission(missions);
-  }, [missions]);
+  }, [missions, setMission]);
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;

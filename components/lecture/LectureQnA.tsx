@@ -36,7 +36,7 @@ function LectureQnA() {
     if (data) {
       setCurrentLectureComments(data);
     }
-  }, [data]);
+  }, [data, setCurrentLectureComments]);
 
   const comments = data;
 

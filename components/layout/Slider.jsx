@@ -55,6 +55,7 @@ export default class Sliders extends Component {
     };
 
     return (
+      // eslint-disable-next-line react/jsx-filename-extension
       <div className="slider_container">
         <div className="slider_box">
           <p className="slider_text">탭스페이스와 함께하는</p>
