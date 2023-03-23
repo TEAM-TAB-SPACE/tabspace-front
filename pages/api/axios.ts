@@ -10,14 +10,38 @@ export const axiosInstance = axios.create({
 });
 
 export const setAxiosAccessToken = (axiosInstance: Axios, access: string) => {
-  axiosInstance.defaults.headers.common['Authorization'] = access;
+  axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access}`;
   return axiosInstance;
 };
 
 export const callGetApi =
   (axios: Axios) => async (url: string, payload: any) => {
     try {
-      const { data } = await axios.get(url, payload);
+      const { data } = payload
+        ? await axios.get(url, { params: payload })
+        : await axios.get(url);
+      return data;
+    } catch (error) {
+      if (error instanceof Error) return error;
+      return String(error);
+    }
+  };
+
+export const callPostApi =
+  (axios: Axios) => async (url: string, payload: any) => {
+    try {
+      const { data } = await axios.post(url, payload);
+      return data;
+    } catch (error) {
+      if (error instanceof Error) return error;
+      return String(error);
+    }
+  };
+
+export const callPutApi =
+  (axios: Axios) => async (url: string, payload: any) => {
+    try {
+      const { data } = await axios.put(url, payload);
       return data;
     } catch (error) {
       if (error instanceof Error) return error;

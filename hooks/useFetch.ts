@@ -7,24 +7,34 @@ import {
   callDeleteApi,
   axiosInstance,
   setAxiosAccessToken,
+  callPostApi,
+  callPutApi,
 } from '../pages/api/axios';
 import { sleep } from '../utils/time';
 
 export type RefetchKey = 'stale' | 'fresh';
 
-type FetchHook = (
-  url?: string,
-  payload?: any,
-  refetchKeyAtom?: RecoilState<RefetchKey>,
-) => {
+export type ApiCall = (url: string, payload: any) => Promise<any>;
+
+interface FetchParams {
+  url?: string;
+  payload?: any;
+  refetchKeyAtom?: RecoilState<RefetchKey>;
+}
+
+type FetchHook = (params?: FetchParams) => {
   isLoading: boolean;
   data: any;
   error: any;
-  get: (url: string, payload: any) => Promise<any>;
-  delete: (url: string, payload: any) => Promise<any>;
+  get: ApiCall;
+  post: ApiCall;
+  put: ApiCall;
+  delete: ApiCall;
 };
 
-const useFetch: FetchHook = (url, payload, refetchKeyAtom) => {
+const useFetch: FetchHook = (params = {}) => {
+  const { url, payload, refetchKeyAtom } = params;
+
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [error, setError] = useState('{}');
@@ -40,6 +50,8 @@ const useFetch: FetchHook = (url, payload, refetchKeyAtom) => {
 
   const client = {
     get: callGetApi(axios),
+    post: callPostApi(axios),
+    put: callPutApi(axios),
     delete: callDeleteApi(axios),
   };
 

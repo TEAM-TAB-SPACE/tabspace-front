@@ -6,7 +6,7 @@ import { TodayLectureSingleData } from '../../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
 function DashboardToday() {
-  const { isLoading, data } = useFetch(API_URL_DASHBOARD.TODAY);
+  const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.TODAY });
   const todayLectures: TodayLectureSingleData[] = data;
 
   if (isLoading)

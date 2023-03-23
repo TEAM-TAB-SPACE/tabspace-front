@@ -1,46 +1,53 @@
+import useFetch from './useFetch';
 import { CalendarCellData } from '../store/dashboard';
+import { API_URL_OTHER } from '../pages/api/other';
 
 const WEEK_LENGTH = 5;
 
-function useAttendance(attendanceData: { startDate: any; attendance: any }) {
-  const { startDate, attendance } = attendanceData;
+function useAttendance(attendance = '') {
+  const { data } = useFetch({ url: API_URL_OTHER.WEEKDAYS });
 
-  let year = startDate?.getYear();
-  let month = startDate?.getMonth();
-  let date = startDate?.getDate();
-  const day = startDate?.getDay();
+  const year = new Date().getFullYear();
+  const month = Number(data?.month) - 1;
+  const days = data ? data.days.split(',').map(Number) : [];
+  const day = new Date(year, month - 1, days[0]).getDay();
 
-  const lastDate = new Date(year, month, 0);
   const firstWeekLenght = WEEK_LENGTH - day;
-
-  const nextDate = () => {
-    date += 1;
-    if (date === lastDate) month += 1;
-  };
 
   const isHoliday = (state: string) => state === 'h';
   const isFriday = (index: number) => index % WEEK_LENGTH === firstWeekLenght;
 
+  const addWeekendCells = (calendarCell: CalendarCellData) => {
+    const { month, date } = calendarCell;
+
+    const weekendCells = [false, false].map((state, index) => {
+      const currentDate = date + index + 1;
+      return { month: month, date: currentDate, state };
+    });
+
+    return [calendarCell, ...weekendCells];
+  };
+
   const calendarData = attendance
     .split('')
     .reduce(
-      (calendarData: number[], attendancePerDay: string, index: number) => {
+      (
+        calendarData: CalendarCellData[],
+        attendancePerDay: string,
+        index: number,
+      ) => {
+        const date = days[index];
         const state = isHoliday(attendancePerDay)
           ? false
           : !!Number(attendancePerDay);
+
         const calendarCell: CalendarCellData = { month, date, state };
 
         if (isFriday(index)) {
-          const weekendCells = [0, 0].map(state => {
-            nextDate();
-            return { month, date, state };
-          });
-
-          nextDate();
-          return [...calendarData, calendarCell, ...weekendCells];
+          const calendarCells = addWeekendCells(calendarCell);
+          return [...calendarData, ...calendarCells];
         }
 
-        nextDate();
         return [...calendarData, calendarCell];
       },
       [],

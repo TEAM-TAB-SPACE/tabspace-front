@@ -3,11 +3,15 @@ import Comments from '../comment/Comments';
 import CommentForm from '../comment/CommentForm';
 import variables from '../../styles/variables.module.scss';
 import useFetch from '../../hooks/useFetch';
-import { commentRefetchKeyAtom } from '../../store/comment';
+import {
+  commentRefetchKeyAtom,
+  currentLectureCommentsAtom,
+} from '../../store/comment';
 import { API_URL_LECTURE } from '../../pages/api/lecture';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { currentLectureSelector } from '../../store/lecture';
+import { useEffect } from 'react';
 
 const { Content } = Layout;
 
@@ -16,12 +20,23 @@ function LectureQnA() {
   const { videoId } = router.query;
 
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
+  const lectureId = selectedLecture?.id;
 
-  const { data } = useFetch(
-    API_URL_LECTURE.COMMENTS_READ,
-    { id: selectedLecture?.id },
-    commentRefetchKeyAtom,
+  const setCurrentLectureComments = useSetRecoilState(
+    currentLectureCommentsAtom,
   );
+
+  const { data } = useFetch({
+    url: API_URL_LECTURE.COMMENTS_REVIEWS,
+    payload: { id: lectureId },
+    refetchKeyAtom: commentRefetchKeyAtom,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setCurrentLectureComments(data);
+    }
+  }, [data]);
 
   const comments = data;
 
@@ -34,7 +49,7 @@ function LectureQnA() {
         }}
       >
         <Comments {...{ depth: 1, comments }} />
-        <CommentForm />
+        <CommentForm {...{ lectureId }} />
       </Content>
       <style jsx global>{`
         .lecture__qna {

@@ -3,8 +3,36 @@ export const Comments = () => {
 
   const getComments = () => comments;
 
+  const addComment = (comment: string) => {
+    comments = [
+      ...comments,
+      {
+        id: Math.random() * 100,
+        user: {
+          realname: '박찬양',
+        },
+        comment: comment,
+        replies: [],
+      },
+    ];
+  };
+
+  const editComment = (id: number, text: string) => {
+    comments = comments.map(comment => {
+      if (comment.id === id) return { ...comment, comment: text };
+      return comment;
+    });
+  };
+
+  const deleteComment = (id: number) => {
+    comments = comments.filter(comment => comment.id !== id);
+  };
+
   return {
     getComments,
+    addComment,
+    editComment,
+    deleteComment,
   };
 };
 

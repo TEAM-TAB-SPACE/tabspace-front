@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Input } from 'antd';
 import { Button } from 'antd';
@@ -9,45 +8,49 @@ import { API_URL_LECTURE } from '../../pages/api/lecture';
 
 const { TextArea } = Input;
 
-interface CommentFormProps {
-  lectureId: number;
+interface ReplyFormProps {
+  commentId: number;
+  hideReplyForm?: () => void;
 }
 
-function CommentForm({ lectureId }: CommentFormProps) {
+function ReplyForm({ commentId, hideReplyForm }: ReplyFormProps) {
   const fetch = useFetch();
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
   const onSubmit = (e: React.SyntheticEvent) => {
     const form = e.target as HTMLFormElement;
-    const textarea = form.children.namedItem('comment') as HTMLTextAreaElement;
+    const textarea = form.children.namedItem('reply') as HTMLTextAreaElement;
     e.preventDefault();
 
-    fetch.post(API_URL_LECTURE.COMMENTS_DEPTH1, {
-      id: lectureId,
+    if (!textarea.value) return;
+
+    fetch.post(API_URL_LECTURE.COMMENTS_DEPTH2, {
+      lecture_comment: commentId,
       comment: textarea.value,
     });
 
     textarea.value = '';
+    hideReplyForm && hideReplyForm();
     setCommentRefetchKey('stale');
   };
 
   return (
     <>
-      <form className="comment__form" onSubmit={onSubmit}>
+      <form className="reply__form" onSubmit={onSubmit}>
         <TextArea
           maxLength={1000}
-          name="comment"
+          name="reply"
           className="form__textarea"
-          style={{ marginTop: '20px', height: '120px', resize: 'none' }}
-          placeholder="함께하는 동료들과 의견을 나눠보세요."
+          style={{ marginTop: '20px', height: '80px', resize: 'none' }}
         />
         <Button
           htmlType="submit"
+          size="small"
           type="primary"
           className="form__submitButton"
-          style={{ width: '100%', height: '40px', marginTop: '20px' }}
+          style={{ margin: '10px 0 30px calc(100% - 70px)' }}
         >
-          등록하기
+          답글 등록
         </Button>
       </form>
       <style jsx global>{`
@@ -62,4 +65,4 @@ function CommentForm({ lectureId }: CommentFormProps) {
   );
 }
 
-export default CommentForm;
+export default ReplyForm;

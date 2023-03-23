@@ -6,7 +6,7 @@ import useFetch from '../../hooks/useFetch';
 import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
 
 function DashboardLatest() {
-  const { isLoading, data } = useFetch(API_URL_DASHBOARD.LATEST);
+  const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.LATEST });
   const { videoId } = data ? data : { videoId: '' };
 
   if (isLoading)

@@ -1,33 +1,88 @@
+import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import IndicatorIcon from './IndicatorIcon';
-import { Popover, Space } from 'antd';
+import EditModal from './modal/EditModal';
+import DeleteModal from './modal/DeleteModal';
+import IndicatorPopover from './IndicatorPopover';
+import usePopover from '../../hooks/usePopover';
+import useModal from '../../hooks/useModal';
+import useComment from '../../hooks/useComment';
+import { commentRefetchKeyAtom } from '../../store/comment';
 
-const content = (
-  <>
-    <button className="indicator__item">수정하기</button>
-    <button className="indicator__item">삭제하기</button>
-  </>
-);
+interface UserBadgeIndicatorProps {
+  depth: 1 | 2;
+  commentId: number;
+}
 
-function UserBadgeIndicator() {
+function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
+  const { isPopoverOpen, showPopover } = usePopover();
+  const { isModalOpen, showModal, closeModal } = useModal();
+  const [modalType, setModalType] = useState('');
+  const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
+
+  const { deleteComment } = useComment(depth);
+
+  const onClickDelete = () => {
+    deleteComment(commentId);
+    closeModal();
+    setCommentRefetchKey('stale');
+  };
+
+  const onPopoverItemClick = (type: 'edit' | 'delete') => () => {
+    setModalType(type);
+    showModal();
+  };
+
   return (
     <>
-      <Space className="userBadge__indicator" wrap>
-        <Popover placement="left" content={content} trigger="focus">
-          <button className="indicator__button">
-            <IndicatorIcon width="20px" height="20px" />
-          </button>
-        </Popover>
-      </Space>
+      <div className="userBadge__indicator">
+        <button
+          className="indicator__button"
+          onClick={() => {
+            showPopover();
+          }}
+        >
+          <IndicatorIcon width="20px" height="20px" />
+        </button>
+        <IndicatorPopover
+          onItemClick={onPopoverItemClick}
+          className={isPopoverOpen ? 'indicator__popover_active' : ''}
+        />
+        {modalType === 'edit' ? (
+          <EditModal
+            {...{ commentId, depth, isModalOpen, onClickEdit: closeModal }}
+          />
+        ) : (
+          <DeleteModal {...{ isModalOpen, onClickDelete }} />
+        )}
+      </div>
       <style jsx global>{`
-        .indicator__button,
-        .indicator__item {
-          display: flex;
-          border: none;
-          background-color: transparent;
-        }
+        .indicator {
+          &__button {
+            display: flex;
+            border: none;
+            background-color: transparent;
+          }
 
-        .indicator__item {
-          padding: 7px;
+          &__popover {
+            display: none;
+            position: absolute;
+            top: -4px;
+            right: 30px;
+            width: 100px;
+            padding: 7px 5px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+            &_active {
+              display: block;
+            }
+
+            .popover__item:not(:last-child) {
+              margin-bottom: 5px;
+            }
+          }
         }
       `}</style>
     </>
