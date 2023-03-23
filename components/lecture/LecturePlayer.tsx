@@ -12,7 +12,7 @@ interface LecturePlayerProps {
 }
 
 interface YoutubeEvent {
-  data: any;
+  data: unknown;
   target: { getCurrentTime: () => number };
 }
 
@@ -47,7 +47,7 @@ function LecturePlayer({ videoId, lectureroomId }: LecturePlayerProps) {
     }
 
     return setCurrentTime(0);
-  }, [playTime]);
+  }, [client, currentTime, lectureroomId, playTime]);
 
   const onVideoStateChange = (e: YoutubeEvent) => {
     const state = e.data;

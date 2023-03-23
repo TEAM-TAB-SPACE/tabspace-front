@@ -17,7 +17,7 @@ export const setAxiosAccessToken = (axiosInstance: Axios, access: string) => {
 };
 
 export const callGetApi =
-  (axios: Axios) => async (url: string, payload: any) => {
+  (axios: Axios) => async (url: string, payload: unknown) => {
     try {
       const { data } = payload
         ? await axios.get(url, { params: payload })
@@ -30,7 +30,7 @@ export const callGetApi =
   };
 
 export const callPostApi =
-  (axios: Axios) => async (url: string, payload: any) => {
+  (axios: Axios) => async (url: string, payload: unknown) => {
     try {
       const { data } = await axios.post(url, payload);
       return data;
@@ -41,7 +41,7 @@ export const callPostApi =
   };
 
 export const callPutApi =
-  (axios: Axios) => async (url: string, payload: any) => {
+  (axios: Axios) => async (url: string, payload: unknown) => {
     try {
       const { data } = await axios.put(url, payload);
       return data;
@@ -52,7 +52,7 @@ export const callPutApi =
   };
 
 export const callDeleteApi =
-  (axios: Axios) => async (url: string, payload: any) => {
+  (axios: Axios) => async (url: string, payload: unknown) => {
     try {
       const { data } = await axios.delete(url, { data: payload });
       return data;
