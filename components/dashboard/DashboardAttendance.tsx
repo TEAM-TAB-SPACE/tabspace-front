@@ -5,8 +5,9 @@ import useFetch from '../../hooks/useFetch';
 import useAttendance from '../../hooks/useAttendance';
 import { CalendarCellData } from '../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
+import type { Dayjs } from 'dayjs';
 
-const dateCellRender = (listData: CalendarCellData[]) => (value: any) => {
+const dateCellRender = (listData: CalendarCellData[], value: Dayjs) => {
   const style: React.CSSProperties = {
     position: 'absolute',
     top: 0,
@@ -40,7 +41,7 @@ function DashboardAttendance() {
       <div className="dashboard__attendance">
         <Calendar
           fullscreen={false}
-          dateCellRender={dateCellRender(calendarData)}
+          dateCellRender={value => dateCellRender(calendarData, value)}
         />
       </div>
       <style jsx global>{`

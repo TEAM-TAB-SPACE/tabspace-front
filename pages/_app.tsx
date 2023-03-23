@@ -44,11 +44,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ConfigProvider locale={locale}>
           <Head>
             <title>TAP SPACE</title>
-            <Script
-              src="https://developers.kakao.com/sdk/js/kakao.js"
-              onLoad={kakaoInit}
-            ></Script>
           </Head>
+          <Script
+            src="https://developers.kakao.com/sdk/js/kakao.js"
+            onLoad={kakaoInit}
+          ></Script>
           <Reset />
           <BaseLayout>
             <Component {...{ ...pageProps }} />

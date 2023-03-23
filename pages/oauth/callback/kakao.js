@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { axiosInstance } from '../../api/axios';
 import { setCookie } from 'cookies-next';
 
-const redirectHandler = () => {
+const RedirectHandler = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
@@ -18,7 +18,7 @@ const redirectHandler = () => {
       sessionStorage.removeItem('inputs');
       router.push('/dashboard');
     }
-  }, [code]);
+  }, [code, router]);
 
   const registerKaKao = async (code, inputData) => {
     await axiosInstance
@@ -42,4 +42,4 @@ const redirectHandler = () => {
   };
 };
 
-export default redirectHandler;
+export default RedirectHandler;

@@ -92,7 +92,7 @@ export default class Carousel extends Component {
                   style={{ borderRadius: '50%' }}
                 />
                 <p className="carousel_mid_title">
-                  "내가 선택한 자율에 대한 책임을 키우는 곳"
+                  &quot;내가 선택한 자율에 대한 책임을 키우는 곳&quot;
                 </p>
               </div>
               <p className="carousel_mid_text">
@@ -113,7 +113,8 @@ export default class Carousel extends Component {
                   style={{ borderRadius: '50%' }}
                 />
                 <p className="carousel_mid_title">
-                  "동료를 존중하며 함께 자라는 방법을 배울 수 있습니다"
+                  &quot;동료를 존중하며 함께 자라는 방법을 배울 수
+                  있습니다&quot;
                 </p>
               </div>
               <p className="carousel_mid_text">
@@ -131,7 +132,8 @@ export default class Carousel extends Component {
                   style={{ borderRadius: '50%' }}
                 />
                 <p className="carousel_mid_title">
-                  “모든 커리큘럼이 개발자로서의 성장에 큰 도움이 됐습니다”
+                  &quot;모든 커리큘럼이 개발자로서의 성장에 큰 도움이
+                  됐습니다&quot;
                 </p>
               </div>
               <p className="carousel_mid_text">
@@ -151,7 +153,7 @@ export default class Carousel extends Component {
                   style={{ borderRadius: '50%' }}
                 />
                 <p className="carousel_mid_title">
-                  “다양한 경험과 지식을 얻을 수 있는 부트캠프”
+                  &quot;다양한 경험과 지식을 얻을 수 있는 부트캠프&quot;
                 </p>
               </div>
               <p className="carousel_mid_text">
