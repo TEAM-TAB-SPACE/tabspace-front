@@ -1,13 +1,17 @@
-interface DashboardGreeting {
-  username: string;
-}
+import { useEffect, useState } from 'react';
 
-function DashboardGreeting({ username }: DashboardGreeting) {
+function DashboardGreeting() {
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    setUserName(localStorage.getItem('realname') || '');
+  }, []);
+
   return (
     <div>
       안녕하세요
       <br />
-      {username}님!
+      {userName}님!
     </div>
   );
 }
