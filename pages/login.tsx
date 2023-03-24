@@ -67,7 +67,7 @@ const login = css`
     width: 250px;
     height: 320px;
     position: relative;
-    margin: 100px auto;
+    margin: 190px auto;
     .login__wrap {
       position: absolute;
       display: flex;
