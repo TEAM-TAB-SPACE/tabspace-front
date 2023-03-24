@@ -30,6 +30,7 @@ function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
 
   const layoutStyle = {
     margin: isMobile ? '0 16px' : '0 auto',
+    padding: isMobile ? '0' : '0 70px',
     maxWidth: '1073px',
     background: 'transparent',
   };
