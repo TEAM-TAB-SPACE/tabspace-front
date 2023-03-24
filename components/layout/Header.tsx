@@ -1,39 +1,45 @@
 import { useEffect, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
-import { LogoutOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Badge, Button } from 'antd';
 import { axiosInstance } from '../../pages/api/axios';
-import { deleteCookie, getCookie } from 'cookies-next';
+import { Badge, Button } from 'antd';
+import { LogoutOutlined, NotificationOutlined } from '@ant-design/icons';
+import { CookieValueTypes, deleteCookie, getCookie } from 'cookies-next';
 import Link from 'next/link';
 import css from 'styled-jsx/css';
 import Logo from '../../public/assets/mainLogo.svg';
+import { loginStateAtom, userAtom } from '../../store/user';
 import { API_URL_AUTH } from '../../pages/api/auth';
 
 export default function Header() {
   const router = useRouter();
   const accessToken = getCookie('accessToken');
+  const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
 
-  const [username, setUserName] = useState('');
+  const user = useRecoilValue(userAtom);
+  const [username, setUserName] = useState(user.realname);
 
   useEffect(() => {
+    //로그인 페이지부터가 아닌 다른 페이지로 바로 진입한 경우를 위함
     const username = localStorage.getItem('realname');
     if (username) setUserName(username);
-  }, []);
+  }, [user]);
 
   // 로그아웃
-  const Logout = () => {
-    const token = accessToken;
+  const Logout = (accessToken: CookieValueTypes) => {
     try {
       axiosInstance.post(API_URL_AUTH.LOGOUT, null, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
       localStorage.removeItem('realname');
       localStorage.removeItem('id');
+
       router.push('/');
+      setIsLogin(false);
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +50,7 @@ export default function Header() {
       <Link href="/">
         <Logo />
       </Link>
-      {!username ? (
+      {!isLogin ? (
         <div className="header__auth">
           <div className="header__login">
             <Link href="/login">로그인</Link>
@@ -64,21 +70,22 @@ export default function Header() {
           <Button
             size="middle"
             type="text"
-            onClick={Logout}
+            onClick={() => Logout(accessToken)}
             style={{ padding: '4px 2px' }}
           >
             <LogoutOutlined style={{ fontSize: 16 }} />
           </Button>
           <Button
-            href="/dashboard"
             size="large"
             style={{ height: '30px', padding: '2px 10px 0' }}
+            onClick={() => {
+              router.push('/dashboard');
+            }}
           >
             대시보드
           </Button>
         </div>
       )}
-
       <style jsx>{header}</style>
       <style global jsx>{`
         a {
