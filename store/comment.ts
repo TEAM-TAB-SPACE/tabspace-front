@@ -4,6 +4,7 @@ import { RefetchKey } from '../hooks/useFetch';
 export interface CommentSingleData {
   id: number;
   user: {
+    id: number;
     realname: string;
   };
   comment: string;
