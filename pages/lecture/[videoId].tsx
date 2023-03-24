@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { Layout } from 'antd';
 import { useSetRecoilState } from 'recoil';
+import { GetServerSideProps } from 'next';
 import LectureContent from '../../components/lecture/LectureContent';
 import Spinner from '../../components/common/Spin';
 import useFetch from '../../hooks/useFetch';
-import { allLectureAtom } from '../../store/lecture';
-import { API_URL_LECTURE } from '../api/lecture';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
+import { allLectureAtom } from '../../store/lecture';
+import { cookieStringToObject } from '../../utils/cookie';
+import { API_URL_LECTURE } from '../api/lecture';
 
 const { Content } = Layout;
 
@@ -43,3 +45,20 @@ function Lecture() {
 }
 
 export default Lecture;
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const cookies = cookieStringToObject(context.req?.headers?.cookie || '');
+
+  if (!cookies.accessToken) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

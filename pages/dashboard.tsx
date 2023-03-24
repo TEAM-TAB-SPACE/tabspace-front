@@ -1,3 +1,4 @@
+import { GetServerSideProps } from 'next';
 import DashboardLayout from '../components/dashboard/DashboardLayout';
 import DashboardGreeting from '../components/dashboard/DashboardGreeting';
 import DashboardLatest from '../components/dashboard/DashboardLatest';
@@ -6,6 +7,7 @@ import DashboardMissionSubmit from '../components/dashboard/dashboardMission/Das
 import DashboardAttendance from '../components/dashboard/DashboardAttendance';
 import DashboardMission from '../components/dashboard/dashboardMission/DashboardMission';
 import DashboardGrowth from '../components/dashboard/dashboardGrowth/DashboardGrowth';
+import { cookieStringToObject } from '../utils/cookie';
 
 const dashboardItems = {
   greeting: { title: '', item: <DashboardGreeting username="모찌" /> },
@@ -22,3 +24,20 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const cookies = cookieStringToObject(context.req?.headers?.cookie || '');
+
+  if (!cookies.accessToken) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
