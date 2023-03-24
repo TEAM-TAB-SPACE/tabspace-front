@@ -9,6 +9,7 @@ import {
   setAxiosAccessToken,
   callPostApi,
   callPutApi,
+  setAxiosInterCeptors,
 } from '../pages/api/axios';
 import { sleep } from '../utils/time';
 
@@ -47,6 +48,7 @@ const useFetch: FetchHook = (params = {}) => {
   const axios = axiosInstance;
 
   if (typeof token === 'string' && token) setAxiosAccessToken(axios, token);
+  setAxiosInterCeptors(axios);
 
   const client = {
     get: callGetApi(axios),

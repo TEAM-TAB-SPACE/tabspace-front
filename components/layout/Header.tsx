@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
-import { axiosInstance } from '../../pages/api/axios';
+import { axiosInstance, setAxiosInterCeptors } from '../../pages/api/axios';
 import { Badge, Button } from 'antd';
 import { LogoutOutlined, NotificationOutlined } from '@ant-design/icons';
 import { deleteCookie, getCookie } from 'cookies-next';
@@ -15,6 +15,8 @@ export default function Header() {
 
   const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
   const user = useRecoilValue(userAtom);
+
+  setAxiosInterCeptors(axiosInstance);
 
   // 로그아웃
   const Logout = () => {
