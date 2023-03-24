@@ -10,7 +10,12 @@ import DashboardGrowth from '../components/dashboard/dashboardGrowth/DashboardGr
 import { cookieStringToObject } from '../utils/cookie';
 
 const dashboardItems = {
-  greeting: { title: '', item: <DashboardGreeting username="모찌" /> },
+  greeting: {
+    title: '',
+    item: (
+      <DashboardGreeting username={localStorage.getItem('realname') || ''} />
+    ),
+  },
   latest: { title: '가장 최근 강의', item: <DashboardLatest /> },
   today: { title: '오늘의 강의', item: <DashboardToday /> },
   attendance: { title: '내 출석', item: <DashboardAttendance /> },
