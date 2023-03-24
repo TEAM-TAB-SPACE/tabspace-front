@@ -29,7 +29,7 @@ function DashboardLayout({ dashboardItems }: DashboardLayoutProps) {
   const { isMobile, isTablet } = useMediaQueryState();
 
   const layoutStyle = {
-    margin: isMobile ? '0 16px' : '0 70px',
+    margin: isMobile ? '0 16px' : '0 auto',
     maxWidth: '1073px',
     background: 'transparent',
   };

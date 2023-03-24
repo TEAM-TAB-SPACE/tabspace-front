@@ -18,8 +18,8 @@ function Lecture() {
   const setAllLecture = useSetRecoilState(allLectureAtom);
 
   const lectureStyle = {
-    maxWidth: '1074px',
-    margin: isMobile ? '0 16px' : '0 70px',
+    maxWidth: '1300px',
+    margin: isMobile ? '0' : '0 auto',
     backgroundColor: 'transparent',
   };
 
@@ -27,7 +27,7 @@ function Lecture() {
     if (data) {
       setAllLecture(data);
     }
-  }, [data]);
+  }, [data, setAllLecture]);
 
   if (isLoading) {
     return <Spinner />;
