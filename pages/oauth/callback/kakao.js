@@ -24,8 +24,8 @@ const RedirectHandler = () => {
     await axiosInstance
       .post(`/auth/register`, { code, ...inputData })
       .then(({ data }) => {
-        localStorage.setItem('realname', JSON.stringify(data.user.realname));
-        localStorage.setItem('id', JSON.stringify(data.user.id));
+        localStorage.setItem('realname', data.user.realname);
+        localStorage.setItem('id', data.user.id);
 
         setCookie('accessToken', data.tokens.access);
         setCookie('refreshToken', data.tokens.refresh);

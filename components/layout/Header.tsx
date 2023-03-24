@@ -1,53 +1,50 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { LogoutOutlined, NotificationOutlined } from '@ant-design/icons';
+import { Badge, Button } from 'antd';
+import { axiosInstance } from '../../pages/api/axios';
+import { deleteCookie, getCookie } from 'cookies-next';
 import Link from 'next/link';
 import css from 'styled-jsx/css';
 import Logo from '../../public/assets/mainLogo.svg';
-import { useRouter } from 'next/router';
-
-import { deleteCookie, getCookie } from 'cookies-next';
-import { useEffect, useState } from 'react';
-import { axiosInstance } from '../../pages/api/axios';
+import { API_URL_AUTH } from '../../pages/api/auth';
 
 export default function Header() {
   const router = useRouter();
-  const [username, setUsername] = useState(''); //realname
-  const [isLogin, setIsLogin] = useState(false); // refresh
+  const accessToken = getCookie('accessToken');
+
+  const [username, setUserName] = useState('');
+
+  useEffect(() => {
+    const username = localStorage.getItem('realname');
+    if (username) setUserName(username);
+  }, []);
 
   // 로그아웃
-  const Logout = async () => {
-    const token = getCookie('accessToken');
+  const Logout = () => {
+    const token = accessToken;
     try {
-      const response = await axiosInstance.post(`/auth/logout`, null, {
+      axiosInstance.post(API_URL_AUTH.LOGOUT, null, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log('로그아웃성공');
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
+      localStorage.removeItem('realname');
+      localStorage.removeItem('id');
       router.push('/');
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(() => {
-    if (getCookie('accessToken')) {
-      setIsLogin(!isLogin);
-    } else {
-      setIsLogin(false);
-    }
-  }, [getCookie('accessToken')]);
-
-  // 로컬스토리지에서 realname
-  useEffect(() => {
-    const username = localStorage.getItem('realname');
-    if (username) setUsername(username);
-  }, []);
-
   return (
     <header className="header__container">
-      <Logo />
-      {!isLogin ? (
+      <Link href="/">
+        <Logo />
+      </Link>
+      {!username ? (
         <div className="header__auth">
           <div className="header__login">
             <Link href="/login">로그인</Link>
@@ -58,8 +55,27 @@ export default function Header() {
         </div>
       ) : (
         <div className="username__div">
-          <p>{username}님 환영합니다!</p>
-          <button onClick={Logout}>로그아웃</button>
+          <p>{username}님</p>
+          <Button size="middle" type="text" style={{ padding: '4px 2px' }}>
+            <Badge dot>
+              <NotificationOutlined style={{ fontSize: 16 }} />
+            </Badge>
+          </Button>
+          <Button
+            size="middle"
+            type="text"
+            onClick={Logout}
+            style={{ padding: '4px 2px' }}
+          >
+            <LogoutOutlined style={{ fontSize: 16 }} />
+          </Button>
+          <Button
+            href="/dashboard"
+            size="large"
+            style={{ height: '30px', padding: '2px 10px 0' }}
+          >
+            대시보드
+          </Button>
         </div>
       )}
 
@@ -78,7 +94,6 @@ const header = css`
   .header__container {
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
     padding: 24px 70px;
     align-items: center;
   }
@@ -86,30 +101,16 @@ const header = css`
     display: flex;
     flex-direction: row;
   }
-  .header__login {
-    padding: 0 10px;
-  }
+  .header__login,
   .header__register {
     padding: 0 10px;
   }
-
   .username__div {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    gap: 23px;
     height: 34px;
-    p {
-      padding-right: 10px;
-    }
-    button {
-      width: 100px;
-      height: 34px;
-      border: none;
-      border-radius: 5px;
-
-      color: #ffffff;
-      background-color: #722ed1;
-    }
+    font-weight: 500;
   }
   @media (max-width: 768px) {
     .header__container {
