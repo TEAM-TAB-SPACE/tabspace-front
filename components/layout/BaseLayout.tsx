@@ -34,7 +34,7 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
   return (
     <>
       <Header />
-      <div>{children}</div>
+      <div style={{ paddingTop: '70px' }}>{children}</div>
       <Footer />
     </>
   );

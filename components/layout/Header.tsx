@@ -93,10 +93,18 @@ export default function Header() {
 
 const header = css`
   .header__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: #fff;
     display: flex;
     justify-content: space-between;
-    padding: 24px 70px;
+    padding: 15px 70px;
     align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.15);
   }
   .header__auth {
     display: flex;
