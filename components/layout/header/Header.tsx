@@ -1,14 +1,15 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
-import { axiosInstance, setAxiosInterCeptors } from '../../pages/api/axios';
-import { Badge, Button } from 'antd';
-import { LogoutOutlined, NotificationOutlined } from '@ant-design/icons';
+import { axiosInstance, setAxiosInterCeptors } from '../../../pages/api/axios';
 import { deleteCookie, getCookie } from 'cookies-next';
+import { LogoutOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
+import AlarmButton from './AlarmButton';
 import Link from 'next/link';
 import css from 'styled-jsx/css';
-import Logo from '../../public/assets/mainLogo.svg';
-import { loginStateAtom, userAtom } from '../../store/user';
-import { API_URL_AUTH } from '../../pages/api/auth';
+import Logo from '../../../public/assets/mainLogo.svg';
+import { loginStateAtom, userAtom } from '../../../store/user';
+import { API_URL_AUTH } from '../../../pages/api/auth';
 
 export default function Header() {
   const router = useRouter();
@@ -56,11 +57,7 @@ export default function Header() {
       ) : (
         <div className="username__div">
           <p>{user.realname}님</p>
-          <Button size="middle" type="text" style={{ padding: '4px 2px' }}>
-            <Badge dot>
-              <NotificationOutlined style={{ fontSize: 16 }} />
-            </Badge>
-          </Button>
+          <AlarmButton />
           <Button
             size="middle"
             type="text"

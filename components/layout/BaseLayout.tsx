@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { getCookie } from 'cookies-next';
-import Header from './Header';
+import Header from './header/Header';
 import Footer from './Footer';
 import useFetch from '../../hooks/useFetch';
 import { loginStateAtom, userAtom } from '../../store/user';
