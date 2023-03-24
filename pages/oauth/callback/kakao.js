@@ -31,8 +31,6 @@ const RedirectHandler = () => {
         setCookie('accessToken', data.tokens.access);
         setCookie('refreshToken', data.tokens.refresh);
         setUser(data.user);
-        localStorage.setItem('realname', data.user.realname);
-        localStorage.setItem('id', data.user.id);
 
         router.push('/dashboard');
         sessionStorage.removeItem('inputs');

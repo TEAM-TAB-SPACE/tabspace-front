@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
 import { axiosInstance } from '../../pages/api/axios';
 import { Badge, Button } from 'antd';
 import { LogoutOutlined, NotificationOutlined } from '@ant-design/icons';
-import { CookieValueTypes, deleteCookie, getCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import Link from 'next/link';
 import css from 'styled-jsx/css';
 import Logo from '../../public/assets/mainLogo.svg';
@@ -13,30 +12,23 @@ import { API_URL_AUTH } from '../../pages/api/auth';
 
 export default function Header() {
   const router = useRouter();
-  const accessToken = getCookie('accessToken');
+
   const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
-
   const user = useRecoilValue(userAtom);
-  const [username, setUserName] = useState(user.realname);
-
-  useEffect(() => {
-    //로그인 페이지부터가 아닌 다른 페이지로 바로 진입한 경우를 위함
-    const username = localStorage.getItem('realname');
-    if (username) setUserName(username);
-  }, [user]);
 
   // 로그아웃
-  const Logout = (accessToken: CookieValueTypes) => {
+  const Logout = () => {
     try {
+      const accessToken = getCookie('accessToken');
+
       axiosInstance.post(API_URL_AUTH.LOGOUT, null, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+
       deleteCookie('accessToken');
       deleteCookie('refreshToken');
-      localStorage.removeItem('realname');
-      localStorage.removeItem('id');
 
       router.push('/');
       setIsLogin(false);
@@ -61,7 +53,7 @@ export default function Header() {
         </div>
       ) : (
         <div className="username__div">
-          <p>{username}님</p>
+          <p>{user.realname}님</p>
           <Button size="middle" type="text" style={{ padding: '4px 2px' }}>
             <Badge dot>
               <NotificationOutlined style={{ fontSize: 16 }} />
@@ -70,7 +62,7 @@ export default function Header() {
           <Button
             size="middle"
             type="text"
-            onClick={() => Logout(accessToken)}
+            onClick={Logout}
             style={{ padding: '4px 2px' }}
           >
             <LogoutOutlined style={{ fontSize: 16 }} />

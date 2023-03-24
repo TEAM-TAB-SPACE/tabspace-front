@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../../store/user';
 
 function DashboardGreeting() {
-  const [userName, setUserName] = useState('');
-
-  useEffect(() => {
-    setUserName(localStorage.getItem('realname') || '');
-  }, []);
+  const { realname } = useRecoilValue(userAtom);
 
   return (
     <div>
       안녕하세요
       <br />
-      {userName}님!
+      {realname}님!
     </div>
   );
 }
