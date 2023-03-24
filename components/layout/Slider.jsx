@@ -64,22 +64,22 @@ export default class Sliders extends Component {
         <div className="slider_slidecontainer">
           <Slider {...settings}>
             <div>
-              <Image src={Logo1} alt="logo1" style={{ width: 185 }} />
+              <Image src={Logo1} alt="logo1" style={{ width: 185 }} className="logo"/>
             </div>
             <div>
-              <Image src={Logo2} alt="logo2" style={{ width: 185 }} />
+              <Image src={Logo2} alt="logo2" style={{ width: 185 }} className="logo"/>
             </div>
             <div>
-              <Image src={Logo3} alt="logo3" style={{ width: 185 }} />
+              <Image src={Logo3} alt="logo3" style={{ width: 185 }} className="logo"/>
             </div>
             <div>
-              <Image src={Logo4} alt="logo4" style={{ width: 185 }} />
+              <Image src={Logo4} alt="logo4" style={{ width: 185 }} className="logo"/>
             </div>
             <div>
-              <Image src={Logo5} alt="logo5" style={{ width: 185 }} />
+              <Image src={Logo5} alt="logo5" style={{ width: 185 }} className="logo"/>
             </div>
             <div>
-              <Image src={Logo6} alt="logo6" style={{ width: 185 }} />
+              <Image src={Logo6} alt="logo6" style={{ width: 185 }} className="logo"/>
             </div>
           </Slider>
         </div>
@@ -104,5 +104,8 @@ const slider = css`
     font-weight: 700;
     font-size: 40px;
     margin-top: 24px;
+  }
+  .logo {
+    height: 100px;
   }
 `;

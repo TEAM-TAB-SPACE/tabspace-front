@@ -1,6 +1,6 @@
-import BaseLayout from '../components/layout/BaseLayout';
 import Image from 'next/image';
 import Mainimg from '../public/images/img1.jpg';
+import Mainimg2 from '../public/images/img2.jpg';
 import Course from '../components/layout/Course';
 import Carousel from '../components/layout/Carousel';
 import Slider from '../components/layout/Slider';
@@ -12,7 +12,12 @@ export default function Home() {
     <>
       <div className="index_wrapper">
         <div className="index_mainimg">
-          <Image src={Mainimg} alt="mainimg" className="mainimg" />
+          <span className="mainimg">
+            <Image src={Mainimg} alt="mainimg" className='mainimg'/>
+          </span>
+          <span className="mainimg2">
+            <Image src={Mainimg2} alt="mainimg2" className='mainimg2'/>
+          </span>
         </div>
         <div className="index_course">
           <Course />
@@ -33,6 +38,13 @@ export default function Home() {
           width: 100%;
           height: 100%;
         }
+        .mainimg2 {
+          width: 100%;
+          height: 100%;
+        }
+        .logo {
+          height: 70px;
+        }
       `}</style>
     </>
   );
@@ -42,9 +54,25 @@ const index = css`
   .index_wrapper {
     padding: 0 70px;
   }
+  @media (min-width: 501px) {
+    .mainimg {
+      display: block;
+    }
+
+    .mainimg2 {
+      display: none;
+    }
+  }
   @media (max-width: 500px) {
     .index_wrapper {
       padding: 0 16px;
+    }
+    .mainimg {
+      display: none;
+    }
+
+    .mainimg2 {
+      display: block;
     }
   }
   .index_top {
