@@ -47,25 +47,25 @@ function LecturePlaylist() {
           max-width: 100% !important;
           height: 100vh !important;
           max-height: 100vh !important;
-        }
 
-        .ant-menu {
-          &-root {
-            overflow: ${isMobile ? 'visible' : 'scroll'};
-          }
+          .ant-menu {
+            &-root {
+              overflow: ${isMobile ? 'visible' : 'scroll'};
+            }
 
-          &-submenu-selected > &-submenu-title {
-            color: ${variables.primary} !important;
-          }
+            &-submenu-selected > &-submenu-title {
+              color: ${variables.primary} !important;
+            }
 
-          &-item-selected {
-            background-color: ${variables.purpleOpacity} !important;
-            color: ${variables.primary} !important;
-          }
+            &-item-selected {
+              background-color: ${variables.purpleOpacity} !important;
+              color: ${variables.primary} !important;
+            }
 
-          &-item:not(.ant-menu-item-selected):active,
-          &-light:not(.ant-menu-horizontal) .ant-menu-submenu-title:active {
-            background-color: ${variables.purpleOpacity} !important;
+            &-item:not(.ant-menu-item-selected):active,
+            &-light:not(.ant-menu-horizontal) .ant-menu-submenu-title:active {
+              background-color: ${variables.purpleOpacity} !important;
+            }
           }
         }
       `}</style>

@@ -15,7 +15,7 @@ const usePlaylist = () => {
       const playlist = convertToPlaylist(allLecture);
       setPlaylist(playlist);
     }
-  }, [allLecture]);
+  }, [allLecture, setPlaylist]);
 
   return playlist;
 };
