@@ -53,7 +53,7 @@ function LecturePlaylist() {
               overflow: ${isMobile ? 'visible' : 'scroll'};
             }
 
-            &-submenu-selected > &-submenu-title {
+            &-submenu-selected > .ant-menu-submenu-title {
               color: ${variables.primary} !important;
             }
 
