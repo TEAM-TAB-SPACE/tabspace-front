@@ -1,62 +1,62 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import css from 'styled-jsx/css';
+import { axiosInstance } from '../../pages/api/axios';
 
 export default function FixedSection() {
-  const [num, setNum] = useState('');
-  const phoneRef = useRef();
+  const [phone, setPhone] = useState('');
+  const [category, setCategory] = useState('F');
 
   // 휴대폰 번호 입력 함수
   const handlePhone = e => {
-    const value = phoneRef.current.value.replace(/\D+/g, '');
-    const numberLength = 11;
+    setPhone(e.target.value);
+  };
 
-    let result;
-    result = '';
+  const handleSelect = e => {
+    setCategory(e.target.value);
+  };
 
-    for (let i = 0; i < value.length && i < numberLength; i++) {
-      switch (i) {
-        case 3:
-          result += '-';
-          break;
-        case 7:
-          result += '-';
-          break;
+  const handleClick = () => {
+    let result = '';
 
-        default:
-          break;
-      }
-
-      result += value[i];
+    for (let i = 0; i < phone.length && i < phone.length; i++) {
+      if (phone[i] === '-') continue;
+      result += phone[i];
     }
 
-    phoneRef.current.value = result;
-
-    setNum(e.target.value);
+    axiosInstance.post(`/appliers/info`, { category, phone: result });
   };
 
   return (
-    <div>
+    // eslint-disable-next-line react/jsx-filename-extension
+    <>
       <div className="fixedsection_container">
-        <select className="fixedsection_selectbtn">
-          <option value="fixedsection_front">프론트엔드 과정</option>
-          <option value="fixedsection_backend">백엔드 과정</option>
-          <option value="fixedsection_ux/ui">UX/UI기확자 과정</option>
+        <select
+          className="fixedsection_selectbtn"
+          onChange={handleSelect}
+          value={category}
+        >
+          <option value="F">프론트엔드 과정</option>
+          <option value="B">백엔드 과정</option>
+          <option value="U">UX/UI기획자 과정</option>
         </select>
         <div>
           <input
             className="fixedsection_telnumber"
-            value={num}
-            ref={phoneRef}
+            value={phone}
             onChange={handlePhone}
             type="tel"
           />
         </div>
-        <button className="fixedsection_button" type="submit">
+        <button
+          className="fixedsection_button"
+          type="submit"
+          onClick={handleClick}
+        >
           사전 알림 신청받기
         </button>
       </div>
       <style jsx>{fixedsection}</style>
-    </div>
+    </>
   );
 }
 

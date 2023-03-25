@@ -1,13 +1,14 @@
-interface DashboardGreeting {
-  username: string;
-}
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../../store/user';
 
-function DashboardGreeting({ username }: DashboardGreeting) {
+function DashboardGreeting() {
+  const { realname } = useRecoilValue(userAtom);
+
   return (
     <div>
       안녕하세요
       <br />
-      {username}님!
+      {realname}님!
     </div>
   );
 }

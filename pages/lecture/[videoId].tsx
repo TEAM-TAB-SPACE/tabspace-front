@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { Layout } from 'antd';
 import { useSetRecoilState } from 'recoil';
+import { GetServerSideProps } from 'next';
 import LectureContent from '../../components/lecture/LectureContent';
 import Spinner from '../../components/common/Spin';
 import useFetch from '../../hooks/useFetch';
-import { allLectureAtom } from '../../store/lecture';
-import { API_URL_LECTURE } from '../api/lecture';
 import useMediaQueryState from '../../hooks/useMediaQueryState';
+import { allLectureAtom } from '../../store/lecture';
+import { cookieStringToObject } from '../../utils/cookie';
+import { API_URL_LECTURE } from '../api/lecture';
 
 const { Content } = Layout;
 
@@ -16,8 +18,8 @@ function Lecture() {
   const setAllLecture = useSetRecoilState(allLectureAtom);
 
   const lectureStyle = {
-    maxWidth: '1074px',
-    margin: isMobile ? '0 16px' : '0 70px',
+    maxWidth: '1300px',
+    margin: isMobile ? '0' : '0 auto',
     backgroundColor: 'transparent',
   };
 
@@ -25,7 +27,7 @@ function Lecture() {
     if (data) {
       setAllLecture(data);
     }
-  }, [data]);
+  }, [data, setAllLecture]);
 
   if (isLoading) {
     return <Spinner />;
@@ -43,3 +45,20 @@ function Lecture() {
 }
 
 export default Lecture;
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const cookies = cookieStringToObject(context.req?.headers?.cookie || '');
+
+  if (!cookies.accessToken) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};

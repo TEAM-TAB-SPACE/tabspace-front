@@ -78,7 +78,7 @@ export default class Carousel extends Component {
       <div className="carousel_container">
         <div className="carousel_box">
           <p className="carousel_text">탭스페이스의 교육을 경험한</p>
-          <p className="carousel_title">졸업생 후기</p>
+          <h3 className="carousel_title">졸업생 후기</h3>
         </div>
         <div className="carousel_slider_container">
           <Global />
@@ -200,13 +200,13 @@ const carousel = css`
   }
   .carousel_text {
     font-weight: 400;
-    font-size: 24px;
+    font-size: 22px;
     margin-top: 150px;
   }
   .carousel_title {
     font-weight: 700;
-    font-size: 40px;
-    margin-top: 24px;
+    font-size: 35px;
+    margin-top: 20px;
   }
   .carousel_long_slide {
     border: 1px solid #a1aebf;

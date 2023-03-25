@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import DashboardItemNoData from './DashboardItemNoData';
 import variables from '../../styles/variables.module.scss';
 import layout from '../../styles/layout.module.scss';
 import SpinCircle from '../common/SpinCircle';
@@ -13,18 +14,7 @@ function DashboardLatest() {
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
 
   if (!videoId)
-    return (
-      <div
-        className={`${layout.flex_center} latest__notFound`}
-        style={{
-          width: '100%',
-          height: '250px',
-          color: variables.textSecondaryColor,
-        }}
-      >
-        최근 수강 강의가 없습니다.
-      </div>
-    );
+    return <DashboardItemNoData text="최근 수강 강의가 없습니다." />;
 
   return (
     <>
@@ -90,7 +80,6 @@ function DashboardLatest() {
           }
 
           &__notFound {
-            background-color: red;
             height: 250px;
           }
         }

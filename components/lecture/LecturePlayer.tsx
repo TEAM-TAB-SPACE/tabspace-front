@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import YouTube from 'react-youtube';
 import SpinCircle from '../common/SpinCircle';
 import variables from '../../styles/variables.module.scss';
-import useVideoState from '../../hooks/useVideoState';
 import useFetch from '../../hooks/useFetch';
 import { API_URL_LECTURE } from '../../pages/api/lecture';
 
@@ -16,8 +15,6 @@ interface YoutubeEvent {
   target: { getCurrentTime: () => number };
 }
 
-const IS_READY = 5;
-
 const VIDEO_STATE = {
   NOT_START: -1,
   STOP: 0,
@@ -30,39 +27,47 @@ const VIDEO_STATE = {
 function LecturePlayer({ videoId, lectureroomId }: LecturePlayerProps) {
   const client = useFetch();
   const [isLoading, setIsLoading] = useState(true);
-  const [currentTime, setCurrentTime] = useState(0);
-  const { playTime, startTimer, stopTimer, resetTimer } = useVideoState();
+
+  const startTime = useRef(0);
+  const endTime = useRef(0);
 
   useEffect(() => {
     setIsLoading(true);
-  }, [videoId]);
-
-  useEffect(() => {
-    if (lectureroomId) {
-      client.post(API_URL_LECTURE.LECTUREROOMS, {
-        id: lectureroomId,
-        playtime: Math.sign(playTime) === -1 ? 0 : playTime,
-        endtime: currentTime,
-      });
-    }
-
-    return setCurrentTime(0);
-  }, [client, currentTime, lectureroomId, playTime]);
+  }, [videoId, lectureroomId]);
 
   const onVideoStateChange = (e: YoutubeEvent) => {
-    const state = e.data;
+    const state = Number(e.data);
     const currentTime = Math.floor(e.target.getCurrentTime());
 
+    if (
+      [
+        VIDEO_STATE.SIGNAL,
+        VIDEO_STATE.BUFFERING,
+        VIDEO_STATE.NOT_START,
+      ].includes(state)
+    )
+      return;
+
     if (state === VIDEO_STATE.PLAY) {
-      resetTimer();
-      setCurrentTime(currentTime);
-      startTimer();
+      startTime.current = 0;
+      endTime.current = 0;
+      startTime.current = new Date().getTime();
     }
 
     if (state === VIDEO_STATE.PAUSE || state === VIDEO_STATE.STOP) {
-      stopTimer();
-      setCurrentTime(currentTime);
+      endTime.current = new Date().getTime();
     }
+
+    const elapsedTime = endTime.current - startTime.current;
+
+    client.post(API_URL_LECTURE.LECTUREROOMS, {
+      id: lectureroomId,
+      playtime:
+        Math.sign(elapsedTime) === -1
+          ? 0
+          : Math.floor((elapsedTime / 1000) % 60),
+      endtime: currentTime,
+    });
   };
 
   return (
@@ -73,10 +78,8 @@ function LecturePlayer({ videoId, lectureroomId }: LecturePlayerProps) {
           className="player__iframe"
           key={videoId}
           videoId={videoId}
-          onReady={({ target }) => {
-            if (target.getPlayerState() === IS_READY) setIsLoading(false);
-          }}
           onStateChange={onVideoStateChange}
+          onReady={() => setIsLoading(false)}
         />
       </div>
       <style jsx global>{`
