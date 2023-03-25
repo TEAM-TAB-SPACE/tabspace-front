@@ -55,7 +55,7 @@ export default function Header() {
           </div>
         ) : (
           <LoginContent
-            username={user.realname}
+            user={user}
             onclickLoginout={Logout}
             onClickDashboard={() => {
               router.push('/dashboard');
