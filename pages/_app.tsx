@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '../styles/globals.scss';
 import { Reset } from 'styled-reset';
 import { RecoilRoot } from 'recoil';
 import { ConfigProvider } from 'antd';
