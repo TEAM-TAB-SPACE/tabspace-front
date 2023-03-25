@@ -45,8 +45,6 @@ function LecturePlayer({ videoId, lectureroomId }: LecturePlayerProps) {
         endtime: currentTime,
       });
     }
-
-    return setCurrentTime(0);
   }, [client, currentTime, lectureroomId, playTime]);
 
   const onVideoStateChange = (e: YoutubeEvent) => {
