@@ -17,7 +17,7 @@ export default function Login() {
     <div className="login__container">
       <div className="login__wrap">
         <p>안녕하세요!</p>
-        <p>탭스페이스 수강장에</p>
+        <p>탭스페이스 강의장에</p>
         <p>오신걸 환영합니다.</p>
       </div>
       <div className="login__kakaoBtn">

@@ -63,7 +63,7 @@ function AlarmButton() {
         }}
       >
         <Badge dot count={isBadgeShow}>
-          <NotificationOutlined style={{ fontSize: 16 }} />
+          <NotificationOutlined style={{ fontSize: 18 }} />
         </Badge>
       </Button>
     </Popover>

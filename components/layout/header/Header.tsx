@@ -2,12 +2,10 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { useRouter } from 'next/router';
 import { axiosInstance, setAxiosInterCeptors } from '../../../pages/api/axios';
 import { deleteCookie, getCookie } from 'cookies-next';
-import { LogoutOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
-import AlarmButton from './AlarmButton';
 import Link from 'next/link';
 import css from 'styled-jsx/css';
 import Logo from '../../../public/assets/mainLogo.svg';
+import LoginContent from './LoginContent';
 import { loginStateAtom, userAtom } from '../../../store/user';
 import { API_URL_AUTH } from '../../../pages/api/auth';
 
@@ -56,27 +54,13 @@ export default function Header() {
             </div>
           </div>
         ) : (
-          <div className="username__div">
-            <p>{user.realname}님</p>
-            <AlarmButton />
-            <Button
-              size="middle"
-              type="text"
-              onClick={Logout}
-              style={{ padding: '4px 2px' }}
-            >
-              <LogoutOutlined style={{ fontSize: 16 }} />
-            </Button>
-            <Button
-              size="large"
-              style={{ height: '30px', padding: '2px 10px 0' }}
-              onClick={() => {
-                router.push('/dashboard');
-              }}
-            >
-              대시보드
-            </Button>
-          </div>
+          <LoginContent
+            username={user.realname}
+            onclickLoginout={Logout}
+            onClickDashboard={() => {
+              router.push('/dashboard');
+            }}
+          />
         )}
       </header>
       <style jsx>{header}</style>
@@ -113,13 +97,7 @@ const header = css`
   .header__register {
     padding: 0 10px;
   }
-  .username__div {
-    display: flex;
-    align-items: center;
-    gap: 23px;
-    height: 34px;
-    font-weight: 500;
-  }
+
   @media (max-width: 768px) {
     .header__container {
       padding: 16px;
