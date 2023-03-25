@@ -1,4 +1,7 @@
+import Link from 'next/link';
 import variables from '../../../styles/variables.module.scss';
+
+const LECTURE_EVALUATION = '강의평가';
 
 function AlarmPopoverContent({ content = [] }: { content: string[] }) {
   if (!content.length) {
@@ -9,15 +12,24 @@ function AlarmPopoverContent({ content = [] }: { content: string[] }) {
     <>
       <div>
         {content?.map((item: string, index: number) => {
+          const splitItem = item.split(LECTURE_EVALUATION);
+
           return (
             <p key={index} className="dashboard__alarmItem">
-              {item}
+              {splitItem[0]}
+              {splitItem.length > 1 && (
+                <Link href={'/lecture/evaluation'} style={{ color: '#1677ff' }}>
+                  {LECTURE_EVALUATION}
+                </Link>
+              )}
+              {splitItem[1]}
             </p>
           );
         })}
       </div>
       <style jsx global>{`
         .dashboard__alarmItem {
+          display: block;
           width: 200px;
           line-height: 130%;
           padding: 10px 0;
