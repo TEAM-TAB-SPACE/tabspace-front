@@ -79,7 +79,7 @@ export default function Header() {
       )}
       <style jsx>{header}</style>
       <style global jsx>{`
-        a {
+        .header__container a {
           text-decoration: none;
           color: black;
         }
