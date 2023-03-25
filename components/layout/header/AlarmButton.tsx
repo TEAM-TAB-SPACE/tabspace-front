@@ -27,16 +27,19 @@ function AlarmButton() {
   const [isBadgeShow, setIsBadgeShow] = useState(0);
   const [isClicked, setIsClicked] = useState(false);
 
-  const emojiKeys = Object.keys(EMOJI);
-
+  //텍스트에서 기호 찾아 이모지로 변경
   const notifications = data?.notifications?.split(',').map((noti: string) => {
-    for (const currentKey of emojiKeys) {
-      const emojiKey = noti.substring(noti.length - 3);
+    const reg1 = new RegExp(/\([1-9][0-4]\)/g);
+    const reg2 = new RegExp(/\(\d\)/g);
+    const emojiKeysOfreg1 = noti.match(reg1) || [];
+    const emojiKeysOfreg2 = noti.match(reg2) || [];
 
-      if (currentKey === emojiKey) {
-        return noti.replace(emojiKey, EMOJI[emojiKey]);
-      }
-    }
+    return [...emojiKeysOfreg1, ...emojiKeysOfreg2].reduce(
+      (notiWithEmoji, key) => {
+        return notiWithEmoji.replaceAll(key, EMOJI[key]);
+      },
+      noti,
+    );
   });
 
   useEffect(() => {
@@ -45,6 +48,7 @@ function AlarmButton() {
 
   return (
     <Popover
+      className="header__notifications"
       content={<AlarmPopoverContent content={notifications} />}
       title="알림"
       trigger="click"
