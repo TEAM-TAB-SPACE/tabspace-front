@@ -1,7 +1,7 @@
-import { getCookie, setCookie } from 'cookies-next';
-
+import { getCookie, removeCookies, setCookie } from 'cookies-next';
 import axios, { Axios } from 'axios';
 import Config from '../../config/config.export';
+import { API_URL_AUTH } from './auth';
 
 export const axiosInstance = axios.create({
   baseURL: Config().baseUrl,
@@ -14,6 +14,59 @@ export const axiosInstance = axios.create({
 export const setAxiosAccessToken = (axiosInstance: Axios, access: string) => {
   axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access}`;
   return axiosInstance;
+};
+
+export const setAxiosInterCeptors = (axiosInstance: Axios) => {
+  axiosInstance.interceptors.response.use(
+    //success
+    res => res,
+    //error
+    async err => {
+      const {
+        config,
+        response: { status },
+      } = err;
+
+      //401이 아닐 경우
+      if (
+        config.url === API_URL_AUTH.REFRESH ||
+        status !== 401 ||
+        config.sent
+      ) {
+        return Promise.reject(err);
+      }
+
+      //401일 경우 새로운 accessToken 발급
+      config.sent = true;
+      const accessToken = await getNewAccessToken();
+
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
+      }
+
+      return axios(config);
+    },
+  );
+
+  return axiosInstance;
+};
+
+const getNewAccessToken = async (): Promise<string | void> => {
+  try {
+    const refreshToken = getCookie('refreshToken');
+
+    const { data } = await axiosInstance.post<{
+      accessToken: string;
+    }>(API_URL_AUTH.REFRESH, { refreshToken });
+
+    setCookie('accessToken', data.accessToken);
+    return data.accessToken;
+  } catch (e) {
+    //refreshToken도 만료일 경우 로그인 페이지로 이동
+    removeCookies('accessToken');
+    removeCookies('refreshToken');
+    window.location.href = 'http://localhost:3000/login';
+  }
 };
 
 export const callGetApi =
@@ -61,39 +114,3 @@ export const callDeleteApi =
       return String(error);
     }
   };
-
-axiosInstance.interceptors.response.use(
-  (response: any) => {
-    return response;
-  },
-  async error => {
-    const {
-      config,
-      response: { status },
-    } = error;
-    if (status === 401 || status === 403) {
-      if (error.response.data.message === 'TokenExpiredError') {
-        const originalRequest = config;
-        const refreshToken = await getCookie('refreshToken');
-        // token refresh 요청
-        const { data } = await axiosInstance.post(
-          `auth/token/refresh`, // token refresh api
-          {
-            refreshToken,
-          },
-        );
-        // 새로운 토큰 저장
-        const { accessToken: newAccessToken, refreshToken: newRefreshToken } =
-          data;
-        await setCookie('accessToken', data.tokens.access);
-        setCookie('refreshToken', data.tokens.refresh);
-
-        axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
-        return axios(originalRequest);
-      }
-    }
-    return Promise.reject(error);
-  },
-);

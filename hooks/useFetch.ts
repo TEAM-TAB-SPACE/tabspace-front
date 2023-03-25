@@ -9,6 +9,7 @@ import {
   setAxiosAccessToken,
   callPostApi,
   callPutApi,
+  setAxiosInterCeptors,
 } from '../pages/api/axios';
 import { sleep } from '../utils/time';
 
@@ -40,13 +41,15 @@ const useFetch: FetchHook = (params = {}) => {
   const [error, setError] = useState('{}');
 
   const [refetchKey, setRefetchKey] = refetchKeyAtom
-    ? useRecoilState<RefetchKey>(refetchKeyAtom)
+    ? // eslint-disable-next-line react-hooks/rules-of-hooks
+      useRecoilState<RefetchKey>(refetchKeyAtom)
     : [];
 
   const token = getCookie('accessToken');
   const axios = axiosInstance;
 
   if (typeof token === 'string' && token) setAxiosAccessToken(axios, token);
+  setAxiosInterCeptors(axios);
 
   const client = {
     get: callGetApi(axios),

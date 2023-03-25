@@ -25,7 +25,7 @@ export default function Register() {
     msg_agree: true,
   });
   // 비구조화 할당으로 값 추출
-  const { realname, email, phone, secret_key, msg_agree } = inputs;
+  const { realname, email, phone, secret_key } = inputs;
 
   const onChange = (e: any) => {
     setInputs(prevInputs => {
@@ -194,7 +194,7 @@ const registerStyle = css`
     width: 300px;
     height: 470px;
     position: relative;
-    margin: 50px auto 200px;
+    margin: 100px auto 170px;
     .register__wrap {
       position: absolute;
       display: flex;

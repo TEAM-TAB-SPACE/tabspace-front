@@ -59,15 +59,6 @@ function LectureQnA() {
           font-weight: 500;
           border-bottom: 1px solid ${variables.black};
         }
-
-        .ant-btn-primary {
-          background-color: ${variables.primary};
-
-          &:not(:disabled):hover {
-            background-color: ${variables.primary};
-            opacity: 0.9;
-          }
-        }
       `}</style>
     </>
   );

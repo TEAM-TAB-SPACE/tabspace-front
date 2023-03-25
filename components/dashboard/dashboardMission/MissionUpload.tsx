@@ -32,7 +32,6 @@ function MissionUpload({ missionId }: MissionUploadProps) {
     action: `${process.env.NEXT_PUBLIC_BASE_URL}${API_URL_DASHBOARD.MISSION}`,
     showUploadList: false,
     onChange: (info: UploadChangeParam<UploadFile<unknown>>) => {
-      console.log(info.file.status);
       if (info.file.status === 'done') {
         success(SUCCESS_MESSAGE);
         setRefetchKey('stale');

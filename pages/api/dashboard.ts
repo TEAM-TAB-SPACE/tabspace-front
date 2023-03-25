@@ -4,4 +4,5 @@ export const API_URL_DASHBOARD = {
   ATTENDANCE: '/dashboards/attendance',
   MISSION: '/homeworks/submission',
   GROWTH: '/dashboards/usergrowths',
+  NOTIFICATION: '/dashboards/notification',
 };

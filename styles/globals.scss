@@ -1,0 +1,32 @@
+@import '/styles/variables.module.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  height: 10px;
+  background: #ddd;
+  border-radius: 10px;
+}
+
+//custom antd style
+.ant-btn-primary {
+  background-color: $primary;
+
+  &:not(:disabled):hover {
+    background-color: $primary;
+    opacity: 0.9;
+  }
+}
+
+.ant-input {
+  &:focus,
+  &:hover {
+    border-color: $purple-light;
+  }
+}

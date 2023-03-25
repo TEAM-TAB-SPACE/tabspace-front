@@ -5,6 +5,7 @@ import { SubMenuType } from 'antd/es/menu/hooks/useItems';
 export type MenuItem = Required<MenuProps>['items'][number];
 
 export interface LectureRoomSingleData {
+  progress: number;
   id: number;
   lecture: {
     id: number;
@@ -114,7 +115,7 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
           addPlaylistItemChildren(
             newPlaylistItem,
             videoId,
-            title,
+            title + `${item.completed ? ` ${String.fromCharCode(9989)}` : ''}`,
             !active_lecture,
           );
         }
@@ -124,6 +125,5 @@ export const convertToPlaylist = (lectureroomData: LectureRoomSingleData[]) => {
     },
     [],
   );
-
   return playlist;
 };

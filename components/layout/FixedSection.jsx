@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import css from 'styled-jsx/css';
 import { axiosInstance } from '../../pages/api/axios';
 
@@ -6,13 +6,8 @@ export default function FixedSection() {
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('F');
 
-  useEffect(() => {
-    console.log(category, phone);
-  }, [phone, category]);
-
   // 휴대폰 번호 입력 함수
   const handlePhone = e => {
-    const value = e.target.value.replace(/\D+/g, '');
     setPhone(e.target.value);
   };
 
@@ -28,18 +23,12 @@ export default function FixedSection() {
       result += phone[i];
     }
 
-    axiosInstance
-      .post(`/appliers/info`, { category, phone: result })
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    axiosInstance.post(`/appliers/info`, { category, phone: result });
   };
 
   return (
-    <div>
+    // eslint-disable-next-line react/jsx-filename-extension
+    <>
       <div className="fixedsection_container">
         <select
           className="fixedsection_selectbtn"
@@ -67,7 +56,7 @@ export default function FixedSection() {
         </button>
       </div>
       <style jsx>{fixedsection}</style>
-    </div>
+    </>
   );
 }
 

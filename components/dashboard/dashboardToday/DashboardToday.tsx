@@ -1,6 +1,7 @@
 import ProgressWithBackground from '../../common/ProgressWithBackground';
 import GoLearnButton from './GoLearnButton';
 import SpinCircle from '../../common/SpinCircle';
+import DashboardItemNoData from '../DashboardItemNoData';
 import useFetch from '../../../hooks/useFetch';
 import { TodayLectureSingleData } from '../../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
@@ -11,6 +12,9 @@ function DashboardToday() {
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
+
+  if (!data.length)
+    return <DashboardItemNoData text="오늘은 수업이 없습니다." />;
 
   return (
     <>

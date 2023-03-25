@@ -2,30 +2,31 @@ import css from 'styled-jsx/css';
 
 export default function Course() {
   return (
-    <div>
+    // eslint-disable-next-line react/jsx-filename-extension
+    <>
       <div className="coures_container">
-        <p className="coures_title">내게 맞는 코스를 찾아보세요</p>
+        <h1 className="coures_title">내게 맞는 코스를 찾아보세요</h1>
         <p className="coures_text">
           탭하우스만의 교육 노하우로 IT 취업에 특화된 과정을 소개합니다.
         </p>
         <div className="coures_box">
           <div className="coures_front">
             <p className="coures_badge">진행중</p>
-            <p className="coures_box_title">프론트엔드 코스</p>
+            <h2 className="coures_box_title">프론트엔드 코스</h2>
             <p className="coures_box_text">
               사용자 친화적 웹 서비스 개발 능력을 갖푼 프론트엔드 개발자 과정
             </p>
           </div>
           <div className="coures_backend">
             <p className="coures_badge">모집예정</p>
-            <h1 className="coures_box_title">백엔드 코스</h1>
+            <h2 className="coures_box_title">백엔드 코스</h2>
             <p className="coures_box_text">
               안정적인 웹 서비스를 효율적으로 구축하는 백엔드 개발자 양성 과정
             </p>
           </div>
           <div className="coures_ux">
             <p className="coures_badge">진행중</p>
-            <h1 className="coures_box_title">UX/UI 기획자 코스</h1>
+            <h2 className="coures_box_title">UX/UI 기획자 코스</h2>
             <p className="coures_box_text">
               기획부터 디자인까지, UX/UI 커리어 입문을 위한 과정
             </p>
@@ -33,7 +34,7 @@ export default function Course() {
         </div>
       </div>
       <style jsx>{index}</style>
-    </div>
+    </>
   );
 }
 
@@ -92,7 +93,7 @@ const index = css`
     padding: 40px;
   }
   .coures_badge {
-    padding: 5px 8px;
+    padding: 6px 8px 3px;
     background: #722ed1;
     border-radius: 100px;
     color: #ffffff;
