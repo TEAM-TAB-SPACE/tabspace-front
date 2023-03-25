@@ -41,42 +41,44 @@ export default function Header() {
   };
 
   return (
-    <header className="header__container">
-      <Link href="/">
-        <Logo />
-      </Link>
-      {!isLogin ? (
-        <div className="header__auth">
-          <div className="header__login">
-            <Link href="/login">로그인</Link>
+    <>
+      <header className="header__container">
+        <Link href="/">
+          <Logo />
+        </Link>
+        {!isLogin ? (
+          <div className="header__auth">
+            <div className="header__login">
+              <Link href="/login">로그인</Link>
+            </div>
+            <div className="header__register">
+              <Link href="/register">회원가입</Link>
+            </div>
           </div>
-          <div className="header__register">
-            <Link href="/register">회원가입</Link>
+        ) : (
+          <div className="username__div">
+            <p>{user.realname}님</p>
+            <AlarmButton />
+            <Button
+              size="middle"
+              type="text"
+              onClick={Logout}
+              style={{ padding: '4px 2px' }}
+            >
+              <LogoutOutlined style={{ fontSize: 16 }} />
+            </Button>
+            <Button
+              size="large"
+              style={{ height: '30px', padding: '2px 10px 0' }}
+              onClick={() => {
+                router.push('/dashboard');
+              }}
+            >
+              대시보드
+            </Button>
           </div>
-        </div>
-      ) : (
-        <div className="username__div">
-          <p>{user.realname}님</p>
-          <AlarmButton />
-          <Button
-            size="middle"
-            type="text"
-            onClick={Logout}
-            style={{ padding: '4px 2px' }}
-          >
-            <LogoutOutlined style={{ fontSize: 16 }} />
-          </Button>
-          <Button
-            size="large"
-            style={{ height: '30px', padding: '2px 10px 0' }}
-            onClick={() => {
-              router.push('/dashboard');
-            }}
-          >
-            대시보드
-          </Button>
-        </div>
-      )}
+        )}
+      </header>
       <style jsx>{header}</style>
       <style global jsx>{`
         .header__container a {
@@ -84,7 +86,7 @@ export default function Header() {
           color: black;
         }
       `}</style>
-    </header>
+    </>
   );
 }
 

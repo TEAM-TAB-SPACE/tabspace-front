@@ -59,27 +59,57 @@ export default class Sliders extends Component {
       <div className="slider_container">
         <div className="slider_box">
           <p className="slider_text">탭스페이스와 함께하는</p>
-          <p className="slider_title">연계 기업</p>
+          <h3 className="slider_title">연계 기업</h3>
         </div>
         <div className="slider_slidecontainer">
           <Slider {...settings}>
             <div>
-              <Image src={Logo1} alt="logo1" style={{ width: 185 }} className="logo"/>
+              <Image
+                src={Logo1}
+                alt="logo1"
+                style={{ width: 185 }}
+                className="logo"
+              />
             </div>
             <div>
-              <Image src={Logo2} alt="logo2" style={{ width: 185 }} className="logo"/>
+              <Image
+                src={Logo2}
+                alt="logo2"
+                style={{ width: 185 }}
+                className="logo"
+              />
             </div>
             <div>
-              <Image src={Logo3} alt="logo3" style={{ width: 185 }} className="logo"/>
+              <Image
+                src={Logo3}
+                alt="logo3"
+                style={{ width: 185 }}
+                className="logo"
+              />
             </div>
             <div>
-              <Image src={Logo4} alt="logo4" style={{ width: 185 }} className="logo"/>
+              <Image
+                src={Logo4}
+                alt="logo4"
+                style={{ width: 185 }}
+                className="logo"
+              />
             </div>
             <div>
-              <Image src={Logo5} alt="logo5" style={{ width: 185 }} className="logo"/>
+              <Image
+                src={Logo5}
+                alt="logo5"
+                style={{ width: 185 }}
+                className="logo"
+              />
             </div>
             <div>
-              <Image src={Logo6} alt="logo6" style={{ width: 185 }} className="logo"/>
+              <Image
+                src={Logo6}
+                alt="logo6"
+                style={{ width: 185 }}
+                className="logo"
+              />
             </div>
           </Slider>
         </div>
@@ -97,13 +127,13 @@ const slider = css`
   }
   .slider_text {
     font-weight: 400;
-    font-size: 24px;
+    font-size: 22px;
     margin-top: 80px;
   }
   .slider_title {
     font-weight: 700;
-    font-size: 40px;
-    margin-top: 24px;
+    font-size: 35px;
+    margin-top: 20px;
   }
   .logo {
     height: 100px;

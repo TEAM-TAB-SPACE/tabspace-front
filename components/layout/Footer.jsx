@@ -8,7 +8,8 @@ import css from 'styled-jsx/css';
 
 export default function Footer() {
   return (
-    <div className="footer_container">
+    // eslint-disable-next-line react/jsx-filename-extension
+    <footer className="footer_container">
       <div className="footer_first_box">
         <p className="footer_title">Locate Us</p>
         <p className="footer_text">
@@ -37,7 +38,7 @@ export default function Footer() {
         </div>
       </div>
       <style jsx>{footer}</style>
-    </div>
+    </footer>
   );
 }
 
