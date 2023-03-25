@@ -41,7 +41,8 @@ const useFetch: FetchHook = (params = {}) => {
   const [error, setError] = useState('{}');
 
   const [refetchKey, setRefetchKey] = refetchKeyAtom
-    ? useRecoilState<RefetchKey>(refetchKeyAtom)
+    ? // eslint-disable-next-line react-hooks/rules-of-hooks
+      useRecoilState<RefetchKey>(refetchKeyAtom)
     : [];
 
   const token = getCookie('accessToken');
