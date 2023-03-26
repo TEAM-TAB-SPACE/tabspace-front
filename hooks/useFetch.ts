@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getCookie } from 'cookies-next';
-import { RecoilState, useRecoilState } from 'recoil';
+import { SetterOrUpdater } from 'recoil';
 import { isDevMode } from '../config/config.export';
 import {
   callGetApi,
@@ -20,7 +20,10 @@ export type ApiCall = (url: string, payload: any) => Promise<any>;
 interface FetchParams {
   url?: string;
   payload?: any;
-  refetchKeyAtom?: RecoilState<RefetchKey>;
+  refetchKey?: {
+    key: RefetchKey;
+    setter: SetterOrUpdater<RefetchKey>;
+  };
 }
 
 type FetchHook = (params?: FetchParams) => {
@@ -34,16 +37,11 @@ type FetchHook = (params?: FetchParams) => {
 };
 
 const useFetch: FetchHook = (params = {}) => {
-  const { url, payload, refetchKeyAtom } = params;
+  const { url, payload, refetchKey } = params;
 
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState();
   const [error, setError] = useState('{}');
-
-  const [refetchKey, setRefetchKey] = refetchKeyAtom
-    ? // eslint-disable-next-line react-hooks/rules-of-hooks
-      useRecoilState<RefetchKey>(refetchKeyAtom)
-    : [];
 
   const token = getCookie('accessToken');
   const axios = axiosInstance;
@@ -51,40 +49,39 @@ const useFetch: FetchHook = (params = {}) => {
   if (typeof token === 'string' && token) setAxiosAccessToken(axios, token);
   setAxiosInterCeptors(axios);
 
-  const client = {
-    get: callGetApi(axios),
-    post: callPostApi(axios),
-    put: callPutApi(axios),
-    delete: callDeleteApi(axios),
-  };
+  const client = useMemo(() => {
+    return {
+      get: callGetApi(axios),
+      post: callPostApi(axios),
+      put: callPutApi(axios),
+      delete: callDeleteApi(axios),
+    };
+  }, [axios]);
 
-  useEffect(
-    () => {
-      (async () => {
-        const callApi = async (endPoint: string) => {
-          const fetchData = await client.get(endPoint, payload);
+  useEffect(() => {
+    (async () => {
+      const callApi = async (endPoint: string) => {
+        const fetchData = await client.get(endPoint, payload);
 
-          if (fetchData instanceof Error) {
-            setError(JSON.stringify(fetchData));
-            return;
-          }
-
-          setData(fetchData);
-          setIsLoading(false);
-          setRefetchKey && setRefetchKey('fresh');
-        };
-        if (refetchKey !== 'fresh' && url) {
-          if (isDevMode) {
-            await sleep(500);
-            callApi(url);
-          } else {
-            callApi(url);
-          }
+        if (fetchData instanceof Error) {
+          setError(JSON.stringify(fetchData));
+          return;
         }
-      })();
-    },
-    refetchKey ? [refetchKey] : [],
-  );
+
+        setData(fetchData);
+        setIsLoading(false);
+        refetchKey?.key && refetchKey.setter('fresh');
+      };
+      if (refetchKey?.key !== 'fresh' && url) {
+        if (isDevMode) {
+          await sleep(500);
+          callApi(url);
+        } else {
+          callApi(url);
+        }
+      }
+    })();
+  }, [client, payload, refetchKey, url]);
 
   return {
     isLoading,
