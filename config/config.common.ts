@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-namespace
 export declare namespace ICommonConfig {
   export type Mode = 'development' | 'production';
 
