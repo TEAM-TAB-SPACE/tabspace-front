@@ -34,7 +34,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ConfigProvider locale={locale}>
           <Head>
             <title>TAP SPACE</title>
-            <link rel="icon" href="/images/favicon.ico" />
           </Head>
           <Script
             src="https://developers.kakao.com/sdk/js/kakao.js"
