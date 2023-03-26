@@ -2,7 +2,6 @@ import css from 'styled-jsx/css';
 
 export default function Course() {
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
     <>
       <div className="coures_container">
         <h1 className="coures_title">내게 맞는 코스를 찾아보세요</h1>

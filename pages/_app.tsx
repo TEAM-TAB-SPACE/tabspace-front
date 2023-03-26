@@ -1,4 +1,5 @@
 import '../styles/globals.scss';
+import '../styles/chatbot.scss';
 import { Reset } from 'styled-reset';
 import { RecoilRoot } from 'recoil';
 import { ConfigProvider } from 'antd';
