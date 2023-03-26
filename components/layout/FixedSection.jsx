@@ -27,7 +27,6 @@ export default function FixedSection() {
   };
 
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
     <>
       <div className="fixedsection_container">
         <select

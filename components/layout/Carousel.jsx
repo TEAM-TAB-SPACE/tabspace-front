@@ -12,7 +12,6 @@ import { createGlobalStyle } from 'styled-components';
 function NextArrow(props) {
   const { onClick } = props;
   return (
-    // eslint-disable-next-line react/jsx-filename-extension
     <div
       style={{ position: 'absolute', top: -110, right: 0 }}
       className="rightbtn"
