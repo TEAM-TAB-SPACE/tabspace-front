@@ -14,7 +14,7 @@ function QRCheckInButton({ userId }: QRCheckInButtonProps) {
         trigger="click"
       >
         <Button size="middle" type="text" style={{ padding: '4px 2px' }}>
-          <QrcodeOutlined style={{ fontSize: 18 }} />
+          <QrcodeOutlined value={userId} style={{ fontSize: 18 }} />
         </Button>
       </Popover>
       <style jsx global>{`
