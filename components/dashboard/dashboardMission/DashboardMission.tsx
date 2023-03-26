@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import ProgressWithBackground from '../../common/ProgressWithBackground';
 import SpinCircle from '../../common/SpinCircle';
 import MissionList from './MissionList';
@@ -14,9 +14,11 @@ import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
 function DashboardMission() {
   const setMission = useSetRecoilState<MissionSingleData[]>(missionsAtom);
+  const [refetchKey, setRefetchKey] = useRecoilState(missionsRefetchKeyAtom);
+
   const { isLoading, data } = useFetch({
     url: API_URL_DASHBOARD.MISSION,
-    refetchKeyAtom: missionsRefetchKeyAtom,
+    refetchKey: { key: refetchKey, setter: setRefetchKey },
   });
 
   const { missions, percent } = useMission(data);
