@@ -5,11 +5,27 @@ import Course from '../components/layout/Course';
 import Carousel from '../components/layout/Carousel';
 import Slider from '../components/layout/Slider';
 import FixedSection from '../components/layout/FixedSection';
+import { FloatButton } from 'antd';
+
 import css from 'styled-jsx/css';
+import 'react-chatbot-kit/build/main.css';
+
+import Chatbot from 'react-chatbot-kit';
+import config from '../chatbot/config';
+import MessageParser from '../chatbot/MessageParser';
+import ActionProvider from '../chatbot/ActionProvider';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 export default function Home() {
   return (
     <>
+      <FloatButton.Group trigger="click" icon={<QuestionCircleOutlined />}>
+        <Chatbot
+          config={config}
+          messageParser={MessageParser}
+          actionProvider={ActionProvider}
+        />
+      </FloatButton.Group>
       <main className="index_wrapper">
         <section className="index_mainimg">
           <span className="mainimg">
