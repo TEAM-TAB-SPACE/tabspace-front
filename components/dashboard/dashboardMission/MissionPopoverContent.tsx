@@ -22,7 +22,7 @@ function MissionPopoverContent({ files }: MissionPopoverContentProps) {
 
   const onClick = () => {
     fetch.delete(API_URL_DASHBOARD.MISSION, { id: file.id });
-    setRefetchKey('stale');
+    setRefetchKey(() => 'stale');
   };
 
   return (

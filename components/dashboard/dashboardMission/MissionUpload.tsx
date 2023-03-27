@@ -34,7 +34,7 @@ function MissionUpload({ missionId }: MissionUploadProps) {
     onChange: (info: UploadChangeParam<UploadFile<unknown>>) => {
       if (info.file.status === 'done') {
         success(SUCCESS_MESSAGE);
-        setRefetchKey('stale');
+        setRefetchKey(() => 'stale');
       } else if (info.file.status === 'error') {
         error(ERROR_MESSAGE);
       }

@@ -29,7 +29,7 @@ function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
   const onClickDelete = () => {
     deleteComment(commentId);
     closeModal();
-    setCommentRefetchKey('stale');
+    setCommentRefetchKey(() => 'stale');
   };
 
   const onPopoverItemClick = (type: 'edit' | 'delete') => () => {

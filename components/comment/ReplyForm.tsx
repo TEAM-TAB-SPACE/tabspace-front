@@ -30,7 +30,7 @@ function ReplyForm({ commentId, hideReplyForm }: ReplyFormProps) {
 
     textarea.value = '';
     hideReplyForm && hideReplyForm();
-    setCommentRefetchKey('stale');
+    setCommentRefetchKey(() => 'stale');
   };
 
   return (

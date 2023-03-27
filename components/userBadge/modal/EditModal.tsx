@@ -41,7 +41,7 @@ function EditModal({
     editComment(commentId, textarea.value, textarea.value);
 
     textarea.value = '';
-    setCommentRefetchKey('stale');
+    setCommentRefetchKey(() => 'stale');
   };
 
   return (
