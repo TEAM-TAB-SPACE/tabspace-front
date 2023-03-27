@@ -47,8 +47,10 @@ function Comment({
           line-height: 140%;
 
           &__text {
+            width: 100%;
             padding: 0 25px 4px;
             font-size: 14px;
+            word-break: break-all;
             color: #111;
           }
         }
