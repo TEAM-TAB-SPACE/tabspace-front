@@ -1,4 +1,4 @@
-import { getCookie, removeCookies, setCookie } from 'cookies-next';
+import { getCookie, removeCookies } from 'cookies-next';
 import axios, { Axios } from 'axios';
 import Config from '../../config/config.export';
 import { API_URL_AUTH } from './auth';
@@ -59,7 +59,6 @@ const getNewAccessToken = async (): Promise<string | void> => {
       accessToken: string;
     }>(API_URL_AUTH.REFRESH, { refreshToken });
 
-    setCookie('accessToken', data.accessToken);
     return data.accessToken;
   } catch (e) {
     //refreshToken도 만료일 경우 로그인 페이지로 이동
