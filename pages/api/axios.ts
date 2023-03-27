@@ -64,10 +64,9 @@ const getNewAccessToken = async (): Promise<string | void> => {
     return data.accessToken;
   } catch (e) {
     //refreshToken도 만료일 경우 로그인 페이지로 이동
-    if (isDevMode) {
-      removeCookies('access');
-      removeCookies('refresh');
-    }
+
+    removeCookies('access');
+    removeCookies('refresh');
 
     window.location.href = isDevMode
       ? `${process.env.NEXT_PUBLIC_DEV_URL}/login`
