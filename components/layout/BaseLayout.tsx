@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { getCookie } from 'cookies-next';
 import Header from './header/Header';
 import Footer from './Footer';
@@ -13,22 +13,23 @@ type BaseLayoutProps = {
 
 export default function BaseLayout({ children }: BaseLayoutProps) {
   const fetch = useFetch();
-  const isLogin = useRecoilValue(loginStateAtom);
+  const setIsLogin = useSetRecoilState(loginStateAtom);
   const setUser = useSetRecoilState(userAtom);
 
   useEffect(() => {
     //사이트 접속 시 로그인 상태면 사용자 정보 get
     const getUserData = async () => {
-      const refreshToken = getCookie('refresh');
+      const accessToken = getCookie('access');
 
-      if (refreshToken && isLogin) {
+      if (accessToken) {
         const data = await fetch.get(API_URL_OTHER.USERNAME, '');
+        setIsLogin(true);
         setUser(data);
       }
     };
 
     getUserData();
-  }, [fetch, isLogin, setUser]);
+  }, [fetch, setIsLogin, setUser]);
 
   return (
     <>
