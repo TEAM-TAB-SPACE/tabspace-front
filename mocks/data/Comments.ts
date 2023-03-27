@@ -9,6 +9,7 @@ export const Comments = () => {
       {
         id: Math.random() * 100,
         user: {
+          id: 9,
           realname: '박찬양',
         },
         comment: comment,
@@ -40,6 +41,7 @@ const commentsData = [
   {
     id: 1,
     user: {
+      id: 9,
       realname: '박찬양',
     },
     comment: '하하',
@@ -47,6 +49,7 @@ const commentsData = [
       {
         id: 1,
         user: {
+          id: 9,
           realname: '박찬양',
         },
         comment: '흐흐',
@@ -54,7 +57,8 @@ const commentsData = [
       {
         id: 3,
         user: {
-          realname: '박찬양',
+          id: 14,
+          realname: '문예림',
         },
         comment: 'ㅇㄹㄴㄹㅇㄹ',
       },
@@ -63,6 +67,7 @@ const commentsData = [
   {
     id: 2,
     user: {
+      id: 9,
       realname: '박찬양',
     },
     comment: '허허',
@@ -70,7 +75,8 @@ const commentsData = [
       {
         id: 2,
         user: {
-          realname: '박찬양',
+          id: 14,
+          realname: '문예림',
         },
         comment: '호호',
       },
@@ -79,6 +85,7 @@ const commentsData = [
   {
     id: 4,
     user: {
+      id: 9,
       realname: '박찬양',
     },
     comment: '질문없습니다!',
