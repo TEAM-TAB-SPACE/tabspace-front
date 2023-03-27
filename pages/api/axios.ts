@@ -65,7 +65,8 @@ const getNewAccessToken = async (): Promise<string | void> => {
     //refreshToken도 만료일 경우 로그인 페이지로 이동
     // removeCookies('access');
     // removeCookies('refresh');
-    window.location.href = 'http://localhost:3000/login';
+
+    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}login`;
   }
 };
 
