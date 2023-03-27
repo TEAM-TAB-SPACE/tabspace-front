@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { Layout } from 'antd';
 import Comments from '../comment/Comments';
 import CommentForm from '../comment/CommentForm';
@@ -8,16 +11,15 @@ import {
   currentLectureCommentsAtom,
 } from '../../store/comment';
 import { API_URL_LECTURE } from '../../pages/api/lecture';
-import { useRouter } from 'next/router';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { currentLectureSelector } from '../../store/lecture';
-import { useEffect } from 'react';
 
 const { Content } = Layout;
 
 function LectureQnA() {
   const router = useRouter();
   const { videoId } = router.query;
+
+  const [refetchKey, setRefetchKey] = useRecoilState(commentRefetchKeyAtom);
 
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
   const lectureId = selectedLecture?.id;
@@ -29,7 +31,7 @@ function LectureQnA() {
   const { data } = useFetch({
     url: API_URL_LECTURE.COMMENTS_REVIEWS,
     payload: { id: lectureId },
-    refetchKeyAtom: commentRefetchKeyAtom,
+    refetchKey: { key: refetchKey, setter: setRefetchKey },
   });
 
   useEffect(() => {
