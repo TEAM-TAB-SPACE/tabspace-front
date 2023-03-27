@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { MouseEventHandler, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Button, Modal, Input } from 'antd';
 import {
@@ -11,6 +11,7 @@ const { TextArea } = Input;
 
 interface EditModalProps {
   depth: 1 | 2;
+  onCancel: MouseEventHandler;
   commentId: number;
   isModalOpen: boolean;
   onClickEdit?: () => void;
@@ -18,6 +19,7 @@ interface EditModalProps {
 
 function EditModal({
   depth,
+  onCancel,
   commentId,
   isModalOpen,
   onClickEdit,
@@ -45,6 +47,7 @@ function EditModal({
   return (
     <Modal
       open={isModalOpen}
+      onCancel={onCancel}
       title="댓글 수정"
       style={{ top: '40%' }}
       width="280px"

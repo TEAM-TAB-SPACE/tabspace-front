@@ -22,6 +22,10 @@ function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
 
   const { deleteComment } = useComment(depth);
 
+  const onCancel = () => {
+    closeModal();
+  };
+
   const onClickDelete = () => {
     deleteComment(commentId);
     closeModal();
@@ -50,10 +54,16 @@ function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
         />
         {modalType === 'edit' ? (
           <EditModal
-            {...{ commentId, depth, isModalOpen, onClickEdit: closeModal }}
+            {...{
+              commentId,
+              depth,
+              isModalOpen,
+              onCancel,
+              onClickEdit: closeModal,
+            }}
           />
         ) : (
-          <DeleteModal {...{ isModalOpen, onClickDelete }} />
+          <DeleteModal {...{ isModalOpen, onCancel, onClickDelete }} />
         )}
       </div>
       <style jsx global>{`
