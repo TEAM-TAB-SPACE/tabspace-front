@@ -66,7 +66,7 @@ const getNewAccessToken = async (): Promise<string | void> => {
     // removeCookies('access');
     // removeCookies('refresh');
 
-    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}login`;
+    window.location.href = `${process.env.NEXT_PUBLIC_URL}/login`;
   }
 };
 
