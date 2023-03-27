@@ -23,7 +23,7 @@ function LectureContent() {
 
   useEffect(() => {
     setRefetchKey(() => 'stale');
-  }, [isMobile, setRefetchKey]);
+  }, [isMobile, videoId, setRefetchKey]);
 
   return (
     <>
