@@ -70,8 +70,8 @@ const getNewAccessToken = async (): Promise<string | void> => {
     }
 
     window.location.href = isDevMode
-      ? `${process.env.NEXT_DEV_PUBLIC_URL}/login`
-      : `${process.env.NEXT_PROD_PUBLIC_URL}/login`;
+      ? `${process.env.NEXT_PUBLIC_DEV_URL}/login`
+      : `${process.env.NEXT_PUBLIC_PROD_URL}/login`;
   }
 };
 
