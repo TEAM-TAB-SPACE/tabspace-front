@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { setCookie } from 'cookies-next';
 import { Skeleton } from 'antd';
 import { useSetRecoilState } from 'recoil';
 import { useSearchParams } from 'next/navigation';
@@ -28,6 +29,9 @@ const RedirectHandler = () => {
 
       if (code) {
         const { data } = await registerKaKao(code, inputPayload);
+
+        // setCookie('access', data.tokens.access);
+        // setCookie('refresh', data.tokens.refresh);
         setUser(data.user);
 
         router.push('/dashboard');

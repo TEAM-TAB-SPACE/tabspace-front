@@ -49,7 +49,7 @@ export default Lecture;
 export const getServerSideProps: GetServerSideProps = async context => {
   const cookies = cookieStringToObject(context.req?.headers?.cookie || '');
 
-  if (!cookies.accessToken) {
+  if (!cookies.access) {
     return {
       redirect: {
         destination: '/login',
