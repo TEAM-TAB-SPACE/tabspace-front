@@ -3,7 +3,6 @@ import { Button } from 'antd';
 import { MouseEventHandler } from 'react';
 import layout from '../../../styles/layout.module.scss';
 import AlarmButton from './AlarmButton';
-import QRCheckInButton from './QRCheckInButton';
 import useMediaQueryState from '../../../hooks/useMediaQueryState';
 import MobileDrawer from './MobileDrawer';
 import { User } from '../../../store/user';
@@ -20,20 +19,18 @@ function LoginContent({
   onClickDashboard,
 }: LoginContentProps) {
   const { isMobile } = useMediaQueryState();
-  const { realname: username, id: userId } = user;
+  const { realname: username } = user;
 
   return (
     <>
       {isMobile ? (
         <div className={`${layout.flex_center} loginContent__mobile`}>
-          <QRCheckInButton {...{ userId }} />
           <AlarmButton />
           <MobileDrawer {...{ username, onclickLoginout }} />
         </div>
       ) : (
         <div className="username__div">
           <p>{username}님</p>
-          <QRCheckInButton {...{ userId }} />
           <AlarmButton />
           <Button
             size="middle"
