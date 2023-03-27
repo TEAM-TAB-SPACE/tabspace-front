@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { axiosInstance } from '../../api/axios';
 import { userAtom } from '../../../store/user';
 import { API_URL_AUTH } from '../../api/auth';
+import { isDevMode } from '../../../config/config.export';
 
 const RedirectHandler = () => {
   const router = useRouter();
@@ -30,8 +31,11 @@ const RedirectHandler = () => {
       if (code) {
         const { data } = await registerKaKao(code, inputPayload);
 
-        // setCookie('access', data.tokens.access);
-        // setCookie('refresh', data.tokens.refresh);
+        if (isDevMode) {
+          setCookie('access', '32901876193870923845');
+          setCookie('refresh', '0985760938475690834756');
+        }
+
         setUser(data.user);
 
         router.push('/dashboard');

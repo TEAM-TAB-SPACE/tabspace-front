@@ -39,5 +39,16 @@ export const dashboardHandler = [
       return res(ctx.json(growthData));
     },
   ),
+  rest.get(
+    `${Config().baseUrl}${API_URL_DASHBOARD.NOTIFICATION}`,
+    async (req, res, ctx) => {
+      return res(
+        ctx.json({
+          notifications:
+            '오늘은 밀린 강의를 청소해 볼까요 ? 마음이 한결 가벼워질거에요 (4),탭탭이랑 1일 1과제 어때요 ?  (5)',
+        }),
+      );
+    },
+  ),
   ...missionHandler,
 ];

@@ -1,6 +1,6 @@
 import { getCookie, removeCookies, setCookie } from 'cookies-next';
 import axios, { Axios } from 'axios';
-import Config from '../../config/config.export';
+import Config, { isDevMode } from '../../config/config.export';
 import { API_URL_AUTH } from './auth';
 
 export const axiosInstance = axios.create({
@@ -59,14 +59,19 @@ const getNewAccessToken = async (): Promise<string | void> => {
       accessToken: string;
     }>(API_URL_AUTH.REFRESH, { refreshToken });
 
-    // setCookie('access', data.accessToken);
+    if (isDevMode) setCookie('access', '1098751982734');
+
     return data.accessToken;
   } catch (e) {
     //refreshToken도 만료일 경우 로그인 페이지로 이동
-    // removeCookies('access');
-    // removeCookies('refresh');
+    if (isDevMode) {
+      removeCookies('access');
+      removeCookies('refresh');
+    }
 
-    window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}login`;
+    window.location.href = isDevMode
+      ? `${process.env.NEXT_DEV_PUBLIC_URL}/login`
+      : `${process.env.NEXT_PROD_PUBLIC_URL}/login`;
   }
 };
 
