@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import css from 'styled-jsx/css';
+import { message } from 'antd';
 import { axiosInstance } from '../../pages/api/axios';
+import { API_URL_OTHER } from '../../pages/api/other';
 
 export default function FixedSection() {
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('F');
+  const [messageApi, contextHolder] = message.useMessage();
 
   // 휴대폰 번호 입력 함수
   const handlePhone = e => {
@@ -15,7 +18,7 @@ export default function FixedSection() {
     setCategory(e.target.value);
   };
 
-  const handleClick = () => {
+  const handleClick = async () => {
     let result = '';
 
     for (let i = 0; i < phone.length && i < phone.length; i++) {
@@ -23,11 +26,19 @@ export default function FixedSection() {
       result += phone[i];
     }
 
-    axiosInstance.post(`/appliers/info`, { category, phone: result });
+    axiosInstance
+      .post(API_URL_OTHER.APPLIERS, {
+        category,
+        phone: result,
+      })
+      .catch(() => {
+        messageApi.info('전화번호 형식이 맞는지 확인해주세요.');
+      });
   };
 
   return (
     <>
+      {contextHolder}
       <div className="fixedsection_container">
         <select
           className="fixedsection_selectbtn"

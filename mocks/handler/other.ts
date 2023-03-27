@@ -21,4 +21,10 @@ export const otherHandler = [
       );
     },
   ),
+  rest.post(
+    `${Config().baseUrl}${API_URL_OTHER.APPLIERS}`,
+    async (req, res, ctx) => {
+      return res(ctx.status(400));
+    },
+  ),
 ];
