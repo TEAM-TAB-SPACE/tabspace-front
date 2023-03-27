@@ -28,7 +28,7 @@ function MissionUpload({ missionId }: MissionUploadProps) {
     multiple: false,
     maxCount: 1,
     data: { id: missionId },
-    headers: { Authorization: `Bearer ${getCookie('accessToken')}` },
+    headers: { Authorization: `Bearer ${getCookie('access')}` },
     action: `${process.env.NEXT_PUBLIC_BASE_URL}${API_URL_DASHBOARD.MISSION}`,
     showUploadList: false,
     onChange: (info: UploadChangeParam<UploadFile<unknown>>) => {
