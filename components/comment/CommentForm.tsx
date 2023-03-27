@@ -26,7 +26,7 @@ function CommentForm({ lectureId }: CommentFormProps) {
     });
 
     textarea.value = '';
-    setCommentRefetchKey('stale');
+    setCommentRefetchKey(() => 'stale');
   };
 
   return (

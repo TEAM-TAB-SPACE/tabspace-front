@@ -70,7 +70,7 @@ const useFetch: FetchHook = (params = {}) => {
 
         setData(fetchData);
         setIsLoading(false);
-        refetchKey?.key && refetchKey.setter('fresh');
+        refetchKey?.key && refetchKey.setter(() => 'fresh');
       };
       if (refetchKey?.key !== 'fresh' && url) {
         if (isDevMode) {

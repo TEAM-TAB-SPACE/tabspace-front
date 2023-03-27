@@ -22,7 +22,7 @@ function LectureContent() {
   const setRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
   useEffect(() => {
-    setRefetchKey('stale');
+    setRefetchKey(() => 'stale');
   }, [isMobile, setRefetchKey]);
 
   return (
