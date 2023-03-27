@@ -5,7 +5,7 @@ import { Skeleton } from 'antd';
 import { useSetRecoilState } from 'recoil';
 import { useSearchParams } from 'next/navigation';
 import { axiosInstance } from '../../api/axios';
-import { userAtom } from '../../../store/user';
+import { loginStateAtom, userAtom } from '../../../store/user';
 import { API_URL_AUTH } from '../../api/auth';
 import { isDevMode } from '../../../config/config.export';
 
@@ -14,6 +14,7 @@ const RedirectHandler = () => {
   const searchParams = useSearchParams();
   const code = searchParams.get('code');
 
+  const setIsLogin = useSetRecoilState(loginStateAtom);
   const setUser = useSetRecoilState(userAtom);
 
   const registerKaKao = async (code, inputData) => {
@@ -36,13 +37,14 @@ const RedirectHandler = () => {
           setCookie('refresh', '0985760938475690834756');
         }
 
+        setIsLogin(true);
         setUser(data.user);
 
         router.push('/dashboard');
         sessionStorage.removeItem('inputs');
       }
     })();
-  }, [code, router, setUser]);
+  }, [code, router, setIsLogin, setUser]);
 
   return (
     // eslint-disable-next-line react/jsx-filename-extension

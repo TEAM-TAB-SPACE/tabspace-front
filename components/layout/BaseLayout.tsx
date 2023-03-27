@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { getCookie } from 'cookies-next';
 import Header from './header/Header';
 import Footer from './Footer';
@@ -13,7 +13,7 @@ type BaseLayoutProps = {
 
 export default function BaseLayout({ children }: BaseLayoutProps) {
   const fetch = useFetch();
-  const setIsLogin = useSetRecoilState(loginStateAtom);
+  const isLogin = useRecoilValue(loginStateAtom);
   const setUser = useSetRecoilState(userAtom);
 
   useEffect(() => {
@@ -21,15 +21,14 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
     const getUserData = async () => {
       const refreshToken = getCookie('refresh');
 
-      if (refreshToken) {
+      if (refreshToken && isLogin) {
         const data = await fetch.get(API_URL_OTHER.USERNAME, '');
-        setIsLogin(true);
         setUser(data);
       }
     };
 
     getUserData();
-  }, [fetch, setIsLogin, setUser]);
+  }, [fetch, isLogin, setUser]);
 
   return (
     <>
