@@ -29,10 +29,8 @@ export default function Header() {
         },
       });
 
-      if (isDevMode) {
-        deleteCookie('access');
-        deleteCookie('refresh');
-      }
+      deleteCookie('access');
+      deleteCookie('refresh');
 
       router.push('/');
       setIsLogin(false);
