@@ -31,8 +31,14 @@ export default function FixedSection() {
         category,
         phone: result,
       })
-      .catch(() => {
-        messageApi.info('전화번호 형식이 맞는지 확인해주세요.');
+      .catch(({ response: { data } }) => {
+        if (data.phone[0] === 'Enter a valid phone number.') {
+          messageApi.info('전화번호 형식이 맞는지 확인해주세요.');
+        } else if (
+          data.phone[0] === 'applier with this phone already exists.'
+        ) {
+          messageApi.info('이미 신청된 번호입니다.');
+        }
       });
   };
 
