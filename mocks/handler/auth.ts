@@ -34,4 +34,10 @@ export const authHandler = [
       );
     },
   ),
+  rest.post(
+    `${Config().baseUrl}${API_URL_AUTH.LOGOUT}`,
+    async (req, res, ctx) => {
+      return res(ctx.status(200));
+    },
+  ),
 ];
