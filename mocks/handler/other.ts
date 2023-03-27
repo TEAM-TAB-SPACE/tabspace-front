@@ -10,4 +10,15 @@ export const otherHandler = [
       return res(ctx.json(calendarData));
     },
   ),
+  rest.get(
+    `${Config().baseUrl}${API_URL_OTHER.USERNAME}`,
+    async (req, res, ctx) => {
+      return res(
+        ctx.json({
+          id: 9,
+          realname: '박찬양',
+        }),
+      );
+    },
+  ),
 ];
