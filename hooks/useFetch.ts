@@ -43,7 +43,7 @@ const useFetch: FetchHook = (params = {}) => {
   const [data, setData] = useState();
   const [error, setError] = useState('{}');
 
-  const token = getCookie('accessToken');
+  const token = getCookie('access');
   const axios = axiosInstance;
 
   if (typeof token === 'string' && token) setAxiosAccessToken(axios, token);

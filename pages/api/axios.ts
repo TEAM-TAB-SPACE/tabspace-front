@@ -1,4 +1,4 @@
-import { getCookie, removeCookies } from 'cookies-next';
+import { getCookie, removeCookies, setCookie } from 'cookies-next';
 import axios, { Axios } from 'axios';
 import Config from '../../config/config.export';
 import { API_URL_AUTH } from './auth';
@@ -53,17 +53,18 @@ export const setAxiosInterCeptors = (axiosInstance: Axios) => {
 
 const getNewAccessToken = async (): Promise<string | void> => {
   try {
-    const refreshToken = getCookie('refreshToken');
+    const refreshToken = getCookie('refresh');
 
     const { data } = await axiosInstance.post<{
       accessToken: string;
     }>(API_URL_AUTH.REFRESH, { refreshToken });
 
+    // setCookie('access', data.accessToken);
     return data.accessToken;
   } catch (e) {
     //refreshToken도 만료일 경우 로그인 페이지로 이동
-    removeCookies('accessToken');
-    removeCookies('refreshToken');
+    // removeCookies('access');
+    // removeCookies('refresh');
     window.location.href = 'http://localhost:3000/login';
   }
 };
@@ -91,7 +92,6 @@ export const callPostApi =
       return String(error);
     }
   };
-
 export const callPutApi =
   (axios: Axios) => async (url: string, payload: unknown) => {
     try {

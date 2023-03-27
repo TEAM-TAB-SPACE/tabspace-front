@@ -19,7 +19,11 @@ import { QuestionCircleOutlined } from '@ant-design/icons';
 export default function Home() {
   return (
     <>
-      <FloatButton.Group trigger="click" icon={<QuestionCircleOutlined />}>
+      <FloatButton.Group
+        type="primary"
+        trigger="click"
+        icon={<QuestionCircleOutlined />}
+      >
         <Chatbot
           config={config}
           messageParser={MessageParser}

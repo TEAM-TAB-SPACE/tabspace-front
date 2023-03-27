@@ -20,7 +20,7 @@ export default function Header() {
   // 로그아웃
   const Logout = () => {
     try {
-      const accessToken = getCookie('accessToken');
+      const accessToken = getCookie('access');
 
       axiosInstance.post(API_URL_AUTH.LOGOUT, null, {
         headers: {
@@ -28,8 +28,8 @@ export default function Header() {
         },
       });
 
-      deleteCookie('accessToken');
-      deleteCookie('refreshToken');
+      // deleteCookie('access');
+      // deleteCookie('refresh');
 
       router.push('/');
       setIsLogin(false);

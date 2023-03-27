@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import useFetch from './useFetch';
 import { API_URL_AUTH } from '../pages/api/auth';
 
@@ -8,12 +8,14 @@ const useAuth = (loginState = false) => {
   const client = useFetch();
 
   useEffect(() => {
-    const refreshToken = getCookie('refreshToken');
+    const refreshToken = getCookie('refresh');
     const getNewAccessToken = async () => {
       if (refreshToken) {
-        client.post(API_URL_AUTH.REFRESH, {
+        const { access } = await client.post(API_URL_AUTH.REFRESH, {
           refresh: refreshToken,
         });
+
+        // setCookie('access', access);
 
         setIsLogin(true);
       }
