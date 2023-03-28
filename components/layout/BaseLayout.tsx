@@ -20,11 +20,12 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
     //사이트 접속 시 로그인 상태면 사용자 정보 get
     const getUserData = async () => {
       const accessToken = getCookie('access');
+      console.log('hasAccessToken', !!accessToken);
 
       if (accessToken) {
         const data = await fetch.get(API_URL_OTHER.USERNAME, '');
-        setIsLogin(true);
-        setUser(data);
+        setIsLogin(() => true);
+        setUser(() => data);
       }
     };
 
