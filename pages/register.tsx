@@ -1,5 +1,6 @@
 import css from 'styled-jsx/css';
 import Link from 'next/link';
+import { message } from 'antd';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -17,6 +18,7 @@ export interface RegisterType {
 
 export default function Register() {
   const router = useRouter();
+  const [messageApi, contextHolder] = message.useMessage();
   const [inputs, setInputs] = useState<RegisterType>({
     realname: '',
     email: '',
@@ -46,7 +48,7 @@ export default function Register() {
     const data = await validationApi(inputs);
 
     if (data instanceof Error) {
-      alert('회원가입에 실패했습니다!');
+      messageApi.error('인증번호가 유효하지 않습니다.');
     } else {
       sessionStorage.setItem('inputs', JSON.stringify(inputs));
       router.push(KAKAO_AUTH_URL);
@@ -55,129 +57,134 @@ export default function Register() {
   };
 
   return (
-    <div className="register__container">
-      <div className="register__wrap">
-        <p>탭스페이스와 함께</p>
-        <p>꿈을 키우세요.</p>
-      </div>
-      <div className="register__form">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="register__input">
-            <label htmlFor="realname">
-              이름
-              <input
-                {...register('realname', { required: true })}
-                type="text"
-                name="realname"
-                value={realname}
-                onChange={onChange}
-                placeholder="실명을 입력해주세요."
-              />
-              <p>
-                {errors.realname?.type === 'required' && '이름을 입력해주세요.'}
-              </p>
-            </label>
-          </div>
-          <div className="register__input">
-            <label htmlFor="email">
-              이메일
-              <input
-                {...register('email', { required: true })}
-                type="email"
-                name="email"
-                value={email}
-                onChange={onChange}
-                placeholder="메일을 입력해주세요."
-              />
-              <p>
-                {errors.email?.type === 'required' && '이메일을 입력해주세요.'}
-              </p>
-            </label>
-          </div>
-          <div className="register__input">
-            <label htmlFor="phone">
-              전화번호
-              <input
-                {...register('phone', { required: true })}
-                type="number"
-                name="phone"
-                value={phone}
-                onChange={onChange}
-                placeholder="휴대전화를 입력해주세요."
-              />
-              <p>
-                {errors.phone?.type === 'required' &&
-                  '휴대전화를 입력해주세요.'}
-              </p>
-            </label>
-          </div>
-          <div className="register__input">
-            <label htmlFor="secretKey">
-              인증번호
-              <input
-                {...register('secret_key', { required: true })}
-                type="number"
-                name="secret_key"
-                value={secret_key}
-                onChange={onChange}
-                placeholder="인증코드 4자리를 입력해주세요."
-              />
-              <p>
-                {errors.secret_key?.type === 'required' &&
-                  '인증코드 입력해주세요.'}
-              </p>
-            </label>
-          </div>
-          <div className="input__marketing">
-            <label htmlFor="msg_agree">
-              <input
-                type="checkbox"
-                {...register('msg_agree')}
-                name="msg_agree"
-                onChange={onChange}
-              />
-              광고성 정보 수신 동의
-            </label>
-          </div>
+    <>
+      {contextHolder}
+      <div className="register__container">
+        <div className="register__wrap">
+          <p>탭스페이스와 함께</p>
+          <p>꿈을 키우세요.</p>
+        </div>
+        <div className="register__form">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="register__input">
+              <label htmlFor="realname">
+                이름
+                <input
+                  {...register('realname', { required: true })}
+                  type="text"
+                  name="realname"
+                  value={realname}
+                  onChange={onChange}
+                  placeholder="실명을 입력해주세요."
+                />
+                <p>
+                  {errors.realname?.type === 'required' &&
+                    '이름을 입력해주세요.'}
+                </p>
+              </label>
+            </div>
+            <div className="register__input">
+              <label htmlFor="email">
+                이메일
+                <input
+                  {...register('email', { required: true })}
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={onChange}
+                  placeholder="메일을 입력해주세요."
+                />
+                <p>
+                  {errors.email?.type === 'required' &&
+                    '이메일을 입력해주세요.'}
+                </p>
+              </label>
+            </div>
+            <div className="register__input">
+              <label htmlFor="phone">
+                전화번호
+                <input
+                  {...register('phone', { required: true })}
+                  type="number"
+                  name="phone"
+                  value={phone}
+                  onChange={onChange}
+                  placeholder="휴대전화를 입력해주세요."
+                />
+                <p>
+                  {errors.phone?.type === 'required' &&
+                    '휴대전화를 입력해주세요.'}
+                </p>
+              </label>
+            </div>
+            <div className="register__input">
+              <label htmlFor="secretKey">
+                인증번호
+                <input
+                  {...register('secret_key', { required: true })}
+                  type="text"
+                  name="secret_key"
+                  value={secret_key}
+                  onChange={onChange}
+                  placeholder="인증번호 입력해주세요."
+                />
+                <p>
+                  {errors.secret_key?.type === 'required' &&
+                    '인증번호 입력해주세요.'}
+                </p>
+              </label>
+            </div>
+            <div className="input__marketing">
+              <label htmlFor="msg_agree">
+                <input
+                  type="checkbox"
+                  {...register('msg_agree')}
+                  name="msg_agree"
+                  onChange={onChange}
+                />
+                광고성 정보 수신 동의
+              </label>
+            </div>
 
-          <div className="register__btn">
-            <input
-              type="submit"
-              className="kakaoBtn"
-              value="카카오로 회원가입하기"
-            />
-          </div>
-        </form>
-      </div>
+            <div className="register__btn">
+              <input
+                type="submit"
+                className="kakaoBtn"
+                value="카카오로 회원가입하기"
+              />
+            </div>
+          </form>
+        </div>
 
-      <div className="register__login">
-        <p>이미 회원이라면?</p>
-        <Link href="/login" style={{ fontSize: '0.8rem' }}>
-          로그인
-        </Link>
-      </div>
+        <div className="register__login">
+          <p>이미 회원이라면?</p>
+          <Link href="/login" style={{ fontSize: '0.8rem' }}>
+            로그인
+          </Link>
+        </div>
 
-      <style global jsx>{`
-        .kakaoBtn {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 200px;
-          height: 30px;
-          color: #ffffff;
-          background-color: #722ed1;
-          font-size: 0.8rem;
-          border-radius: 5px;
-          p {
-            padding-left: 5px;
+        <style global jsx>{`
+          .kakaoBtn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 30px;
+            color: #ffffff;
+            background-color: #722ed1;
+            font-size: 0.8rem;
+            border-radius: 5px;
+            p {
+              padding-left: 5px;
+            }
           }
-        }
-        a {
-          text-decoration: none;
-        }
-      `}</style>
-      <style jsx>{registerStyle}</style>
-    </div>
+          a {
+            text-decoration: none;
+          }
+        `}</style>
+        <style jsx>{registerStyle}</style>
+      </div>
+    </>
   );
 }
 

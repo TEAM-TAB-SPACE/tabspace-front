@@ -1,32 +1,38 @@
-import { useEffect, useState } from 'react';
-import { getCookie, setCookie } from 'cookies-next';
-import useFetch from './useFetch';
-import { API_URL_AUTH } from '../pages/api/auth';
+import { useCallback } from 'react';
+import { setCookie } from 'cookies-next';
 import { isDevMode } from '../config/config.export';
+import { useRecoilState } from 'recoil';
+import { loginStateAtom, userAtom } from '../store/user';
+import { useRouter } from 'next/router';
 
-const useAuth = (loginState = false) => {
-  const [isLogin, setIsLogin] = useState<boolean>(loginState);
-  const client = useFetch();
+const useAuth = () => {
+  const router = useRouter();
 
-  useEffect(() => {
-    const refreshToken = getCookie('refresh');
-    const getNewAccessToken = () => {
-      if (refreshToken) {
-        client.post(API_URL_AUTH.REFRESH, {
-          refresh: refreshToken,
-        });
+  const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
+  const [user, setUser] = useRecoilState(userAtom);
 
-        if (isDevMode) {
-          setCookie('access', '109832749182734');
-        }
-
-        setIsLogin(true);
+  const setLoginState = useCallback(
+    async ({
+      tokens,
+      user,
+    }: {
+      tokens: { access: string; refresh: string };
+      user: { id: number; realname: string };
+    }) => {
+      if (isDevMode) {
+        setCookie('access', tokens.access);
+        setCookie('refresh', tokens.access);
       }
-    };
 
-    getNewAccessToken();
-  }, []);
-  return { isLogin };
+      setIsLogin(true);
+      setUser(user);
+
+      router.push('/dashboard');
+    },
+    [router, setIsLogin, setUser],
+  );
+
+  return { isLogin, user, setLoginState };
 };
 
 export default useAuth;
