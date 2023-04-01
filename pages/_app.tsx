@@ -10,7 +10,7 @@ import Script from 'next/script';
 import BaseLayout from '../components/layout/BaseLayout';
 import locale from 'antd/lib/locale/ko_KR';
 
-if (isDevMode && process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+if (isDevMode) {
   import('../mocks');
 }
 

@@ -8,7 +8,6 @@ import Logo from '../../../public/assets/mainLogo.svg';
 import LoginContent from './LoginContent';
 import { loginStateAtom, userAtom } from '../../../store/user';
 import { API_URL_AUTH } from '../../../pages/api/auth';
-import { isDevMode } from '../../../config/config.export';
 
 export default function Header() {
   const router = useRouter();

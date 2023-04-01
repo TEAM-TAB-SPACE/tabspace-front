@@ -1,28 +1,18 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { setCookie } from 'cookies-next';
 import { Skeleton } from 'antd';
-import { useSetRecoilState } from 'recoil';
 import { useSearchParams } from 'next/navigation';
-import { axiosInstance } from '../../api/axios';
-import { loginStateAtom, userAtom } from '../../../store/user';
 import { API_URL_AUTH } from '../../api/auth';
-import { isDevMode } from '../../../config/config.export';
+import useFetch from '../../../hooks/useFetch';
+import useAuth from '../../../hooks/useAuth';
 
 const RedirectHandler = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const client = useFetch();
+  const { setLoginState } = useAuth();
+
   const code = searchParams.get('code');
-
-  const setIsLogin = useSetRecoilState(loginStateAtom);
-  const setUser = useSetRecoilState(userAtom);
-
-  const registerKaKao = async (code, inputData) => {
-    return await axiosInstance.post(API_URL_AUTH.REGISTER, {
-      code,
-      ...inputData,
-    });
-  };
 
   useEffect(() => {
     (async () => {
@@ -30,21 +20,16 @@ const RedirectHandler = () => {
       const inputPayload = JSON.parse(inputData);
 
       if (code) {
-        const { data } = await registerKaKao(code, inputPayload);
+        const { tokens, user } = await client.post(API_URL_AUTH.REGISTER, {
+          code,
+          ...inputPayload,
+        });
 
-        if (isDevMode) {
-          setCookie('access', '32901876193870923845');
-          setCookie('refresh', '0985760938475690834756');
-        }
-
-        setIsLogin(true);
-        setUser(data.user);
-
-        router.push('/dashboard');
+        setLoginState({ tokens, user });
         sessionStorage.removeItem('inputs');
       }
     })();
-  }, [code, router, setIsLogin, setUser]);
+  }, [client, code, router, setLoginState]);
 
   return (
     // eslint-disable-next-line react/jsx-filename-extension

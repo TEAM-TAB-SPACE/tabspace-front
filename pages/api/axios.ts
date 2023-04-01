@@ -56,12 +56,14 @@ const getNewAccessToken = async (): Promise<string | void> => {
     const refreshToken = getCookie('refresh');
 
     const { data } = await axiosInstance.post<{
-      accessToken: string;
+      access: string;
     }>(API_URL_AUTH.REFRESH, { refreshToken });
 
-    if (isDevMode) setCookie('access', '1098751982734');
+    if (isDevMode) {
+      setCookie('access', data.access);
+    }
 
-    return data.accessToken;
+    return data.access;
   } catch (e) {
     //refreshToken도 만료일 경우 로그인 페이지로 이동
 
