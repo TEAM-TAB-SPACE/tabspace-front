@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { getCookie } from 'cookies-next';
 import Header from './header/Header';
 import Footer from './Footer';
 import useFetch from '../../hooks/useFetch';
-import { loginStateAtom, userAtom } from '../../store/user';
+import useAuth from '../../hooks/useAuth';
 import { API_URL_OTHER } from '../../pages/api/other';
 
 type BaseLayoutProps = {
@@ -13,24 +11,19 @@ type BaseLayoutProps = {
 
 export default function BaseLayout({ children }: BaseLayoutProps) {
   const fetch = useFetch();
-  const setIsLogin = useSetRecoilState(loginStateAtom);
-  const setUser = useSetRecoilState(userAtom);
+  const { setLoginState } = useAuth();
 
+  //사이트 접속 시 로그인 상태면 사용자 정보 get
   useEffect(() => {
-    //사이트 접속 시 로그인 상태면 사용자 정보 get
-    const getUserData = async () => {
-      const accessToken = getCookie('access');
-      console.log('hasAccessToken', !!accessToken);
+    (async () => {
+      const authState = localStorage.getItem('AUTH_STATE');
 
-      if (accessToken) {
+      if (authState) {
         const data = await fetch.get(API_URL_OTHER.USERNAME, '');
-        setIsLogin(() => true);
-        setUser(() => data);
+        setLoginState({ user: data });
       }
-    };
-
-    getUserData();
-  }, [fetch, setIsLogin, setUser]);
+    })();
+  }, []);
 
   return (
     <>
