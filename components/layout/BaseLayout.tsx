@@ -3,6 +3,7 @@ import Header from './header/Header';
 import Footer from './Footer';
 import useFetch from '../../hooks/useFetch';
 import useAuth from '../../hooks/useAuth';
+import { getCookie } from 'cookies-next';
 import { API_URL_OTHER } from '../../pages/api/other';
 
 type BaseLayoutProps = {
@@ -17,8 +18,9 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
   useEffect(() => {
     (async () => {
       const authState = localStorage.getItem('AUTH_STATE');
+      const accessToken = getCookie('access');
 
-      if (authState) {
+      if (accessToken && authState) {
         const data = await fetch.get(API_URL_OTHER.USERNAME, '');
         setLoginState({ user: data });
       }
