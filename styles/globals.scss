@@ -34,6 +34,10 @@
   border-radius: 10px;
 }
 
+a {
+  text-decoration: none;
+}
+
 //custom antd style
 .ant-btn-primary {
   background-color: $primary;

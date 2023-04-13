@@ -1,4 +1,5 @@
 import css from 'styled-jsx/css';
+import variables from '../../styles/variables.module.scss';
 
 export default function Course() {
   return (
@@ -93,9 +94,9 @@ const index = css`
   }
   .coures_badge {
     padding: 6px 8px 3px;
-    background: #722ed1;
+    background: ${variables.primary};
     border-radius: 100px;
-    color: #ffffff;
+    color: ${variables.white};
     font-size: 12px;
     font-weight: 500;
   }

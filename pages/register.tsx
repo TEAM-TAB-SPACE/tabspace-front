@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { validationApi } from './api/validation';
-
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
+import { KAKAO_AUTH_URL } from '../constant/authUrl';
+import variables from '../styles/variables.module.scss';
 
 export interface RegisterType {
   realname: string;
@@ -28,21 +28,21 @@ export default function Register() {
   });
   // 비구조화 할당으로 값 추출
   const { realname, email, phone, secret_key } = inputs;
-
-  const onChange = (e: any) => {
-    setInputs(prevInputs => {
-      return {
-        ...prevInputs,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const onChange = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    setInputs(prevInputs => {
+      return {
+        ...prevInputs,
+        [target.name]: target.value,
+      };
+    });
+  };
 
   const onSubmit = async () => {
     const data = await validationApi(inputs);
@@ -52,7 +52,6 @@ export default function Register() {
     } else {
       sessionStorage.setItem('inputs', JSON.stringify(inputs));
       router.push(KAKAO_AUTH_URL);
-      router.push('/dashboard');
     }
   };
 
@@ -61,8 +60,11 @@ export default function Register() {
       {contextHolder}
       <div className="register__container">
         <div className="register__wrap">
-          <p>탭스페이스와 함께</p>
-          <p>꿈을 키우세요.</p>
+          <p>
+            탭스페이스와 함께
+            <br />
+            꿈을 키우세요.
+          </p>
         </div>
         <div className="register__form">
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -146,42 +148,20 @@ export default function Register() {
               </label>
             </div>
 
-            <div className="register__btn">
-              <input
-                type="submit"
-                className="kakaoBtn"
-                value="카카오로 회원가입하기"
-              />
-            </div>
+            <input
+              type="submit"
+              className="kakaoBtn"
+              value="카카오로 회원가입하기"
+            />
           </form>
         </div>
 
         <div className="register__login">
-          <p>이미 회원이라면?</p>
+          <span>이미 회원이라면?</span>
           <Link href="/login" style={{ fontSize: '0.8rem' }}>
             로그인
           </Link>
         </div>
-
-        <style global jsx>{`
-          .kakaoBtn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 200px;
-            height: 30px;
-            color: #ffffff;
-            background-color: #722ed1;
-            font-size: 0.8rem;
-            border-radius: 5px;
-            p {
-              padding-left: 5px;
-            }
-          }
-          a {
-            text-decoration: none;
-          }
-        `}</style>
         <style jsx>{registerStyle}</style>
       </div>
     </>
@@ -193,51 +173,35 @@ const registerStyle = css`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 300px;
+    margin: 150px auto;
     padding: 50px 30px;
-    background: #ffffff;
+    background: ${variables.white};
+    border-radius: 15px;
     border: 1px solid #a1aebf;
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
-    width: 300px;
-    height: 470px;
-    position: relative;
-    margin: 100px auto 170px;
+
     .register__wrap {
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      p {
-        font-size: 1.3rem;
-        font-weight: 700;
-        padding: 5px;
-      }
+      padding-bottom: 15px;
+      text-align: center;
+      font-size: 1.3rem;
+      line-height: 140%;
+      font-weight: 700;
     }
+
     .register__form {
-      position: absolute;
       display: flex;
-      max-width: 260px;
-      top: 130px;
-      form {
-        display: flex;
-        flex-direction: column;
-        .register__input {
-          padding-bottom: 5px;
-          label {
-            font-size: 0.8rem;
-            input {
-              width: 100%;
-              height: 30px;
-              border-radius: 5px;
-              border: 1px solid gray;
-            }
-            p {
-              font-size: 0.7rem;
-              padding-top: 7px;
-              color: red;
-            }
-          }
+
+      .register__input {
+        padding-bottom: 10px;
+        font-size: 0.8rem;
+
+        input {
+          margin-top: 5px;
+          width: 100%;
+          height: 30px;
+          border-radius: 5px;
+          border: 1px solid gray;
         }
       }
     }
@@ -245,36 +209,25 @@ const registerStyle = css`
       label {
         display: flex;
         justify-content: center;
-        font-size: 0.8rem;
         align-items: center;
-        text-align: center;
         padding: 10px 0;
-      }
-    }
-    .register__btn {
-      display: flex;
-      flex-direction: row;
-      .kakaoBtn {
-        border: none;
-      }
-    }
-    .register__login {
-      display: flex;
-      justify-content: center;
-      flex-direction: row;
-      align-items: center;
-      position: absolute;
-      top: 500px;
-      p {
         font-size: 0.8rem;
-        padding-right: 5px;
       }
     }
-  }
 
-  @media (max-width: 667px) {
-    .register__container {
-      top: 60px;
+    .kakaoBtn {
+      width: 100%;
+      height: 30px;
+      color: ${variables.white};
+      background-color: ${variables.primary};
+      font-size: 0.8rem;
+      border-radius: 5px;
+      border: none;
+    }
+
+    .register__login {
+      padding-top: 20px;
+      font-size: 0.8rem;
     }
   }
 `;

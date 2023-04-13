@@ -3,6 +3,7 @@ import css from 'styled-jsx/css';
 import { message } from 'antd';
 import { axiosInstance } from '../../pages/api/axios';
 import { API_URL_OTHER } from '../../pages/api/other';
+import variables from '../../styles/variables.module.scss';
 
 export default function FixedSection() {
   const [phone, setPhone] = useState('');
@@ -89,7 +90,7 @@ const fixedsection = css`
     bottom: 30px;
     border: 1px solid #a1aebf;
     padding: 15px;
-    background: #ffffff;
+    background: ${variables.white};
     box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     justify-content: space-evenly;
@@ -112,11 +113,11 @@ const fixedsection = css`
   }
   .fixedsection_button {
     border-radius: 2px;
-    background: #722ed1;
-    border: 1px solid #722ed1;
+    background: ${variables.primary};
+    border: 1px solid ${variables.primary};
     padding: 0 30px;
     height: 36px;
-    color: white;
+    color: ${variables.white};
     font-size: 16px;
     line-height: 140%;
     font-weight: 700;
@@ -132,11 +133,11 @@ const fixedsection = css`
       position: fixed;
     }
     .fixedsection_selectbtn {
-      width: 93px;
+      width: 105px;
       height: 30px;
     }
     .fixedsection_telnumber {
-      width: 140px;
+      width: 130px;
       height: 38px;
     }
     .fixedsection_button {

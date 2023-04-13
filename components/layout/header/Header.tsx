@@ -26,7 +26,7 @@ export default function Header() {
       });
 
       setLogoutState();
-      router.push('/');
+      location.href = '/';
     } catch (error) {
       console.log(error);
     }

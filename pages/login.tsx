@@ -6,8 +6,7 @@ import useFetch from '../hooks/useFetch';
 import useAuth from '../hooks/useAuth';
 import layout from '../styles/layout.module.scss';
 import { API_URL_AUTH } from './api/auth';
-
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
+import { KAKAO_AUTH_URL } from '../constant/authUrl';
 
 export default function Login() {
   const router = useRouter();
