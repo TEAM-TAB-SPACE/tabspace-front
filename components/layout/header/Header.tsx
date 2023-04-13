@@ -1,20 +1,16 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { axiosInstance, setAxiosInterCeptors } from '../../../pages/api/axios';
-import { deleteCookie, getCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 import Link from 'next/link';
 import css from 'styled-jsx/css';
 import Logo from '../../../public/assets/mainLogo.svg';
 import LoginContent from './LoginContent';
-import { loginStateAtom, userAtom } from '../../../store/user';
+import useAuth from '../../../hooks/useAuth';
 import { API_URL_AUTH } from '../../../pages/api/auth';
 
 export default function Header() {
   const router = useRouter();
-
-  const setUser = useSetRecoilState(userAtom);
-  const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
-  const user = useRecoilValue(userAtom);
+  const { isLogin, user, setLogoutState } = useAuth();
 
   setAxiosInterCeptors(axiosInstance);
 
@@ -29,14 +25,8 @@ export default function Header() {
         },
       });
 
-      deleteCookie('access');
-      deleteCookie('refresh');
-
-      setIsLogin(() => false);
-      setUser(() => {
-        return { id: 0, realname: '' };
-      });
-      await router.push('/');
+      setLogoutState();
+      router.push('/');
     } catch (error) {
       console.log(error);
     }

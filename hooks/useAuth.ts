@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { setCookie } from 'cookies-next';
+import { deleteCookie, setCookie } from 'cookies-next';
 import { isDevMode } from '../config/config.export';
 import { useRecoilState } from 'recoil';
 import { loginStateAtom, userAtom } from '../store/user';
@@ -16,14 +16,15 @@ const useAuth = () => {
       tokens,
       user,
     }: {
-      tokens: { access: string; refresh: string };
+      tokens?: { access: string; refresh: string };
       user: { id: number; realname: string };
     }) => {
-      if (isDevMode) {
+      if (isDevMode && tokens) {
         setCookie('access', tokens.access);
         setCookie('refresh', tokens.access);
       }
 
+      localStorage.setItem('AUTH_STATE', JSON.stringify(true));
       setIsLogin(true);
       setUser(user);
 
@@ -32,7 +33,16 @@ const useAuth = () => {
     [router, setIsLogin, setUser],
   );
 
-  return { isLogin, user, setLoginState };
+  const setLogoutState = () => {
+    deleteCookie('access');
+    deleteCookie('refresh');
+    localStorage.removeItem('AUTH_STATE');
+
+    setIsLogin(false);
+    setUser({ id: 0, realname: '' });
+  };
+
+  return { isLogin, user, setLoginState, setLogoutState };
 };
 
 export default useAuth;
