@@ -5,9 +5,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { validationApi } from './api/validation';
+import { KAKAO_AUTH_URL } from '../constant/authUrl';
 import variables from '../styles/variables.module.scss';
-
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
 
 export interface RegisterType {
   realname: string;
