@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Mainimg from '../public/images/img1.jpg';
 import Mainimg2 from '../public/images/img2.jpg';
-import Course from '../components/layout/Course';
-import Carousel from '../components/layout/Carousel';
-import Slider from '../components/layout/Slider';
-import FixedSection from '../components/layout/FixedSection';
+import Course from '../components/home/Course';
+import Carousel from '../components/home/Carousel';
+import Slider from '../components/home/Slider';
+import FixedSection from '../components/home/FixedSection';
 import { FloatButton } from 'antd';
 
 import css from 'styled-jsx/css';
