@@ -1,4 +1,4 @@
-import layout from '../../styles/layout.module.scss';
+import layout from '../../../styles/layout.module.scss';
 
 interface UserBadgeTextProps {
   userName: string;

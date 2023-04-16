@@ -1,6 +1,6 @@
 import React from 'react';
 import UserBadgeText from './UserBadgeText';
-import layout from '../../styles/layout.module.scss';
+import layout from '../../../styles/layout.module.scss';
 import UserBadgeIndicator from './UserBadgeIndicator';
 
 export interface UserBadgeData {

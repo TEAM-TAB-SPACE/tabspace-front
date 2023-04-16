@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import UserBadge from '../userBadge/UserBadge';
+import UserBadge from './userBadge/UserBadge';
 import ReplyButton from './ReplyButton';
 import ReplyForm from './ReplyForm';
-import { UserBadgeData } from '../userBadge/UserBadge';
+import { UserBadgeData } from './userBadge/UserBadge';
 
 interface CommentProps {
   isMyComment?: boolean;
