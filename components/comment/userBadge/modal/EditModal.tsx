@@ -4,8 +4,8 @@ import { Button, Modal, Input } from 'antd';
 import {
   currentCommentSelector,
   commentRefetchKeyAtom,
-} from '../../../store/comment';
-import useComment from '../../../hooks/useComment';
+} from '../../../../store/comment';
+import useComment from '../../../../hooks/useComment';
 
 const { TextArea } = Input;
 
