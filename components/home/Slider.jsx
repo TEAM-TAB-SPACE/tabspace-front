@@ -58,7 +58,7 @@ export default class Sliders extends Component {
           <Slider {...settings}>
             <div>
               <Image
-                src="/images/Logo1.jpg"
+                src="/assets/images/Logo1.jpg"
                 width={185}
                 height={70}
                 alt="logo1"
@@ -67,7 +67,7 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src="/images/Logo2.jpg"
+                src="/assets/images/Logo2.jpg"
                 width={185}
                 height={70}
                 alt="logo2"
@@ -77,7 +77,7 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src="/images/Logo3.jpg"
+                src="/assets/images/Logo3.jpg"
                 width={185}
                 height={70}
                 alt="logo3"
@@ -87,7 +87,7 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src="/images/Logo4.jpg"
+                src="/assets/images/Logo4.jpg"
                 width={185}
                 height={70}
                 alt="logo4"
@@ -97,7 +97,7 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src="/images/Logo5.jpg"
+                src="/assets/images/Logo5.jpg"
                 width={185}
                 height={70}
                 alt="logo5"
@@ -107,7 +107,7 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src="/images/Logo6.jpg"
+                src="/assets/images/Logo6.jpg"
                 width={185}
                 height={70}
                 alt="logo6"

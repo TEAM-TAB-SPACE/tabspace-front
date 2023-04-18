@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import footerimg1 from 'public/images/footer1.jpg';
-import footerimg2 from 'public/images/footer2.jpg';
-import footerimg3 from 'public/images/footer3.jpg';
-import footerimg4 from 'public/images/footer4.jpg';
+import footerimg1 from 'public/assets/images/footer1.jpg';
+import footerimg2 from 'public/assets/images/footer2.jpg';
+import footerimg3 from 'public/assets/images/footer3.jpg';
+import footerimg4 from 'public/assets/images/footer4.jpg';
 
 import css from 'styled-jsx/css';
 

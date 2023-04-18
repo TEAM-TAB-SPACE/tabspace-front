@@ -14,7 +14,7 @@ function NextArrow(props) {
       className="rightbtn"
     >
       <Image
-        src="/images/btn-right.jpg"
+        src="/assets/images/btn-right.jpg"
         width={50}
         height={50}
         className="rightbtn"
@@ -33,7 +33,7 @@ function PrevArrow(props) {
       className="leftbtn"
     >
       <Image
-        src="/images/btn-left.jpg"
+        src="/assets/images/btn-left.jpg"
         width={50}
         height={50}
         className="leftbtn"
@@ -82,7 +82,7 @@ export default class Carousel extends Component {
             <div className="carousel_long_slide" style={{ width: 250 }}>
               <div className="carousel_mid_profile_title">
                 <Image
-                  src="/images/profile.jpeg"
+                  src="/assets/images/profile.jpeg"
                   alt="profileimg"
                   width="48"
                   height="48"
@@ -103,7 +103,7 @@ export default class Carousel extends Component {
             <div className="carousel_shot_slide" style={{ width: 250 }}>
               <div className="carousel_mid_profile_title">
                 <Image
-                  src="/images/profile.jpeg"
+                  src="/assets/images/profile.jpeg"
                   alt="profileimg"
                   width="48"
                   height="48"
@@ -122,7 +122,7 @@ export default class Carousel extends Component {
             <div className="carousel_long_slide" style={{ width: 250 }}>
               <div className="carousel_mid_profile_title">
                 <Image
-                  src="/images/profile.jpeg"
+                  src="/assets/images/profile.jpeg"
                   alt="profileimg"
                   width="48"
                   height="48"
@@ -143,7 +143,7 @@ export default class Carousel extends Component {
             <div className="carousel_shot_slide" style={{ width: 250 }}>
               <div className="carousel_mid_profile_title">
                 <Image
-                  src="/images/profile.jpeg"
+                  src="/assets/images/profile.jpeg"
                   alt="profileimg"
                   width="48"
                   height="48"
