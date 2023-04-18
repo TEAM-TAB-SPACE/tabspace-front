@@ -97,11 +97,13 @@ const fixedsection = css`
     left: 50%;
     transform: translateX(-50%);
   }
+
   .fixedsection_selectbtn {
     height: 36px;
     border-radius: 5px;
     text-align: center;
   }
+
   .fixedsection_telnumber {
     height: 36px;
     text-align: center;
@@ -111,6 +113,7 @@ const fixedsection = css`
     font-size: 16px;
     line-height: 140%;
   }
+
   .fixedsection_button {
     border-radius: 2px;
     background: ${variables.primary};
@@ -123,6 +126,7 @@ const fixedsection = css`
     font-weight: 700;
     border-radius: 5px;
   }
+
   @media (max-width: 570px) {
     .fixedsection_container {
       width: 288px;
@@ -132,14 +136,17 @@ const fixedsection = css`
       bottom: 10px;
       position: fixed;
     }
+
     .fixedsection_selectbtn {
       width: 105px;
       height: 30px;
     }
+
     .fixedsection_telnumber {
       width: 130px;
       height: 38px;
     }
+
     .fixedsection_button {
       width: 243px;
       height: 36.8px;

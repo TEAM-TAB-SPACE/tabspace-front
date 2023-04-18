@@ -46,6 +46,7 @@ const index = css`
     text-align: center;
     line-height: 140%;
   }
+
   .coures_text {
     margin-top: 15px;
     text-align: center;
@@ -53,12 +54,14 @@ const index = css`
     font-size: 22px;
     line-height: 130%;
   }
+
   .coures_box {
     margin-top: 40px;
     display: flex;
     justify-content: center;
     gap: 32px;
   }
+
   .coures_front {
     width: 100%;
     min-height: 200px;
@@ -70,6 +73,7 @@ const index = css`
     border-radius: 10px;
     padding: 40px;
   }
+
   .coures_backend {
     width: 100%;
     min-height: 200px;
@@ -81,6 +85,7 @@ const index = css`
     border-radius: 10px;
     padding: 40px;
   }
+
   .coures_ux {
     width: 100%;
     min-height: 200px;
@@ -92,6 +97,7 @@ const index = css`
     border-radius: 10px;
     padding: 40px;
   }
+
   .coures_badge {
     padding: 6px 8px 3px;
     background: ${variables.primary};
@@ -100,17 +106,20 @@ const index = css`
     font-size: 12px;
     font-weight: 500;
   }
+
   .coures_box_title {
     font-size: 25px;
     line-height: 140%;
     font-weight: 700;
   }
+
   .coures_box_text {
     font-weight: 300;
     font-size: 16px;
     line-height: 140%;
     letter-spacing: 0.02em;
   }
+
   @media (max-width: 700px) {
     .coures_box {
       display: flex;

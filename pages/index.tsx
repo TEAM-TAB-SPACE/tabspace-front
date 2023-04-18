@@ -8,6 +8,7 @@ import FixedSection from '../components/home/FixedSection';
 import { FloatButton } from 'antd';
 
 import css from 'styled-jsx/css';
+import variables from '../styles/variables.module.scss';
 import 'react-chatbot-kit/build/main.css';
 
 import Chatbot from 'react-chatbot-kit';
@@ -54,14 +55,12 @@ export default function Home() {
       </main>
       <style jsx>{index}</style>
       <style global jsx>{`
-        .mainimg {
-          width: 100%;
-          height: 100%;
-        }
+        .mainimg,
         .mainimg2 {
           width: 100%;
           height: 100%;
         }
+
         .logo {
           height: 70px;
         }
@@ -74,6 +73,7 @@ const index = css`
   .index_wrapper {
     padding: 0 70px;
   }
+
   @media (min-width: 501px) {
     .mainimg {
       display: block;
@@ -83,10 +83,12 @@ const index = css`
       display: none;
     }
   }
+
   @media (max-width: 500px) {
     .index_wrapper {
       padding: 0 16px;
     }
+
     .mainimg {
       display: none;
     }
@@ -95,27 +97,32 @@ const index = css`
       display: block;
     }
   }
+
   .index_top {
     width: 1440px;
     height: 568px;
   }
+
   .index_top_title {
     font-weight: bold;
     font-size: 40px;
     margin-top: 80px;
     text-align: center;
   }
+
   .index_top_text {
     margin-top: 24px;
     text-align: center;
     line-height: 25px;
     font-size: 24px;
   }
+
   .index_topbox {
     margin-top: 40px;
     display: flex;
     justify-content: center;
   }
+
   .index_topbox_front {
     width: 280px;
     height: 120px;
@@ -128,6 +135,7 @@ const index = css`
     margin-right: 32px;
     padding: 40px;
   }
+
   .index_topbox_backend {
     width: 280px;
     height: 120px;
@@ -140,6 +148,7 @@ const index = css`
     margin-right: 32px;
     padding: 40px;
   }
+
   .index_topbox_ux {
     width: 280px;
     height: 120px;
@@ -151,6 +160,7 @@ const index = css`
     border-radius: 10px;
     padding: 40px;
   }
+
   .index_topbox_badge {
     display: flex;
     justify-content: center;
@@ -158,11 +168,12 @@ const index = css`
     padding: 0px 8px;
     width: 48px;
     height: 17px;
-    background: #722ed1;
+    background: ${variables.purple};
     border-radius: 100px;
-    color: #ffffff;
+    color: ${variables.white};
     font-size: 12px;
   }
+
   .index_topbox_backend_badge {
     display: flex;
     justify-content: center;
@@ -170,37 +181,43 @@ const index = css`
     padding: 0px 8px;
     width: 58px;
     height: 17px;
-    background: #722ed1;
+    background: ${variables.purple};
     border-radius: 100px;
-    color: #ffffff;
+    color: ${variables.white};
     font-size: 12px;
   }
+
   .index_topbox_title {
     font-size: 28px;
     line-height: 140%;
     font-weight: 700;
   }
+
   .index_topbox_text {
     font-weight: 300;
     font-size: 14px;
     line-height: 140%;
     letter-spacing: 0.02em;
   }
+
   .index_mid {
     width: 1440px;
     height: 516px;
   }
+
   .index_text {
     font-weight: 400;
     font-size: 24px;
     margin-left: 70px;
   }
+
   .index_title {
     font-weight: 700;
     font-size: 40px;
     margin-left: 70px;
     margin-top: 24px;
   }
+
   .swiper_container {
     display: flex;
     width: 1017px;
@@ -208,12 +225,14 @@ const index = css`
     margin-top: 56px;
     justify-content: center;
   }
+
   .swiper_slide {
     border: 1px solid #a1aebf;
     border-radius: 4px;
     width: 307px;
     height: 266px;
   }
+
   .index_profile {
     border-radius: 50%;
   }
