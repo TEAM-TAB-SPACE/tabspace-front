@@ -58,12 +58,6 @@ export default function Header() {
         )}
       </header>
       <style jsx>{header}</style>
-      <style global jsx>{`
-        .header__container a {
-          text-decoration: none;
-          color: black;
-        }
-      `}</style>
     </>
   );
 }
@@ -87,6 +81,7 @@ const header = css`
     display: flex;
     flex-direction: row;
   }
+
   .header__login,
   .header__register {
     padding: 0 10px;
