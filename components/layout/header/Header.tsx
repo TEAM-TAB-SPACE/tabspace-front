@@ -1,36 +1,14 @@
 import { useRouter } from 'next/router';
-import { axiosInstance, setAxiosInterCeptors } from '../../../pages/api/axios';
-import { getCookie } from 'cookies-next';
 import Link from 'next/link';
 import css from 'styled-jsx/css';
 import Logo from '../../../public/assets/mainLogo.svg';
 import LoginContent from './LoginContent';
 import useAuth from '../../../hooks/useAuth';
-import { API_URL_AUTH } from '../../../pages/api/auth';
+import variables from '../../../styles/variables.module.scss';
 
 export default function Header() {
   const router = useRouter();
-  const { isLogin, user, setLogoutState } = useAuth();
-
-  setAxiosInterCeptors(axiosInstance);
-
-  // 로그아웃
-  const Logout = async () => {
-    try {
-      const accessToken = getCookie('access');
-
-      axiosInstance.post(API_URL_AUTH.LOGOUT, null, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      setLogoutState();
-      location.href = '/';
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const { isLogin, user, logout } = useAuth();
 
   return (
     <>
@@ -50,7 +28,7 @@ export default function Header() {
         ) : (
           <LoginContent
             user={user}
-            onClickLoginout={Logout}
+            onClickLoginout={logout}
             onClickDashboard={() => {
               router.push('/dashboard');
             }}
@@ -64,16 +42,16 @@ export default function Header() {
 
 const header = css`
   .header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000;
     width: 100%;
-    background-color: #fff;
-    display: flex;
-    justify-content: space-between;
+    background-color: ${variables.white};
     padding: 15px 70px;
-    align-items: center;
     border-bottom: 1px solid #e2e8f0;
     box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.15);
   }
