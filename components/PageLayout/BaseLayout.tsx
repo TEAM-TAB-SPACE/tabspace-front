@@ -21,8 +21,8 @@ export default function BaseLayout({ children }: BaseLayoutProps) {
       const accessToken = getCookie('access');
 
       if (accessToken && authState) {
-        const data = await fetch.get(API_URL_OTHER.USERNAME, '');
-        setLoginState({ user: data });
+        const userData = await fetch.get(API_URL_OTHER.USERNAME, '');
+        setLoginState(userData);
       }
     })();
   }, []);
