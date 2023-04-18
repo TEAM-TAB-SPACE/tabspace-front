@@ -5,10 +5,10 @@ import { Button, Drawer } from 'antd';
 
 interface MobileDrawerProps {
   username: string;
-  onclickLoginout: MouseEventHandler;
+  onClickLoginout: MouseEventHandler;
 }
 
-function MobileDrawer({ username = '', onclickLoginout }: MobileDrawerProps) {
+function MobileDrawer({ username = '', onClickLoginout }: MobileDrawerProps) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
 
@@ -37,7 +37,7 @@ function MobileDrawer({ username = '', onclickLoginout }: MobileDrawerProps) {
         onClose={onClose}
         open={open}
         extra={
-          <Button size="small" onClick={onclickLoginout}>
+          <Button size="small" onClick={onClickLoginout}>
             로그아웃
           </Button>
         }

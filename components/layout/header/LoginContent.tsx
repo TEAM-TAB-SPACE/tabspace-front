@@ -9,13 +9,13 @@ import { User } from '../../../store/user';
 
 interface LoginContentProps {
   user: User;
-  onclickLoginout: MouseEventHandler;
+  onClickLoginout: MouseEventHandler;
   onClickDashboard: MouseEventHandler;
 }
 
 function LoginContent({
   user,
-  onclickLoginout,
+  onClickLoginout,
   onClickDashboard,
 }: LoginContentProps) {
   const { isMobile } = useMediaQueryState();
@@ -26,7 +26,7 @@ function LoginContent({
       {isMobile ? (
         <div className={`${layout.flex_center} loginContent__mobile`}>
           <AlarmButton />
-          <MobileDrawer {...{ username, onclickLoginout }} />
+          <MobileDrawer {...{ username, onClickLoginout }} />
         </div>
       ) : (
         <div className="username__div">
@@ -35,7 +35,7 @@ function LoginContent({
           <Button
             size="middle"
             type="text"
-            onClick={onclickLoginout}
+            onClick={onClickLoginout}
             style={{ padding: '4px 2px' }}
           >
             <LogoutOutlined style={{ fontSize: 18 }} />
