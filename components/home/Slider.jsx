@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
+import Image from 'next/image';
 import Slider from 'react-slick';
+import css from 'styled-jsx/css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Image from 'next/image';
-import Logo1 from 'public/images/Logo1.jpg';
-import Logo2 from 'public/images/Logo2.jpg';
-import Logo3 from 'public/images/Logo3.jpg';
-import Logo4 from 'public/images/Logo4.jpg';
-import Logo5 from 'public/images/Logo5.jpg';
-import Logo6 from 'public/images/Logo6.jpg';
-import css from 'styled-jsx/css';
 
 export default class Sliders extends Component {
   render() {
@@ -64,15 +58,18 @@ export default class Sliders extends Component {
           <Slider {...settings}>
             <div>
               <Image
-                src={Logo1}
+                src="/assets/images/Logo1.jpg"
+                width={185}
+                height={70}
                 alt="logo1"
-                style={{ width: 185 }}
                 className="logo"
               />
             </div>
             <div>
               <Image
-                src={Logo2}
+                src="/assets/images/Logo2.jpg"
+                width={185}
+                height={70}
                 alt="logo2"
                 style={{ width: 185 }}
                 className="logo"
@@ -80,7 +77,9 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src={Logo3}
+                src="/assets/images/Logo3.jpg"
+                width={185}
+                height={70}
                 alt="logo3"
                 style={{ width: 185 }}
                 className="logo"
@@ -88,7 +87,9 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src={Logo4}
+                src="/assets/images/Logo4.jpg"
+                width={185}
+                height={70}
                 alt="logo4"
                 style={{ width: 185 }}
                 className="logo"
@@ -96,7 +97,9 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src={Logo5}
+                src="/assets/images/Logo5.jpg"
+                width={185}
+                height={70}
                 alt="logo5"
                 style={{ width: 185 }}
                 className="logo"
@@ -104,7 +107,9 @@ export default class Sliders extends Component {
             </div>
             <div>
               <Image
-                src={Logo6}
+                src="/assets/images/Logo6.jpg"
+                width={185}
+                height={70}
                 alt="logo6"
                 style={{ width: 185 }}
                 className="logo"
@@ -121,19 +126,23 @@ const slider = css`
   .slider_container {
     margin-bottom: 120px;
   }
+
   .slider_box {
     margin-bottom: 64px;
   }
+
   .slider_text {
     font-weight: 400;
     font-size: 22px;
     margin-top: 80px;
   }
+
   .slider_title {
     font-weight: 700;
     font-size: 35px;
     margin-top: 20px;
   }
+
   .logo {
     height: 100px;
   }

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import Image from 'next/image';
-import Profileimg from 'public/images/profile.jpeg';
-import Rightbtn from 'public/images/btn-right.jpg';
-import Leftbtn from 'public/images/btn-left.jpg';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -17,7 +14,7 @@ function NextArrow(props) {
       className="rightbtn"
     >
       <Image
-        src={Rightbtn}
+        src="/assets/images/btn-right.jpg"
         width={50}
         height={50}
         className="rightbtn"
@@ -36,7 +33,7 @@ function PrevArrow(props) {
       className="leftbtn"
     >
       <Image
-        src={Leftbtn}
+        src="/assets/images/btn-left.jpg"
         width={50}
         height={50}
         className="leftbtn"
@@ -85,7 +82,7 @@ export default class Carousel extends Component {
             <div className="carousel_long_slide" style={{ width: 250 }}>
               <div className="carousel_mid_profile_title">
                 <Image
-                  src={Profileimg}
+                  src="/assets/images/profile.jpeg"
                   alt="profileimg"
                   width="48"
                   height="48"
@@ -106,7 +103,7 @@ export default class Carousel extends Component {
             <div className="carousel_shot_slide" style={{ width: 250 }}>
               <div className="carousel_mid_profile_title">
                 <Image
-                  src={Profileimg}
+                  src="/assets/images/profile.jpeg"
                   alt="profileimg"
                   width="48"
                   height="48"
@@ -125,7 +122,7 @@ export default class Carousel extends Component {
             <div className="carousel_long_slide" style={{ width: 250 }}>
               <div className="carousel_mid_profile_title">
                 <Image
-                  src={Profileimg}
+                  src="/assets/images/profile.jpeg"
                   alt="profileimg"
                   width="48"
                   height="48"
@@ -146,7 +143,7 @@ export default class Carousel extends Component {
             <div className="carousel_shot_slide" style={{ width: 250 }}>
               <div className="carousel_mid_profile_title">
                 <Image
-                  src={Profileimg}
+                  src="/assets/images/profile.jpeg"
                   alt="profileimg"
                   width="48"
                   height="48"
@@ -172,18 +169,21 @@ const Global = createGlobalStyle`
   .slick-slide {
       margin-right: 30px;
   }
+
   .carousel_container {
     .slick-track {
       width: 5000px;
       height: 400px;
       overflow: hidden;
     }  
+
     @media (max-width: 500px) {
       .rightbtn {
           left: 75%;
           transform: translateX(-50%);
           margin-top: 240px; 
       }
+
       .leftbtn {
         left: 50%;
         transform: translateX(-40%);
@@ -197,35 +197,42 @@ const carousel = css`
   .carousel_box {
     margin-bottom: 56px;
   }
+
   .carousel_text {
     font-weight: 400;
     font-size: 22px;
     margin-top: 150px;
   }
+
   .carousel_title {
     font-weight: 700;
     font-size: 35px;
     margin-top: 20px;
   }
+
   .carousel_long_slide {
     border: 1px solid #a1aebf;
     border-radius: 4px;
     padding: 20px;
   }
+
   .carousel_shot_slide {
     border: 1px solid #a1aebf;
     border-radius: 4px;
     padding: 20px;
   }
+
   .carousel_mid_profile_title {
     display: flex;
     align-items: center;
   }
+
   .carousel_mid_title {
     margin-left: 10px;
     font-weight: bold;
     line-height: 120%;
   }
+
   .carousel_mid_text {
     margin-top: 16px;
     letter-spacing: 0.02em;

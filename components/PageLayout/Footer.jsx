@@ -1,10 +1,11 @@
 import Image from 'next/image';
-import footerimg1 from 'public/images/footer1.jpg';
-import footerimg2 from 'public/images/footer2.jpg';
-import footerimg3 from 'public/images/footer3.jpg';
-import footerimg4 from 'public/images/footer4.jpg';
+import footerimg1 from 'public/assets/images/footer1.jpg';
+import footerimg2 from 'public/assets/images/footer2.jpg';
+import footerimg3 from 'public/assets/images/footer3.jpg';
+import footerimg4 from 'public/assets/images/footer4.jpg';
 
 import css from 'styled-jsx/css';
+import variables from '../../styles/variables.module.scss';
 
 export default function Footer() {
   return (
@@ -47,21 +48,24 @@ const footer = css`
     justify-content: space-around;
     width: 100%;
     padding: 30px 70px;
-    background-color: #330b52;
+    background-color: ${variables.purpleDark};
     align-items: center;
   }
+
   .footer_title {
-    color: white;
+    color: ${variables.white};
     font-weight: 700;
     font-size: 16px;
     line-height: 24px;
   }
+
   .footer_text {
-    color: white;
+    color: ${variables.white};
     font-size: 14px;
     line-height: 22px;
     margin-top: 10px;
   }
+
   .footerimg_container {
     margin: 20px auto 0;
     width: 134px;
@@ -69,11 +73,13 @@ const footer = css`
     display: flex;
     justify-content: space-between;
   }
+
   @media (max-width: 700px) {
     .footer_container {
       display: block;
       text-align: center;
     }
+
     .footer_second_box,
     .footer_third_box {
       margin-top: 50px;

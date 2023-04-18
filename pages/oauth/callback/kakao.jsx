@@ -2,34 +2,26 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Skeleton } from 'antd';
 import { useSearchParams } from 'next/navigation';
-import { API_URL_AUTH } from '../../api/auth';
 import useFetch from '../../../hooks/useFetch';
 import useAuth from '../../../hooks/useAuth';
 
-const RedirectHandler = () => {
-  const searchParams = useSearchParams();
+function RedirectHandler() {
   const router = useRouter();
   const client = useFetch();
-  const { setLoginState } = useAuth();
 
-  const code = searchParams.get('code');
+  const searchParams = useSearchParams();
+  const authCode = searchParams.get('code');
+
+  const { kakaoAuthLogin } = useAuth();
 
   useEffect(() => {
-    (async () => {
-      const inputData = sessionStorage.getItem('inputs');
-      const inputPayload = JSON.parse(inputData);
+    const socialLogin = async () => {
+      const registerInput = sessionStorage.getItem('inputs');
+      if (authCode) kakaoAuthLogin(authCode, registerInput);
+    };
 
-      if (code) {
-        const { tokens, user } = await client.post(API_URL_AUTH.REGISTER, {
-          code,
-          ...inputPayload,
-        });
-
-        setLoginState({ tokens, user });
-        sessionStorage.removeItem('inputs');
-      }
-    })();
-  }, [client, code, router, setLoginState]);
+    socialLogin();
+  }, [authCode, client, kakaoAuthLogin, router]);
 
   return (
     // eslint-disable-next-line react/jsx-filename-extension
@@ -53,6 +45,6 @@ const RedirectHandler = () => {
       `}</style>
     </>
   );
-};
+}
 
 export default RedirectHandler;

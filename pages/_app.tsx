@@ -7,7 +7,7 @@ import { isDevMode } from '../config/config.export';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
-import BaseLayout from '../components/layout/BaseLayout';
+import BaseLayout from '../components/PageLayout/BaseLayout';
 import locale from 'antd/lib/locale/ko_KR';
 
 if (isDevMode) {
@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ConfigProvider locale={locale}>
           <Head>
             <title>TAP SPACE</title>
-            <link rel="icon" href="/images/favicon.ico" />
+            <link rel="icon" href="/assets/images/favicon.ico" />
           </Head>
           <Script
             src="https://developers.kakao.com/sdk/js/kakao.js"
