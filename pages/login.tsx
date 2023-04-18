@@ -1,26 +1,16 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Button } from 'antd';
-import Kakao from '../public/assets/kakaotalk.svg';
-import useFetch from '../hooks/useFetch';
 import useAuth from '../hooks/useAuth';
 import layout from '../styles/layout.module.scss';
-import { API_URL_AUTH } from './api/auth';
+import Kakao from '../public/assets/kakaotalk.svg';
 import { KAKAO_AUTH_URL } from '../constant/authUrl';
 
 export default function Login() {
   const router = useRouter();
-  const client = useFetch();
-  const { setLoginState } = useAuth();
+  const { loginTestUser } = useAuth();
 
-  const loginTestUser = async (mode?: number) => {
-    const { tokens, user } = await client.post(API_URL_AUTH.TEST_LOGIN, {
-      mode,
-    });
-    setLoginState({ tokens, user });
-  };
-
-  const loginOnclick = () => {
+  const handleLoginButtonClick = () => {
     if (sessionStorage !== null) {
       router.push(KAKAO_AUTH_URL);
     }
@@ -56,7 +46,7 @@ export default function Login() {
             size="large"
             className={`${layout.flex_center} login__button`}
             icon={<Kakao style={{ marginRight: '5px' }} />}
-            onClick={loginOnclick}
+            onClick={handleLoginButtonClick}
           >
             카카오 로그인
           </Button>
@@ -66,50 +56,48 @@ export default function Login() {
           <Link href="/register">회원가입</Link>
         </div>
       </div>
-      <style global jsx>
-        {`
-          .login__container {
-            margin: 150px auto;
-            padding: 50px 30px;
-            width: 290px;
-            text-align: center;
-            border: 1px solid #a1aebf;
-            border-radius: 15px;
-            box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
+      <style global jsx>{`
+        .login__container {
+          margin: 150px auto;
+          padding: 50px 30px;
+          width: 290px;
+          text-align: center;
+          border: 1px solid #a1aebf;
+          border-radius: 15px;
+          box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
 
-            .login__greeting {
-              font-size: 1.3rem;
-              font-weight: 700;
-              line-height: 130%;
+          .login__greeting {
+            font-size: 1.3rem;
+            font-weight: 700;
+            line-height: 130%;
+          }
+
+          .login__buttons {
+            margin: 30px 0 30px;
+
+            .login__button {
+              width: 100%;
             }
 
-            .login__buttons {
-              margin: 30px 0 30px;
-
-              .login__button {
-                width: 100%;
-              }
-
-              .login__button:not(:last-child) {
-                margin-bottom: 10px;
-              }
-
-              .rupy {
-                background-color: #e57d8f;
-              }
-
-              .pororo {
-                background-color: #0075eb;
-                letter-spacing: -1.5px;
-              }
+            .login__button:not(:last-child) {
+              margin-bottom: 10px;
             }
 
-            .login__noAccount {
-              font-size: 0.8rem;
+            .rupy {
+              background-color: #e57d8f;
+            }
+
+            .pororo {
+              background-color: #0075eb;
+              letter-spacing: -1.5px;
             }
           }
-        `}
-      </style>
+
+          .login__noAccount {
+            font-size: 0.8rem;
+          }
+        }
+      `}</style>
     </>
   );
 }

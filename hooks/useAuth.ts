@@ -1,15 +1,15 @@
-import { useCallback } from 'react';
-import { deleteCookie, setCookie } from 'cookies-next';
-import { isDevMode } from '../config/config.export';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
+import { deleteCookie, setCookie } from 'cookies-next';
 import useFetch from './useFetch';
-import { loginStateAtom, userAtom } from '../store/user';
+import { isDevMode } from '../config/config.export';
+import { RegisterType } from '../pages/register';
+import { loginStateAtom, userAtom, User } from '../store/user';
 import { API_URL_AUTH } from '../pages/api/auth';
 
-interface LoginResponse {
-  tokens?: { access: string; refresh: string };
-  user: { id: number; realname: string };
+interface Tokens {
+  access: string;
+  refresh: string;
 }
 
 function useAuth() {
@@ -19,21 +19,55 @@ function useAuth() {
   const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
   const [user, setUser] = useRecoilState(userAtom);
 
-  const setLoginState = useCallback(
-    async ({ tokens, user }: LoginResponse) => {
-      if (isDevMode && tokens) {
-        setCookie('access', tokens.access);
-        setCookie('refresh', tokens.access);
-      }
+  const setLoginState = (user: User) => {
+    setIsLogin(true);
+    setUser(user);
+  };
 
-      localStorage.setItem('AUTH_STATE', JSON.stringify(true));
-      setIsLogin(true);
-      setUser(user);
+  //로그인 공통 로직
+  const login = (tokens: Tokens) => {
+    if (isDevMode && tokens) {
+      setCookie('access', tokens.access);
+      setCookie('refresh', tokens.refresh);
+    }
 
-      router.push('/dashboard');
-    },
-    [router, setIsLogin, setUser],
-  );
+    localStorage.setItem('AUTH_STATE', JSON.stringify(true));
+    sessionStorage.removeItem('inputs');
+
+    router.push('/dashboard');
+  };
+
+  //테스트 계정 로그인
+  const loginTestUser = async (mode?: number) => {
+    try {
+      const { tokens, user } = await client.post(API_URL_AUTH.TEST_LOGIN, {
+        mode,
+      });
+
+      setLoginState(user);
+      login(tokens);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //카카오 소셜 인증 로그인 (로그인, 회원가입)
+  const kakaoAuthLogin = async (
+    authCode: string,
+    registerInput?: RegisterType,
+  ) => {
+    try {
+      const { tokens, user } = await client.post(API_URL_AUTH.REGISTER, {
+        authCode,
+        ...registerInput,
+      });
+
+      setLoginState(user);
+      login(tokens);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // 로그아웃
   const logout = async () => {
@@ -50,7 +84,14 @@ function useAuth() {
     }
   };
 
-  return { isLogin, user, setLoginState, logout };
+  return {
+    isLogin,
+    user,
+    setLoginState,
+    kakaoAuthLogin,
+    loginTestUser,
+    logout,
+  };
 }
 
 export default useAuth;
