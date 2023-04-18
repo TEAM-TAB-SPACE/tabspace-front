@@ -7,7 +7,7 @@ import { isDevMode } from '../config/config.export';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Script from 'next/script';
-import BaseLayout from '../components/layout/BaseLayout';
+import BaseLayout from '../components/PageLayout/BaseLayout';
 import locale from 'antd/lib/locale/ko_KR';
 
 if (isDevMode) {
