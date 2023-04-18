@@ -1,21 +1,7 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { Button } from 'antd';
-import useAuth from '../hooks/useAuth';
-import layout from '../styles/layout.module.scss';
-import Kakao from '../public/assets/kakaotalk.svg';
-import { KAKAO_AUTH_URL } from '../constant/authUrl';
+import LoginButtons from '../components/login/LoginButtons';
 
 export default function Login() {
-  const router = useRouter();
-  const { loginTestUser } = useAuth();
-
-  const handleLoginButtonClick = () => {
-    if (sessionStorage !== null) {
-      router.push(KAKAO_AUTH_URL);
-    }
-  };
-
   return (
     <>
       <div className="login__container">
@@ -25,31 +11,7 @@ export default function Login() {
           오신걸 환영합니다.
         </p>
         <div className="login__buttons">
-          <Button
-            type="primary"
-            size="large"
-            className="login__button rupy"
-            onClick={() => loginTestUser(1)}
-          >
-            모범생 루피 계정 로그인
-          </Button>
-          <Button
-            type="primary"
-            size="large"
-            className="login__button pororo"
-            onClick={() => loginTestUser(2)}
-          >
-            노는게 제일 좋은 뽀로로 계정 로그인
-          </Button>
-          <Button
-            type="primary"
-            size="large"
-            className={`${layout.flex_center} login__button`}
-            icon={<Kakao style={{ marginRight: '5px' }} />}
-            onClick={handleLoginButtonClick}
-          >
-            카카오 로그인
-          </Button>
+          <LoginButtons />
         </div>
         <div className="login__noAccount">
           <span>회원이 아니신가요?</span>
@@ -70,27 +32,6 @@ export default function Login() {
             font-size: 1.3rem;
             font-weight: 700;
             line-height: 130%;
-          }
-
-          .login__buttons {
-            margin: 30px 0 30px;
-
-            .login__button {
-              width: 100%;
-            }
-
-            .login__button:not(:last-child) {
-              margin-bottom: 10px;
-            }
-
-            .rupy {
-              background-color: #e57d8f;
-            }
-
-            .pororo {
-              background-color: #0075eb;
-              letter-spacing: -1.5px;
-            }
           }
 
           .login__noAccount {
