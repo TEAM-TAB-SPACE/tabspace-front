@@ -1,7 +1,7 @@
 import layout from '../styles/layout.module.scss';
 import { Result } from 'antd';
 
-const Custom404 = () => {
+function Custom404() {
   return (
     <div
       className={`${layout.flex_center}`}
@@ -17,6 +17,6 @@ const Custom404 = () => {
       <Result status="404" title="404" subTitle="페이지를 찾을 수 없습니다." />
     </div>
   );
-};
+}
 
 export default Custom404;
