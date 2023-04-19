@@ -32,10 +32,22 @@ function MyApp({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <ConfigProvider locale={locale}>
           <Head>
-            <title>TAP SPACE</title>
+            <title>TAP SPACE | 새로운 커리어의 시작</title>
             <meta
               name="google-site-verification"
               content="HHMIKThf1Cj4TcAYqUgHF9lljY1Z0EoubPQdXkVdOOE"
+            />
+            <meta
+              name="description"
+              content="새로운 커리어의 시작 코딩 교육 10년 경험을 가진 탭스페이스와 함께하세요"
+            />
+            <meta property="og:title" content="탭스페이스" />
+            <meta property="og:url" content="https://tab.tabspace.site/" />
+            <meta property="og:image" content="/assets/images/og_image.png" />
+            <meta property="og:image:alt" content="탭스페이스 로고" />
+            <meta
+              property="og:description"
+              content="새로운 커리어의 시작 탭스페이스"
             />
             <link rel="icon" href="/assets/images/favicon.ico" />
           </Head>
