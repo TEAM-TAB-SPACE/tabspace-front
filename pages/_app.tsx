@@ -33,6 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ConfigProvider locale={locale}>
           <Head>
             <title>TAP SPACE</title>
+            <meta
+              name="google-site-verification"
+              content="HHMIKThf1Cj4TcAYqUgHF9lljY1Z0EoubPQdXkVdOOE"
+            />
             <link rel="icon" href="/assets/images/favicon.ico" />
           </Head>
           <Script
