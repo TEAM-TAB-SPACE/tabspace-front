@@ -1,16 +1,10 @@
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
-import { deleteCookie, setCookie } from 'cookies-next';
+import { deleteCookie } from 'cookies-next';
 import useFetch from './useFetch';
-import { isDevMode } from '../config/config.export';
 import { RegisterType } from '../pages/register';
 import { loginStateAtom, userAtom, User } from '../store/user';
 import { API_URL_AUTH } from '../pages/api/auth';
-
-interface Tokens {
-  access: string;
-  refresh: string;
-}
 
 function useAuth() {
   const router = useRouter();
@@ -25,12 +19,7 @@ function useAuth() {
   };
 
   //로그인 공통 로직
-  const login = (tokens: Tokens) => {
-    if (isDevMode && tokens) {
-      setCookie('access', tokens.access);
-      setCookie('refresh', tokens.refresh);
-    }
-
+  const login = () => {
     localStorage.setItem('AUTH_STATE', JSON.stringify(true));
     sessionStorage.removeItem('inputs');
 
@@ -40,12 +29,12 @@ function useAuth() {
   //테스트 계정 로그인
   const loginTestUser = async (mode?: number) => {
     try {
-      const { tokens, user } = await client.post(API_URL_AUTH.TEST_LOGIN, {
+      const { user } = await client.post(API_URL_AUTH.TEST_LOGIN, {
         mode,
       });
 
       setLoginState(user);
-      login(tokens);
+      login();
     } catch (error) {
       console.log(error);
     }
@@ -57,13 +46,13 @@ function useAuth() {
     registerInput?: RegisterType,
   ) => {
     try {
-      const { tokens, user } = await client.post(API_URL_AUTH.REGISTER, {
+      const { user } = await client.post(API_URL_AUTH.REGISTER, {
         authCode,
         ...registerInput,
       });
 
       setLoginState(user);
-      login(tokens);
+      login();
     } catch (error) {
       console.log(error);
     }
