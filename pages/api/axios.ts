@@ -4,7 +4,7 @@ import Config, { isDevMode } from '../../config/config.export';
 import { API_URL_AUTH } from './auth';
 
 export const axiosInstance = axios.create({
-  baseURL: Config().baseUrl,
+  // baseURL: Config().baseUrl,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -70,9 +70,7 @@ const getNewAccessToken = async (): Promise<string | void> => {
     removeCookies('access');
     removeCookies('refresh');
 
-    window.location.href = isDevMode
-      ? `${process.env.NEXT_PUBLIC_DEV_URL}/login`
-      : `${process.env.NEXT_PUBLIC_PROD_URL}/login`;
+    window.location.href = '/login';
   }
 };
 
