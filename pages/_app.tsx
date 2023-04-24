@@ -5,7 +5,7 @@ import { isDevMode } from 'config/config.export';
 
 import Head from 'next/head';
 import Script from 'next/script';
-import BaseLayout from 'components/PageLayout/BaseLayout';
+import BaseLayout from 'components/pageLayout/BaseLayout';
 import withTheme from 'theme';
 
 import 'styles/globals.scss';
