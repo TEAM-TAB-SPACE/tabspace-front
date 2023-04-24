@@ -4,7 +4,7 @@ import { Button, Result } from 'antd';
 
 import { useRouter } from 'next/router';
 
-import { EVALUATION_RESULT_MESSAGE } from 'constant/messages';
+import { EVALUATION_RESULT_MESSAGES } from 'constant/messages';
 
 interface EvaluationResultProps {
   isSuccess: boolean;
@@ -30,7 +30,7 @@ function EvaluationResult({
       {isSuccess ? (
         <Result
           status="success"
-          title={EVALUATION_RESULT_MESSAGE.success}
+          title={EVALUATION_RESULT_MESSAGES.success}
           style={{ padding: '300px 0' }}
           extra={[
             <Button
@@ -45,7 +45,7 @@ function EvaluationResult({
       ) : (
         <Result
           status="error"
-          title={EVALUATION_RESULT_MESSAGE.error}
+          title={EVALUATION_RESULT_MESSAGES.error}
           style={{ padding: '300px 0' }}
           extra={[
             <Button

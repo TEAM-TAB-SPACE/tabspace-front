@@ -8,7 +8,7 @@ import useMessage from 'hooks/useMessage';
 
 import { missionsRefetchKeyAtom } from 'store/dashboard';
 
-import { MISSION_UPLOAD_MESSAGE } from 'constant/messages';
+import { MISSION_UPLOAD_MESSAGES } from 'constant/messages';
 
 import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
@@ -34,10 +34,10 @@ function MissionUpload({ missionId }: MissionUploadProps) {
     showUploadList: false,
     onChange: (info: UploadChangeParam<UploadFile<unknown>>) => {
       if (info.file.status === 'done') {
-        success(MISSION_UPLOAD_MESSAGE.success);
+        success(MISSION_UPLOAD_MESSAGES.success);
         setRefetchKey(() => 'stale');
       } else if (info.file.status === 'error') {
-        error(MISSION_UPLOAD_MESSAGE.error);
+        error(MISSION_UPLOAD_MESSAGES.error);
       }
     },
   };
@@ -49,8 +49,8 @@ function MissionUpload({ missionId }: MissionUploadProps) {
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
         </p>
-        <p className="ant-upload-text">{MISSION_UPLOAD_MESSAGE.uploadText}</p>
-        <p className="ant-upload-hint">{MISSION_UPLOAD_MESSAGE.uploadHint}</p>
+        <p className="ant-upload-text">{MISSION_UPLOAD_MESSAGES.uploadText}</p>
+        <p className="ant-upload-hint">{MISSION_UPLOAD_MESSAGES.uploadHint}</p>
       </Dragger>
     </>
   );
