@@ -1,5 +1,6 @@
 import MissionListItem from './MissionListItem';
-import { MissionSingleData } from '../../../store/dashboard';
+
+import { MissionSingleData } from 'store/dashboard';
 
 interface MissionListProps {
   missions: MissionSingleData[];

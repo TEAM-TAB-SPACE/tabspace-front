@@ -1,9 +1,13 @@
 import { useSetRecoilState } from 'recoil';
+
 import { Input } from 'antd';
 import { Button } from 'antd';
-import useFetch from '../../hooks/useFetch';
-import { commentRefetchKeyAtom } from '../../store/comment';
-import { API_URL_LECTURE } from '../../pages/api/lecture';
+
+import useFetch from 'hooks/useFetch';
+
+import { commentRefetchKeyAtom } from 'store/comment';
+
+import { API_URL_LECTURE } from 'pages/api/lecture';
 
 const { TextArea } = Input;
 

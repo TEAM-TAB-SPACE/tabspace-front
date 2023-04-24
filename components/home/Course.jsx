@@ -1,5 +1,6 @@
 import css from 'styled-jsx/css';
-import variables from '../../styles/variables.module.scss';
+
+import variables from 'styles/variables.module.scss';
 
 export default function Course() {
   return (

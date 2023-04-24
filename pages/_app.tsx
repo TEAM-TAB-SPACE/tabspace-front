@@ -1,13 +1,18 @@
-import '../styles/globals.scss';
-import '../styles/chatbot.scss';
 import { Reset } from 'styled-reset';
 import { RecoilRoot } from 'recoil';
+
 import { isDevMode } from '../config/config.export';
-import type { AppProps } from 'next/app';
+
 import Head from 'next/head';
 import Script from 'next/script';
-import BaseLayout from '../components/PageLayout/BaseLayout';
-import withTheme from '../theme';
+import BaseLayout from 'components/PageLayout/BaseLayout';
+import withTheme from 'theme';
+
+import 'styles/globals.scss';
+import 'styles/chatbot.scss';
+
+//types
+import type { AppProps } from 'next/app';
 
 if (isDevMode) {
   import('../mocks');

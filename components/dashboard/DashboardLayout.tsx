@@ -1,7 +1,9 @@
 import { Layout, Row, Col } from 'antd';
-import DashboardItem from '../../components/dashboard/DashboardItem';
-import useMediaQueryState from '../../hooks/useMediaQueryState';
-import variables from '../../styles/variables.module.scss';
+import DashboardItem from 'components/dashboard/DashboardItem';
+
+import useMediaQueryState from 'hooks/useMediaQueryState';
+
+import variables from 'styles/variables.module.scss';
 
 const { Content } = Layout;
 

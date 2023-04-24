@@ -1,11 +1,11 @@
-import SpinCircle from '../../common/SpinCircle';
+import SpinCircle from 'components/common/SpinCircle';
 import GrowthChart from './GrowthChart';
-import useFetch from '../../../hooks/useFetch';
-import {
-  GrowthChartCategory,
-  GrowthSingleData,
-} from '../../../store/dashboard';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
+
+import useFetch from 'hooks/useFetch';
+
+import { GrowthChartCategory, GrowthSingleData } from 'store/dashboard';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
 function DashboardGrowth() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.GROWTH });

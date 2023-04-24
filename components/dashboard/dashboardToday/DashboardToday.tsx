@@ -1,11 +1,15 @@
-import ProgressWithBackground from '../../common/ProgressWithBackground';
+import ProgressWithBackground from 'components/common/ProgressWithBackground';
+import SpinCircle from 'components/common/SpinCircle';
 import GoLearnButton from './GoLearnButton';
-import SpinCircle from '../../common/SpinCircle';
 import DashboardItemNoData from '../DashboardItemNoData';
-import useFetch from '../../../hooks/useFetch';
-import { TodayLectureSingleData } from '../../../store/dashboard';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
-import { DASHBOARD_TODAY_NO_DATA_MESSAGE } from '../../../constant/messages';
+
+import useFetch from 'hooks/useFetch';
+
+import { TodayLectureSingleData } from 'store/dashboard';
+
+import { DASHBOARD_TODAY_NO_DATA_MESSAGE } from 'constant/messages';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
 function DashboardToday() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.TODAY });

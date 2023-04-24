@@ -1,12 +1,19 @@
 import { useSetRecoilState } from 'recoil';
+import { getCookie } from 'cookies-next';
+
 import { InboxOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
+
+import useMessage from 'hooks/useMessage';
+
+import { missionsRefetchKeyAtom } from 'store/dashboard';
+
+import { MISSION_UPLOAD_MESSAGE } from 'constant/messages';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
+
+//types
 import { UploadChangeParam, UploadFile } from 'antd/es/upload';
-import useMessage from '../../../hooks/useMessage';
-import { missionsRefetchKeyAtom } from '../../../store/dashboard';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
-import { getCookie } from 'cookies-next';
-import { MISSION_UPLOAD_MESSAGE } from '../../../constant/messages';
 
 const { Dragger } = Upload;
 

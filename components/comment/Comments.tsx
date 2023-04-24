@@ -1,8 +1,12 @@
 import { Fragment } from 'react';
 import { useRecoilValue } from 'recoil';
+
 import Comment from './Comment';
-import { CommentSingleData } from '../../store/comment';
-import { userAtom } from '../../store/user';
+
+import { userAtom } from 'store/user';
+
+//types
+import { CommentSingleData } from 'store/comment';
 
 interface CommentsProps {
   depth: 1 | 2;

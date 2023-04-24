@@ -1,10 +1,16 @@
 import { Calendar } from 'antd';
-import variables from '../../styles/variables.module.scss';
-import SpinCircle from '../common/SpinCircle';
-import useFetch from '../../hooks/useFetch';
-import useAttendance from '../../hooks/useAttendance';
-import { CalendarCellData } from '../../store/dashboard';
-import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
+import SpinCircle from 'components/common/SpinCircle';
+
+import useFetch from 'hooks/useFetch';
+import useAttendance from 'hooks/useAttendance';
+
+import { CalendarCellData } from 'store/dashboard';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
+
+import variables from 'styles/variables.module.scss';
+
+//types
 import type { Dayjs } from 'dayjs';
 
 const dateCellRender = (listData: CalendarCellData[], value: Dayjs) => {

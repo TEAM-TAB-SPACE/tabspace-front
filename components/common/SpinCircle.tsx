@@ -1,6 +1,7 @@
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import layout from '../../styles/layout.module.scss';
+
+import layout from 'styles/layout.module.scss';
 
 interface SpinCircleProps {
   className?: string;

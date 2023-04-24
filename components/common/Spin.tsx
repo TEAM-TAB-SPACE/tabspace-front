@@ -1,5 +1,6 @@
 import { Spin } from 'antd';
-import layout from '../../styles/layout.module.scss';
+
+import layout from 'styles/layout.module.scss';
 
 function Spinner() {
   return (

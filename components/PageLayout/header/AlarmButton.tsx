@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
+
 import { NotificationOutlined } from '@ant-design/icons';
 import { Badge, Button, Popover } from 'antd';
 import AlarmPopoverContent from './AlarmPopoverContent';
-import useFetch from '../../../hooks/useFetch';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
-import { EMOJI } from '../../../constant/emoji';
+
+import useFetch from 'hooks/useFetch';
+
+import { EMOJI } from 'constant/emoji';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
 function AlarmButton() {
   const { data } = useFetch({ url: API_URL_DASHBOARD.NOTIFICATION });

@@ -1,9 +1,11 @@
-import React from 'react';
 import { Layout, Tabs } from 'antd';
-import type { TabsProps } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LectureQnA from './LectureQnA';
+
 import variables from '../../styles/variables.module.scss';
+
+//types
+import type { TabsProps } from 'antd';
 
 const { Content } = Layout;
 

@@ -1,7 +1,10 @@
 import { useState } from 'react';
+
 import UserBadge from './userBadge/UserBadge';
 import ReplyButton from './ReplyButton';
 import ReplyForm from './ReplyForm';
+
+//types
 import { UserBadgeData } from './userBadge/UserBadge';
 
 interface CommentProps {

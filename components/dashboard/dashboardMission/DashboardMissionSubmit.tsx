@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+
 import { Form } from 'antd';
 import MissionUpload from './MissionUpload';
 import MissionSelect from './MissionSelect';
-import { missionsSelectOptionsSelector } from '../../../store/dashboard';
+
+import { missionsSelectOptionsSelector } from 'store/dashboard';
 
 function DashboardMissionSubmit() {
   const missionsSelectOptions = useRecoilValue(missionsSelectOptionsSelector);

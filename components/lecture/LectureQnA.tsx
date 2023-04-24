@@ -1,17 +1,22 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+
 import { Layout } from 'antd';
-import Comments from '../comment/Comments';
-import CommentForm from '../comment/CommentForm';
-import variables from '../../styles/variables.module.scss';
-import useFetch from '../../hooks/useFetch';
+import Comments from 'components/comment/Comments';
+import CommentForm from 'components/comment/CommentForm';
+
+import useFetch from 'hooks/useFetch';
+
 import {
   commentRefetchKeyAtom,
   currentLectureCommentsAtom,
-} from '../../store/comment';
-import { API_URL_LECTURE } from '../../pages/api/lecture';
-import { currentLectureSelector } from '../../store/lecture';
+} from 'store/comment';
+import { currentLectureSelector } from 'store/lecture';
+
+import { API_URL_LECTURE } from 'pages/api/lecture';
+
+import variables from 'styles/variables.module.scss';
 
 const { Content } = Layout;
 

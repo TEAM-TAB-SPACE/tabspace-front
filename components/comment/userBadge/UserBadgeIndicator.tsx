@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+
 import IndicatorIcon from './IndicatorIcon';
 import EditModal from './modal/EditModal';
 import DeleteModal from './modal/DeleteModal';
 import IndicatorPopover from './IndicatorPopover';
-import usePopover from '../../../hooks/usePopover';
-import useModal from '../../../hooks/useModal';
-import useComment from '../../../hooks/useComment';
-import { commentRefetchKeyAtom } from '../../../store/comment';
+
+import usePopover from 'hooks/usePopover';
+import useModal from 'hooks/useModal';
+import useComment from 'hooks/useComment';
+
+import { commentRefetchKeyAtom } from 'store/comment';
 
 interface UserBadgeIndicatorProps {
   depth: 1 | 2;

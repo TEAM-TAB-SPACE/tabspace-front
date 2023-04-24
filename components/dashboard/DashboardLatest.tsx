@@ -1,12 +1,16 @@
 import Link from 'next/link';
 import DashboardItemNoData from './DashboardItemNoData';
-import variables from '../../styles/variables.module.scss';
-import layout from '../../styles/layout.module.scss';
-import SpinCircle from '../common/SpinCircle';
-import useFetch from '../../hooks/useFetch';
-import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
-import { DASHBOARD_LATEST_NO_DATA_MESSAGE } from '../../constant/messages';
-import { INTERNAL } from '../../constant/urls';
+import SpinCircle from 'components/common/SpinCircle';
+
+import useFetch from 'hooks/useFetch';
+
+import { DASHBOARD_LATEST_NO_DATA_MESSAGE } from 'constant/messages';
+import { INTERNAL } from 'constant/urls';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
+
+import layout from 'styles/layout.module.scss';
+import variables from 'styles/variables.module.scss';
 
 function DashboardLatest() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.LATEST });

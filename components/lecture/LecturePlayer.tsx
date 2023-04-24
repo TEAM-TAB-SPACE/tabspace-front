@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+
 import YouTube from 'react-youtube';
-import SpinCircle from '../common/SpinCircle';
-import variables from '../../styles/variables.module.scss';
-import useFetch from '../../hooks/useFetch';
-import { API_URL_LECTURE } from '../../pages/api/lecture';
+import SpinCircle from 'components/common/SpinCircle';
+
+import useFetch from 'hooks/useFetch';
+
+import { API_URL_LECTURE } from 'pages/api/lecture';
+
+import variables from 'styles/variables.module.scss';
 
 interface LecturePlayerProps {
   lectureroomId: number;

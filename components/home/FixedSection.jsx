@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import css from 'styled-jsx/css';
+
 import { message } from 'antd';
-import { axiosInstance } from '../../pages/api/axios';
-import { API_URL_OTHER } from '../../pages/api/other';
-import variables from '../../styles/variables.module.scss';
+
+import variables from 'styles/variables.module.scss';
+
+import { axiosInstance } from 'pages/api/axios';
+import { API_URL_OTHER } from 'pages/api/other';
 
 export default function FixedSection() {
   const [phone, setPhone] = useState('');

@@ -1,7 +1,10 @@
-import { Button, Result } from 'antd';
-import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
-import { EVALUATION_RESULT_MESSAGE } from '../../../constant/messages';
+
+import { Button, Result } from 'antd';
+
+import { useRouter } from 'next/router';
+
+import { EVALUATION_RESULT_MESSAGE } from 'constant/messages';
 
 interface EvaluationResultProps {
   isSuccess: boolean;

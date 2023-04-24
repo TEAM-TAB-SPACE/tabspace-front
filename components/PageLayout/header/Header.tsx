@@ -1,12 +1,19 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import css from 'styled-jsx/css';
-import Logo from '../../../public/assets/mainLogo.svg';
+
+import Link from 'next/link';
+
 import LoginContent from './LoginContent';
-import useAuth from '../../../hooks/useAuth';
-import layout from '../../../styles/layout.module.scss';
-import variables from '../../../styles/variables.module.scss';
-import { INTERNAL } from '../../../constant/urls';
+
+import useAuth from 'hooks/useAuth';
+
+import { INTERNAL } from 'constant/urls';
+
+import layout from 'styles/layout.module.scss';
+import variables from 'styles/variables.module.scss';
+
+//assets
+import Logo from 'public/assets/mainLogo.svg';
 
 export default function Header() {
   const router = useRouter();

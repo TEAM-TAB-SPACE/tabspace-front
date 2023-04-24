@@ -1,5 +1,6 @@
 import { Select } from 'antd';
-import { MissionSelectOption } from '../../../store/dashboard';
+
+import { MissionSelectOption } from 'store/dashboard';
 
 const { Option } = Select;
 

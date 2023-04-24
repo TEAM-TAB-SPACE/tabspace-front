@@ -1,7 +1,9 @@
 import Link from 'next/link';
-import { ALARM_NO_DATA_MESSAGE } from '../../../constant/messages';
-import { INTERNAL } from '../../../constant/urls';
-import variables from '../../../styles/variables.module.scss';
+
+import { ALARM_NO_DATA_MESSAGE } from 'constant/messages';
+import { INTERNAL } from 'constant/urls';
+
+import variables from 'styles/variables.module.scss';
 
 const LECTURE_EVALUATION = '강의평가';
 

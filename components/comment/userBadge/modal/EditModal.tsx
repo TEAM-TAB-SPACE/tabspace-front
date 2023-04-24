@@ -1,11 +1,11 @@
 import { MouseEventHandler, useRef } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+
 import { Button, Modal, Input } from 'antd';
-import {
-  currentCommentSelector,
-  commentRefetchKeyAtom,
-} from '../../../../store/comment';
-import useComment from '../../../../hooks/useComment';
+
+import useComment from 'hooks/useComment';
+
+import { currentCommentSelector, commentRefetchKeyAtom } from 'store/comment';
 
 const { TextArea } = Input;
 

@@ -1,9 +1,14 @@
 import { Button } from 'antd';
 import { useRouter } from 'next/router';
-import layout from '../../styles/layout.module.scss';
-import Kakao from '../../public/assets/kakaotalk.svg';
-import useAuth from '../../hooks/useAuth';
-import { EXTERNAL } from '../../constant/urls';
+
+import useAuth from 'hooks/useAuth';
+
+import { EXTERNAL } from 'constant/urls';
+
+import layout from 'styles/layout.module.scss';
+
+//asssets
+import Kakao from 'public/assets/kakaotalk.svg';
 
 function LoginButtons() {
   const router = useRouter();

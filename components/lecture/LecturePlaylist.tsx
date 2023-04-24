@@ -1,10 +1,13 @@
 import { useRecoilValue } from 'recoil';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+
 import { Layout, Menu } from 'antd';
-import useMediaQueryState from '../../hooks/useMediaQueryState';
-import usePlaylist from '../../hooks/usePlaylist';
-import { currentLectureSelector } from '../../store/lecture';
+
+import useMediaQueryState from 'hooks/useMediaQueryState';
+import usePlaylist from 'hooks/usePlaylist';
+
+import { currentLectureSelector } from 'store/lecture';
 
 const { Sider } = Layout;
 

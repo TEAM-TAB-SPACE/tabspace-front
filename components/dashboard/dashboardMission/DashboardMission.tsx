@@ -1,16 +1,20 @@
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import ProgressWithBackground from '../../common/ProgressWithBackground';
-import SpinCircle from '../../common/SpinCircle';
+
+import ProgressWithBackground from 'components/common/ProgressWithBackground';
+import SpinCircle from 'components/common/SpinCircle';
 import MissionList from './MissionList';
-import useFetch from '../../../hooks/useFetch';
-import useMission from '../../../hooks/useMission';
+
+import useFetch from 'hooks/useFetch';
+import useMission from 'hooks/useMission';
+
 import {
   missionsAtom,
   MissionSingleData,
   missionsRefetchKeyAtom,
-} from '../../../store/dashboard';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
+} from 'store/dashboard';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
 function DashboardMission() {
   const setMission = useSetRecoilState<MissionSingleData[]>(missionsAtom);

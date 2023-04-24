@@ -1,10 +1,15 @@
 import { useSetRecoilState } from 'recoil';
+
 import { Input } from 'antd';
 import { Button } from 'antd';
-import useFetch from '../../hooks/useFetch';
-import { commentRefetchKeyAtom } from '../../store/comment';
-import { API_URL_LECTURE } from '../../pages/api/lecture';
-import { COMMENT_FORM_PLACEHOLDER } from '../../constant/placeholders';
+
+import useFetch from 'hooks/useFetch';
+
+import { commentRefetchKeyAtom } from 'store/comment';
+
+import { COMMENT_FORM_PLACEHOLDER } from 'constant/placeholders';
+
+import { API_URL_LECTURE } from 'pages/api/lecture';
 
 const { TextArea } = Input;
 

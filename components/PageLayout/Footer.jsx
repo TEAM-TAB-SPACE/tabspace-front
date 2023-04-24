@@ -1,11 +1,14 @@
+import css from 'styled-jsx/css';
+
 import Image from 'next/image';
+
+import variables from 'styles/variables.module.scss';
+
+//assets
 import footerimg1 from 'public/assets/images/footer1.jpg';
 import footerimg2 from 'public/assets/images/footer2.jpg';
 import footerimg3 from 'public/assets/images/footer3.jpg';
 import footerimg4 from 'public/assets/images/footer4.jpg';
-
-import css from 'styled-jsx/css';
-import variables from '../../styles/variables.module.scss';
 
 export default function Footer() {
   return (
