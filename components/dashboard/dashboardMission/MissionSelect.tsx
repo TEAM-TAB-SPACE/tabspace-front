@@ -1,5 +1,4 @@
 import { Select } from 'antd';
-import variables from '../../../styles/variables.module.scss';
 import { MissionSelectOption } from '../../../store/dashboard';
 
 const { Option } = Select;
@@ -29,11 +28,6 @@ function MissionSelect({ options, value, onChange }: MissionSelectProps) {
         .dashboard__missionSubmit {
           .ant-select {
             margin-bottom: 20px;
-
-            &:hover .ant-select-selector,
-            &-focused .ant-select-selector {
-              border-color: ${variables.primary} !important;
-            }
           }
         }
       `}</style>

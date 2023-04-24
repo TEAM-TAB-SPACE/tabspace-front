@@ -61,10 +61,6 @@ function DashboardAttendance() {
             &-panel {
               border-top: none;
             }
-
-            &-cell-inner::before {
-              border: 1px solid ${variables.primary} !important;
-            }
           }
         }
       `}</style>

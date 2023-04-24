@@ -2,7 +2,6 @@ import { useSetRecoilState } from 'recoil';
 import { InboxOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
 import { UploadChangeParam, UploadFile } from 'antd/es/upload';
-import variables from '../../../styles/variables.module.scss';
 import useMessage from '../../../hooks/useMessage';
 import { missionsRefetchKeyAtom } from '../../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
@@ -51,13 +50,6 @@ function MissionUpload({ missionId }: MissionUploadProps) {
         <p className="ant-upload-text">{UPLOAD_TEXT}</p>
         <p className="ant-upload-hint">{UPLOAD_HINT}</p>
       </Dragger>
-      <style jsx global>{`
-        .dashboard__missionSubmit {
-          .ant-upload-drag:hover {
-            border-color: ${variables.primary} !important;
-          }
-        }
-      `}</style>
     </>
   );
 }

@@ -1,14 +1,13 @@
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import layout from '../../styles/layout.module.scss';
-import variables from '../../styles/variables.module.scss';
-
-const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 interface SpinCircleProps {
   className?: string;
   style?: React.CSSProperties;
 }
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
 function SpinCircle({ className, style }: SpinCircleProps) {
   return (
@@ -16,11 +15,6 @@ function SpinCircle({ className, style }: SpinCircleProps) {
       <div className={`${layout.flex_center} ${className}`} style={style}>
         <Spin indicator={antIcon} />
       </div>
-      <style jsx global>{`
-        .ant-spin {
-          color: ${variables.primary};
-        }
-      `}</style>
     </>
   );
 }
