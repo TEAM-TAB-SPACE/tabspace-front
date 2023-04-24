@@ -1,6 +1,7 @@
 import { RightOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import Link from 'next/link';
+import { INTERNAL } from '../../../constant/urls';
 
 interface GoLearnButtonProps {
   videoId: string;
@@ -17,7 +18,7 @@ function GoLearnButton({ videoId }: GoLearnButtonProps) {
       type="link"
       icon={
         <>
-          <Link href={`/lecture/${videoId}`} style={fontStyle}>
+          <Link href={`${INTERNAL.lecture}/${videoId}`} style={fontStyle}>
             학습하기
             <RightOutlined />
           </Link>

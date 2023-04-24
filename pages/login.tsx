@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import LoginButtons from '../components/login/LoginButtons';
+import { INTERNAL } from '../constant/urls';
 
 export default function Login() {
   return (
@@ -15,7 +16,7 @@ export default function Login() {
         </div>
         <div className="login__noAccount">
           <span>회원이 아니신가요?</span>
-          <Link href="/register">회원가입</Link>
+          <Link href={INTERNAL.register}>회원가입</Link>
         </div>
       </div>
       <style global jsx>{`

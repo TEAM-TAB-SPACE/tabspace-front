@@ -6,6 +6,7 @@ import SpinCircle from '../common/SpinCircle';
 import useFetch from '../../hooks/useFetch';
 import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
 import { DASHBOARD_LATEST_NO_DATA_MESSAGE } from '../../constant/messages';
+import { INTERNAL } from '../../constant/urls';
 
 function DashboardLatest() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.LATEST });
@@ -22,7 +23,7 @@ function DashboardLatest() {
       <div className="dashboard__latest">
         <div className="latest__wrapper">
           <Link
-            href={`/lecture/${videoId}`}
+            href={`${INTERNAL.lecture}/${videoId}`}
             className={`latest__link ${layout.flex_center}`}
           >
             이어보기

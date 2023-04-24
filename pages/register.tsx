@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { validationApi } from './api/validation';
-import { KAKAO_AUTH_URL } from '../constant/authUrl';
+import { EXTERNAL, INTERNAL } from '../constant/urls';
 import variables from '../styles/variables.module.scss';
 
 export interface RegisterType {
@@ -51,7 +51,7 @@ export default function Register() {
       messageApi.error('인증번호가 유효하지 않습니다.');
     } else {
       sessionStorage.setItem('inputs', JSON.stringify(inputs));
-      router.push(KAKAO_AUTH_URL);
+      router.push(EXTERNAL.KAKAO_AUTH);
     }
   };
 
@@ -158,7 +158,7 @@ export default function Register() {
 
         <div className="register__login">
           <span>이미 회원이라면?</span>
-          <Link href="/login" style={{ fontSize: '0.8rem' }}>
+          <Link href={INTERNAL.login} style={{ fontSize: '0.8rem' }}>
             로그인
           </Link>
         </div>

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ALARM_NO_DATA_MESSAGE } from '../../../constant/messages';
+import { INTERNAL } from '../../../constant/urls';
 import variables from '../../../styles/variables.module.scss';
 
 const LECTURE_EVALUATION = '강의평가';
@@ -19,7 +20,7 @@ function AlarmPopoverContent({ content = [] }: { content: string[] }) {
             <p key={index} className="dashboard__alarmItem">
               {splitItem[0]}
               {splitItem.length > 1 && (
-                <Link href={'/lecture/evaluation'} style={{ color: '#1677ff' }}>
+                <Link href={INTERNAL.evaluation} style={{ color: '#1677ff' }}>
                   {LECTURE_EVALUATION}
                 </Link>
               )}
