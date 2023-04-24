@@ -1,7 +1,7 @@
 import { Reset } from 'styled-reset';
 import { RecoilRoot } from 'recoil';
 
-import { isDevMode } from '../config/config.export';
+import { isDevMode } from 'config/config.export';
 
 import Head from 'next/head';
 import Script from 'next/script';

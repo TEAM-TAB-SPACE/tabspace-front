@@ -1,6 +1,8 @@
 import Link from 'next/link';
-import LoginButtons from '../components/login/LoginButtons';
-import { INTERNAL } from '../constant/urls';
+
+import LoginButtons from 'components/login/LoginButtons';
+
+import { INTERNAL } from 'constant/urls';
 
 export default function Login() {
   return (

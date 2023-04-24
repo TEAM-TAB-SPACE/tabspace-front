@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Skeleton } from 'antd';
 import { useSearchParams } from 'next/navigation';
-import useFetch from '../../../hooks/useFetch';
-import useAuth from '../../../hooks/useAuth';
+
+import { Skeleton } from 'antd';
+
+import useFetch from 'hooks/useFetch';
+import useAuth from 'hooks/useAuth';
 
 function RedirectHandler() {
   const router = useRouter();

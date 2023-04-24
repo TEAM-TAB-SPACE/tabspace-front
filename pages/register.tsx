@@ -1,12 +1,17 @@
-import css from 'styled-jsx/css';
-import Link from 'next/link';
-import { message } from 'antd';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import css from 'styled-jsx/css';
 import { useRouter } from 'next/router';
-import { validationApi } from './api/validation';
-import { EXTERNAL, INTERNAL } from '../constant/urls';
-import variables from '../styles/variables.module.scss';
+import { useForm } from 'react-hook-form';
+
+import Link from 'next/link';
+
+import { message } from 'antd';
+
+import { validationApi } from 'pages/api/validation';
+
+import { EXTERNAL, INTERNAL } from 'constant/urls';
+
+import variables from 'styles/variables.module.scss';
 
 export interface RegisterType {
   realname: string;
