@@ -4,6 +4,8 @@ import UserBadge from './userBadge/UserBadge';
 import ReplyButton from './ReplyButton';
 import ReplyForm from './ReplyForm';
 
+import variables from 'styles/variables.module.scss';
+
 //types
 import { UserBadgeData } from './userBadge/UserBadge';
 
@@ -25,6 +27,7 @@ function Comment({
   const [isReplyMode, setIsReplyMode] = useState(false);
 
   const showReplyForm = () => setIsReplyMode(true);
+
   const hideReplyForm = () => setIsReplyMode(false);
 
   const onClickReplyButton = () => {
@@ -54,7 +57,7 @@ function Comment({
             padding: 0 25px 4px;
             font-size: 14px;
             word-break: break-all;
-            color: #111;
+            color: ${variables.black};
           }
         }
       `}</style>
