@@ -4,23 +4,7 @@ import { Badge, Button, Popover } from 'antd';
 import AlarmPopoverContent from './AlarmPopoverContent';
 import useFetch from '../../../hooks/useFetch';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
-
-const EMOJI: { [key: string]: string } = {
-  '(1)': '😀',
-  '(2)': '🥺',
-  '(3)': '🤓',
-  '(4)': '🤗',
-  '(5)': '😉',
-  '(6)': '😎',
-  '(7)': '🥰',
-  '(8)': '😍',
-  '(9)': '🥳',
-  '(10)': '✨',
-  '(11)': '🔥',
-  '(12)': '🎉',
-  '(13)': '🚗',
-  '(14)': '👍',
-};
+import { EMOJI } from '../../../constant/emoji';
 
 function AlarmButton() {
   const { data } = useFetch({ url: API_URL_DASHBOARD.NOTIFICATION });

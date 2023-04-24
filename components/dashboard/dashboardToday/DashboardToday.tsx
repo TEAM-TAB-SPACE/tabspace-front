@@ -5,6 +5,7 @@ import DashboardItemNoData from '../DashboardItemNoData';
 import useFetch from '../../../hooks/useFetch';
 import { TodayLectureSingleData } from '../../../store/dashboard';
 import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
+import { DASHBOARD_TODAY_NO_DATA_MESSAGE } from '../../../constant/messages';
 
 function DashboardToday() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.TODAY });
@@ -14,7 +15,7 @@ function DashboardToday() {
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
 
   if (!data.length)
-    return <DashboardItemNoData text="오늘은 수업이 없습니다." />;
+    return <DashboardItemNoData text={DASHBOARD_TODAY_NO_DATA_MESSAGE} />;
 
   return (
     <>

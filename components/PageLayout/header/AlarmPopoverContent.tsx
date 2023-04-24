@@ -1,11 +1,12 @@
 import Link from 'next/link';
+import { ALARM_NO_DATA_MESSAGE } from '../../../constant/messages';
 import variables from '../../../styles/variables.module.scss';
 
 const LECTURE_EVALUATION = '강의평가';
 
 function AlarmPopoverContent({ content = [] }: { content: string[] }) {
   if (!content.length) {
-    return <p>알림이 없습니다.</p>;
+    return <p>{ALARM_NO_DATA_MESSAGE}</p>;
   }
 
   return (

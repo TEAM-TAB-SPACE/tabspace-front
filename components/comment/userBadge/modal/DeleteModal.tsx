@@ -1,13 +1,12 @@
 import { Button, Modal } from 'antd';
 import { MouseEventHandler } from 'react';
+import { DELETE_CONFIRM_MESSAGE } from '../../../../constant/messages';
 
 interface DeleteModalProps {
   isModalOpen: boolean;
   onCancel: MouseEventHandler;
   onClickDelete?: () => void;
 }
-
-const DELETE_CONFIRM_MESSAGE = '댓글을 삭제하시겠습니까?';
 
 function DeleteModal({
   isModalOpen,

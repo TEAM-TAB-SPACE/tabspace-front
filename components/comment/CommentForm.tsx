@@ -4,6 +4,7 @@ import { Button } from 'antd';
 import useFetch from '../../hooks/useFetch';
 import { commentRefetchKeyAtom } from '../../store/comment';
 import { API_URL_LECTURE } from '../../pages/api/lecture';
+import { COMMENT_FORM_PLACEHOLDER } from '../../constant/placeholders';
 
 const { TextArea } = Input;
 
@@ -36,7 +37,7 @@ function CommentForm({ lectureId }: CommentFormProps) {
         name="comment"
         className="form__textarea"
         style={{ marginTop: '20px', height: '120px', resize: 'none' }}
-        placeholder="함께하는 동료들과 의견을 나눠보세요."
+        placeholder={COMMENT_FORM_PLACEHOLDER}
       />
       <Button
         htmlType="submit"
