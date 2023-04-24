@@ -1,36 +1,24 @@
-import Image from 'next/image';
-import Mainimg from '../public/assets/images/img1.jpg';
-import Mainimg2 from '../public/assets/images/img2.jpg';
-import Course from '../components/home/Course';
-import Carousel from '../components/home/Carousel';
-import Slider from '../components/home/Slider';
-import FixedSection from '../components/home/FixedSection';
-import { FloatButton } from 'antd';
-
 import css from 'styled-jsx/css';
-import variables from '../styles/variables.module.scss';
-import 'react-chatbot-kit/build/main.css';
 
-import Chatbot from 'react-chatbot-kit';
-import config from '../chatbot/config';
-import MessageParser from '../chatbot/MessageParser';
-import ActionProvider from '../chatbot/ActionProvider';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import Image from 'next/image';
+
+import Course from 'components/home/Course';
+import Carousel from 'components/home/Carousel';
+import Slider from 'components/home/Slider';
+import FixedSection from 'components/home/FixedSection';
+import ChatbotFloatButton from 'components/home/ChatbotFloatButton';
+
+import 'react-chatbot-kit/build/main.css';
+import variables from 'styles/variables.module.scss';
+
+//assets
+import Mainimg from 'public/assets/images/img1.jpg';
+import Mainimg2 from 'public/assets/images/img2.jpg';
 
 export default function Home() {
   return (
     <>
-      <FloatButton.Group
-        type="primary"
-        trigger="click"
-        icon={<QuestionCircleOutlined />}
-      >
-        <Chatbot
-          config={config}
-          messageParser={MessageParser}
-          actionProvider={ActionProvider}
-        />
-      </FloatButton.Group>
+      <ChatbotFloatButton />
       <main className="index_wrapper">
         <section className="index_mainimg">
           <span className="mainimg">
