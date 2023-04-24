@@ -30,7 +30,7 @@ function Comment({
 
   const hideReplyForm = () => setIsReplyMode(false);
 
-  const onClickReplyButton = () => {
+  const handleReplyButtonClick = () => {
     if (isReplyMode) {
       hideReplyForm();
     } else {
@@ -43,7 +43,10 @@ function Comment({
       <div className="comment">
         <UserBadge {...{ ...userBadgeData, depth, commentId, isMyComment }} />
         <div className="comment__text">{content}</div>
-        {depth === 1 && <ReplyButton onClick={onClickReplyButton} />}
+
+        {/* 댓글일 경우 답글달기 버튼 렌더링 */}
+        {depth === 1 && <ReplyButton onClick={handleReplyButtonClick} />}
+
         {isReplyMode && <ReplyForm {...{ commentId, hideReplyForm }} />}
       </div>
       <style jsx>{`

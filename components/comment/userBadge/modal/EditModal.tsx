@@ -25,6 +25,7 @@ function EditModal({
   onClickEdit,
 }: EditModalProps) {
   const { editComment } = useComment(depth);
+
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
   const form = useRef<HTMLFormElement>(null);
@@ -33,7 +34,7 @@ function EditModal({
     currentCommentSelector({ depth, commentId }),
   );
 
-  const onClick = () => {
+  const handleEditButtonClick = () => {
     const textarea = form.current?.children.namedItem(
       'comment',
     ) as HTMLTextAreaElement;
@@ -56,7 +57,7 @@ function EditModal({
           key="submit"
           type="primary"
           onClick={() => {
-            onClick();
+            handleEditButtonClick();
             onClickEdit && onClickEdit();
           }}
         >

@@ -1,7 +1,6 @@
 import { useSetRecoilState } from 'recoil';
 
-import { Input } from 'antd';
-import { Button } from 'antd';
+import { Input, Button } from 'antd';
 
 import useFetch from 'hooks/useFetch';
 
@@ -18,9 +17,10 @@ interface ReplyFormProps {
 
 function ReplyForm({ commentId, hideReplyForm }: ReplyFormProps) {
   const fetch = useFetch();
+
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
-  const onSubmit = (e: React.SyntheticEvent) => {
+  const handleReplySubmit = (e: React.SyntheticEvent) => {
     const form = e.target as HTMLFormElement;
     const textarea = form.children.namedItem('reply') as HTMLTextAreaElement;
     e.preventDefault();
@@ -38,7 +38,7 @@ function ReplyForm({ commentId, hideReplyForm }: ReplyFormProps) {
   };
 
   return (
-    <form className="reply__form" onSubmit={onSubmit}>
+    <form className="reply__form" onSubmit={handleReplySubmit}>
       <TextArea
         maxLength={1000}
         name="reply"

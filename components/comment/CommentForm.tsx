@@ -19,9 +19,10 @@ interface CommentFormProps {
 
 function CommentForm({ lectureId }: CommentFormProps) {
   const fetch = useFetch();
+
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
-  const onSubmit = (e: React.SyntheticEvent) => {
+  const handleCommentSubmit = (e: React.SyntheticEvent) => {
     const form = e.target as HTMLFormElement;
     const textarea = form.children.namedItem('comment') as HTMLTextAreaElement;
     e.preventDefault();
@@ -36,7 +37,7 @@ function CommentForm({ lectureId }: CommentFormProps) {
   };
 
   return (
-    <form className="comment__form" onSubmit={onSubmit}>
+    <form className="comment__form" onSubmit={handleCommentSubmit}>
       <TextArea
         maxLength={1000}
         name="comment"

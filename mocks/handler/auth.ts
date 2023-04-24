@@ -52,7 +52,7 @@ export const authHandler = [
               'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc5Mzc1NzY5LCJpYXQiOjE2NzkzNzU0NjksImp0aSI6Ijk2MDIwNGJjNTM3YTRmMzE4ODExYTE2ZmEyZWVlMzM2IiwidXNlcl9pZCI6OX0.KR_QgWLvbkFy49JpxAsvZ-NV1c3oQWcXc4_XqSpmEco',
           },
           user: {
-            id: 54,
+            id: 9,
             realname: '노는게제일좋은뽀로로',
           },
         }),
