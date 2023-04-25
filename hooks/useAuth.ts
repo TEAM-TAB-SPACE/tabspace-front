@@ -1,10 +1,15 @@
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { deleteCookie } from 'cookies-next';
+
 import useFetch from './useFetch';
-import { RegisterType } from '../pages/register';
-import { loginStateAtom, userAtom, User } from '../store/user';
-import { API_URL_AUTH } from '../pages/api/auth';
+
+import { loginStateAtom, userAtom, User } from 'store/user';
+
+import { API_URL_AUTH } from 'pages/api/auth';
+
+//types
+import { RegisterType } from 'pages/register';
 
 function useAuth() {
   const router = useRouter();

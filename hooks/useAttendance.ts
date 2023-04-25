@@ -1,6 +1,8 @@
 import useFetch from './useFetch';
-import { CalendarCellData } from '../store/dashboard';
-import { API_URL_OTHER } from '../pages/api/other';
+
+import { CalendarCellData } from 'store/dashboard';
+
+import { API_URL_OTHER } from 'pages/api/other';
 
 const WEEK_LENGTH = 5;
 
