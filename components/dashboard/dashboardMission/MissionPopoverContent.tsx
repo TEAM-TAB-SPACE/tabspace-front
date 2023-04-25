@@ -1,11 +1,18 @@
+import { useSetRecoilState } from 'recoil';
+
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import text from '../../../styles/text.module.scss';
-import layout from '../../../styles/layout.module.scss';
-import useFetch from '../../../hooks/useFetch';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
-import { missionsRefetchKeyAtom } from '../../../store/dashboard';
-import { useSetRecoilState } from 'recoil';
+
+import useFetch from 'hooks/useFetch';
+
+import { missionsRefetchKeyAtom } from 'store/dashboard';
+
+import { MISSION_POPUP_NO_FILE_MESSAGE } from 'constant/messages';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
+
+import text from 'styles/text.module.scss';
+import layout from 'styles/layout.module.scss';
 
 interface MissionPopoverContentProps {
   files: { id: number; url: string }[];
@@ -44,7 +51,7 @@ function MissionPopoverContent({ files }: MissionPopoverContentProps) {
           </Button>
         </div>
       ) : (
-        <div>제출된 파일이 없습니다.</div>
+        <div>{MISSION_POPUP_NO_FILE_MESSAGE}</div>
       )}
     </>
   );

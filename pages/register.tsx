@@ -1,12 +1,19 @@
-import css from 'styled-jsx/css';
-import Link from 'next/link';
-import { message } from 'antd';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import css from 'styled-jsx/css';
 import { useRouter } from 'next/router';
-import { validationApi } from './api/validation';
-import { KAKAO_AUTH_URL } from '../constant/authUrl';
-import variables from '../styles/variables.module.scss';
+import { useForm } from 'react-hook-form';
+
+import Link from 'next/link';
+
+import { message } from 'antd';
+
+import { validationApi } from 'pages/api/validation';
+
+import { EXTERNAL, INTERNAL } from 'constant/urls';
+import { REGISTER_VALIDATION_MESSAGES } from 'constant/messages';
+import { REGISTER_FORM_PLACEHOLDER } from 'constant/placeholders';
+
+import variables from 'styles/variables.module.scss';
 
 export interface RegisterType {
   realname: string;
@@ -26,8 +33,9 @@ export default function Register() {
     secret_key: '',
     msg_agree: true,
   });
-  // 비구조화 할당으로 값 추출
+
   const { realname, email, phone, secret_key } = inputs;
+
   const {
     register,
     handleSubmit,
@@ -48,10 +56,10 @@ export default function Register() {
     const data = await validationApi(inputs);
 
     if (data instanceof Error) {
-      messageApi.error('인증번호가 유효하지 않습니다.');
+      messageApi.error(REGISTER_VALIDATION_MESSAGES.secretKeyNotFound);
     } else {
       sessionStorage.setItem('inputs', JSON.stringify(inputs));
-      router.push(KAKAO_AUTH_URL);
+      router.push(EXTERNAL.KAKAO_AUTH);
     }
   };
 
@@ -77,11 +85,11 @@ export default function Register() {
                   name="realname"
                   value={realname}
                   onChange={onChange}
-                  placeholder="실명을 입력해주세요."
+                  placeholder={REGISTER_FORM_PLACEHOLDER.realname}
                 />
                 <p>
                   {errors.realname?.type === 'required' &&
-                    '이름을 입력해주세요.'}
+                    REGISTER_VALIDATION_MESSAGES.emptyInput.realname}
                 </p>
               </label>
             </div>
@@ -94,11 +102,11 @@ export default function Register() {
                   name="email"
                   value={email}
                   onChange={onChange}
-                  placeholder="메일을 입력해주세요."
+                  placeholder={REGISTER_FORM_PLACEHOLDER.mail}
                 />
                 <p>
                   {errors.email?.type === 'required' &&
-                    '이메일을 입력해주세요.'}
+                    REGISTER_VALIDATION_MESSAGES.emptyInput.mail}
                 </p>
               </label>
             </div>
@@ -111,11 +119,11 @@ export default function Register() {
                   name="phone"
                   value={phone}
                   onChange={onChange}
-                  placeholder="휴대전화를 입력해주세요."
+                  placeholder={REGISTER_FORM_PLACEHOLDER.phone}
                 />
                 <p>
                   {errors.phone?.type === 'required' &&
-                    '휴대전화를 입력해주세요.'}
+                    REGISTER_VALIDATION_MESSAGES.emptyInput.phone}
                 </p>
               </label>
             </div>
@@ -128,11 +136,11 @@ export default function Register() {
                   name="secret_key"
                   value={secret_key}
                   onChange={onChange}
-                  placeholder="인증번호 입력해주세요."
+                  placeholder={REGISTER_FORM_PLACEHOLDER.secretKey}
                 />
                 <p>
                   {errors.secret_key?.type === 'required' &&
-                    '인증번호 입력해주세요.'}
+                    REGISTER_VALIDATION_MESSAGES.emptyInput.secretKey}
                 </p>
               </label>
             </div>
@@ -158,7 +166,7 @@ export default function Register() {
 
         <div className="register__login">
           <span>이미 회원이라면?</span>
-          <Link href="/login" style={{ fontSize: '0.8rem' }}>
+          <Link href={INTERNAL.login} style={{ fontSize: '0.8rem' }}>
             로그인
           </Link>
         </div>

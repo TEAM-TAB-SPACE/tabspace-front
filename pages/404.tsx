@@ -1,5 +1,6 @@
-import layout from '../styles/layout.module.scss';
 import { Result } from 'antd';
+
+import layout from 'styles/layout.module.scss';
 
 function Custom404() {
   return (

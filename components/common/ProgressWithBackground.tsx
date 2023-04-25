@@ -1,7 +1,8 @@
 import { Progress } from 'antd';
-import variables from '../../styles/variables.module.scss';
-import layout from '../../styles/layout.module.scss';
-import text from '../../styles/text.module.scss';
+
+import variables from 'styles/variables.module.scss';
+import layout from 'styles/layout.module.scss';
+import text from 'styles/text.module.scss';
 
 interface ProgressWithBackground {
   header?: string;

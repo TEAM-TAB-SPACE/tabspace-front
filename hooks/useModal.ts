@@ -1,12 +1,6 @@
 import { useState } from 'react';
 
-type UseModalHook = () => {
-  isModalOpen: boolean;
-  showModal: () => void;
-  closeModal: () => void;
-};
-
-const useModal: UseModalHook = () => {
+function useModal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -18,6 +12,6 @@ const useModal: UseModalHook = () => {
   };
 
   return { isModalOpen, showModal, closeModal };
-};
+}
 
 export default useModal;

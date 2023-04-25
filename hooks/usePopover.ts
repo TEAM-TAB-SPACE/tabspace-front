@@ -1,12 +1,6 @@
 import { useEffect, useState } from 'react';
 
-type UsePopoverHook = () => {
-  isPopoverOpen: boolean;
-  showPopover: () => void;
-  closePopover: () => void;
-};
-
-const usePopover: UsePopoverHook = () => {
+function usePopover() {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   useEffect(() => {
@@ -31,6 +25,6 @@ const usePopover: UsePopoverHook = () => {
   };
 
   return { isPopoverOpen, showPopover, closePopover };
-};
+}
 
 export default usePopover;

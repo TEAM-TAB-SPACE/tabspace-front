@@ -1,7 +1,9 @@
 import React from 'react';
-import UserBadgeText from './UserBadgeText';
-import layout from '../../../styles/layout.module.scss';
+
 import UserBadgeIndicator from './UserBadgeIndicator';
+
+import layout from 'styles/layout.module.scss';
+import variables from 'styles/variables.module.scss';
 
 export interface UserBadgeData {
   userName: string;
@@ -17,18 +19,28 @@ interface UserBadgeProps extends UserBadgeData {
 function UserBadge({
   isMyComment,
   userName,
-  elapsedTime = null,
   commentId,
   depth,
 }: UserBadgeProps) {
   return (
-    <div
-      className={layout.flex_a_center_j_between}
-      style={{ position: 'relative' }}
-    >
-      <UserBadgeText {...{ userName, elapsedTime }} />
-      {isMyComment && <UserBadgeIndicator {...{ depth, commentId }} />}
-    </div>
+    <>
+      <div
+        className={layout.flex_a_center_j_between}
+        style={{ position: 'relative' }}
+      >
+        <div className="name">{userName}</div>
+        {isMyComment && <UserBadgeIndicator {...{ depth, commentId }} />}
+      </div>
+      <style jsx>{`
+        .name {
+          display: 'inline-block';
+          color: ${variables.black};
+          margin-right: 7px;
+          font-size: 12px;
+          font-weight: 500;
+        }
+      `}</style>
+    </>
   );
 }
 

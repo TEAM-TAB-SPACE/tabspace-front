@@ -1,7 +1,12 @@
 import { useState } from 'react';
+
 import UserBadge from './userBadge/UserBadge';
 import ReplyButton from './ReplyButton';
 import ReplyForm from './ReplyForm';
+
+import variables from 'styles/variables.module.scss';
+
+//types
 import { UserBadgeData } from './userBadge/UserBadge';
 
 interface CommentProps {
@@ -22,9 +27,10 @@ function Comment({
   const [isReplyMode, setIsReplyMode] = useState(false);
 
   const showReplyForm = () => setIsReplyMode(true);
+
   const hideReplyForm = () => setIsReplyMode(false);
 
-  const onClickReplyButton = () => {
+  const handleReplyButtonClick = () => {
     if (isReplyMode) {
       hideReplyForm();
     } else {
@@ -37,7 +43,10 @@ function Comment({
       <div className="comment">
         <UserBadge {...{ ...userBadgeData, depth, commentId, isMyComment }} />
         <div className="comment__text">{content}</div>
-        {depth === 1 && <ReplyButton onClick={onClickReplyButton} />}
+
+        {/* 댓글일 경우 답글달기 버튼 렌더링 */}
+        {depth === 1 && <ReplyButton onClick={handleReplyButtonClick} />}
+
         {isReplyMode && <ReplyForm {...{ commentId, hideReplyForm }} />}
       </div>
       <style jsx>{`
@@ -51,7 +60,7 @@ function Comment({
             padding: 0 25px 4px;
             font-size: 14px;
             word-break: break-all;
-            color: #111;
+            color: ${variables.black};
           }
         }
       `}</style>

@@ -1,6 +1,10 @@
-import { Button, Result } from 'antd';
-import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
+
+import { Button, Result } from 'antd';
+
+import { useRouter } from 'next/router';
+
+import { EVALUATION_RESULT_MESSAGES } from 'constant/messages';
 
 interface EvaluationResultProps {
   isSuccess: boolean;
@@ -26,7 +30,7 @@ function EvaluationResult({
       {isSuccess ? (
         <Result
           status="success"
-          title="소중한 의견 감사합니다!"
+          title={EVALUATION_RESULT_MESSAGES.success}
           style={{ padding: '300px 0' }}
           extra={[
             <Button
@@ -41,7 +45,7 @@ function EvaluationResult({
       ) : (
         <Result
           status="error"
-          title="제출에 실패했습니다. 다시 시도해 주세요."
+          title={EVALUATION_RESULT_MESSAGES.error}
           style={{ padding: '300px 0' }}
           extra={[
             <Button

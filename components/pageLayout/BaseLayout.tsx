@@ -1,10 +1,13 @@
 import { useEffect } from 'react';
+import { getCookie } from 'cookies-next';
+
 import Header from './header/Header';
 import Footer from './Footer';
-import useFetch from '../../hooks/useFetch';
-import useAuth from '../../hooks/useAuth';
-import { getCookie } from 'cookies-next';
-import { API_URL_OTHER } from '../../pages/api/other';
+
+import useFetch from 'hooks/useFetch';
+import useAuth from 'hooks/useAuth';
+
+import { API_URL_OTHER } from 'pages/api/other';
 
 type BaseLayoutProps = {
   children: React.ReactNode;

@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
-import { getCookie } from 'cookies-next';
 import { SetterOrUpdater } from 'recoil';
-import { isDevMode } from '../config/config.export';
+import { getCookie } from 'cookies-next';
+
+import { isDevMode } from 'config/config.export';
+
 import {
   callGetApi,
   callDeleteApi,
@@ -10,8 +12,9 @@ import {
   callPostApi,
   callPutApi,
   setAxiosInterCeptors,
-} from '../pages/api/axios';
-import { sleep } from '../utils/time';
+} from 'pages/api/axios';
+
+import { sleep } from 'utils/time';
 
 export type RefetchKey = 'stale' | 'fresh';
 
@@ -26,17 +29,7 @@ interface FetchParams {
   };
 }
 
-type FetchHook = (params?: FetchParams) => {
-  isLoading: boolean;
-  data: any;
-  error: any;
-  get: ApiCall;
-  post: ApiCall;
-  put: ApiCall;
-  delete: ApiCall;
-};
-
-const useFetch: FetchHook = (params = {}) => {
+function useFetch(params: FetchParams = {}) {
   const { url, payload, refetchKey } = params;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -89,6 +82,6 @@ const useFetch: FetchHook = (params = {}) => {
     error: JSON.parse(error),
     ...client,
   };
-};
+}
 
 export default useFetch;

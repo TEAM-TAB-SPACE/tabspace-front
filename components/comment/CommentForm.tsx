@@ -1,9 +1,15 @@
 import { useSetRecoilState } from 'recoil';
+
 import { Input } from 'antd';
 import { Button } from 'antd';
-import useFetch from '../../hooks/useFetch';
-import { commentRefetchKeyAtom } from '../../store/comment';
-import { API_URL_LECTURE } from '../../pages/api/lecture';
+
+import useFetch from 'hooks/useFetch';
+
+import { commentRefetchKeyAtom } from 'store/comment';
+
+import { COMMENT_FORM_PLACEHOLDER } from 'constant/placeholders';
+
+import { API_URL_LECTURE } from 'pages/api/lecture';
 
 const { TextArea } = Input;
 
@@ -13,9 +19,10 @@ interface CommentFormProps {
 
 function CommentForm({ lectureId }: CommentFormProps) {
   const fetch = useFetch();
+
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
-  const onSubmit = (e: React.SyntheticEvent) => {
+  const handleCommentSubmit = (e: React.SyntheticEvent) => {
     const form = e.target as HTMLFormElement;
     const textarea = form.children.namedItem('comment') as HTMLTextAreaElement;
     e.preventDefault();
@@ -30,13 +37,13 @@ function CommentForm({ lectureId }: CommentFormProps) {
   };
 
   return (
-    <form className="comment__form" onSubmit={onSubmit}>
+    <form className="comment__form" onSubmit={handleCommentSubmit}>
       <TextArea
         maxLength={1000}
         name="comment"
         className="form__textarea"
         style={{ marginTop: '20px', height: '120px', resize: 'none' }}
-        placeholder="함께하는 동료들과 의견을 나눠보세요."
+        placeholder={COMMENT_FORM_PLACEHOLDER}
       />
       <Button
         htmlType="submit"

@@ -1,8 +1,9 @@
 import { HeartFilled } from '@ant-design/icons';
 import { Popover } from 'antd';
-import layout from '../../../styles/layout.module.scss';
-import variables from '../../../styles/variables.module.scss';
 import MissionPopoverContent from './MissionPopoverContent';
+
+import layout from 'styles/layout.module.scss';
+import variables from 'styles/variables.module.scss';
 
 interface MissionListItemProps {
   title: string;

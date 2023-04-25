@@ -35,6 +35,10 @@ export interface MissionSelectOption {
   title: string;
 }
 
+export interface AttendanceData {
+  attendance?: string;
+}
+
 export interface GrowthSingleData {
   id: number;
   lecture_category: {

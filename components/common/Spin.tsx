@@ -1,6 +1,6 @@
 import { Spin } from 'antd';
-import layout from '../../styles/layout.module.scss';
-import variables from '../../styles/variables.module.scss';
+
+import layout from 'styles/layout.module.scss';
 
 function Spinner() {
   return (
@@ -8,15 +8,9 @@ function Spinner() {
       <div className={`${layout.flex_center} spinner`}>
         <Spin size="large" />
       </div>
-      <style jsx global>{`
+      <style jsx>{`
         .spinner {
           height: 100vh;
-        }
-
-        .ant-spin {
-          &-dot-item {
-            background-color: ${variables.primary} !important;
-          }
         }
       `}</style>
     </>

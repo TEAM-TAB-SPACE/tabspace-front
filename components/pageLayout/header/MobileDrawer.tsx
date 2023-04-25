@@ -1,6 +1,7 @@
 import { MouseEventHandler, useState } from 'react';
-import { MenuOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
+
+import { MenuOutlined } from '@ant-design/icons';
 import { Button, Drawer } from 'antd';
 
 interface MobileDrawerProps {

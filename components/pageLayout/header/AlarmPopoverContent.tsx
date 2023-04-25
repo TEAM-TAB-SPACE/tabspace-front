@@ -1,11 +1,15 @@
 import Link from 'next/link';
-import variables from '../../../styles/variables.module.scss';
+
+import { ALARM_NO_DATA_MESSAGE } from 'constant/messages';
+import { INTERNAL } from 'constant/urls';
+
+import variables from 'styles/variables.module.scss';
 
 const LECTURE_EVALUATION = '강의평가';
 
-function AlarmPopoverContent({ content = [] }: { content: string[] }) {
-  if (!content.length) {
-    return <p>알림이 없습니다.</p>;
+function AlarmPopoverContent({ content = [] }: { content?: string[] }) {
+  if (!content || !content.length) {
+    return <p>{ALARM_NO_DATA_MESSAGE}</p>;
   }
 
   return (
@@ -18,7 +22,7 @@ function AlarmPopoverContent({ content = [] }: { content: string[] }) {
             <p key={index} className="dashboard__alarmItem">
               {splitItem[0]}
               {splitItem.length > 1 && (
-                <Link href={'/lecture/evaluation'} style={{ color: '#1677ff' }}>
+                <Link href={INTERNAL.evaluation} style={{ color: '#1677ff' }}>
                   {LECTURE_EVALUATION}
                 </Link>
               )}

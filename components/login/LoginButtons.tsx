@@ -1,9 +1,14 @@
 import { Button } from 'antd';
 import { useRouter } from 'next/router';
-import layout from '../../styles/layout.module.scss';
-import Kakao from '../../public/assets/kakaotalk.svg';
-import useAuth from '../../hooks/useAuth';
-import { KAKAO_AUTH_URL } from '../../constant/authUrl';
+
+import useAuth from 'hooks/useAuth';
+
+import { EXTERNAL } from 'constant/urls';
+
+import layout from 'styles/layout.module.scss';
+
+//asssets
+import Kakao from 'public/assets/kakaotalk.svg';
 
 function LoginButtons() {
   const router = useRouter();
@@ -12,7 +17,7 @@ function LoginButtons() {
 
   const onClickSocialLoginButton = () => {
     if (sessionStorage !== null) {
-      router.push(KAKAO_AUTH_URL);
+      router.push(EXTERNAL.KAKAO_AUTH);
     }
   };
 

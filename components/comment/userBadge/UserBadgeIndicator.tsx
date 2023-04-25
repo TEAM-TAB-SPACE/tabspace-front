@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
+
 import IndicatorIcon from './IndicatorIcon';
 import EditModal from './modal/EditModal';
 import DeleteModal from './modal/DeleteModal';
 import IndicatorPopover from './IndicatorPopover';
-import usePopover from '../../../hooks/usePopover';
-import useModal from '../../../hooks/useModal';
-import useComment from '../../../hooks/useComment';
-import { commentRefetchKeyAtom } from '../../../store/comment';
+
+import usePopover from 'hooks/usePopover';
+import useModal from 'hooks/useModal';
+import useComment from 'hooks/useComment';
+
+import { commentRefetchKeyAtom } from 'store/comment';
 
 interface UserBadgeIndicatorProps {
   depth: 1 | 2;
@@ -16,8 +19,11 @@ interface UserBadgeIndicatorProps {
 
 function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
   const { isPopoverOpen, showPopover } = usePopover();
+
   const { isModalOpen, showModal, closeModal } = useModal();
+
   const [modalType, setModalType] = useState('');
+
   const setCommentRefetchKey = useSetRecoilState(commentRefetchKeyAtom);
 
   const { deleteComment } = useComment(depth);
@@ -26,13 +32,13 @@ function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
     closeModal();
   };
 
-  const onClickDelete = () => {
+  const handleDeleteButtonClick = () => {
     deleteComment(commentId);
     closeModal();
     setCommentRefetchKey(() => 'stale');
   };
 
-  const onPopoverItemClick = (type: 'edit' | 'delete') => () => {
+  const handlePopoverItemClick = (type: 'edit' | 'delete') => () => {
     setModalType(type);
     showModal();
   };
@@ -49,7 +55,7 @@ function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
           <IndicatorIcon width="20px" height="20px" />
         </button>
         <IndicatorPopover
-          onItemClick={onPopoverItemClick}
+          onItemClick={handlePopoverItemClick}
           className={isPopoverOpen ? 'indicator__popover_active' : ''}
         />
         {modalType === 'edit' ? (
@@ -63,7 +69,13 @@ function UserBadgeIndicator({ depth, commentId }: UserBadgeIndicatorProps) {
             }}
           />
         ) : (
-          <DeleteModal {...{ isModalOpen, onCancel, onClickDelete }} />
+          <DeleteModal
+            {...{
+              isModalOpen,
+              onCancel,
+              onClickDelete: handleDeleteButtonClick,
+            }}
+          />
         )}
       </div>
       <style jsx global>{`

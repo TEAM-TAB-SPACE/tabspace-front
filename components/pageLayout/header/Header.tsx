@@ -1,10 +1,19 @@
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import css from 'styled-jsx/css';
-import Logo from '../../../public/assets/mainLogo.svg';
+
+import Link from 'next/link';
+
 import LoginContent from './LoginContent';
-import useAuth from '../../../hooks/useAuth';
-import variables from '../../../styles/variables.module.scss';
+
+import useAuth from 'hooks/useAuth';
+
+import { INTERNAL } from 'constant/urls';
+
+import layout from 'styles/layout.module.scss';
+import variables from 'styles/variables.module.scss';
+
+//assets
+import Logo from 'public/assets/mainLogo.svg';
 
 export default function Header() {
   const router = useRouter();
@@ -12,17 +21,17 @@ export default function Header() {
 
   return (
     <>
-      <header className="header__container">
-        <Link href="/">
+      <header className={`${layout.flex_a_center_j_between} header__container`}>
+        <Link href={INTERNAL.home}>
           <Logo />
         </Link>
         {!isLogin ? (
           <div className="header__auth">
             <div className="header__login">
-              <Link href="/login">로그인</Link>
+              <Link href={INTERNAL.login}>로그인</Link>
             </div>
             <div className="header__register">
-              <Link href="/register">회원가입</Link>
+              <Link href={INTERNAL.register}>회원가입</Link>
             </div>
           </div>
         ) : (
@@ -30,7 +39,7 @@ export default function Header() {
             user={user}
             onClickLoginout={logout}
             onClickDashboard={() => {
-              router.push('/dashboard');
+              router.push(INTERNAL.dashboard);
             }}
           />
         )}
@@ -42,9 +51,6 @@ export default function Header() {
 
 const header = css`
   .header__container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     position: fixed;
     top: 0;
     left: 0;

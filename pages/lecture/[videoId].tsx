@@ -1,14 +1,19 @@
 import { useEffect } from 'react';
-import { Layout } from 'antd';
-import { useSetRecoilState } from 'recoil';
 import { GetServerSideProps } from 'next';
-import LectureContent from '../../components/lecture/LectureContent';
-import Spinner from '../../components/common/Spin';
-import useFetch from '../../hooks/useFetch';
-import useMediaQueryState from '../../hooks/useMediaQueryState';
-import { allLectureAtom } from '../../store/lecture';
-import { cookieStringToObject } from '../../utils/cookie';
-import { API_URL_LECTURE } from '../api/lecture';
+import { useSetRecoilState } from 'recoil';
+
+import { Layout } from 'antd';
+import LectureContent from 'components/lecture/LectureContent';
+import Spinner from 'components/common/Spin';
+
+import useFetch from 'hooks/useFetch';
+import useMediaQueryState from 'hooks/useMediaQueryState';
+
+import { allLectureAtom } from 'store/lecture';
+
+import { cookieStringToObject } from 'utils/cookie';
+
+import { API_URL_LECTURE } from 'pages/api/lecture';
 
 const { Content } = Layout;
 

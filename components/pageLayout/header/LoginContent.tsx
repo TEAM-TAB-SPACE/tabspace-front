@@ -1,11 +1,15 @@
+import { MouseEventHandler } from 'react';
+
 import { LogoutOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import { MouseEventHandler } from 'react';
-import layout from '../../../styles/layout.module.scss';
 import AlarmButton from './AlarmButton';
-import useMediaQueryState from '../../../hooks/useMediaQueryState';
 import MobileDrawer from './MobileDrawer';
-import { User } from '../../../store/user';
+
+import useMediaQueryState from 'hooks/useMediaQueryState';
+
+import { User } from 'store/user';
+
+import layout from 'styles/layout.module.scss';
 
 interface LoginContentProps {
   user: User;

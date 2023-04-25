@@ -1,12 +1,9 @@
 import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  allLectureAtom,
-  convertToPlaylist,
-  playlistAtom,
-} from '../store/lecture';
 
-const usePlaylist = () => {
+import { allLectureAtom, convertToPlaylist, playlistAtom } from 'store/lecture';
+
+function usePlaylist() {
   const [playlist, setPlaylist] = useRecoilState(playlistAtom);
   const allLecture = useRecoilValue(allLectureAtom);
 
@@ -18,6 +15,6 @@ const usePlaylist = () => {
   }, [allLecture, setPlaylist]);
 
   return playlist;
-};
+}
 
 export default usePlaylist;

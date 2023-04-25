@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { cookieStringToObject } from '../../utils/cookie';
+
 import { Input, Rate, Divider, Button } from 'antd';
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
-import EvaluationResult from '../../components/lecture/evaluation/EvaluationResult';
-import useFetch from '../../hooks/useFetch';
-import useMediaQueryState from '../../hooks/useMediaQueryState';
-import { API_URL_OTHER } from '../api/other';
+import EvaluationResult from 'components/lecture/evaluation/EvaluationResult';
+
+import useFetch from 'hooks/useFetch';
+import useMediaQueryState from 'hooks/useMediaQueryState';
+
+import { cookieStringToObject } from 'utils/cookie';
+
+import { API_URL_OTHER } from 'pages/api/other';
 
 const { TextArea } = Input;
 

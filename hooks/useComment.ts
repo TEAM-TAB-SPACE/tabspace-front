@@ -1,7 +1,8 @@
-import { API_URL_LECTURE } from '../pages/api/lecture';
 import useFetch from './useFetch';
 
-const useComment = (depth: 1 | 2) => {
+import { API_URL_LECTURE } from 'pages/api/lecture';
+
+function useComment(depth: 1 | 2) {
   const fetch = useFetch();
 
   const url =
@@ -22,6 +23,6 @@ const useComment = (depth: 1 | 2) => {
   };
 
   return { addComment, editComment, deleteComment };
-};
+}
 
 export default useComment;

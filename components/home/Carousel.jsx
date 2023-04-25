@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { createGlobalStyle } from 'styled-components';
+import css from 'styled-jsx/css';
+
 import Image from 'next/image';
 import Slider from 'react-slick';
+
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import css from 'styled-jsx/css';
-import { createGlobalStyle } from 'styled-components';
 
 function NextArrow(props) {
   const { onClick } = props;
