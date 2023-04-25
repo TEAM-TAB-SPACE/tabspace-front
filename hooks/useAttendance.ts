@@ -9,14 +9,17 @@ const WEEK_LENGTH = 5;
 function useAttendance(attendance = '') {
   const { data } = useFetch({ url: API_URL_OTHER.WEEKDAYS });
 
+  if (!data) return;
+
   const year = new Date().getFullYear();
-  const month = Number(data?.month) - 1;
-  const days = data ? data.days.split(',').map(Number) : [];
+  const month = Number(data['month']);
+  const days = (data['days'] as string).split(',').map(Number);
   const day = new Date(year, month - 1, days[0]).getDay();
 
   const firstWeekLenght = WEEK_LENGTH - day;
 
   const isHoliday = (state: string) => state === 'h';
+
   const isFriday = (index: number) => index % WEEK_LENGTH === firstWeekLenght;
 
   const addWeekendCells = (calendarCell: CalendarCellData) => {
