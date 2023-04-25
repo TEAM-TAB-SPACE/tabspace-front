@@ -13,12 +13,13 @@ import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
 function DashboardToday() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.TODAY });
-  const todayLectures: TodayLectureSingleData[] = data;
+
+  const todayLectures = data as unknown as TodayLectureSingleData[];
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
 
-  if (!data.length)
+  if (!todayLectures.length)
     return <DashboardItemNoData text={DASHBOARD_TODAY_NO_DATA_MESSAGE} />;
 
   return (

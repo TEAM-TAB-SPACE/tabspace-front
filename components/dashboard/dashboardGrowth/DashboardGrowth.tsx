@@ -10,7 +10,7 @@ import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 function DashboardGrowth() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.GROWTH });
 
-  const chartData = data?.reduce(
+  const chartData = (data as unknown as GrowthSingleData[]).reduce(
     (
       chartData: GrowthChartCategory[],
       { lecture_category, ability }: GrowthSingleData,
