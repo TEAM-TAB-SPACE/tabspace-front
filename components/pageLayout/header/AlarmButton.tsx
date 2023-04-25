@@ -10,13 +10,20 @@ import { EMOJI } from 'constant/emoji';
 
 import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
+//types
+import { NotificationData } from 'store/notification';
+
 function AlarmButton() {
   const { data } = useFetch({ url: API_URL_DASHBOARD.NOTIFICATION });
+
+  const { notifications }: NotificationData = data || {};
+
   const [isBadgeShow, setIsBadgeShow] = useState(0);
+
   const [isClicked, setIsClicked] = useState(false);
 
   //텍스트에서 기호 찾아 이모지로 변경
-  const notifications = data?.notifications?.split(',').map((noti: string) => {
+  const notificationToArray = notifications?.split(',').map((noti: string) => {
     const reg1 = new RegExp(/\([1-9][0-4]\)/g);
     const reg2 = new RegExp(/\(\d\)/g);
     const emojiKeysOfreg1 = noti.match(reg1) || [];
@@ -37,7 +44,7 @@ function AlarmButton() {
   return (
     <Popover
       className="header__notifications"
-      content={<AlarmPopoverContent content={notifications} />}
+      content={<AlarmPopoverContent content={notificationToArray} />}
       title="알림"
       trigger="click"
     >

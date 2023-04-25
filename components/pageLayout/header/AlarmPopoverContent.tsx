@@ -7,8 +7,8 @@ import variables from 'styles/variables.module.scss';
 
 const LECTURE_EVALUATION = '강의평가';
 
-function AlarmPopoverContent({ content = [] }: { content: string[] }) {
-  if (!content.length) {
+function AlarmPopoverContent({ content = [] }: { content?: string[] }) {
+  if (!content || !content.length) {
     return <p>{ALARM_NO_DATA_MESSAGE}</p>;
   }
 

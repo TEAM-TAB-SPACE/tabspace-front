@@ -10,7 +10,7 @@ import { CommentSingleData } from 'store/comment';
 
 interface CommentsProps {
   depth: 1 | 2;
-  comments: CommentSingleData[];
+  comments?: CommentSingleData[];
 }
 
 function Comments({ depth, comments }: CommentsProps) {
