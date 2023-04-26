@@ -2,7 +2,7 @@ import { MouseEventHandler } from 'react';
 
 import { Button, Modal } from 'antd';
 
-import { DELETE_CONFIRM_MESSAGE } from 'constant/messages';
+import { DELETE_CONFIRM_MESSAGE } from 'constants/messages';
 
 interface DeleteModalProps {
   isModalOpen: boolean;

@@ -9,9 +9,9 @@ import { message } from 'antd';
 
 import { validationApi } from 'pages/api/validation';
 
-import { EXTERNAL, INTERNAL } from 'constant/urls';
-import { REGISTER_VALIDATION_MESSAGES } from 'constant/messages';
-import { REGISTER_FORM_PLACEHOLDER } from 'constant/placeholders';
+import { EXTERNAL, INTERNAL } from 'constants/urls';
+import { REGISTER_VALIDATION_MESSAGES } from 'constants/messages';
+import { REGISTER_FORM_PLACEHOLDER } from 'constants/placeholders';
 
 import variables from 'styles/variables.module.scss';
 

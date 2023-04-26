@@ -7,7 +7,7 @@ import useFetch from 'hooks/useFetch';
 
 import { missionsRefetchKeyAtom } from 'store/dashboard';
 
-import { MISSION_POPUP_NO_FILE_MESSAGE } from 'constant/messages';
+import { MISSION_POPUP_NO_FILE_MESSAGE } from 'constants/messages';
 
 import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 

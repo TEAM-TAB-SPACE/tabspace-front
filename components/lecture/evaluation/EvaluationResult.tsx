@@ -4,7 +4,7 @@ import { Button, Result } from 'antd';
 
 import { useRouter } from 'next/router';
 
-import { EVALUATION_RESULT_MESSAGES } from 'constant/messages';
+import { EVALUATION_RESULT_MESSAGES } from 'constants/messages';
 
 interface EvaluationResultProps {
   isSuccess: boolean;

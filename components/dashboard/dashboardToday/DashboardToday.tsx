@@ -7,7 +7,7 @@ import useFetch from 'hooks/useFetch';
 
 import { TodayLectureSingleData } from 'store/dashboard';
 
-import { DASHBOARD_TODAY_NO_DATA_MESSAGE } from 'constant/messages';
+import { DASHBOARD_TODAY_NO_DATA_MESSAGE } from 'constants/messages';
 
 import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 

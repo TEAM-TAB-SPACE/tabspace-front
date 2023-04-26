@@ -7,7 +7,7 @@ import LoginContent from './LoginContent';
 
 import useAuth from 'hooks/useAuth';
 
-import { INTERNAL } from 'constant/urls';
+import { INTERNAL } from 'constants/urls';
 
 import layout from 'styles/layout.module.scss';
 import variables from 'styles/variables.module.scss';

@@ -6,7 +6,7 @@ import AlarmPopoverContent from './AlarmPopoverContent';
 
 import useFetch from 'hooks/useFetch';
 
-import { EMOJI } from 'constant/emoji';
+import { EMOJI } from 'constants/emoji';
 
 import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 

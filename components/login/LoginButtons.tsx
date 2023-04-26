@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import useAuth from 'hooks/useAuth';
 
-import { EXTERNAL } from 'constant/urls';
+import { EXTERNAL } from 'constants/urls';
 
 import layout from 'styles/layout.module.scss';
 

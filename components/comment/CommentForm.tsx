@@ -7,7 +7,7 @@ import useFetch from 'hooks/useFetch';
 
 import { commentRefetchKeyAtom } from 'store/comment';
 
-import { COMMENT_FORM_PLACEHOLDER } from 'constant/placeholders';
+import { COMMENT_FORM_PLACEHOLDER } from 'constants/placeholders';
 
 import { API_URL_LECTURE } from 'pages/api/lecture';
 

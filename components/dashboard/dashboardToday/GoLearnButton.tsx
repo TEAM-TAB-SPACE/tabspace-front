@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { RightOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
-import { INTERNAL } from 'constant/urls';
+import { INTERNAL } from 'constants/urls';
 
 interface GoLearnButtonProps {
   videoId: string;
