@@ -4,8 +4,8 @@ import SpinCircle from 'components/common/SpinCircle';
 
 import useFetch from 'hooks/useFetch';
 
-import { DASHBOARD_LATEST_NO_DATA_MESSAGE } from 'constant/messages';
-import { INTERNAL } from 'constant/urls';
+import { DASHBOARD_LATEST_NO_DATA_MESSAGE } from 'constants/messages';
+import { INTERNAL } from 'constants/urls';
 
 import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
@@ -14,6 +14,7 @@ import variables from 'styles/variables.module.scss';
 
 function DashboardLatest() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.LATEST });
+
   const { videoId } = data ? data : { videoId: '' };
 
   if (isLoading)

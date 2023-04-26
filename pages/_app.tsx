@@ -15,7 +15,7 @@ import 'styles/chatbot.scss';
 import type { AppProps } from 'next/app';
 
 if (isDevMode) {
-  import('../mocks');
+  import('mocks');
 }
 
 // 전역에서 kakao 선언

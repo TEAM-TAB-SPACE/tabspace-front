@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import LoginButtons from 'components/login/LoginButtons';
 
-import { INTERNAL } from 'constant/urls';
+import { INTERNAL } from 'constants/urls';
 
 export default function Login() {
   return (

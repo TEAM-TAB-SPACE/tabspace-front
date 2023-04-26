@@ -11,6 +11,7 @@ import useMediaQueryState from 'hooks/useMediaQueryState';
 import { cookieStringToObject } from 'utils/cookie';
 
 import { API_URL_OTHER } from 'pages/api/other';
+import { INTERNAL } from 'constants/urls';
 
 const { TextArea } = Input;
 
@@ -26,14 +27,18 @@ const customIcons: Record<number, React.ReactNode> = {
 
 function Evaluation() {
   const fetch = useFetch();
+
   const { isMobile } = useMediaQueryState();
+
   const [score, setScore] = useState(0);
+
   const [isSubmitted, setIsSubmitted] = useState(false);
+
   const [isSuccess, setIsSeccess] = useState(false);
 
   const onChageRate = (score: number) => setScore(score);
 
-  const onSubmit = async (e: React.SyntheticEvent) => {
+  const handleEvaluationSubmit = async (e: React.SyntheticEvent) => {
     const form = e.target as HTMLFormElement;
     const textarea = form.querySelector(
       '.form__textarea',
@@ -63,7 +68,7 @@ function Evaluation() {
       {isSubmitted ? (
         <EvaluationResult {...{ isSuccess, setIsSubmitted }} />
       ) : (
-        <form className="lecture__evaluation" onSubmit={onSubmit}>
+        <form className="lecture__evaluation" onSubmit={handleEvaluationSubmit}>
           <fieldset className="evaluation__field">
             <div className="evaluation__question">강의는 만족스러우셨나요?</div>
             <Rate
@@ -133,7 +138,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   if (!cookies.access) {
     return {
       redirect: {
-        destination: '/login',
+        destination: INTERNAL.login,
         permanent: false,
       },
     };

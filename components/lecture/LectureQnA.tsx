@@ -22,11 +22,13 @@ const { Content } = Layout;
 
 function LectureQnA() {
   const router = useRouter();
+
   const { videoId } = router.query;
 
   const [refetchKey, setRefetchKey] = useRecoilState(commentRefetchKeyAtom);
 
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
+
   const lectureId = selectedLecture?.id;
 
   const setCurrentLectureComments = useSetRecoilState(

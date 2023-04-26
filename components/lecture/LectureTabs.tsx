@@ -2,7 +2,7 @@ import { Layout, Tabs } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LectureQnA from './LectureQnA';
 
-import variables from '../../styles/variables.module.scss';
+import variables from 'styles/variables.module.scss';
 
 //types
 import type { TabsProps } from 'antd';

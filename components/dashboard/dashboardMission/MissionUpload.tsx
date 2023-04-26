@@ -8,7 +8,7 @@ import useMessage from 'hooks/useMessage';
 
 import { missionsRefetchKeyAtom } from 'store/dashboard';
 
-import { MISSION_UPLOAD_MESSAGES } from 'constant/messages';
+import { MISSION_UPLOAD_MESSAGES } from 'constants/messages';
 
 import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
@@ -23,6 +23,7 @@ interface MissionUploadProps {
 
 function MissionUpload({ missionId }: MissionUploadProps) {
   const setRefetchKey = useSetRecoilState(missionsRefetchKeyAtom);
+
   const { contextHolder, success, error } = useMessage();
 
   const draggerProps = {

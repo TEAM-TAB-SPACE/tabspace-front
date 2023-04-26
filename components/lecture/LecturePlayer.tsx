@@ -30,16 +30,18 @@ const VIDEO_STATE = {
 
 function LecturePlayer({ videoId, lectureroomId }: LecturePlayerProps) {
   const client = useFetch();
+
   const [isLoading, setIsLoading] = useState(true);
 
   const startTime = useRef(0);
+
   const endTime = useRef(0);
 
   useEffect(() => {
     setIsLoading(true);
   }, [videoId, lectureroomId]);
 
-  const onVideoStateChange = (e: YoutubeEvent) => {
+  const handleVideoStateChange = (e: YoutubeEvent) => {
     const state = Number(e.data);
     const currentTime = Math.floor(e.target.getCurrentTime());
 
@@ -82,7 +84,7 @@ function LecturePlayer({ videoId, lectureroomId }: LecturePlayerProps) {
           className="player__iframe"
           key={videoId}
           videoId={videoId}
-          onStateChange={onVideoStateChange}
+          onStateChange={handleVideoStateChange}
           onReady={() => setIsLoading(false)}
         />
       </div>

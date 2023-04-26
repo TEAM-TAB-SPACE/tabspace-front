@@ -10,7 +10,9 @@ import { API_URL_OTHER } from 'pages/api/other';
 
 export default function FixedSection() {
   const [phone, setPhone] = useState('');
+
   const [category, setCategory] = useState('F');
+
   const [messageApi, contextHolder] = message.useMessage();
 
   // 휴대폰 번호 입력 함수

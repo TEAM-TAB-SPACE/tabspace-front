@@ -19,7 +19,7 @@ function DashboardMissionSubmit() {
     setSelectedValue(defaultSelectedValue);
   }, [defaultSelectedValue]);
 
-  const onSelectChange = (value: number) => {
+  const handleMissionSelectChange = (value: number) => {
     setSelectedValue(value);
   };
 
@@ -29,7 +29,7 @@ function DashboardMissionSubmit() {
         <MissionSelect
           options={missionsSelectOptions}
           value={selectedValue}
-          onChange={onSelectChange}
+          onChange={handleMissionSelectChange}
         />
         <MissionUpload missionId={selectedValue} />
       </Form>

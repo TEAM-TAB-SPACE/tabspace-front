@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { ALARM_NO_DATA_MESSAGE } from 'constant/messages';
-import { INTERNAL } from 'constant/urls';
+import { ALARM_NO_DATA_MESSAGE } from 'constants/messages';
+import { INTERNAL } from 'constants/urls';
 
 import variables from 'styles/variables.module.scss';
 

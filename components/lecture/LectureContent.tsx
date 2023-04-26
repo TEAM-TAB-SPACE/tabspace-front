@@ -17,9 +17,11 @@ const { Content } = Layout;
 
 function LectureContent() {
   const router = useRouter();
+
   const { videoId } = router.query;
 
   const { isMobile } = useMediaQueryState();
+
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
 
   const setRefetchKey = useSetRecoilState(commentRefetchKeyAtom);

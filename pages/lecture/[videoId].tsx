@@ -14,12 +14,15 @@ import { allLectureAtom } from 'store/lecture';
 import { cookieStringToObject } from 'utils/cookie';
 
 import { API_URL_LECTURE } from 'pages/api/lecture';
+import { INTERNAL } from 'constants/urls';
 
 const { Content } = Layout;
 
 function Lecture() {
   const { isMobile } = useMediaQueryState();
+
   const { isLoading, data } = useFetch({ url: API_URL_LECTURE.LECTUREROOMS });
+
   const setAllLecture = useSetRecoilState(allLectureAtom);
 
   const lectureStyle = {
@@ -57,7 +60,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   if (!cookies.access) {
     return {
       redirect: {
-        destination: '/login',
+        destination: INTERNAL.login,
         permanent: false,
       },
     };

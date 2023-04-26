@@ -8,15 +8,19 @@ import useMediaQueryState from 'hooks/useMediaQueryState';
 import usePlaylist from 'hooks/usePlaylist';
 
 import { currentLectureSelector } from 'store/lecture';
+import { INTERNAL } from 'constants/urls';
 
 const { Sider } = Layout;
 
 function LecturePlaylist() {
   const router = useRouter();
+
   const { videoId } = router.query;
 
   const [openKey, setOpenKey] = useState<string[]>([]);
+
   const { isMobile } = useMediaQueryState();
+
   const playlist = usePlaylist();
 
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
@@ -37,7 +41,9 @@ function LecturePlaylist() {
             width: '100%',
             height: '100%',
           }}
-          onClick={({ keyPath: [key] }) => router.push(`/lecture/${key}`)}
+          onClick={({ keyPath: [key] }) =>
+            router.push(`${INTERNAL.lecture}/${key}`)
+          }
           onOpenChange={openKey => {
             setOpenKey(openKey);
           }}

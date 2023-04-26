@@ -8,8 +8,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-function NextArrow(props) {
-  const { onClick } = props;
+function NextArrow({ onClick }) {
   return (
     <div
       style={{ position: 'absolute', top: -110, right: 0 }}
