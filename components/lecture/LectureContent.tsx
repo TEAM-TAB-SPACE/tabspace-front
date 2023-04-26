@@ -1,22 +1,27 @@
 import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
+
 import { Layout } from 'antd';
 import LecturePlaylist from './LecturePlaylist';
 import LecturePlayer from './LecturePlayer';
 import LectureQnA from './LectureQnA';
 import LectureTabs from './LectureTabs';
-import useMediaQueryState from '../../hooks/useMediaQueryState';
-import { currentLectureSelector } from '../../store/lecture';
-import { commentRefetchKeyAtom } from '../../store/comment';
+
+import useMediaQueryState from 'hooks/useMediaQueryState';
+
+import { currentLectureSelector } from 'store/lecture';
+import { commentRefetchKeyAtom } from 'store/comment';
 
 const { Content } = Layout;
 
 function LectureContent() {
   const router = useRouter();
+
   const { videoId } = router.query;
 
   const { isMobile } = useMediaQueryState();
+
   const selectedLecture = useRecoilValue(currentLectureSelector(`${videoId}`));
 
   const setRefetchKey = useSetRecoilState(commentRefetchKeyAtom);

@@ -1,5 +1,5 @@
-import variables from '../../styles/variables.module.scss';
-import layout from '../../styles/layout.module.scss';
+import variables from 'styles/variables.module.scss';
+import layout from 'styles/layout.module.scss';
 
 function DashboardItemNoData({ text }: { text: string }) {
   return (

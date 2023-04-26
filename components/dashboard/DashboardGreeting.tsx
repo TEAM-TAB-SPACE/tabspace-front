@@ -1,5 +1,6 @@
 import { useRecoilValue } from 'recoil';
-import { userAtom } from '../../store/user';
+
+import { userAtom } from 'store/user';
 
 function DashboardGreeting() {
   const { realname } = useRecoilValue(userAtom);

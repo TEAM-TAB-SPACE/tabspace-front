@@ -1,34 +1,29 @@
 import { useEffect, useState } from 'react';
+
 import { NotificationOutlined } from '@ant-design/icons';
 import { Badge, Button, Popover } from 'antd';
 import AlarmPopoverContent from './AlarmPopoverContent';
-import useFetch from '../../../hooks/useFetch';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
 
-const EMOJI: { [key: string]: string } = {
-  '(1)': '😀',
-  '(2)': '🥺',
-  '(3)': '🤓',
-  '(4)': '🤗',
-  '(5)': '😉',
-  '(6)': '😎',
-  '(7)': '🥰',
-  '(8)': '😍',
-  '(9)': '🥳',
-  '(10)': '✨',
-  '(11)': '🔥',
-  '(12)': '🎉',
-  '(13)': '🚗',
-  '(14)': '👍',
-};
+import useFetch from 'hooks/useFetch';
+
+import { EMOJI } from 'constants/emoji';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
+
+//types
+import { NotificationData } from 'store/notification';
 
 function AlarmButton() {
   const { data } = useFetch({ url: API_URL_DASHBOARD.NOTIFICATION });
+
+  const { notifications }: NotificationData = data || {};
+
   const [isBadgeShow, setIsBadgeShow] = useState(0);
+
   const [isClicked, setIsClicked] = useState(false);
 
   //텍스트에서 기호 찾아 이모지로 변경
-  const notifications = data?.notifications?.split(',').map((noti: string) => {
+  const notificationToArray = notifications?.split(',').map((noti: string) => {
     const reg1 = new RegExp(/\([1-9][0-4]\)/g);
     const reg2 = new RegExp(/\(\d\)/g);
     const emojiKeysOfreg1 = noti.match(reg1) || [];
@@ -49,7 +44,7 @@ function AlarmButton() {
   return (
     <Popover
       className="header__notifications"
-      content={<AlarmPopoverContent content={notifications} />}
+      content={<AlarmPopoverContent content={notificationToArray} />}
       title="알림"
       trigger="click"
     >

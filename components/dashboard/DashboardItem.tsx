@@ -1,5 +1,6 @@
 import { Card } from 'antd';
-import variables from '../../styles/variables.module.scss';
+
+import variables from 'styles/variables.module.scss';
 
 interface DashoardItemProps {
   title: string;

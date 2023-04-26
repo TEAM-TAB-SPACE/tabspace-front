@@ -1,6 +1,11 @@
-import { Button, Result } from 'antd';
-import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction } from 'react';
+
+import { Button, Result } from 'antd';
+
+import { useRouter } from 'next/router';
+
+import { EVALUATION_RESULT_MESSAGES } from 'constants/messages';
+import { INTERNAL } from 'constants/urls';
 
 interface EvaluationResultProps {
   isSuccess: boolean;
@@ -12,12 +17,12 @@ function EvaluationResult({
   setIsSubmitted,
 }: EvaluationResultProps) {
   const router = useRouter();
-  console.log(isSuccess);
-  const onClickDashboardButton = () => {
-    router.push('/dashboard');
+
+  const handleMoveToDashboardButtonClick = () => {
+    router.push(INTERNAL.dashboard);
   };
 
-  const onClickAgainButton = () => {
+  const handleAgainButtonClick = () => {
     setIsSubmitted(false);
   };
 
@@ -26,13 +31,13 @@ function EvaluationResult({
       {isSuccess ? (
         <Result
           status="success"
-          title="소중한 의견 감사합니다!"
+          title={EVALUATION_RESULT_MESSAGES.success}
           style={{ padding: '300px 0' }}
           extra={[
             <Button
               type="primary"
               key="dashboard"
-              onClick={onClickDashboardButton}
+              onClick={handleMoveToDashboardButtonClick}
             >
               대시보드로 이등
             </Button>,
@@ -41,13 +46,13 @@ function EvaluationResult({
       ) : (
         <Result
           status="error"
-          title="제출에 실패했습니다. 다시 시도해 주세요."
+          title={EVALUATION_RESULT_MESSAGES.error}
           style={{ padding: '300px 0' }}
           extra={[
             <Button
               type="primary"
               key="evaluation"
-              onClick={onClickAgainButton}
+              onClick={handleAgainButtonClick}
             >
               다시 제출하기
             </Button>,

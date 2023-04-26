@@ -1,13 +1,16 @@
 import { GetServerSideProps } from 'next';
-import DashboardLayout from '../components/dashboard/DashboardLayout';
-import DashboardGreeting from '../components/dashboard/DashboardGreeting';
-import DashboardLatest from '../components/dashboard/DashboardLatest';
-import DashboardToday from '../components/dashboard/dashboardToday/DashboardToday';
-import DashboardMissionSubmit from '../components/dashboard/dashboardMission/DashboardMissionSubmit';
-import DashboardAttendance from '../components/dashboard/DashboardAttendance';
-import DashboardMission from '../components/dashboard/dashboardMission/DashboardMission';
-import DashboardGrowth from '../components/dashboard/dashboardGrowth/DashboardGrowth';
-import { cookieStringToObject } from '../utils/cookie';
+
+import DashboardLayout from 'components/dashboard/DashboardLayout';
+import DashboardGreeting from 'components/dashboard/DashboardGreeting';
+import DashboardLatest from 'components/dashboard/DashboardLatest';
+import DashboardToday from 'components/dashboard/dashboardToday/DashboardToday';
+import DashboardMissionSubmit from 'components/dashboard/dashboardMission/DashboardMissionSubmit';
+import DashboardAttendance from 'components/dashboard/DashboardAttendance';
+import DashboardMission from 'components/dashboard/dashboardMission/DashboardMission';
+import DashboardGrowth from 'components/dashboard/dashboardGrowth/DashboardGrowth';
+
+import { cookieStringToObject } from 'utils/cookie';
+import { INTERNAL } from 'constants/urls';
 
 const dashboardItems = {
   greeting: { title: '', item: <DashboardGreeting /> },
@@ -31,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   if (!cookies.access) {
     return {
       redirect: {
-        destination: '/login',
+        destination: INTERNAL.login,
         permanent: false,
       },
     };

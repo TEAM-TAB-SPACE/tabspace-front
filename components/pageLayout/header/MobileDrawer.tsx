@@ -1,6 +1,7 @@
 import { MouseEventHandler, useState } from 'react';
-import { MenuOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
+
+import { MenuOutlined } from '@ant-design/icons';
 import { Button, Drawer } from 'antd';
 
 interface MobileDrawerProps {
@@ -10,13 +11,14 @@ interface MobileDrawerProps {
 
 function MobileDrawer({ username = '', onClickLoginout }: MobileDrawerProps) {
   const router = useRouter();
+
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
     setOpen(true);
   };
 
-  const onClose = () => {
+  const handleDrawerClose = () => {
     setOpen(false);
   };
 
@@ -34,7 +36,7 @@ function MobileDrawer({ username = '', onClickLoginout }: MobileDrawerProps) {
         title={`${username}님`}
         width={200}
         closable={false}
-        onClose={onClose}
+        onClose={handleDrawerClose}
         open={open}
         extra={
           <Button size="small" onClick={onClickLoginout}>
@@ -46,7 +48,7 @@ function MobileDrawer({ username = '', onClickLoginout }: MobileDrawerProps) {
           className="drawer__item"
           onClick={() => {
             router.push('/dashboard');
-            onClose();
+            handleDrawerClose();
           }}
         >
           대시보드

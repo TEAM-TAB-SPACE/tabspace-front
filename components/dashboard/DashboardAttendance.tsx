@@ -1,13 +1,19 @@
 import { Calendar } from 'antd';
-import variables from '../../styles/variables.module.scss';
-import SpinCircle from '../common/SpinCircle';
-import useFetch from '../../hooks/useFetch';
-import useAttendance from '../../hooks/useAttendance';
-import { CalendarCellData } from '../../store/dashboard';
-import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
+import SpinCircle from 'components/common/SpinCircle';
+
+import useFetch from 'hooks/useFetch';
+import useAttendance from 'hooks/useAttendance';
+
+import { AttendanceData, CalendarCellData } from 'store/dashboard';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
+
+import variables from 'styles/variables.module.scss';
+
+//types
 import type { Dayjs } from 'dayjs';
 
-const dateCellRender = (listData: CalendarCellData[], value: Dayjs) => {
+const dateCellRender = (listData: CalendarCellData[] = [], value: Dayjs) => {
   const style: React.CSSProperties = {
     position: 'absolute',
     top: 0,
@@ -31,7 +37,9 @@ const dateCellRender = (listData: CalendarCellData[], value: Dayjs) => {
 function DashboardAttendance() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.ATTENDANCE });
 
-  const calendarData = useAttendance(data?.attendance);
+  const { attendance }: AttendanceData = data || {};
+
+  const calendarData = useAttendance(attendance);
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
@@ -60,10 +68,6 @@ function DashboardAttendance() {
 
             &-panel {
               border-top: none;
-            }
-
-            &-cell-inner::before {
-              border: 1px solid ${variables.primary} !important;
             }
           }
         }

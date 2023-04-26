@@ -1,27 +1,34 @@
 import Link from 'next/link';
 import DashboardItemNoData from './DashboardItemNoData';
-import variables from '../../styles/variables.module.scss';
-import layout from '../../styles/layout.module.scss';
-import SpinCircle from '../common/SpinCircle';
-import useFetch from '../../hooks/useFetch';
-import { API_URL_DASHBOARD } from '../../pages/api/dashboard';
+import SpinCircle from 'components/common/SpinCircle';
+
+import useFetch from 'hooks/useFetch';
+
+import { DASHBOARD_LATEST_NO_DATA_MESSAGE } from 'constants/messages';
+import { INTERNAL } from 'constants/urls';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
+
+import layout from 'styles/layout.module.scss';
+import variables from 'styles/variables.module.scss';
 
 function DashboardLatest() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.LATEST });
+
   const { videoId } = data ? data : { videoId: '' };
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
 
   if (!videoId)
-    return <DashboardItemNoData text="최근 수강 강의가 없습니다." />;
+    return <DashboardItemNoData text={DASHBOARD_LATEST_NO_DATA_MESSAGE} />;
 
   return (
     <>
       <div className="dashboard__latest">
         <div className="latest__wrapper">
           <Link
-            href={`/lecture/${videoId}`}
+            href={`${INTERNAL.lecture}/${videoId}`}
             className={`latest__link ${layout.flex_center}`}
           >
             이어보기

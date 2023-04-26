@@ -1,20 +1,26 @@
-import ProgressWithBackground from '../../common/ProgressWithBackground';
+import ProgressWithBackground from 'components/common/ProgressWithBackground';
+import SpinCircle from 'components/common/SpinCircle';
 import GoLearnButton from './GoLearnButton';
-import SpinCircle from '../../common/SpinCircle';
 import DashboardItemNoData from '../DashboardItemNoData';
-import useFetch from '../../../hooks/useFetch';
-import { TodayLectureSingleData } from '../../../store/dashboard';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
+
+import useFetch from 'hooks/useFetch';
+
+import { TodayLectureSingleData } from 'store/dashboard';
+
+import { DASHBOARD_TODAY_NO_DATA_MESSAGE } from 'constants/messages';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
 
 function DashboardToday() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.TODAY });
-  const todayLectures: TodayLectureSingleData[] = data;
+
+  const todayLectures = data as unknown as TodayLectureSingleData[];
 
   if (isLoading)
     return <SpinCircle style={{ width: '100%', height: '250px' }} />;
 
-  if (!data.length)
-    return <DashboardItemNoData text="오늘은 수업이 없습니다." />;
+  if (!todayLectures.length)
+    return <DashboardItemNoData text={DASHBOARD_TODAY_NO_DATA_MESSAGE} />;
 
   return (
     <>

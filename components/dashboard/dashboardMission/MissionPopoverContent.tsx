@@ -1,11 +1,18 @@
+import { useSetRecoilState } from 'recoil';
+
 import { DeleteOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import text from '../../../styles/text.module.scss';
-import layout from '../../../styles/layout.module.scss';
-import useFetch from '../../../hooks/useFetch';
-import { API_URL_DASHBOARD } from '../../../pages/api/dashboard';
-import { missionsRefetchKeyAtom } from '../../../store/dashboard';
-import { useSetRecoilState } from 'recoil';
+
+import useFetch from 'hooks/useFetch';
+
+import { missionsRefetchKeyAtom } from 'store/dashboard';
+
+import { MISSION_POPUP_NO_FILE_MESSAGE } from 'constants/messages';
+
+import { API_URL_DASHBOARD } from 'pages/api/dashboard';
+
+import text from 'styles/text.module.scss';
+import layout from 'styles/layout.module.scss';
 
 interface MissionPopoverContentProps {
   files: { id: number; url: string }[];
@@ -13,14 +20,16 @@ interface MissionPopoverContentProps {
 
 function MissionPopoverContent({ files }: MissionPopoverContentProps) {
   const setRefetchKey = useSetRecoilState(missionsRefetchKeyAtom);
+
   const fetch = useFetch();
 
   const file = files[0];
 
   const splitUrl = file?.url.split('/');
+
   const fileName = splitUrl && splitUrl[splitUrl.length - 1];
 
-  const onClick = () => {
+  const handleDeleteFileButtonClick = () => {
     fetch.delete(API_URL_DASHBOARD.MISSION, { id: file.id });
     setRefetchKey(() => 'stale');
   };
@@ -37,14 +46,14 @@ function MissionPopoverContent({ files }: MissionPopoverContentProps) {
             {fileName}
           </a>
           <Button
-            onClick={onClick}
+            onClick={handleDeleteFileButtonClick}
             style={{ padding: 0, width: '20px', border: 'none' }}
           >
             <DeleteOutlined />
           </Button>
         </div>
       ) : (
-        <div>제출된 파일이 없습니다.</div>
+        <div>{MISSION_POPUP_NO_FILE_MESSAGE}</div>
       )}
     </>
   );

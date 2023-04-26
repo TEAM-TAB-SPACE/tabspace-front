@@ -1,6 +1,6 @@
 import { message } from 'antd';
 
-const useMessage = () => {
+function useMessage() {
   const [messageApi, contextHolder] = message.useMessage();
 
   const success = (message: string) => {
@@ -18,6 +18,6 @@ const useMessage = () => {
   };
 
   return { messageApi, contextHolder, success, error };
-};
+}
 
 export default useMessage;

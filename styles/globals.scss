@@ -38,20 +38,3 @@ a {
   text-decoration: none;
   color: $black;
 }
-
-//custom antd style
-.ant-btn-primary {
-  background-color: $primary;
-
-  &:not(:disabled):hover {
-    background-color: $primary;
-    opacity: 0.9;
-  }
-}
-
-.ant-input {
-  &:focus,
-  &:hover {
-    border-color: $purple-light;
-  }
-}

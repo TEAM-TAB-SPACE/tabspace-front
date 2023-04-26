@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+
 import { Form } from 'antd';
 import MissionUpload from './MissionUpload';
 import MissionSelect from './MissionSelect';
-import variables from '../../../styles/variables.module.scss';
-import { missionsSelectOptionsSelector } from '../../../store/dashboard';
+
+import { missionsSelectOptionsSelector } from 'store/dashboard';
 
 function DashboardMissionSubmit() {
   const missionsSelectOptions = useRecoilValue(missionsSelectOptionsSelector);
@@ -18,7 +19,7 @@ function DashboardMissionSubmit() {
     setSelectedValue(defaultSelectedValue);
   }, [defaultSelectedValue]);
 
-  const onSelectChange = (value: number) => {
+  const handleMissionSelectChange = (value: number) => {
     setSelectedValue(value);
   };
 
@@ -28,17 +29,13 @@ function DashboardMissionSubmit() {
         <MissionSelect
           options={missionsSelectOptions}
           value={selectedValue}
-          onChange={onSelectChange}
+          onChange={handleMissionSelectChange}
         />
         <MissionUpload missionId={selectedValue} />
       </Form>
       <style jsx global>{`
         .dashboard__missionSubmit {
           width: 100%;
-
-          .anticon {
-            color: ${variables.primary} !important;
-          }
         }
       `}</style>
     </>
