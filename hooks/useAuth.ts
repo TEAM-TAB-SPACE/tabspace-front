@@ -52,7 +52,7 @@ function useAuth() {
   ) => {
     try {
       const { user } = await client.post(API_URL_AUTH.REGISTER, {
-        authCode,
+        code: authCode,
         ...registerInput,
       });
 
@@ -66,7 +66,7 @@ function useAuth() {
   // 로그아웃
   const logout = async () => {
     try {
-      client.post(API_URL_AUTH.LOGOUT, null);
+      await client.post(API_URL_AUTH.LOGOUT, null);
 
       deleteCookie('access');
       deleteCookie('refresh');
