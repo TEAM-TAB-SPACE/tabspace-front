@@ -15,7 +15,7 @@ function LoginButtons() {
 
   const { loginTestUser } = useAuth();
 
-  const onClickSocialLoginButton = () => {
+  const handleSocialLoginButtonClick = () => {
     if (sessionStorage !== null) {
       router.push(EXTERNAL.KAKAO_AUTH);
     }
@@ -44,7 +44,7 @@ function LoginButtons() {
         size="large"
         className={`${layout.flex_center} login__button`}
         icon={<Kakao style={{ marginRight: '5px' }} />}
-        onClick={onClickSocialLoginButton}
+        onClick={handleSocialLoginButtonClick}
       >
         카카오 로그인
       </Button>

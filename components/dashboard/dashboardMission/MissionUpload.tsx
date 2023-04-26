@@ -23,6 +23,7 @@ interface MissionUploadProps {
 
 function MissionUpload({ missionId }: MissionUploadProps) {
   const setRefetchKey = useSetRecoilState(missionsRefetchKeyAtom);
+
   const { contextHolder, success, error } = useMessage();
 
   const draggerProps = {

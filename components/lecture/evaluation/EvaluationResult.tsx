@@ -5,6 +5,7 @@ import { Button, Result } from 'antd';
 import { useRouter } from 'next/router';
 
 import { EVALUATION_RESULT_MESSAGES } from 'constants/messages';
+import { INTERNAL } from 'constants/urls';
 
 interface EvaluationResultProps {
   isSuccess: boolean;
@@ -16,12 +17,12 @@ function EvaluationResult({
   setIsSubmitted,
 }: EvaluationResultProps) {
   const router = useRouter();
-  console.log(isSuccess);
-  const onClickDashboardButton = () => {
-    router.push('/dashboard');
+
+  const handleMoveToDashboardButtonClick = () => {
+    router.push(INTERNAL.dashboard);
   };
 
-  const onClickAgainButton = () => {
+  const handleAgainButtonClick = () => {
     setIsSubmitted(false);
   };
 
@@ -36,7 +37,7 @@ function EvaluationResult({
             <Button
               type="primary"
               key="dashboard"
-              onClick={onClickDashboardButton}
+              onClick={handleMoveToDashboardButtonClick}
             >
               대시보드로 이등
             </Button>,
@@ -51,7 +52,7 @@ function EvaluationResult({
             <Button
               type="primary"
               key="evaluation"
-              onClick={onClickAgainButton}
+              onClick={handleAgainButtonClick}
             >
               다시 제출하기
             </Button>,

@@ -15,6 +15,7 @@ type BaseLayoutProps = {
 
 export default function BaseLayout({ children }: BaseLayoutProps) {
   const fetch = useFetch();
+
   const { setLoginState } = useAuth();
 
   //사이트 접속 시 로그인 상태면 사용자 정보 get

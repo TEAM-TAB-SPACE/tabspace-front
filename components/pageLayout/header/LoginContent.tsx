@@ -23,6 +23,7 @@ function LoginContent({
   onClickDashboard,
 }: LoginContentProps) {
   const { isMobile } = useMediaQueryState();
+
   const { realname: username } = user;
 
   return (

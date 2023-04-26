@@ -14,6 +14,7 @@ import variables from 'styles/variables.module.scss';
 
 function DashboardLatest() {
   const { isLoading, data } = useFetch({ url: API_URL_DASHBOARD.LATEST });
+
   const { videoId } = data ? data : { videoId: '' };
 
   if (isLoading)

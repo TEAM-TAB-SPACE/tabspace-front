@@ -17,6 +17,7 @@ import Logo from 'public/assets/mainLogo.svg';
 
 export default function Header() {
   const router = useRouter();
+
   const { isLogin, user, logout } = useAuth();
 
   return (

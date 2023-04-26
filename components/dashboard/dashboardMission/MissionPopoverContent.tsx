@@ -20,14 +20,16 @@ interface MissionPopoverContentProps {
 
 function MissionPopoverContent({ files }: MissionPopoverContentProps) {
   const setRefetchKey = useSetRecoilState(missionsRefetchKeyAtom);
+
   const fetch = useFetch();
 
   const file = files[0];
 
   const splitUrl = file?.url.split('/');
+
   const fileName = splitUrl && splitUrl[splitUrl.length - 1];
 
-  const onClick = () => {
+  const handleDeleteFileButtonClick = () => {
     fetch.delete(API_URL_DASHBOARD.MISSION, { id: file.id });
     setRefetchKey(() => 'stale');
   };
@@ -44,7 +46,7 @@ function MissionPopoverContent({ files }: MissionPopoverContentProps) {
             {fileName}
           </a>
           <Button
-            onClick={onClick}
+            onClick={handleDeleteFileButtonClick}
             style={{ padding: 0, width: '20px', border: 'none' }}
           >
             <DeleteOutlined />

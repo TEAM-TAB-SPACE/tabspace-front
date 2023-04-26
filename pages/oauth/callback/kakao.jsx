@@ -9,9 +9,11 @@ import useAuth from 'hooks/useAuth';
 
 function RedirectHandler() {
   const router = useRouter();
+
   const client = useFetch();
 
   const searchParams = useSearchParams();
+
   const authCode = searchParams.get('code');
 
   const { kakaoAuthLogin } = useAuth();

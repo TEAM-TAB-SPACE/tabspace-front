@@ -10,6 +10,7 @@ import DashboardMission from 'components/dashboard/dashboardMission/DashboardMis
 import DashboardGrowth from 'components/dashboard/dashboardGrowth/DashboardGrowth';
 
 import { cookieStringToObject } from 'utils/cookie';
+import { INTERNAL } from 'constants/urls';
 
 const dashboardItems = {
   greeting: { title: '', item: <DashboardGreeting /> },
@@ -33,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   if (!cookies.access) {
     return {
       redirect: {
-        destination: '/login',
+        destination: INTERNAL.login,
         permanent: false,
       },
     };
