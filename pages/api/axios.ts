@@ -1,6 +1,8 @@
 import { getCookie, removeCookies } from 'cookies-next';
 import axios, { Axios } from 'axios';
-import Config from '../../config/config.export';
+
+import Config from 'config/config.export';
+
 import { API_URL_AUTH } from './auth';
 
 export const axiosInstance = axios.create({
