@@ -6,6 +6,8 @@ import useFetch from './useFetch';
 
 import { loginStateAtom, userAtom, User } from 'store/user';
 
+import { INTERNAL } from 'constants/urls';
+
 import { API_URL_AUTH } from 'pages/api/auth';
 
 //types
@@ -30,7 +32,7 @@ function useAuth() {
     localStorage.setItem('AUTH_STATE', JSON.stringify(true));
     sessionStorage.removeItem('inputs');
 
-    router.push('/dashboard');
+    router.push(INTERNAL.dashboard);
   };
 
   //테스트 계정 로그인
