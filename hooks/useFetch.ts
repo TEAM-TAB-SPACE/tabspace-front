@@ -60,13 +60,14 @@ function useFetch(params: FetchParams = {}) {
 
         if (fetchData instanceof Error) {
           setError(JSON.stringify(fetchData));
-          return;
+        } else {
+          setData(fetchData);
         }
 
-        setData(fetchData);
         setIsLoading(false);
         refetchKey?.key && refetchKey.setter(() => 'fresh');
       };
+
       if (refetchKey?.key !== 'fresh' && url) {
         if (isDevMode) {
           await sleep(500);
