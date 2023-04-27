@@ -33,7 +33,9 @@ function useFetch(params: FetchParams = {}) {
   const { url, payload, refetchKey } = params;
 
   const [isLoading, setIsLoading] = useState(true);
+
   const [data, setData] = useState();
+
   const [error, setError] = useState('{}');
 
   const token = getCookie('access');

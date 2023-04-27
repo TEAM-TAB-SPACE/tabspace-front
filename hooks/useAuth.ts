@@ -13,9 +13,11 @@ import { RegisterType } from 'pages/register';
 
 function useAuth() {
   const router = useRouter();
+
   const client = useFetch();
 
   const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
+
   const [user, setUser] = useRecoilState(userAtom);
 
   const setLoginState = (user: User) => {

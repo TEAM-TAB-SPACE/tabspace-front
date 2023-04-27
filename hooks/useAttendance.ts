@@ -12,8 +12,11 @@ function useAttendance(attendance = '') {
   if (!data) return;
 
   const year = new Date().getFullYear();
+
   const month = Number(data['month']);
+
   const days = (data['days'] as string).split(',').map(Number);
+
   const day = new Date(year, month - 1, days[0]).getDay();
 
   const firstWeekLenght = WEEK_LENGTH - day;
