@@ -1,10 +1,13 @@
+import { useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 import { useRouter } from 'next/router';
 import { deleteCookie } from 'cookies-next';
 
 import useFetch from './useFetch';
 
-import { loginStateAtom, userAtom, User } from 'store/user';
+import { loginStateAtom, userAtom, User, isLoginFailedAtom } from 'store/user';
+
+import { INTERNAL } from 'constants/urls';
 
 import { API_URL_AUTH } from 'pages/api/auth';
 
@@ -18,70 +21,66 @@ function useAuth() {
 
   const [isLogin, setIsLogin] = useRecoilState(loginStateAtom);
 
+  const [isLoginFailed, setIsLoginFailed] = useRecoilState(isLoginFailedAtom);
+
   const [user, setUser] = useRecoilState(userAtom);
 
   const setLoginState = (user: User) => {
-    setIsLogin(true);
-    setUser(user);
+    setIsLogin(() => true);
+    setUser(() => user);
   };
 
   //로그인 공통 로직
-  const login = () => {
+  const login = (loginData: { user: User }) => {
+    if (loginData instanceof Error) {
+      setIsLoginFailed(true);
+      router.push(INTERNAL.login);
+      return;
+    }
+
     localStorage.setItem('AUTH_STATE', JSON.stringify(true));
     sessionStorage.removeItem('inputs');
 
-    router.push('/dashboard');
+    setLoginState(loginData.user);
+    router.push(INTERNAL.dashboard);
   };
 
   //테스트 계정 로그인
-  const loginTestUser = async (mode?: number) => {
-    try {
-      const { user } = await client.post(API_URL_AUTH.TEST_LOGIN, {
-        mode,
-      });
+  const loginTestUser = useCallback(async (mode?: number) => {
+    const res = await client.post(API_URL_AUTH.TEST_LOGIN, {
+      mode,
+    });
 
-      setLoginState(user);
-      login();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    login(res);
+  }, []);
 
   //카카오 소셜 인증 로그인 (로그인, 회원가입)
-  const kakaoAuthLogin = async (
-    authCode: string,
-    registerInput?: RegisterType,
-  ) => {
-    try {
-      const { user } = await client.post(API_URL_AUTH.REGISTER, {
+  const kakaoAuthLogin = useCallback(
+    async (authCode: string, registerInput?: RegisterType) => {
+      const res = await client.post(API_URL_AUTH.REGISTER, {
         code: authCode,
         ...registerInput,
       });
 
-      setLoginState(user);
-      login();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      login(res);
+    },
+    [],
+  );
 
   // 로그아웃
-  const logout = async () => {
-    try {
-      await client.post(API_URL_AUTH.LOGOUT, null);
+  const logout = useCallback(async () => {
+    await client.post(API_URL_AUTH.LOGOUT, null);
 
-      deleteCookie('access');
-      deleteCookie('refresh');
-      localStorage.removeItem('AUTH_STATE');
+    deleteCookie('access');
+    deleteCookie('refresh');
+    localStorage.removeItem('AUTH_STATE');
 
-      location.href = '/';
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    location.href = '/';
+  }, []);
 
   return {
     isLogin,
+    isLoginFailed,
     user,
     setLoginState,
     kakaoAuthLogin,
