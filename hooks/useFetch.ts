@@ -33,7 +33,9 @@ function useFetch(params: FetchParams = {}) {
   const { url, payload, refetchKey } = params;
 
   const [isLoading, setIsLoading] = useState(true);
+
   const [data, setData] = useState();
+
   const [error, setError] = useState('{}');
 
   const token = getCookie('access');
@@ -58,13 +60,14 @@ function useFetch(params: FetchParams = {}) {
 
         if (fetchData instanceof Error) {
           setError(JSON.stringify(fetchData));
-          return;
+        } else {
+          setData(fetchData);
         }
 
-        setData(fetchData);
         setIsLoading(false);
         refetchKey?.key && refetchKey.setter(() => 'fresh');
       };
+
       if (refetchKey?.key !== 'fresh' && url) {
         if (isDevMode) {
           await sleep(500);

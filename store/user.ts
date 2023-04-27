@@ -17,3 +17,8 @@ export const loginStateAtom = atom<boolean>({
   key: 'loginStateAtom',
   default: false,
 });
+
+export const isLoginFailedAtom = atom<boolean>({
+  key: 'isLoginFailedAtom',
+  default: false,
+});
