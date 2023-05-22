@@ -30,3 +30,5 @@ export const REGISTER_VALIDATION_MESSAGES = {
     phone: '휴대전화를 입력해주세요.',
   },
 };
+
+export const LOGIN_FAIL_MESSAGE = '아이디 또는 비밀번호가 잘못되었습니다.';

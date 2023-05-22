@@ -23,7 +23,7 @@
    ├─ lecture           - 강의 수강장 관련 컴포넌트
    ├─ home              - 랜딩페이지 관련 컴포넌트
 └─ config               - 개발 / 운영 환경을 세팅하기 위한 디렉토리
-└─ constant             - 상수를 모아둔 디렉토리
+└─ constants            - 상수를 모아둔 디렉토리
 └─ hooks                - 커스텀 훅을 모아둔 컴포넌트
 └─ mocks                - mock api 관련 디렉토리
 └─ pages                - 페이지 라우팅 디렉토리

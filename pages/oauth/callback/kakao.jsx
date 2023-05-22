@@ -1,17 +1,11 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
 
 import { Skeleton } from 'antd';
 
-import useFetch from 'hooks/useFetch';
 import useAuth from 'hooks/useAuth';
 
 function RedirectHandler() {
-  const router = useRouter();
-
-  const client = useFetch();
-
   const searchParams = useSearchParams();
 
   const authCode = searchParams.get('code');
@@ -25,7 +19,7 @@ function RedirectHandler() {
     };
 
     socialLogin();
-  }, [authCode, client, kakaoAuthLogin, router]);
+  }, [authCode, kakaoAuthLogin]);
 
   return (
     // eslint-disable-next-line react/jsx-filename-extension

@@ -5,6 +5,7 @@ import { allLectureAtom, convertToPlaylist, playlistAtom } from 'store/lecture';
 
 function usePlaylist() {
   const [playlist, setPlaylist] = useRecoilState(playlistAtom);
+
   const allLecture = useRecoilValue(allLectureAtom);
 
   useEffect(() => {

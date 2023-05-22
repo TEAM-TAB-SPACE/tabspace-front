@@ -1,12 +1,27 @@
+import { useEffect } from 'react';
+
 import Link from 'next/link';
 
 import LoginButtons from 'components/login/LoginButtons';
 
+import useMessage from 'hooks/useMessage';
+import useAuth from 'hooks/useAuth';
+
 import { INTERNAL } from 'constants/urls';
+import { LOGIN_FAIL_MESSAGE } from 'constants/messages';
 
 export default function Login() {
+  const { contextHolder, error } = useMessage();
+
+  const { isLoginFailed } = useAuth();
+
+  useEffect(() => {
+    if (isLoginFailed) error(LOGIN_FAIL_MESSAGE);
+  }, [error, isLoginFailed]);
+
   return (
     <>
+      {contextHolder}
       <div className="login__container">
         <p className="login__greeting">
           안녕하세요! <br />
