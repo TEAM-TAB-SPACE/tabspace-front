@@ -12,6 +12,12 @@
 - [유저스토리](https://github.com/TEAM-TAB-SPACE/tabspace-front/wiki/%EC%9C%A0%EC%A0%80%EC%8A%A4%ED%86%A0%EB%A6%AC)
 - [Git](https://github.com/TEAM-TAB-SPACE/tabspace-front/wiki/Git)
 
+## 프로젝트 실행
+```
+npm i
+npm run dev:dev
+```
+
 ## 디렉토리 구조
 ```
 └─ chatbot              - 랜딩페이지 챗봇 관련 디렉토리
